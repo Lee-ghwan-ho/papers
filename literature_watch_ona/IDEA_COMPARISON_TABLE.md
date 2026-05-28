@@ -46,6 +46,8 @@
 | Causality_SDG | Global + Causal | None | ❌ | ❌ | ❌ | ❌ | Causal factorization |
 | SI2CRL | Spectrum (causal) | None | ❌ | ❌ | ❌ | ❌ | Causal representation |
 | DGSSA | Structural + Stylistic | Binary (vessel/bg) | ⚠️ topology-inspired | ❌ | ❌ | ❌ | 구조 다양성은 새 vessel 생성, 내 방법과 방향 다름 |
+| **ADA** *(Run#2)* | Global (per-sample) | **Content-adaptive** (Bezier param dynamic) | ❌ structure signal 없음 | ❌ | ❌ | ❌ | Per-sample adaptive aug이지만 intra-class structural property 사용 안 함. Thin vessel 보호 개념 없음. |
+| GFSA *(Run#2)* | Feature-space style | None (VAE sampling) | ❌ | ❌ | ❌ | ❌ | Feature style diversity 증가. Image-space aug 아님. |
 
 ---
 
@@ -60,6 +62,8 @@
 | WaveRNet | Wavelet multi-source DG | Multi-source 설정. 내 방법은 single-source. |
 | ISAC | Mask completion for vascular cross-domain | Mask completion 기반 cross-domain. |
 | MULTIDOMAIN_BRAIN | Feature disentanglement | Multi-domain 설정. |
+| MBFCV *(Run#2)* | Multi-Branch Feature Extractor로 두께별 혈관 구분. Few-shot cross-domain. | Feature representation 분리. 내 방법(aug budget)과 방향 다름. Test-time support 필요. |
+| CRISP *(Run#2)* | Rank-based domain-shift robustness (model-agnostic, training-free). | 내 train-time aug과 방향 다름. Post-hoc inference 방식. |
 
 ---
 
@@ -75,6 +79,17 @@
 | Deep Closing | Topology autoencoder + erosion | Disconnected region 탐지 → 내 thin vessel 탐지 관련 |
 | Topology-Aware Uncertainty | DMT 기반 구조 단위 uncertainty | Structural unit에서 uncertainty 추정 → thin vessel uncertainty 관련 |
 | TopoTTA | TTA for tubular topology | Cross-domain topological shift 탐지 |
+
+---
+
+---
+
+## Run #2 (2026-05-28) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **ADA** (MICCAI 2025) | Learnable Bezier Remap으로 per-sample adaptive Bezier augmentation. "content에 따라 aug 강도를 달리 한다"는 아이디어 공유. 7개 데이터셋 SOTA. | 핵심 차이 강조: ADA는 전체 이미지 단위 per-sample adaptive aug (image-level content feature → global Bezier param). 내 방법은 같은 이미지 내에서 혈관마다 다른 강도 (local structural observability → local aug budget). ADA는 thin vessel 보호 목적이 전혀 없음. |
+| **MBFCV** (MICCAI 2025) | Multi-Branch Feature Extractor가 두께별 혈관을 구분. 혈관 두께를 명시적으로 모델링한다는 점에서 개념 유사. | 내 방법은 augmentation 시점에서 두께 조건 적용, MBFCV는 inference 시 feature 분리. 또한 MBFCV는 few-shot (support 필요), 나는 single-source DG (test-time 정보 없음). |
 
 ---
 
