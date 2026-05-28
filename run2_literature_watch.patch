@@ -1,0 +1,535 @@
+From d4a6331dea242a11e177b131f7eaa606ed35c149 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 28 May 2026 00:11:13 +0000
+Subject: [PATCH] =?UTF-8?q?feat:=20literature=20watch=20Run=20#2=20(2026-0?=
+ =?UTF-8?q?5-28)=20=E2=80=94=2013=ED=8E=B8=20=EC=8B=A0=EA=B7=9C?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+신규 수록 논문 13편:
+- ADA (MICCAI 2025): Learnable Bezier Remap per-sample adaptive aug [직접 경쟁 ★★★]
+- MBFCV (MICCAI 2025): Multi-Branch vessel thickness discrimination [직접 경쟁 ★★★]
+- GLCP (MICCAI 2025): Global-to-Local Connectivity Preservation
+- CF_SEG (MICCAI 2025): Counterfactuals Meet Segmentation
+- SPATIAL_TOPO (ICCV 2025 Workshop): Spatial-Aware Persistent Feature Matching
+- GFSA (Pattern Recognition 2025): Generative Feature Style Augmentation
+- FDGP (ICASSP 2025): Frequency Federated DG for Polyp
+- CRISP (arXiv 2026): Rank-Guided Iterative Squeezing for Robust Seg
+- FMS2 (arXiv 2026): Flow Matching for Thin Structure Seg & Synthesis
+- SPOCKMIP (arXiv 2024): TOF-MRA vessel seg with MIP loss
+- FPGM (arXiv 2025): Frequency Prior Guided Matching
+- BOUNDLESS (arXiv 2024): Adaptive Feature Blending + DCAR
+- DRIPS (medRxiv 2025): Domain Randomisation for PVS Seg
+
+핵심 발견: ADA가 Bezier adaptive aug 아이디어를 공유하지만
+image-level global conditioning vs structure-level local conditioning으로
+granularity가 완전히 다름. thin vessel protection 개념 없음.
+
+누적 총 논문: 44 → 57편
+---
+ literature_watch_ona/IDEA_COMPARISON_TABLE.md |  15 +++
+ literature_watch_ona/MASTER_PAPER_INDEX.md    |  23 +++-
+ literature_watch_ona/READING_QUEUE.md         |  13 +++
+ literature_watch_ona/SEARCH_LOG.md            |  67 ++++++++++++
+ literature_watch_ona/paper_notes/ADA.md       |  88 +++++++++++++++
+ literature_watch_ona/paper_notes/MBFCV.md     |  66 ++++++++++++
+ .../2026-05-28_literature_report.md           | 100 ++++++++++++++++++
+ 7 files changed, 370 insertions(+), 2 deletions(-)
+ create mode 100644 literature_watch_ona/paper_notes/ADA.md
+ create mode 100644 literature_watch_ona/paper_notes/MBFCV.md
+ create mode 100644 literature_watch_ona/weekly_reports/2026-05-28_literature_report.md
+
+diff --git a/literature_watch_ona/IDEA_COMPARISON_TABLE.md b/literature_watch_ona/IDEA_COMPARISON_TABLE.md
+index ffd4e61..7530791 100644
+--- a/literature_watch_ona/IDEA_COMPARISON_TABLE.md
++++ b/literature_watch_ona/IDEA_COMPARISON_TABLE.md
+@@ -46,6 +46,8 @@
+ | Causality_SDG | Global + Causal | None | ❌ | ❌ | ❌ | ❌ | Causal factorization |
+ | SI2CRL | Spectrum (causal) | None | ❌ | ❌ | ❌ | ❌ | Causal representation |
+ | DGSSA | Structural + Stylistic | Binary (vessel/bg) | ⚠️ topology-inspired | ❌ | ❌ | ❌ | 구조 다양성은 새 vessel 생성, 내 방법과 방향 다름 |
++| **ADA** *(Run#2)* | Global (per-sample) | **Content-adaptive** (Bezier param dynamic) | ❌ structure signal 없음 | ❌ | ❌ | ❌ | Per-sample adaptive aug이지만 intra-class structural property 사용 안 함. Thin vessel 보호 개념 없음. |
++| GFSA *(Run#2)* | Feature-space style | None (VAE sampling) | ❌ | ❌ | ❌ | ❌ | Feature style diversity 증가. Image-space aug 아님. |
+ 
+ ---
+ 
+@@ -60,6 +62,8 @@
+ | WaveRNet | Wavelet multi-source DG | Multi-source 설정. 내 방법은 single-source. |
+ | ISAC | Mask completion for vascular cross-domain | Mask completion 기반 cross-domain. |
+ | MULTIDOMAIN_BRAIN | Feature disentanglement | Multi-domain 설정. |
++| MBFCV *(Run#2)* | Multi-Branch Feature Extractor로 두께별 혈관 구분. Few-shot cross-domain. | Feature representation 분리. 내 방법(aug budget)과 방향 다름. Test-time support 필요. |
++| CRISP *(Run#2)* | Rank-based domain-shift robustness (model-agnostic, training-free). | 내 train-time aug과 방향 다름. Post-hoc inference 방식. |
+ 
+ ---
+ 
+@@ -78,6 +82,17 @@
+ 
+ ---
+ 
++---
++
++## Run #2 (2026-05-28) 신규 위험 논문 업데이트
++
++| 논문 | 위험 이유 | 대응 방향 |
++|------|-----------|-----------|
++| **ADA** (MICCAI 2025) | Learnable Bezier Remap으로 per-sample adaptive Bezier augmentation. "content에 따라 aug 강도를 달리 한다"는 아이디어 공유. 7개 데이터셋 SOTA. | 핵심 차이 강조: ADA는 전체 이미지 단위 per-sample adaptive aug (image-level content feature → global Bezier param). 내 방법은 같은 이미지 내에서 혈관마다 다른 강도 (local structural observability → local aug budget). ADA는 thin vessel 보호 목적이 전혀 없음. |
++| **MBFCV** (MICCAI 2025) | Multi-Branch Feature Extractor가 두께별 혈관을 구분. 혈관 두께를 명시적으로 모델링한다는 점에서 개념 유사. | 내 방법은 augmentation 시점에서 두께 조건 적용, MBFCV는 inference 시 feature 분리. 또한 MBFCV는 few-shot (support 필요), 나는 single-source DG (test-time 정보 없음). |
++
++---
++
+ ## 가장 위험한 경쟁 논문 (Novelty 충돌 가능성)
+ 
+ | 논문 | 위험 이유 | 대응 방향 |
+diff --git a/literature_watch_ona/MASTER_PAPER_INDEX.md b/literature_watch_ona/MASTER_PAPER_INDEX.md
+index 1df0468..c19736b 100644
+--- a/literature_watch_ona/MASTER_PAPER_INDEX.md
++++ b/literature_watch_ona/MASTER_PAPER_INDEX.md
+@@ -1,7 +1,7 @@
+ # MASTER PAPER INDEX — Continuous-ONA Literature Watch
+ 
+-> 마지막 업데이트: 2026-05-27  
+-> 총 수록 논문: 44편
++> 마지막 업데이트: 2026-05-28  
++> 총 수록 논문: 57편
+ 
+ ---
+ 
+@@ -37,6 +37,11 @@
+ | SDG_REALWORLD | Experience with Single Domain Generalization in Real World Medical Imaging Deployments | arXiv | 2026 | Preprint Only | Medium |
+ | GENORDETECT | Generalize or Detect? Towards Robust Semantic Segmentation Under Multiple Distribution Shifts | NeurIPS 2024 | 2024 | Accepted Conference | Medium |
+ | DAPSAM | Prompting Segment Anything Model with Domain-Adaptive Prototype for Generalizable Medical Image Segmentation | arXiv | 2024 | Preprint Only | Low |
++| ADA | ADA: An Adaptive Augmentation Framework for Single-Source Domain Generalization in Medical Image Segmentation | MICCAI 2025 | 2025 | Accepted Conference | **High** |
++| MBFCV | A Multi-Branch Framework for Cross-Domain Vessel Segmentation via the Few-Shot Paradigm | MICCAI 2025 | 2025 | Accepted Conference | High |
++| GFSA | Generative Feature Style Augmentation for Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal | Medium |
++| CRISP | CRISP: Rank-Guided Iterative Squeezing for Robust Medical Image Segmentation under Domain Shift | arXiv | 2026 | Preprint Only | Medium |
++| BOUNDLESS | Boundless Across Domains: A New Paradigm of Adaptive Feature and Cross-Attention for Domain Generalization in Medical Image Segmentation | arXiv | 2024 | Preprint Only | Low |
+ 
+ ---
+ 
+@@ -49,6 +54,9 @@
+ | SHAPEBIAS | Shape Bias and Robustness Evaluation via Cue Decomposition for Image Classification and Segmentation | arXiv | 2025 | Preprint Only | Medium |
+ | SHAPEBIAS_CNN | Promoting Shape Bias in CNNs: Frequency-Based and Contrastive Regularization for Corruption Robustness | arXiv | 2025 | Preprint Only | Medium |
+ | INTRA_STYLE | Intra-Source Style Augmentation for Improved Domain Generalization | arXiv | 2022 | Preprint Only | Medium |
++| CF_SEG | CF-Seg: Counterfactuals Meet Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Low |
++| FDGP | Frequency-Based Federated Domain Generalization for Polyp Segmentation | ICASSP 2025 | 2025 | Accepted Conference | Low |
++| FPGM | Frequency Prior Guided Matching: A Data Augmentation Approach for Generalizable Semi-Supervised Polyp Segmentation | arXiv | 2025 | Preprint Only | Low |
+ 
+ ---
+ 
+@@ -73,6 +81,11 @@
+ | FLOWAXIS | FlowAxis: Geometric-topological Deep Transfer Learning for Precise Vessel Segmentation in 3D Medical Volumes | npj Digital Medicine | 2026 | Published Journal | Medium |
+ | TOPUNCERT | Topology-Aware Uncertainty for Image Segmentation | NeurIPS 2023 | 2023 | Accepted Conference | Medium |
+ | CLDICE | clDice: A Novel Topology-Preserving Loss Function for Tubular Structure Segmentation | CVPR 2021 | 2021 | Accepted Conference | High |
++| GLCP | GLCP: Global-to-Local Connectivity Preservation for Tubular Structure Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Medium |
++| SPATIAL_TOPO | Topology-Preserving Image Segmentation with Spatial-Aware Persistent Feature Matching | ICCV 2025 Workshop | 2025 | Workshop Paper | Medium |
++| FMS2 | FMS²: Unified Flow Matching for Segmentation and Synthesis of Thin Structures | arXiv | 2026 | Preprint Only | Low |
++| SPOCKMIP | SPOCKMIP: Segmentation of Vessels in MRAs with Enhanced Continuity using Maximum Intensity Projection as Loss | arXiv | 2024 | Preprint Only | Medium |
++| DRIPS | DRIPS: Domain Randomisation for Image-based Perivascular Spaces Segmentation | medRxiv | 2025 | Preprint Only | Low |
+ 
+ ---
+ 
+@@ -111,3 +124,9 @@
+ | SHAPEBIAS | Shape Bias Cue Decomp | 2503.12453 | 2025 |
+ | SHAPEBIAS_CNN | Shape Bias CNN | 2509.11355 | 2025 |
+ | INTRA_STYLE | Intra-Source Style | 2210.10175 | 2022 |
++| CRISP | CRISP: Rank-Guided Iterative Squeezing | 2604.05409 | 2026 |
++| BOUNDLESS | Boundless Across Domains (AFB/DCAR) | 2411.14883 | 2024 |
++| FMS2 | FMS²: Flow Matching for Thin Structures | 2603.13659 | 2026 |
++| SPOCKMIP | SPOCKMIP: Vessel MRA with MIP Loss | 2407.08655 | 2024 |
++| FPGM | Frequency Prior Guided Matching (polyp) | 2508.06517 | 2025 |
++| DRIPS | DRIPS: Domain Rand. for PVS Segmentation | medRxiv 2025 | 2025 |
+diff --git a/literature_watch_ona/READING_QUEUE.md b/literature_watch_ona/READING_QUEUE.md
+index a57d6dd..db14062 100644
+--- a/literature_watch_ona/READING_QUEUE.md
++++ b/literature_watch_ona/READING_QUEUE.md
+@@ -9,6 +9,8 @@
+ 
+ | 우선순위 | KEY | 이유 |
+ |---------|-----|------|
++| ★★★ | **ADA** | **Run #2 신규** Learnable Bezier Remap으로 per-sample adaptive aug. "aug 강도를 content에 따라 조절"이라는 아이디어 공유. 즉시 full text 확인 필수. MICCAI 2025 Paper 0315. |
++| ★★★ | **MBFCV** | **Run #2 신규** Multi-Branch Feature Extractor로 혈관 두께 명시적 구분. 내 intra-class thickness conditioning과 방향 유사. MICCAI 2025 Paper 0782. |
+ | ★★★ | **SRCSM** | Semantic-aware RC는 label 단위로 다른 augmentation 적용. 내 방법이 "같은 class 내 다른 강도"임을 명확히 구분하기 위해 즉시 독해 필요. arXiv:2512.01510 |
+ | ★★★ | **CONSTYX** | Over-augmented feature suppression 개념. 내 방법의 "thin vessel 보호"와 개념적으로 유사할 수 있음. MICCAI 2025. |
+ | ★★★ | **SEMDIR** | Feature-space semantic direction augmentation. 내 방법과 동일한 문제의식(domain-specific vs anatomical feature 분리)을 다름. arXiv:2507.23326 |
+@@ -29,6 +31,10 @@
+ | ★★ | **MULTIDOMAIN_BRAIN** | TOF-MRA 포함 brain vessel multi-domain DG. 직접적인 경쟁 데이터셋. MELBA 2025. |
+ | ★★ | **TOPOTTA** | TTA for tubular topology. 내 방법 이후 적용 가능성. ICCV 2025. |
+ | ★★ | **HARMONYSEG** | Growth-suppression balanced loss for tubular. ICCV 2025. |
++| ★★ | **GLCP** | **Run #2 신규** Global-to-Local Connectivity Preservation for Tubular. Local discontinuity 탐지. MICCAI 2025. |
++| ★★ | **GFSA** | **Run #2 신규** Generative Feature Style Aug for DG in Medical Seg. VAE 기반 feature style generation. Pattern Recognition 2025. |
++| ★★ | **SPOCKMIP** | **Run #2 신규** TOF-MRA vessel segmentation with MIP loss. 내 exact 데이터셋 도메인에서의 thin vessel continuity 문제 다룸. arXiv 2407.08655. |
++| ★★ | **CRISP** | **Run #2 신규** Rank-Guided Iterative Squeezing for Robust Medical Seg. Model-agnostic DG, lung vessel CT 실험 포함. arXiv 2604.05409. |
+ 
+ ---
+ 
+@@ -45,6 +51,9 @@
+ | ★ | **SI2CRL** | Spectrum intervention causal SSDG. MedIA 2025. |
+ | ★ | **GENORDETECT** | Generalize or Detect NeurIPS 2024. 증강 기반 OOD+DG. |
+ | ★ | **FLOWAXIS** | Continuous vessel parameterization. npj Digital Medicine 2026. |
++| ★ | **SPATIAL_TOPO** | **Run #2 신규** Spatial-Aware Persistent Feature Matching for topology. ICCV 2025 Workshop. |
++| ★ | **CF_SEG** | **Run #2 신규** Counterfactual image generation for segmentation. MICCAI 2025. |
++| ★ | **FMS2** | **Run #2 신규** Flow Matching for thin structure segmentation and synthesis. Cross-domain generalization. arXiv 2026. |
+ 
+ ---
+ 
+@@ -70,3 +79,7 @@
+ | CLDICE | clDice topology loss. (이미 알고 있는 기준 논문) |
+ | DAPSAM | Domain-adaptive SAM prompt. |
+ | INTRA_STYLE | Intra-source style aug. |
++| BOUNDLESS | Adaptive Feature Blending + Dual Cross-Attention Regularization. arXiv 2024. |
++| FDGP | Frequency federated DG for polyp. ICASSP 2025. |
++| FPGM | Frequency Prior Guided Matching for polyp. arXiv 2025. |
++| DRIPS | Domain randomisation for perivascular spaces. medRxiv 2025. |
+diff --git a/literature_watch_ona/SEARCH_LOG.md b/literature_watch_ona/SEARCH_LOG.md
+index 13cd1e7..b69867b 100644
+--- a/literature_watch_ona/SEARCH_LOG.md
++++ b/literature_watch_ona/SEARCH_LOG.md
+@@ -2,6 +2,73 @@
+ 
+ ---
+ 
++## 2026-05-28 — 정기 탐색 (Run #2)
++
++### 실행 환경
++- 날짜: 2026-05-28
++- 모델: claude-sonnet-4-6
++- 연도 우선: 2025–2026, 보조: 2024
++- 신규 발견: 13편 (Accepted Conference 5편 + Workshop 1편 + Journal 1편 + Preprint 6편)
++
++### 수행한 검색 쿼리
++
++| Lane | 쿼리 | 주요 발견 |
++|------|------|-----------|
++| A | single source domain generalization medical image segmentation MICCAI 2025 2026 augmentation | **ADA (MICCAI 2025)** — Learnable Bezier Remap, Channel Shift Control, Gradient-guided Feature Weaken |
++| A | vessel segmentation domain generalization cerebrovascular TOF-MRA 2025 2026 | SPOCKMIP(2024), Multi-center brain vessel challenge 재확인 |
++| A | ADA adaptive augmentation MICCAI 2025 Bezier remap content feature gradient weaken | ADA (MICCAI 2025) 상세 확인: 7개 데이터셋, per-sample adaptive aug |
++| A | CVPR 2025 accepted medical segmentation domain generalization augmentation | 직접적 신규 CVPR 2025 미발견 (UniDDG 2501.04741 주목) |
++| A | generative feature style augmentation domain generalization medical segmentation 2025 Pattern Recognition | **GFSA (Pattern Recognition 2025)** 확인 |
++| A | CRISP rank-guided iterative squeezing robust medical image segmentation domain shift 2026 | **CRISP (arXiv 2604.05409)** 확인 |
++| A | boundless across domains adaptive feature cross-attention DG medical segmentation 2025 | BOUNDLESS (arXiv 2411.14883) 확인 |
++| B | class-wise region-conditioned structure-aware augmentation medical segmentation DG 2025 | DG-TTA 재확인, SRCSM/SEMDIR 재확인 |
++| B | CF-Seg counterfactuals segmentation medical image 2025 2026 | **CF_SEG (MICCAI 2025)** 확인 |
++| B | frequency-based federated domain generalization polyp segmentation 2024 2025 | **FDGP (ICASSP 2025)** 확인 |
++| B | frequency prior guided matching semi-supervised polyp segmentation DG 2025 | **FPGM (arXiv 2508.06517)** 확인 |
++| C | thin tubular structure segmentation topology preservation DG CVPR ICCV ECCV 2025 | **GLCP (MICCAI 2025)**, SPATIAL_TOPO (ICCV 2025W), FMS² 발견 |
++| C | GLCP global-to-local connectivity preservation tubular structure 2025 | GLCP (MICCAI 2025) 상세 확인: IMS + DAR 모듈 |
++| C | topology preserving segmentation spatial-aware persistent feature matching 2024 2025 | **SPATIAL_TOPO (ICCV 2025 Workshop)** 확인: arXiv 2412.02076 |
++| C | FMS2 flow matching segmentation synthesis thin structures 2026 | **FMS² (arXiv 2603.13659)** 확인 |
++| C | SPOCKMIP segmentation vessels MRA maximum intensity projection loss 2024 | **SPOCKMIP (arXiv 2407.08655)** 확인: TOF-MRA 특화, MIP loss |
++| C | MICCAI 2025 vessel segmentation domain generalization multi-center brain MRA | **MBFCV (MICCAI 2025)** 발견: Multi-branch for vessel thickness |
++| C | multi-branch framework cross-domain vessel segmentation few-shot MICCAI 2025 thickness | MBFCV (MICCAI 2025) 상세 확인: MBFE로 두께 다른 혈관 구분 |
++| C | perivascular space segmentation MRI challenge MICCAI 2024 domain generalization small vessel | MICCAI 2024 EPVS Challenge 확인, **DRIPS (medRxiv 2025)** 발견 |
++| D | CVPR ICCV NeurIPS ICLR 2025 DG segmentation augmentation robust distribution shift | CRISP 재확인, 기존 목록 재확인 |
++| D | NeurIPS 2025 augmentation budget adaptive structure-aware perturbation DG | 직접 신규 발견 없음 |
++| D | ICLR 2025 DG invariant representation shape texture bias segmentation | 기존 방향 재확인 |
++| Follow-up | SLAug TPAMI follow-up citing 2025 | ADA, SRCSM, ConStyX 등이 직접 인용하는 follow-up 확인 |
++| Follow-up | DomainDrop domain-sensitive feature suppression 2024 2025 follow-up | 직접 후속 논문 없음 (원 논문 ICCV 2023) |
++| Follow-up | morphology-conditioned augmentation vessel thickness radius DG 2025 | 직접 명시 논문 없음 — 내 방법의 gap 재확인 |
++
++### 핵심 신규 발견 요약
++
++#### 최우선 주의 논문 (Novelty 충돌 위험)
++
++**ADA (MICCAI 2025)** — arXiv 미확인, MICCAI 2025 Proceedings (Paper 0315)
++- Learnable Bezier Remap: content feature에 따라 Bezier 파라미터를 **per-sample** 동적으로 조절
++- Channel Shift Control: 채널별 shift/scale 동적 조절
++- Gradient-guided Feature Weaken: high-impact feature 억제
++- 7개 데이터셋 실험
++- **내 방법과 겹치는 부분**: "aug 강도를 image content에 따라 적응적으로 조절"이라는 아이디어
++- **핵심 차이**: ADA는 per-sample (전체 이미지 단위) 적응, 나는 intra-image structural observability 기반 (같은 이미지 내 혈관마다 다른 강도). ADA에는 얇은 혈관 보호 개념이 없음.
++
++**MBFCV (MICCAI 2025)** — Paper 0782
++- Multi-Branch Feature Extractor(MBFE): 두께가 다른 혈관 구조를 구분하는 multi-branch
++- High-Frequency Auxiliary Modality: 혈관 고주파 구조에 집중
++- Few-shot paradigm으로 cross-domain
++- **내 방법과 겹치는 부분**: 혈관 두께를 명시적으로 모델링
++- **핵심 차이**: 내 방법은 augmentation budget 조절, MBFCV는 feature representation 계층 분리. MBFCV는 test-time support 필요.
++
++### 미탐색 / 추가 탐색 필요 구역
++
++- [ ] UniDDG (2501.04741) — "One image as one domain" 아이디어 상세 확인
++- [ ] Anatomy-Guided Texture Aug for Cervical Tumor (MICCAI 2024, 10.1007/978-3-031-73360-4_8)
++- [ ] ICCV 2025 정식 accepted paper 중 structure/vessel 관련 추가 탐색
++- [ ] Causality-inspired Latent Feature Aug (arXiv 2406.05980) 확인 필요
++- [ ] NeurIPS 2025 proceedings 추가 탐색 (schedule 확인)
++
++---
++
+ ## 2026-05-27 — 초기 전체 탐색 (Run #1)
+ 
+ ### 실행 환경
+diff --git a/literature_watch_ona/paper_notes/ADA.md b/literature_watch_ona/paper_notes/ADA.md
+new file mode 100644
+index 0000000..3899169
+--- /dev/null
++++ b/literature_watch_ona/paper_notes/ADA.md
+@@ -0,0 +1,88 @@
++# ADA: An Adaptive Augmentation Framework for Single-Source Domain Generalization in Medical Image Segmentation
++
++> **Venue**: MICCAI 2025 (Paper 0315)  
++> **Status**: Accepted Conference Paper  
++> **Category**: A — 직접 경쟁  
++> **Relevance**: **High** — Novelty 충돌 가능성 최우선 경계 대상  
++> **URL**: https://papers.miccai.org/miccai-2025/0039-Paper0315.html  
++> **Added**: Run #2 (2026-05-28)
++
++---
++
++## 요약
++
++ADA는 SSDG(Single-Source Domain Generalization) for medical image segmentation을 위한
++학습 가능한 적응형 증강 프레임워크다.
++
++**핵심 구성 요소 3가지:**
++
++1. **Learnable Bezier Remap (LBR)**  
++   - Bezier curve로 nonlinear intensity mapping을 구현  
++   - **각 샘플의 content feature에 따라** Bezier 파라미터를 동적으로 조절  
++   - 즉, same Bezier family지만 per-sample adaptive parameterization
++
++2. **Channel Shift Control (CSC)**  
++   - 각 color channel의 shift/scale 파라미터를 동적으로 조절  
++   - 채널별 appearance diversity 확보
++
++3. **Gradient-guided Feature Weaken (GFW)**  
++   - Segmentation 결정에 high-impact인 feature를 약화  
++   - Shortcut 억제 역할
++
++**실험**: 7개 의료 segmentation 데이터셋에서 SOTA 주장
++
++---
++
++## 내 방법(Continuous-ONA)과의 비교
++
++### 유사점 (위험 요소)
++
++| 항목 | ADA | Continuous-ONA |
++|------|-----|----------------|
++| Augmentation type | Nonlinear intensity mapping (Bezier) | Nonlinear appearance transformation (Bezier/spline) |
++| Adaptive 여부 | ✅ Content-adaptive | ✅ Structure-adaptive |
++| SSDG 목적 | ✅ | ✅ |
++
++### 핵심 차이 (Novelty 방어 포인트)
++
++| 항목 | ADA | Continuous-ONA |
++|------|-----|----------------|
++| **적응 단위** | Image 전체 (per-sample) | **Intra-image: 혈관별 (per-structure)** |
++| **조건 신호** | 전체 이미지의 content feature (학습된) | **Local vessel radius / observability (annotation 기반)** |
++| **강도 분포** | 이미지마다 하나의 global Bezier param | **같은 이미지 내에서 연속적으로 다른 aug budget** |
++| **얇은 구조 보호** | ❌ 명시적 보호 없음 | ✅ fragile structure 보호가 핵심 동기 |
++| **Label-image consistency** | ❌ 언급 없음 | ✅ 핵심 문제의식 |
++| **구조 특이적 signal** | ❌ content feature는 구조 두께 무관 | ✅ Hessian/vesselness 기반 local radius |
++
++### 대응 전략
++
++1. ADA는 **image-level global adaptive augmentation** — per-image 하나의 Bezier curve.  
++   내 방법은 **structure-level local adaptive augmentation** — 같은 이미지 내 혈관마다 다른 augmentation budget.  
++   이는 완전히 다른 granularity다.
++
++2. ADA의 content feature conditioning은 model-learned feature에 의존 (implicit).  
++   내 방법은 annotation-derived structural observability (explicit, interpretable).
++
++3. ADA는 "label-image inconsistency"를 문제로 정의하지 않음.  
++   얇고 희미한 혈관이 강한 aug로 사라지는 현상을 다루지 않음.
++
++4. Related Work에 ADA를 명시적으로 배치하고:  
++   > "ADA adapts the augmentation strength at the image level based on content features,
++   > but applies a single global transformation per image.  
++   > In contrast, ONA operates at the sub-structure level within a single foreground class,
++   > conditioning the augmentation budget on local structural observability."
++
++---
++
++## ADA를 어떻게 baseline으로 활용할 것인가
++
++- POC 비교에 ADA 추가를 검토 (MICCAI 2025 출판 논문이므로 강력한 baseline)
++- ADA vs Continuous-ONA의 차이: image-level vs structure-level adaptive augmentation
++
++---
++
++## 미해결 질문
++
++- ADA의 LBR이 이미지 전체에 단일 Bezier를 적용하는지, 아니면 region별인지 full text 확인 필요
++- GFW가 specific anatomical structure (예: thin vessel)에 더 많이 적용되는 패턴이 있는지 확인 필요
++- 실험 데이터셋에 vessel segmentation이 포함되어 있는지 확인 필요
+diff --git a/literature_watch_ona/paper_notes/MBFCV.md b/literature_watch_ona/paper_notes/MBFCV.md
+new file mode 100644
+index 0000000..924b1fd
+--- /dev/null
++++ b/literature_watch_ona/paper_notes/MBFCV.md
+@@ -0,0 +1,66 @@
++# A Multi-Branch Framework for Cross-Domain Vessel Segmentation via the Few-Shot Paradigm
++
++> **Venue**: MICCAI 2025 (Paper 0782)  
++> **Status**: Accepted Conference Paper  
++> **Category**: A + C — 직접 경쟁 (혈관 두께 조건부 표현 + 혈관 특화 DG)  
++> **Relevance**: **High** — 혈관 두께를 명시적으로 모델링  
++> **URL**: https://papers.miccai.org/miccai-2025/0019-Paper0782.html  
++> **Added**: Run #2 (2026-05-28)
++
++---
++
++## 요약
++
++Few-shot segmentation(FSS) paradigm을 활용한 cross-domain vessel segmentation framework.
++혈관 domain shift의 핵심 문제인 "texture와 thickness 차이"를 명시적으로 다룬다.
++
++**핵심 구성 요소:**
++
++1. **Multi-Branch Feature Extractor (MBFE)**  
++   - 두께가 다른 혈관 구조(thick / thin)를 구분하는 multi-branch  
++   - **혈관 두께에 따라 서로 다른 feature 경로** 사용
++   
++2. **High-Frequency Auxiliary Modality**  
++   - 혈관의 고주파 구조 정보를 보조 modality로 도입  
++   - 세부 혈관 구조에 집중하도록 유도
++
++3. **Dual-Modality Feature Extraction and Fusion (DM-FEF)**  
++   - 원본 이미지와 고주파 이미지 정보를 fusion
++
++**설정**: Few-shot cross-domain (support set 필요)
++
++---
++
++## 내 방법(Continuous-ONA)과의 비교
++
++### 유사점 (위험 요소)
++
++| 항목 | MBFCV | Continuous-ONA |
++|------|-------|----------------|
++| 혈관 두께 명시적 모델링 | ✅ MBFE | ✅ local radius/observability |
++| 혈관 구조 내 이질성 인식 | ✅ thick vs thin | ✅ continuous observability |
++| Domain shift 대응 | ✅ | ✅ |
++
++### 핵심 차이
++
++| 항목 | MBFCV | Continuous-ONA |
++|------|-------|----------------|
++| **접근 방식** | Feature representation 분리 (at inference) | **Augmentation budget 조절 (at training)** |
++| **Domain 설정** | Few-shot (test-time support 필요) | **Single-source DG (test-time 정보 없음)** |
++| **두께 조건 적용** | Feature branch 선택 (이진적) | **Augmentation strength (연속적)** |
++| **label-image consistency** | ❌ | ✅ |
++| **SSDG 조건** | ❌ (few-shot에 의존) | ✅ |
++
++### 대응 전략
++
++> "MBFCV distinguishes vessel structures of varying thickness at the feature representation level
++> and requires test-time support images. In contrast, ONA encodes structural observability
++> into the augmentation process at training time, requiring no target-domain information."
++
++---
++
++## 미해결 질문
++
++- MBFE에서 thin/thick 분류가 binary인지, 연속 스펙트럼인지 full text 확인 필요
++- few-shot 실험의 target domain 설정 (modality? center?)
++- MBFE의 thickness 구분 기준: 학습된 것인가, 사전 정의된 것인가
+diff --git a/literature_watch_ona/weekly_reports/2026-05-28_literature_report.md b/literature_watch_ona/weekly_reports/2026-05-28_literature_report.md
+new file mode 100644
+index 0000000..aad92fa
+--- /dev/null
++++ b/literature_watch_ona/weekly_reports/2026-05-28_literature_report.md
+@@ -0,0 +1,100 @@
++# Literature Watch Report — Run #2
++**날짜**: 2026-05-28  
++**검색 범위**: 2025–2026 우선, 2024 보조  
++**신규 수록 논문**: 13편  
++**누적 총 논문**: 57편
++
++---
++
++## 이번 실행 요약
++
++Run #2에서 가장 중요한 발견은 **ADA (MICCAI 2025)**다.  
++"Content feature에 따라 Bezier augmentation 파라미터를 per-sample adaptive하게 조절한다"는 아이디어로,
++내 Continuous-ONA의 핵심 아이디어("augmentation 강도를 구조 특성에 따라 다르게")와 표면적으로 유사하다.
++
++그러나 ADA는 **image-level global adaptive aug** (전체 이미지 하나의 Bezier param)이고,  
++내 방법은 **structure-level intra-image local adaptive aug** (같은 이미지 내 혈관마다 다른 budget)이다.  
++이 granularity의 차이와 "thin vessel label-image consistency" 문제의식이 핵심 차별점이다.
++
++또한 **MBFCV (MICCAI 2025)**가 혈관 두께를 Multi-Branch Feature Extractor로 명시적으로 모델링했으나,
++이는 few-shot inference-time 설정이고 내 방법(SSDG + training-time augmentation conditioning)과 접근이 전혀 다르다.
++
++---
++
++## 신규 논문 목록 (13편)
++
++### Accepted Conference Papers / Published Journal
++
++| KEY | 제목 | Venue | Cat | Rel | 핵심 메모 |
++|-----|------|-------|-----|-----|-----------|
++| **ADA** | ADA: Adaptive Aug Framework for SSDG in Medical Image Seg | MICCAI 2025 | A | **High** | Learnable Bezier Remap per-sample. **직접 경쟁 — 즉시 독해 필요** |
++| **MBFCV** | Multi-Branch Framework for Cross-Domain Vessel Seg via Few-Shot | MICCAI 2025 | A/C | High | MBFE로 혈관 두께 구분. Few-shot 설정. |
++| **GLCP** | GLCP: Global-to-Local Connectivity Preservation for Tubular Seg | MICCAI 2025 | C | Medium | IMS + DAR 모듈. Local discontinuity 탐지. |
++| **CF_SEG** | CF-Seg: Counterfactuals Meet Segmentation | MICCAI 2025 | B | Low | Disease-free counterfactual generation → segmentation |
++| **SPATIAL_TOPO** | Topology-Preserving Seg with Spatial-Aware Persistent Feature Matching | ICCV 2025 Workshop | C | Medium | Spatial-Aware Topological Loss. Tubular structure. |
++| **FDGP** | Frequency-Based Federated Domain Generalization for Polyp Seg | ICASSP 2025 | B | Low | Fourier thresholding in federated setting |
++| **GFSA** | Generative Feature Style Augmentation for DG in Medical Image Seg | Pattern Recognition 2025 | A | Medium | VAE 기반 feature style generation. Prostate/spinal MRI. |
++
++### Preprint Only (별도 후보)
++
++| KEY | 제목 | arXiv | Cat | Rel | 핵심 메모 |
++|-----|------|-------|-----|-----|-----------|
++| **CRISP** | CRISP: Rank-Guided Iterative Squeezing for Robust Medical Seg | 2604.05409 (2026) | A | Medium | Rank stability of positive regions. Parameter-free. Lung vessel CT 포함. |
++| **FMS2** | FMS²: Unified Flow Matching for Segmentation and Synthesis | 2603.13659 (2026) | C | Low | Flow matching for thin structures. Cross-domain generalization. |
++| **SPOCKMIP** | SPOCKMIP: Vessel MRA Segmentation with MIP Loss | 2407.08655 (2024) | C | Medium | TOF-MRA 특화. MIP projection as training loss. 연속성 향상. |
++| **FPGM** | Frequency Prior Guided Matching: Aug for Generalizable Polyp Seg | 2508.06517 (2025) | B | Low | Learned edge frequency prior → spectral perturbation |
++| **BOUNDLESS** | Boundless Across Domains: Adaptive Feature Blending + DCAR | 2411.14883 (2024) | A | Low | AFB + Dual Cross-Attention Regularization |
++| **DRIPS** | DRIPS: Domain Randomisation for Perivascular Spaces Seg | medRxiv 2025 | C | Low | Physics-inspired synthetic data for PVS seg DG |
++
++---
++
++## Novelty Check 요약
++
++### Continuous-ONA의 핵심 Gap — Run #2 이후도 유지됨
++
++1. **Intra-class continuous conditioning**: ADA도 per-sample이지, intra-image per-structure가 아님.  
++   MBFCV도 두께를 구분하지만 feature representation 수준이고 augmentation budget이 아님.  
++   → **단일 foreground class 내에서 구조별로 연속적으로 aug budget을 다르게 배분하는 방법은 여전히 없다.**
++
++2. **Label-image consistency for fragile structures**: ADA, MBFCV 모두 thin vessel의 label-image inconsistency를 문제로 정의하지 않음.  
++   → **내 방법의 핵심 문제의식은 여전히 고유함.**
++
++3. **Source annotation 기반 observability**: ADA는 learned content feature (implicit), 내 방법은 local radius/vesselness (explicit, interpretable).
++
++### 위험도 업데이트
++
++| 논문 | 위험도 | 설명 |
++|------|--------|------|
++| ADA | 🔴 중위험 | Bezier adaptive aug 아이디어 공유. Granularity 차이로 방어 가능. |
++| MBFCV | 🟡 저위험 | 혈관 두께 모델링 공유. 설정(few-shot vs SSDG)이 완전히 다름. |
++| SRCSM | 🔴 중위험 | (기존) Semantic-aware class별 RC. 같은 class 내 차이와 명확히 구분 필요. |
++| FIESTA | 🔴 중위험 | (기존) Uncertainty-guided aug strength. Model-centric vs data-centric 차이. |
++
++---
++
++## ADA와의 직접 비교 분석
++
++| 비교 항목 | ADA (MICCAI 2025) | Continuous-ONA |
++|-----------|-------------------|----------------|
++| **적응 단위** | Image-level (per-sample) | **Structure-level (per-vessel-segment)** |
++| **조건 신호** | Content feature (learned, global) | **Local observability (annotation-derived, local)** |
++| **Aug budget 분포** | 이미지마다 하나의 global budget | **같은 이미지 내 연속적으로 다른 budget** |
++| **얇은 구조 보호** | ❌ | ✅ |
++| **Label-image consistency** | ❌ | ✅ |
++| **Bezier parameterization** | Learnable (gradient-driven) | Observability-conditioned (geometry-driven) |
++
++→ **같은 Bezier aug 계열이지만 전혀 다른 conditioning 방식과 목적.**  
++→ ADA의 존재는 "Bezier aug는 이미 MICCAI 2025에 있다"는 사실을 보여주지만,  
++   "구조별 local conditioning"과 "thin vessel protection"은 ADA에 없다.
++
++---
++
++## 다음 실행 (Run #3)에서 추가 탐색할 항목
++
++- [ ] ADA full text (Paper 0315) 직접 확인 — LBR이 global인지 local인지 확인 필수
++- [ ] UniDDG (2501.04741) — "One image as one domain" 아이디어
++- [ ] Anatomy-Guided Texture Augmentation for Cervical Tumor (MICCAI 2024)
++- [ ] Causality-inspired Latent Feature Aug (arXiv 2406.05980)
++- [ ] ICCV 2025 full accepted list 추가 탐색
++- [ ] NeurIPS 2025 proceedings 추가 탐색
++- [ ] SLAug/SRCSM/ADA를 모두 비교하는 systematic review 존재 여부
+-- 
+2.43.0
+
