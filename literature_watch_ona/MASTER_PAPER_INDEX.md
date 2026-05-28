@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-05-27  
-> 총 수록 논문: 44편
+> 마지막 업데이트: 2026-05-28  
+> 총 수록 논문: 57편
 
 ---
 
@@ -37,6 +37,11 @@
 | SDG_REALWORLD | Experience with Single Domain Generalization in Real World Medical Imaging Deployments | arXiv | 2026 | Preprint Only | Medium |
 | GENORDETECT | Generalize or Detect? Towards Robust Semantic Segmentation Under Multiple Distribution Shifts | NeurIPS 2024 | 2024 | Accepted Conference | Medium |
 | DAPSAM | Prompting Segment Anything Model with Domain-Adaptive Prototype for Generalizable Medical Image Segmentation | arXiv | 2024 | Preprint Only | Low |
+| ADA | ADA: An Adaptive Augmentation Framework for Single-Source Domain Generalization in Medical Image Segmentation | MICCAI 2025 | 2025 | Accepted Conference | **High** |
+| MBFCV | A Multi-Branch Framework for Cross-Domain Vessel Segmentation via the Few-Shot Paradigm | MICCAI 2025 | 2025 | Accepted Conference | High |
+| GFSA | Generative Feature Style Augmentation for Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal | Medium |
+| CRISP | CRISP: Rank-Guided Iterative Squeezing for Robust Medical Image Segmentation under Domain Shift | arXiv | 2026 | Preprint Only | Medium |
+| BOUNDLESS | Boundless Across Domains: A New Paradigm of Adaptive Feature and Cross-Attention for Domain Generalization in Medical Image Segmentation | arXiv | 2024 | Preprint Only | Low |
 
 ---
 
@@ -49,6 +54,9 @@
 | SHAPEBIAS | Shape Bias and Robustness Evaluation via Cue Decomposition for Image Classification and Segmentation | arXiv | 2025 | Preprint Only | Medium |
 | SHAPEBIAS_CNN | Promoting Shape Bias in CNNs: Frequency-Based and Contrastive Regularization for Corruption Robustness | arXiv | 2025 | Preprint Only | Medium |
 | INTRA_STYLE | Intra-Source Style Augmentation for Improved Domain Generalization | arXiv | 2022 | Preprint Only | Medium |
+| CF_SEG | CF-Seg: Counterfactuals Meet Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Low |
+| FDGP | Frequency-Based Federated Domain Generalization for Polyp Segmentation | ICASSP 2025 | 2025 | Accepted Conference | Low |
+| FPGM | Frequency Prior Guided Matching: A Data Augmentation Approach for Generalizable Semi-Supervised Polyp Segmentation | arXiv | 2025 | Preprint Only | Low |
 
 ---
 
@@ -73,6 +81,11 @@
 | FLOWAXIS | FlowAxis: Geometric-topological Deep Transfer Learning for Precise Vessel Segmentation in 3D Medical Volumes | npj Digital Medicine | 2026 | Published Journal | Medium |
 | TOPUNCERT | Topology-Aware Uncertainty for Image Segmentation | NeurIPS 2023 | 2023 | Accepted Conference | Medium |
 | CLDICE | clDice: A Novel Topology-Preserving Loss Function for Tubular Structure Segmentation | CVPR 2021 | 2021 | Accepted Conference | High |
+| GLCP | GLCP: Global-to-Local Connectivity Preservation for Tubular Structure Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Medium |
+| SPATIAL_TOPO | Topology-Preserving Image Segmentation with Spatial-Aware Persistent Feature Matching | ICCV 2025 Workshop | 2025 | Workshop Paper | Medium |
+| FMS2 | FMS²: Unified Flow Matching for Segmentation and Synthesis of Thin Structures | arXiv | 2026 | Preprint Only | Low |
+| SPOCKMIP | SPOCKMIP: Segmentation of Vessels in MRAs with Enhanced Continuity using Maximum Intensity Projection as Loss | arXiv | 2024 | Preprint Only | Medium |
+| DRIPS | DRIPS: Domain Randomisation for Image-based Perivascular Spaces Segmentation | medRxiv | 2025 | Preprint Only | Low |
 
 ---
 
@@ -111,3 +124,9 @@
 | SHAPEBIAS | Shape Bias Cue Decomp | 2503.12453 | 2025 |
 | SHAPEBIAS_CNN | Shape Bias CNN | 2509.11355 | 2025 |
 | INTRA_STYLE | Intra-Source Style | 2210.10175 | 2022 |
+| CRISP | CRISP: Rank-Guided Iterative Squeezing | 2604.05409 | 2026 |
+| BOUNDLESS | Boundless Across Domains (AFB/DCAR) | 2411.14883 | 2024 |
+| FMS2 | FMS²: Flow Matching for Thin Structures | 2603.13659 | 2026 |
+| SPOCKMIP | SPOCKMIP: Vessel MRA with MIP Loss | 2407.08655 | 2024 |
+| FPGM | Frequency Prior Guided Matching (polyp) | 2508.06517 | 2025 |
+| DRIPS | DRIPS: Domain Rand. for PVS Segmentation | medRxiv 2025 | 2025 |
