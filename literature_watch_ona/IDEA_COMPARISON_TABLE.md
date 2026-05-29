@@ -48,6 +48,9 @@
 | DGSSA | Structural + Stylistic | Binary (vessel/bg) | ⚠️ topology-inspired | ❌ | ❌ | ❌ | 구조 다양성은 새 vessel 생성, 내 방법과 방향 다름 |
 | **ADA** *(Run#2)* | Global (per-sample) | **Content-adaptive** (Bezier param dynamic) | ❌ structure signal 없음 | ❌ | ❌ | ❌ | Per-sample adaptive aug이지만 intra-class structural property 사용 안 함. Thin vessel 보호 개념 없음. |
 | GFSA *(Run#2)* | Feature-space style | None (VAE sampling) | ❌ | ❌ | ❌ | ❌ | Feature style diversity 증가. Image-space aug 아님. |
+| **ICRN** *(Run#3)* | **Region-specific** (FG/BG gamma) | **Binary** (foreground vs. background) | ❌ (annotation region만 사용) | Partially (foreground style 조절) | ❌ | ❌ | FG/BG 분리 gamma aug. 내 방법은 이를 single FG class 내로 세분화 + continuous radius 사용. |
+| **RandDG** *(Run#3)* | Global (all pixels) | None (global GIN + ULoFT) | ❌ | ❌ | ❌ | ❌ | GIN + freq feature-space aug 조합. 모든 픽셀에 동일 강도. 내 방법과 공학적으로 유사하나 thickness conditioning 없음. |
+| **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 
 ---
 
@@ -83,6 +86,14 @@
 ---
 
 ---
+
+## Run #3 (2026-05-29) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **AGTA** (MICCAI 2024 Workshop) | "anatomy-guided texture aug"라는 개념이 내 "observability-conditioned aug"와 논리 방향 동일. "특정 구조는 texture를 보호해야 한다"는 주장 공유. | 핵심 차이 강조: AGTA = class-level binary (tumor vs. 주변), 나 = single vessel class 내 continuous radius. AGTA는 tumor texture cue 보존이 목적, 나는 thin vessel label-image inconsistency 방지가 목적. Workshop paper이므로 영향력 낮음. |
+| **ICRN** (IEEE TMI 2024) | Gamma correction 기반 Local Style Augmentation이 foreground/background를 분리 증강. "annotation-region-specific aug"라는 개념 선행. | 핵심 차이: ICRN = FG/BG binary gamma aug, 나 = vessel foreground 내에서 local radius에 따라 continuous nonlinear aug 강도 조절. ICRN은 FG 내 thick/thin 구분 없음. |
+| **RandDG** (Medical Physics 2025) | GIN input-space + freq feature-space augmentation 조합. 내 nonlinear aug baseline과 공학적으로 가장 유사. | 핵심 차이: RandDG는 모든 픽셀에 동일한 GIN 강도 적용. 내 방법은 GIN 강도를 local vessel radius에 따라 nonuniform하게 적용. RandDG에는 thin vessel 보호 개념 없음. |
 
 ## Run #2 (2026-05-28) 신규 위험 논문 업데이트
 

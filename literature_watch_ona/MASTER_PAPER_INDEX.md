@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-05-28  
-> 총 수록 논문: 57편
+> 마지막 업데이트: 2026-05-29  
+> 총 수록 논문: 72편
 
 ---
 
@@ -42,6 +42,11 @@
 | GFSA | Generative Feature Style Augmentation for Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal | Medium |
 | CRISP | CRISP: Rank-Guided Iterative Squeezing for Robust Medical Image Segmentation under Domain Shift | arXiv | 2026 | Preprint Only | Medium |
 | BOUNDLESS | Boundless Across Domains: A New Paradigm of Adaptive Feature and Cross-Attention for Domain Generalization in Medical Image Segmentation | arXiv | 2024 | Preprint Only | Low |
+| FREESDG | Frequency-mixed Single-source Domain Generalization for Medical Image Segmentation | MICCAI 2023 | 2023 | Accepted Conference | High |
+| ICRN | Invariant Content Representation for Generalizable Medical Image Segmentation | IEEE TMI | 2024 | Published Journal | High |
+| RANDDG | Frequency-aware Domain Randomization for Single-Source Domain Generalization in Medical Image Segmentation | Medical Physics | 2025 | Published Journal | High |
+| DCAM | D-CAM: Learning Generalizable Weakly-Supervised Medical Image Segmentation from Domain-Invariant CAM | MICCAI 2025 | 2025 | Accepted Conference | Medium |
+| WFEX | Addressing Label Scarcity and Domain Shift in Medical Image Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Medium |
 
 ---
 
@@ -57,6 +62,9 @@
 | CF_SEG | CF-Seg: Counterfactuals Meet Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Low |
 | FDGP | Frequency-Based Federated Domain Generalization for Polyp Segmentation | ICASSP 2025 | 2025 | Accepted Conference | Low |
 | FPGM | Frequency Prior Guided Matching: A Data Augmentation Approach for Generalizable Semi-Supervised Polyp Segmentation | arXiv | 2025 | Preprint Only | Low |
+| AGTA | Improving Single-Source Domain Generalization via Anatomy-Guided Texture Augmentation for Cervical Tumor Segmentation | MICCAI 2024 Workshop (CMMCA) | 2024 | Workshop Paper | High |
+| XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
+| STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 
 ---
 
@@ -86,6 +94,8 @@
 | FMS2 | FMS²: Unified Flow Matching for Segmentation and Synthesis of Thin Structures | arXiv | 2026 | Preprint Only | Low |
 | SPOCKMIP | SPOCKMIP: Segmentation of Vessels in MRAs with Enhanced Continuity using Maximum Intensity Projection as Loss | arXiv | 2024 | Preprint Only | Medium |
 | DRIPS | DRIPS: Domain Randomisation for Image-based Perivascular Spaces Segmentation | medRxiv | 2025 | Preprint Only | Low |
+| DSUSNAKE | Dynamic Snake Upsampling Operator and Boundary-Skeleton Weighted Loss for Tubular Structure Segmentation | arXiv | 2025 | Preprint Only | Medium |
+| SDFTOPONET | SDF-TopoNet: A Two-Stage Framework for Tubular Structure Segmentation via SDF Pre-training and Topology-Aware Fine-Tuning | arXiv | 2025 | Preprint Only | Low |
 
 ---
 
@@ -100,6 +110,8 @@
 | HARMONYSEG | HarmonySeg: Tubular Structure Segmentation with Deep-Shallow Feature Fusion and Growth-Suppression Balanced Loss | ICCV 2025 | 2025 | Accepted Conference | Medium |
 | TOPOTTA | TopoTTA: Topology-Enhanced Test-Time Adaptation for Tubular Structure Segmentation | ICCV 2025 | 2025 | Accepted Conference | Medium |
 | DYNSNAKE | Dynamic Snake Convolution based on Topological Geometric Constraints for Tubular Structure Segmentation | ICCV 2023 | 2023 | Accepted Conference | Medium |
+| ADAL | Adversarial Data Augmentation for Single Domain Generalization via Lyapunov Exponent-Guided Optimization | ICCV 2025 | 2025 | Accepted Conference | Medium |
+| DPMFORMER | Exploiting Domain Properties in Language-Driven Domain Generalization for Semantic Segmentation | ICCV 2025 | 2025 | Accepted Conference | Low |
 
 ---
 
@@ -130,3 +142,9 @@
 | SPOCKMIP | SPOCKMIP: Vessel MRA with MIP Loss | 2407.08655 | 2024 |
 | FPGM | Frequency Prior Guided Matching (polyp) | 2508.06517 | 2025 |
 | DRIPS | DRIPS: Domain Rand. for PVS Segmentation | medRxiv 2025 | 2025 |
+| UNIDDG | Rethinking Domain Generalization in Medical Image Segmentation: One Image as One Domain | 2501.04741 | 2025 |
+| STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | 2412.04296 | 2024 |
+| DSUSNAKE | Dynamic Snake Upsampling Operator and Boundary-Skeleton Weighted Loss for Tubular Structure Segmentation | 2505.08525 | 2025 |
+| SDFTOPONET | SDF-TopoNet: SDF Pre-training + Topology-Aware Fine-Tuning for Tubular Segmentation | 2503.14523 | 2025 |
+| BISDG | Bi-Level Optimization for Single Domain Generalization | 2604.06349 | 2026 |
+| CLFA | Causality-inspired Latent Feature Augmentation for Single Domain Generalization | 2406.05980 | 2024 |

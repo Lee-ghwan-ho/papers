@@ -16,6 +16,8 @@
 | ★★★ | **SEMDIR** | Feature-space semantic direction augmentation. 내 방법과 동일한 문제의식(domain-specific vs anatomical feature 분리)을 다름. arXiv:2507.23326 |
 | ★★★ | **FIESTA** | Uncertainty-guided augmentation strength 조절. 내 방법과 가장 개념 유사. 차이 명확히 파악 필요. arXiv:2406.14308 |
 | ★★★ | **DGSSA** | Structural + Stylistic aug for retinal vessel. 혈관 구조 특성을 aug에 사용한 논문. 직접 유사 가능성. Neural Networks 2025. |
+| ★★★ | **AGTA** | **Run #3 신규** Anatomy-Guided Texture Augmentation for cervical tumor SSDG. "texture를 무조건 파괴하면 안 된다"는 논지 → 내 "fragile structure 보호" 주장과 방향 유사. 구분점: AGTA는 tumor texture 보존 목적, 나는 thin vessel visibility 보호. MICCAI 2024 Workshop (CMMCA). |
+| ★★★ | **ICRN** | **Run #3 신규** Invariant Content Representation + local style augmentation으로 foreground/background style을 분리 증강. 내 "class 내 구조 단위 분리 증강"과 level이 다르지만 "annotation 기반 region-specific aug"라는 개념 유사. IEEE TMI 2024. |
 
 ---
 
@@ -35,6 +37,9 @@
 | ★★ | **GFSA** | **Run #2 신규** Generative Feature Style Aug for DG in Medical Seg. VAE 기반 feature style generation. Pattern Recognition 2025. |
 | ★★ | **SPOCKMIP** | **Run #2 신규** TOF-MRA vessel segmentation with MIP loss. 내 exact 데이터셋 도메인에서의 thin vessel continuity 문제 다룸. arXiv 2407.08655. |
 | ★★ | **CRISP** | **Run #2 신규** Rank-Guided Iterative Squeezing for Robust Medical Seg. Model-agnostic DG, lung vessel CT 실험 포함. arXiv 2604.05409. |
+| ★★ | **RANDDG** | **Run #3 신규** frequency-aware domain randomization for SSDG. GIN 기반 input-space aug + ULoFT feature-space perturbation. 내 baseline과 직접 비교 후보. Medical Physics 2025. |
+| ★★ | **FREESDG** | **Run #3 신규** FreeSDG: frequency-mixed SSDG for medical seg. MICCAI 2023 foundational freq aug. ADA/ConStyX 등이 이를 baseline으로 사용하는지 확인 필요. MICCAI 2023. |
+| ★★ | **ADAL** | **Run #3 신규** Adversarial SDG via Lyapunov Exponent-Guided Optimization. ICCV 2025. 자연영상이지만 single-domain DG에서 adversarial aug 강도 조절의 이론적 근거 제공. |
 
 ---
 
@@ -54,6 +59,10 @@
 | ★ | **SPATIAL_TOPO** | **Run #2 신규** Spatial-Aware Persistent Feature Matching for topology. ICCV 2025 Workshop. |
 | ★ | **CF_SEG** | **Run #2 신규** Counterfactual image generation for segmentation. MICCAI 2025. |
 | ★ | **FMS2** | **Run #2 신규** Flow Matching for thin structure segmentation and synthesis. Cross-domain generalization. arXiv 2026. |
+| ★ | **XDOMAINMIX** | **Run #3 신규** Cross-domain feature augmentation: class-specific vs domain-specific component swap. IJCAI 2024. feature-space DG aug의 이론적 decomposition 참고. |
+| ★ | **UNIDDG** | **Run #3 신규** One Image as One Domain (OIOD). Content-style cross-batch recombination + EMA boundary attention. arXiv 2501.04741. "각 이미지를 독립 도메인으로"는 내 thin vessel 개념과 level이 다름 — 참고용. |
+| ★ | **WFEX** | **Run #3 신규** Wavelet Frequency Exchange + Parametric Spline layers for label scarcity + domain shift. MICCAI 2025. 반지름 기반이 아닌 frequency 기반이지만 spline activation 참고 가능. |
+| ★ | **DSUSNAKE** | **Run #3 신규** Dynamic Snake Upsampling + Boundary-Skeleton Weighted Loss. plug-and-play for tubular DG. arXiv 2505.08525. |
 
 ---
 
@@ -83,3 +92,8 @@
 | FDGP | Frequency federated DG for polyp. ICASSP 2025. |
 | FPGM | Frequency Prior Guided Matching for polyp. arXiv 2025. |
 | DRIPS | Domain randomisation for perivascular spaces. medRxiv 2025. |
+| DCAM | Domain-invariant CAM for weakly-supervised DG. MICCAI 2025. weakly-supervised 설정, 간접 참고. |
+| DPMFORMER | Language-driven DG (CLIP prompts + texture perturbation). ICCV 2025. 자연영상, 간접 참고. |
+| SDFTOPONET | SDF pre-training + topology fine-tuning for tubular. arXiv 2503. 낮은 계산 비용 topology loss 참고. |
+| BISDG | Bi-Level Optimization for SDG: inner task + outer generalization. arXiv 2604. 일반 DG이론 참고. |
+| CLFA | Causality-inspired latent feature aug for SDG. arXiv 2406. feature-space causal intervention 참고. |
