@@ -2,6 +2,97 @@
 
 ---
 
+## 2026-05-30 — 정기 탐색 (Run #4)
+
+### 실행 환경
+- 날짜: 2026-05-30
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024
+- 신규 발견: **13편** (Accepted Conference 5편 + Published Journal 7편 + Preprint 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation NeurIPS 2025 CVPR 2025 adaptive | 기존 논문 재확인, NeurIPS 2025 직접 미발견 |
+| A | BucketAugment reinforcement learning augmentation policy domain generalization CT segmentation 2024 | **BUCKETAUG (IEEE OJEMB 2024)** 확인: Q-learning 기반 augmentation policy |
+| A | deep learning domain randomization image feature space multiorgan CT MRI 2025 Radiology AI | **DOMRAND_IMG_FEAT (Radiology AI 2025)** 확인: image+feature space 동시 randomization |
+| A | NeurIPS 2025 poster retinal vessel domain generalization graph prior | **GRAPHSEG (NeurIPS 2025)** 확인: Deformable Graph Priors for retinal vessel DG |
+| A | FASAM fully automated SAM SSDG medical image segmentation 2507.17281 | **FASAM (IEEE SMC 2025)** 확인: Auto-prompted SAM for SSDG |
+| B | spatially adaptive augmentation budget structure-conditioned per-pixel appearance 2025 | **ASAUG (arXiv 2505.23438)** 발견: entropy-based adaptive aug weight |
+| B | domain generalization rejecting extreme augmentations reward function WACV 2024 | **REAUG (WACV 2024)** 확인: augmentation 강도 reward function으로 거부 |
+| B | dual stream feature augmentation domain generalization hard fictitious ACM MM 2024 | **DFA (ACM MM 2024)** 확인: uncertainty-guided hard cross-domain feature generation |
+| B | causal style bias deconfounding domain generalization IEEE TIP 2025 | **SDCL (IEEE TIP 2025)** 확인: backdoor causal learning + style-guided expert module |
+| B | Stylizing ViT anatomy-preserving style transfer DG medical ISBI 2026 | **STYLIZING_VIT (ISBI 2026)** 확인: weight-shared ViT attention for DG |
+| B | SCSD semantic consistency style diversity AAAI 2025 domain generalized segmentation | **SCSD (AAAI 2025)** 확인: Semantic Query Booster + Text-Driven Style Transform |
+| C | OVS-Net optimized vessel segmentation small vessel enhancement IEEE TIP 2025 | **OVSNET (IEEE TIP 2025)** 확인: dual-branch macro/micro vessel extraction, 17-dataset benchmark |
+| C | topology-aware circle of willis MRA CTA segmentation Computers in Biology and Medicine 2026 | **COW_TOPOLOGY (CBM 2026)** 확인: nnUNet + Skeleton Recall + topology post-processing, TopCoW 2024 winner |
+| C | vessel diameter conditioned augmentation radius adaptive observability 2025 | 직접 명시 논문 없음 — 내 방법의 핵심 gap 재확인 |
+| C | partial volume effect vessel augmentation simulation thin MRI 2025 | 해당 논문 없음 |
+| D | NeurIPS 2025 domain generalization augmentation causal structure robust proceedings | GRAPHSEG (NeurIPS 2025) 발견 외 추가 신규 없음 |
+| D | CVPR 2025 domain generalization medical image augmentation structure style | SCSD 재확인, 직접 CVPR 2025 의료영상 DG 논문 없음 |
+| D | domain-randomized deep learning neuroimage analysis IEEE Signal Processing Magazine 2025 | **DOMRAND_NEURO (IEEE SPM 2025)** 확인: 합성영상 기반 intensity randomization |
+| Follow-up | DomainDrop follow-up domain-sensitive feature suppression 2024 2025 | DomainDrop 직접 후속 없음 — 원 논문 ICCV 2023 에서 DFA, SDCL 등이 유사 방향 |
+| Follow-up | VectorField Transformer retinal vessel MIDL 2022 follow-up | OpenReview에서 MIDL 2022 확인 — 직접 후속 논문 없음, HESSIAN_VF가 가장 가까운 발전 |
+| Follow-up | SLAug citation 2025 2026 novelty-related | GRAPHSEG, REAUG가 augmentation budget 방향에서 가장 주목할 후속 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**REAUG (WACV 2024)** — arXiv:2310.06670, WACV 2024 pp.2215-2225
+- "augmentation이 너무 강하면 학습에 해롭다" → reward function으로 extreme augmentation 거부
+- **내 방법과의 공통점**: augmentation budget 개념, 강한 aug가 오히려 해가 된다는 인식
+- **핵심 차이**: REAUG = 이미지 전체 단위에서 augmentation 거부/수용 (binary decision at image-level), 나 = 동일 이미지 내 혈관 구조의 관찰 가능성에 따라 연속적으로 강도 조절 (intra-image continuous). REAUG는 thin vessel 개념 없음.
+
+**GRAPHSEG (NeurIPS 2025)** — OpenReview ID: zVkbsGlKn9
+- 구조 보존(structure-preserved) vs 구조 열화(structure-degraded) 컴포넌트 분리 + deformable graph prior
+- **내 방법과의 공통점**: "구조 가시성(observability)"에 따른 분리 표현 개념
+- **핵심 차이**: GRAPHSEG는 feature decomposition + graph prior 기반 representation learning, 나는 augmentation budget 조절. GRAPHSEG는 test-time에 graph prior가 필요. NeurIPS 2025 논문으로 중요도 높음.
+
+**OVSNET (IEEE TIP 2025)** — arXiv:2411.15251, DOI: 10.1109/TIP.2025.3607583
+- Micro vessel enhancement module이 명시적으로 small vessel을 별도 처리
+- **내 방법과의 공통점**: "thin/small vessel을 굵은 vessel과 다르게 처리해야 한다"는 동기 공유
+- **핵심 차이**: OVSNET는 segmentation 모델의 feature extraction branch를 분리, 나는 augmentation 단계에서 strength를 조절. OVSNET는 DG 논문이 아님.
+
+#### 주요 신규 발견
+
+**SCSD (AAAI 2025)** — arXiv:2412.12050
+- Semantic Query Booster + Text-Driven Style Transform: 자연영상 DG segmentation (GTAV→Cityscapes)
+- 상위 tier 논문으로 semantic consistency + style diversity를 동시에 다루는 방법
+
+**DFA (ACM MM 2024)** — arXiv:2409.04699, DOI: 10.1145/3664647.3680652
+- uncertainty-guided hard cross-domain feature 생성 + 비인과적 특징 adversarial masking
+- feature-space augmentation의 두 축(diversity + causality)을 동시에 다룸
+
+**SDCL (IEEE TIP 2025)** — arXiv:2503.16852
+- Style-guided expert module(SGEM) + backdoor causal learning: 스타일을 confounder로 처리
+- 의료+자연영상 멀티태스크 실험
+
+**BUCKETAUG (IEEE OJEMB 2024)** — DOI: 10.1109/OJEMB.2024.3397623
+- Q-learning으로 augmentation stack 최적 policy 탐색. medical DG.
+
+**DOMRAND_IMG_FEAT (Radiology AI 2025)** — DOI: 10.1148/ryai.240586
+- image space + feature space 동시 domain randomization으로 nnUNet 기반 multiorgan DG
+
+**COW_TOPOLOGY (CBM 2026)** — PubMed:41637822
+- TopCoW 2024 challenge 우승 솔루션: nnUNet + Skeleton Recall + topology post-processing
+- 내 TOF-MRA 실험 데이터셋과 가장 직접 관련된 방법 중 하나
+
+**OVSNET (IEEE TIP 2025)** — arXiv:2411.15251
+- Dual-branch (macro/micro) vessel 처리 + 17 데이터셋 벤치마크
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] CVPR 2025 main track augmentation 논문 — 직접 검색에서 의료영상 DG 신규 없음
+- [ ] NeurIPS 2025 proceedings에 GRAPHSEG 외 vessel/DG 추가 논문 가능성 확인
+- [ ] GRAPHSEG arXiv ID 확인 (OpenReview만 확인, arXiv preprint 별도 확인 필요)
+- [ ] REAUG와 내 방법의 차이 논문에서 명시적으로 articulate하는 방안 검토
+- [ ] "intra-image structure-conditioned augmentation" 또는 "within-class augmentation budget" 키워드 재탐색
+- [ ] TopBrain 2025 challenge dataset 활용 가능성 탐색
+
+---
+
 ## 2026-05-29 — 정기 탐색 (Run #3)
 
 ### 실행 환경

@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-05-29  
-> 총 수록 논문: 72편
+> 마지막 업데이트: 2026-05-30  
+> 총 수록 논문: 85편
 
 ---
 
@@ -47,6 +47,10 @@
 | RANDDG | Frequency-aware Domain Randomization for Single-Source Domain Generalization in Medical Image Segmentation | Medical Physics | 2025 | Published Journal | High |
 | DCAM | D-CAM: Learning Generalizable Weakly-Supervised Medical Image Segmentation from Domain-Invariant CAM | MICCAI 2025 | 2025 | Accepted Conference | Medium |
 | WFEX | Addressing Label Scarcity and Domain Shift in Medical Image Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Medium |
+| GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | High |
+| BUCKETAUG | BucketAugment: Reinforced Domain Generalisation in Abdominal CT Segmentation | IEEE OJEMB | 2024 | Published Journal | Medium |
+| DOMRAND_IMG_FEAT | Deep Learning with Domain Randomization in Image and Feature Spaces for Abdominal Multiorgan Segmentation on CT and MRI Scans | Radiology: AI | 2025 | Published Journal | Medium |
+| FASAM | Fully Automated SAM for Single-source Domain Generalization in Medical Image Segmentation | IEEE SMC 2025 | 2025 | Accepted Conference | Low |
 
 ---
 
@@ -65,6 +69,10 @@
 | AGTA | Improving Single-Source Domain Generalization via Anatomy-Guided Texture Augmentation for Cervical Tumor Segmentation | MICCAI 2024 Workshop (CMMCA) | 2024 | Workshop Paper | High |
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
+| REAUG | Domain Generalization by Rejecting Extreme Augmentations | WACV 2024 | 2024 | Accepted Conference | High |
+| DFA | Dual-stream Feature Augmentation for Domain Generalization | ACM MM 2024 | 2024 | Accepted Conference | Medium |
+| SDCL | Causal Inference via Style Bias Deconfounding for Domain Generalization | IEEE TIP | 2025 | Published Journal | Medium |
+| STYLIZING_VIT | Stylizing ViT: Anatomy-Preserving Instance Style Transfer for Domain Generalization | ISBI 2026 | 2026 | Accepted Conference | Low |
 
 ---
 
@@ -96,6 +104,8 @@
 | DRIPS | DRIPS: Domain Randomisation for Image-based Perivascular Spaces Segmentation | medRxiv | 2025 | Preprint Only | Low |
 | DSUSNAKE | Dynamic Snake Upsampling Operator and Boundary-Skeleton Weighted Loss for Tubular Structure Segmentation | arXiv | 2025 | Preprint Only | Medium |
 | SDFTOPONET | SDF-TopoNet: A Two-Stage Framework for Tubular Structure Segmentation via SDF Pre-training and Topology-Aware Fine-Tuning | arXiv | 2025 | Preprint Only | Low |
+| OVSNET | Optimized Vessel Segmentation: A Structure-Agnostic Approach with Small Vessel Enhancement and Morphological Correction | IEEE TIP | 2025 | Published Journal | High |
+| COW_TOPOLOGY | Topology-aware multiclass segmentation of the Circle of Willis from MRA and CTA images | Computers in Biology and Medicine | 2026 | Published Journal | Medium |
 
 ---
 
@@ -112,6 +122,8 @@
 | DYNSNAKE | Dynamic Snake Convolution based on Topological Geometric Constraints for Tubular Structure Segmentation | ICCV 2023 | 2023 | Accepted Conference | Medium |
 | ADAL | Adversarial Data Augmentation for Single Domain Generalization via Lyapunov Exponent-Guided Optimization | ICCV 2025 | 2025 | Accepted Conference | Medium |
 | DPMFORMER | Exploiting Domain Properties in Language-Driven Domain Generalization for Semantic Segmentation | ICCV 2025 | 2025 | Accepted Conference | Low |
+| SCSD | Exploring Semantic Consistency and Style Diversity for Domain Generalized Semantic Segmentation | AAAI 2025 | 2025 | Accepted Conference | Medium |
+| DOMRAND_NEURO | Domain-Randomized Deep Learning for Neuroimage Analysis | IEEE Signal Processing Magazine | 2025 | Published Journal | Low |
 
 ---
 
@@ -148,3 +160,4 @@
 | SDFTOPONET | SDF-TopoNet: SDF Pre-training + Topology-Aware Fine-Tuning for Tubular Segmentation | 2503.14523 | 2025 |
 | BISDG | Bi-Level Optimization for Single Domain Generalization | 2604.06349 | 2026 |
 | CLFA | Causality-inspired Latent Feature Augmentation for Single Domain Generalization | 2406.05980 | 2024 |
+| ASAUG | Adaptive Spatial Augmentation for Semi-supervised Semantic Segmentation | 2505.23438 | 2025 |
