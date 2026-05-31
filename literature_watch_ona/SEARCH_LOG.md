@@ -2,6 +2,83 @@
 
 ---
 
+## 2026-05-31 — 정기 탐색 (Run #4)
+
+### 실행 환경
+- 날짜: 2026-05-31
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024
+- 신규 발견: **8편** (Accepted Conference 5편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation MICCAI 2025 2026 vessel brain | 기존 논문 재확인 (ADA, RASS 등) |
+| A | domain generalization cerebrovascular TOF-MRA vessel segmentation 2025 2026 MICCAI TMI | VesselVerse (MICCAI 2025 dataset 논문) 발견, 기존 확인 |
+| A | class-conditioned structure-aware augmentation medical image segmentation domain generalization 2025 2026 | DGSSA, SRCSM 등 기존 논문 재확인 |
+| A | NeurIPS 2025 domain generalization augmentation segmentation structure preserving | **GRAPHSEG (NeurIPS 2025)** 발견: Deformable Graph Priors for retinal vessel DG |
+| A | ICLR 2025 domain generalization segmentation data augmentation structure invariance | 기존 논문 재확인 (XDomainMix 등) |
+| B | CVPR ICCV 2025 augmentation budget adaptive structure aware perturbation domain generalization | PASTA 등 기존 재확인, ICCV 2025 전체 탐색 시도 |
+| B | morphology-aware augmentation vessel radius thickness conditioned domain generalization 2025 2026 | 직접 명시 논문 여전히 없음 → 내 gap 재확인 |
+| C | tubular structure segmentation thin vessel domain generalization 2025 2026 CVPR ICCV ECCV NeurIPS | **VessShape (arXiv 2510.27646)** 발견: few-shot vessel shape prior, DS-Mamba 발견 |
+| C | VessShape few-shot blood vessel segmentation shape priors synthetic images 2025 | **VessShape (arXiv 2510.27646)** 확인: tubular geometry + diverse textures으로 shape bias 유도 |
+| C | MICCAI 2025 vessel brain domain generalization single source (open access portal) | SAM-OSLN (MICCAI 2025), **L2CP** (MICCAI 2025 Paper 3277) 발견 |
+| C | "test-time training" vessel segmentation domain generalization copy-paste local contrast MICCAI 2025 | **L2CP (MICCAI 2025)** 상세 확인: morphological closing으로 thin vessel 제거, local contrast copy-paste |
+| D | CVPR 2025 open access vessel vascular segmentation domain generalization | **vesselFM (CVPR 2025)** 확인: Foundation model for 3D blood vessel DG (arXiv 2411.17386) |
+| D | CVPR 2025 test-time domain generalization medical image segmentation morphological prior | **TTDG-MGM (CVPR 2025)** 확인: Universe learning + multi-graph matching (arXiv 2503.13012) |
+| D | NeurIPS 2025 medical image vessel domain generalization augmentation openreview accepted | **GRAPHSEG (NeurIPS 2025)** 확인: openreview zVkbsGlKn9, poster 115045 |
+| D | LangDAug Langevin data augmentation multi-source DG medical image ICML 2025 | **LangDAug (ICML 2025)** 확인: arXiv 2505.19659, EBM + Langevin dynamics |
+| D | CVPR 2025 domain generalization segmentation robust distribution shift new | DROPGEN (arXiv 2604.02564) 발견 |
+| A | DROPGEN invariance biomedical domain generalization biomedical arXiv 2604.02564 | **DROPGEN (arXiv 2604.02564)** 확인: foundation model repr. + source intensities, 3D biomedical seg |
+| A | semantic data augmentation invariant risk minimization medical image domain generalization arXiv 2502.05593 | **SDAIRM (arXiv 2502.05593)** 확인: domain-oriented direction selector for IRM |
+| Follow-up | SLAug RASS ConStyX follow-up citation 2025 2026 MICCAI ICCV NeurIPS | 기존 논문들의 follow-up 탐색 (특별한 신규 없음) |
+| Follow-up | vessel diameter conditioned augmentation radius adaptive augmentation domain generalization 2025 2026 | **직접 명시 논문 여전히 없음** → Continuous-ONA의 핵심 gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**L2CP (MICCAI 2025)** — Paper 3277
+- "thin vessel 구조를 morphological closing으로 제거한다"는 아이디어를 DG에서 명시적으로 사용
+- **내 방법과의 공통 전제**: thin vessel은 appearance/domain 측면에서 다르게 취급되어야 한다
+- **핵심 차이**: L2CP = test-time adaptation (target 필요), 나 = training-time SSDG (target 불필요)
+- Thin vessel의 특수성을 DG에서 독립적으로 인식한 논문 → 내 동기를 지지하는 선행 근거로 활용 가능
+
+#### 최고 티어 신규 논문 (High-impact venue)
+
+**vesselFM (CVPR 2025)** — arXiv 2411.17386
+- 3D blood vessel DG를 위한 foundation model
+- TOF-MRA 포함 4가지 modality에서 zero-shot 일반화
+- Domain randomization + flow matching 생성 모델 사용
+- 내 방법과는 paradigm이 다름 (large-scale foundation vs. lightweight SSDG)
+
+**TTDG-MGM (CVPR 2025)** — arXiv 2503.13012
+- Morphological prior를 multi-graph matching에 통합한 test-time DG for medical seg
+- Retinal fundus + polyp benchmark에서 SOTA
+
+**LangDAug (ICML 2025)** — arXiv 2505.19659
+- EBM + Langevin dynamics로 source domain 간 intermediate 샘플 생성
+- Multi-source DG (내 SSDG 설정과 다름)
+- Rademacher complexity 상한 이론 분석 포함
+
+**GRAPHSEG (NeurIPS 2025)** — OpenReview zVkbsGlKn9
+- 변형 가능한 retinal atlas graph prior + variational Bayesian framework
+- Structure-preserved와 structure-degraded 분해로 domain-invariant representation
+- CHASE/DRIVE/HRF에서 domain shift 조건 SOTA
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] vesselFM 전문 독해: domain randomization scheme 세부 사항 및 TOF-MRA 실험 결과
+- [ ] LangDAug full text: Langevin dynamics aug 과정 상세 및 SSDG 적용 가능성 확인
+- [ ] GRAPHSEG full text (OpenReview PDF): deformable graph prior 구현 상세
+- [ ] TTDG-MGM GitHub 코드 확인: morphological prior 사용 방식
+- [ ] L2CP: morphological closing scale 파라미터 → 혈관 두께 선택 기준 확인
+- [ ] "vessel diameter conditioned augmentation" 키워드: 여전히 명시적 논문 없음 → 내 ONA gap 유지
+- [ ] NeurIPS 2025 추가 탐색: medical DG 관련 논문 더 있을 수 있음
+
+---
+
 ## 2026-05-29 — 정기 탐색 (Run #3)
 
 ### 실행 환경

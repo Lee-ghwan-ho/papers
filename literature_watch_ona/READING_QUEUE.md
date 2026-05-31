@@ -40,6 +40,9 @@
 | ★★ | **RANDDG** | **Run #3 신규** frequency-aware domain randomization for SSDG. GIN 기반 input-space aug + ULoFT feature-space perturbation. 내 baseline과 직접 비교 후보. Medical Physics 2025. |
 | ★★ | **FREESDG** | **Run #3 신규** FreeSDG: frequency-mixed SSDG for medical seg. MICCAI 2023 foundational freq aug. ADA/ConStyX 등이 이를 baseline으로 사용하는지 확인 필요. MICCAI 2023. |
 | ★★ | **ADAL** | **Run #3 신규** Adversarial SDG via Lyapunov Exponent-Guided Optimization. ICCV 2025. 자연영상이지만 single-domain DG에서 adversarial aug 강도 조절의 이론적 근거 제공. |
+| ★★ | **LANGDAUG** | **Run #4 신규** LangDAug: Langevin Data Augmentation for Multi-Source DG. ICML 2025. Energy-Based Model + Langevin dynamics로 source domain 간 intermediate 샘플 생성. 의료영상 DG aug의 이론적 분석 참고 (Rademacher complexity 상한). |
+| ★★ | **L2CP** | **Run #4 신규** Test-Time Training with Local Contrast-Preserving Copy-Pasted Image for Retinal Vessel DG. MICCAI 2025. **"thin vessel 구조를 morphological closing으로 제거"라는 아이디어를 DG에 명시적으로 사용**. 내 thin vessel 보호 동기와 직접 연결. 설정은 test-time (target 필요), 나는 training-time SSDG. |
+| ★★ | **VESSELFM** | **Run #4 신규** vesselFM: Foundation Model for Universal 3D Blood Vessel Segmentation. CVPR 2025. Domain randomization + flow matching generative model로 zero-shot DG. TOF-MRA 포함 4가지 modality 실험. 3D vessel DG의 최신 CVPR 기준 논문. |
 
 ---
 
@@ -63,6 +66,8 @@
 | ★ | **UNIDDG** | **Run #3 신규** One Image as One Domain (OIOD). Content-style cross-batch recombination + EMA boundary attention. arXiv 2501.04741. "각 이미지를 독립 도메인으로"는 내 thin vessel 개념과 level이 다름 — 참고용. |
 | ★ | **WFEX** | **Run #3 신규** Wavelet Frequency Exchange + Parametric Spline layers for label scarcity + domain shift. MICCAI 2025. 반지름 기반이 아닌 frequency 기반이지만 spline activation 참고 가능. |
 | ★ | **DSUSNAKE** | **Run #3 신규** Dynamic Snake Upsampling + Boundary-Skeleton Weighted Loss. plug-and-play for tubular DG. arXiv 2505.08525. |
+| ★ | **TTDG_MGM** | **Run #4 신규** Test-Time DG via Universe Learning + Multi-Graph Matching for medical seg. CVPR 2025. Morphological prior를 graph matching에 통합. Retinal fundus + polyp benchmark. |
+| ★ | **GRAPHSEG** | **Run #4 신규** Generalizable Retina Vessel Segmentation with Deformable Graph Priors. NeurIPS 2025. Variational Bayesian + retinal atlas deformable graph prior + structure-preserved/degraded decomposition. CHASE/DRIVE/HRF. |
 
 ---
 
@@ -97,3 +102,6 @@
 | SDFTOPONET | SDF pre-training + topology fine-tuning for tubular. arXiv 2503. 낮은 계산 비용 topology loss 참고. |
 | BISDG | Bi-Level Optimization for SDG: inner task + outer generalization. arXiv 2604. 일반 DG이론 참고. |
 | CLFA | Causality-inspired latent feature aug for SDG. arXiv 2406. feature-space causal intervention 참고. |
+| DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
+| VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
+| SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
