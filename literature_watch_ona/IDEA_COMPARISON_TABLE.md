@@ -51,6 +51,8 @@
 | **ICRN** *(Run#3)* | **Region-specific** (FG/BG gamma) | **Binary** (foreground vs. background) | ❌ (annotation region만 사용) | Partially (foreground style 조절) | ❌ | ❌ | FG/BG 분리 gamma aug. 내 방법은 이를 single FG class 내로 세분화 + continuous radius 사용. |
 | **RandDG** *(Run#3)* | Global (all pixels) | None (global GIN + ULoFT) | ❌ | ❌ | ❌ | ❌ | GIN + freq feature-space aug 조합. 모든 픽셀에 동일 강도. 내 방법과 공학적으로 유사하나 thickness conditioning 없음. |
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
+| **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
+| **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
 
 ---
 
@@ -67,6 +69,9 @@
 | MULTIDOMAIN_BRAIN | Feature disentanglement | Multi-domain 설정. |
 | MBFCV *(Run#2)* | Multi-Branch Feature Extractor로 두께별 혈관 구분. Few-shot cross-domain. | Feature representation 분리. 내 방법(aug budget)과 방향 다름. Test-time support 필요. |
 | CRISP *(Run#2)* | Rank-based domain-shift robustness (model-agnostic, training-free). | 내 train-time aug과 방향 다름. Post-hoc inference 방식. |
+| TTDG_MGM *(Run#4)* | Universe embeddings + multi-graph matching + morphological prior. Test-time DG. CVPR 2025. | Test-time 방식. 내 training-time aug과 다름. 그러나 morphological prior 활용이 내 radius signal과 개념 유사. |
+| GRAPHSEG *(Run#4)* | Variational Bayesian + deformable retinal atlas graph prior. Structure-preserved/degraded decomposition. NeurIPS 2025. | 구조를 preserved/degraded로 분리하는 개념이 내 관찰 가능성 분류와 연결됨. 단, retinal atlas 의존 (특정 해부 구조). |
+| VESSELFM *(Run#4)* | Foundation model: 17 datasets + domain randomization + flow matching. CVPR 2025. | Large-scale foundation model. 내 lightweight SSDG와 데이터 요구사항 근본 다름. |
 
 ---
 
@@ -84,6 +89,14 @@
 | TopoTTA | TTA for tubular topology | Cross-domain topological shift 탐지 |
 
 ---
+
+---
+
+## Run #4 (2026-05-31) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **L2CP** (MICCAI 2025) | "thin vessel 구조를 morphological closing으로 제거"라는 아이디어가 내 "thin vessel은 특별히 취급되어야 한다"는 전제와 논리적으로 동일. 단, test-time adaptation 방법. | 핵심 차이: L2CP = target domain 필요한 test-time adaptation, 나 = training-time SSDG (target 불필요). L2CP는 thin vessel을 제거해서 target style을 얻는 것이 목적, 나는 thin vessel에 보수적인 aug budget을 부여하여 label-image consistency를 지키는 것이 목적. |
 
 ---
 

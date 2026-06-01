@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-05-29  
-> 총 수록 논문: 72편
+> 마지막 업데이트: 2026-05-31  
+> 총 수록 논문: 80편
 
 ---
 
@@ -47,6 +47,9 @@
 | RANDDG | Frequency-aware Domain Randomization for Single-Source Domain Generalization in Medical Image Segmentation | Medical Physics | 2025 | Published Journal | High |
 | DCAM | D-CAM: Learning Generalizable Weakly-Supervised Medical Image Segmentation from Domain-Invariant CAM | MICCAI 2025 | 2025 | Accepted Conference | Medium |
 | WFEX | Addressing Label Scarcity and Domain Shift in Medical Image Segmentation | MICCAI 2025 | 2025 | Accepted Conference | Medium |
+| TTDG_MGM | Test-Time Domain Generalization via Universe Learning: A Multi-Graph Matching Approach for Medical Image Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
+| LANGDAUG | LangDAug: Langevin Data Augmentation for Multi-Source Domain Generalization in Medical Image Segmentation | ICML 2025 | 2025 | Accepted Conference | Medium |
+| L2CP | Test-Time Training with Local Contrast-Preserving Copy-Pasted Image for Domain Generalization in Retinal Vessel Segmentation | MICCAI 2025 | 2025 | Accepted Conference | **High** |
 
 ---
 
@@ -96,6 +99,8 @@
 | DRIPS | DRIPS: Domain Randomisation for Image-based Perivascular Spaces Segmentation | medRxiv | 2025 | Preprint Only | Low |
 | DSUSNAKE | Dynamic Snake Upsampling Operator and Boundary-Skeleton Weighted Loss for Tubular Structure Segmentation | arXiv | 2025 | Preprint Only | Medium |
 | SDFTOPONET | SDF-TopoNet: A Two-Stage Framework for Tubular Structure Segmentation via SDF Pre-training and Topology-Aware Fine-Tuning | arXiv | 2025 | Preprint Only | Low |
+| VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | **High** |
+| GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 
 ---
 
@@ -112,6 +117,10 @@
 | DYNSNAKE | Dynamic Snake Convolution based on Topological Geometric Constraints for Tubular Structure Segmentation | ICCV 2023 | 2023 | Accepted Conference | Medium |
 | ADAL | Adversarial Data Augmentation for Single Domain Generalization via Lyapunov Exponent-Guided Optimization | ICCV 2025 | 2025 | Accepted Conference | Medium |
 | DPMFORMER | Exploiting Domain Properties in Language-Driven Domain Generalization for Semantic Segmentation | ICCV 2025 | 2025 | Accepted Conference | Low |
+| TTDG_MGM | Test-Time Domain Generalization via Universe Learning: A Multi-Graph Matching Approach for Medical Image Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
+| LANGDAUG | LangDAug: Langevin Data Augmentation for Multi-Source Domain Generalization in Medical Image Segmentation | ICML 2025 | 2025 | Accepted Conference | Medium |
+| GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
+| VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 
 ---
 
@@ -148,3 +157,6 @@
 | SDFTOPONET | SDF-TopoNet: SDF Pre-training + Topology-Aware Fine-Tuning for Tubular Segmentation | 2503.14523 | 2025 |
 | BISDG | Bi-Level Optimization for Single Domain Generalization | 2604.06349 | 2026 |
 | CLFA | Causality-inspired Latent Feature Augmentation for Single Domain Generalization | 2406.05980 | 2024 |
+| DROPGEN | Why Invariance is Not Enough for Biomedical Domain Generalization and How to Fix It | 2604.02564 | 2026 |
+| VESSHAPE | VessShape: Few-shot 2D Blood Vessel Segmentation by Leveraging Shape Priors from Synthetic Images | 2510.27646 | 2025 |
+| SDAIRM | Semantic Data Augmentation Enhanced Invariant Risk Minimization for Medical Image Domain Generalization | 2502.05593 | 2025 |
