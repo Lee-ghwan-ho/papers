@@ -18,6 +18,7 @@
 | ★★★ | **DGSSA** | Structural + Stylistic aug for retinal vessel. 혈관 구조 특성을 aug에 사용한 논문. 직접 유사 가능성. Neural Networks 2025. |
 | ★★★ | **AGTA** | **Run #3 신규** Anatomy-Guided Texture Augmentation for cervical tumor SSDG. "texture를 무조건 파괴하면 안 된다"는 논지 → 내 "fragile structure 보호" 주장과 방향 유사. 구분점: AGTA는 tumor texture 보존 목적, 나는 thin vessel visibility 보호. MICCAI 2024 Workshop (CMMCA). |
 | ★★★ | **ICRN** | **Run #3 신규** Invariant Content Representation + local style augmentation으로 foreground/background style을 분리 증강. 내 "class 내 구조 단위 분리 증강"과 level이 다르지만 "annotation 기반 region-specific aug"라는 개념 유사. IEEE TMI 2024. |
+| ★★★ | **COSTA** | **Run #5 신규** 8-center TOF-MRA multi-vendor dataset + CESAR network (style self-consistency loss). 내 실험 환경과 정확히 동일한 TOF-MRA 도메인 이질성 문제를 다룬 최신 IEEE TMI 2024 논문. 내 방법 평가에 COSTA 데이터셋 활용 가능성 확인 필요. |
 
 ---
 
@@ -68,6 +69,8 @@
 | ★ | **DSUSNAKE** | **Run #3 신규** Dynamic Snake Upsampling + Boundary-Skeleton Weighted Loss. plug-and-play for tubular DG. arXiv 2505.08525. |
 | ★ | **TTDG_MGM** | **Run #4 신규** Test-Time DG via Universe Learning + Multi-Graph Matching for medical seg. CVPR 2025. Morphological prior를 graph matching에 통합. Retinal fundus + polyp benchmark. |
 | ★ | **GRAPHSEG** | **Run #4 신규** Generalizable Retina Vessel Segmentation with Deformable Graph Priors. NeurIPS 2025. Variational Bayesian + retinal atlas deformable graph prior + structure-preserved/degraded decomposition. CHASE/DRIVE/HRF. |
+| ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
+| ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 
 ---
 
