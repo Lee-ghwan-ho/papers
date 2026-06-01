@@ -2,6 +2,68 @@
 
 ---
 
+## 2026-06-01 — 정기 탐색 (Run #5)
+
+### 실행 환경
+- 날짜: 2026-06-01
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024
+- 신규 발견: **6편** (Accepted Conference 1편 + Published Journal 2편 + Workshop 2편 + Preprint 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI | 기존 목록 재확인, WACV 2026 SSDG paper 발견 (classification, 낮은 관련성) |
+| A | NeurIPS 2025 domain generalization segmentation augmentation robust distribution shift proceedings | XDiff3D (NeurIPS 2025, 3D seg) 발견; 의료영상 직접 DG 신규 없음 |
+| A | CVPR 2025 domain generalization semantic segmentation augmentation structure-aware | **TTDG-MGM (CVPR 2025, arXiv 2503.13012)** 발견 (Run #4에서 이미 인덱싱됨) |
+| A | CVPR 2025 medical image segmentation domain generalization single source open access thecvf | TTDG-MGM 재확인; **MoSE (CVPR 2025W, arXiv 2504.09601)** 발견 |
+| A | TOF-MRA cerebrovascular segmentation domain generalization multi-center 2025 2026 | **COSTA (IEEE TMI 2024)** 발견: 8-center TOF-MRA + CESAR style self-consistency |
+| A | COSTA IEEE TMI 2024 cerebrovascular TOF-MRA CESAR style self-consistency network | COSTA 공식 확인: DOI 10.1109/tmi.2024.3424976, Vol 43(12), pp 4442-4456 |
+| A | "domain game" arXiv 2406.02125 SSDG MICCAI CMMCA 2024 | **Domain Game (MICCAI 2024 Workshop CMMCA)** 확인: geometric sensitivity로 anatomical/domain feature 분리 |
+| B | class-specific augmentation strength intra-class structure-conditioned perturbation segmentation 2025 2026 | 기존 목록 재확인 |
+| B | arXiv 2025 2026 nonlinear appearance augmentation observability-conditioned morphology-aware vessel DG | 직접 명시 논문 없음 — Continuous-ONA gap 재확인 |
+| B | domain generalization medical segmentation 2026 arXiv June frequency augmentation nonlinear | **FL-AugDG (arXiv 2602.20773)** 발견: GIN + frequency aug evaluation in federated setting |
+| C | optimized vessel segmentation small vessel enhancement arXiv 2411.15251 | **OVS-Net (IEEE TIP 2025)** 확인: Vol 34, pp 7168-7179; dual-branch small vessel + morphological correction |
+| C | MICCAI 2025 vessel brain Circle of Willis cerebrovascular segmentation new 2025 | **VesselVerse (MICCAI 2025)** 발견: 950-image brain vessel annotation dataset |
+| C | partial volume effect vessel MRI segmentation thin vessel augmentation DG | 직접 다룬 신규 논문 없음 (내 방법의 gap 재확인) |
+| D | NeurIPS 2025 proceedings DG segmentation augmentation 3D | XDiff3D ("No Object Is an Island") NeurIPS 2025 확인 — 3D semantic seg 일반화, 의료영상 아님 |
+| D | ICLR 2025 augmentation policy domain generalization robustness segmentation | 직접 신규 없음 |
+| Follow-up | DomainDrop ICCV 2023 follow-up 2024 2025 cite | 직접 follow-up 논문 없음 (확인) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (즉시 읽기)
+
+**COSTA (IEEE TMI 2024)** — DOI: 10.1109/tmi.2024.3424976
+- 8개 imaging center TOF-MRA 데이터셋 (COSTA) + CESAR network
+- Style Self-Consistency Loss: 서로 다른 center style을 표준 style로 정렬
+- Coarse-to-fine architecture + automatic feature selection (long-range + local context)
+- **내 연구와 직접 연관**: TOF-MRA multi-center cerebrovascular segmentation에서 style heterogeneity를 직접 다룬 논문. 내 방법의 baseline 비교 필수. COSTA 데이터셋 활용 가능성 탐색 필요.
+
+#### 주요 신규 발견
+
+**OVS-Net (IEEE TIP 2025)** — arXiv: 2411.15251, IEEE TIP Vol 34 pp 7168-7179
+- SAM backbone 기반 macro/micro 이중 분기: macro vessel 추출 + micro (small) vessel enhancement
+- "segmentation algorithms optimized for overlap scores overlook small/fragile structures" 진술 → 내 동기 지지
+- **내 방법과의 관계**: inference-time 추가 모듈 방식 vs 내 training-time augmentation — 겹치지 않음.
+
+**Domain Game (MICCAI 2024 Workshop, CMMCA)** — arXiv: 2406.02125
+- Geometric transformation sensitivity로 anatomical feature vs domain-specific feature 분리
+- prostate segmentation +11.8%, brain tumor +10.5% 개선
+
+**FL-AugDG (arXiv 2602.20773)** — Feb 2026 preprint
+- Federated setting에서 GIN, spatial aug, frequency aug, normalization을 체계적으로 비교
+- GIN이 모든 설정에서 일관되게 최상 성능 → 내 uniform nonlinear aug baseline 구성 근거
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] COSTA 데이터셋 실제 접근 가능성 (GitHub iMED-Lab/COSTA 확인)
+- [ ] OVS-Net morphological correction module 상세: 내 thin vessel 보호 mechanism과 연결 가능성
+- [ ] "radius-conditioned augmentation" 또는 "thickness-conditioned appearance transform" 직접 키워드 재탐색 → 여전히 없음 (내 핵심 novelty gap 유지)
+
+---
+
 ## 2026-05-31 — 정기 탐색 (Run #4)
 
 ### 실행 환경

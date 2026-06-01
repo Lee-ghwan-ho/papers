@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-05-31  
-> 총 수록 논문: 80편
+> 마지막 업데이트: 2026-06-01  
+> 총 수록 논문: 86편
 
 ---
 
@@ -50,6 +50,9 @@
 | TTDG_MGM | Test-Time Domain Generalization via Universe Learning: A Multi-Graph Matching Approach for Medical Image Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | LANGDAUG | LangDAug: Langevin Data Augmentation for Multi-Source Domain Generalization in Medical Image Segmentation | ICML 2025 | 2025 | Accepted Conference | Medium |
 | L2CP | Test-Time Training with Local Contrast-Preserving Copy-Pasted Image for Domain Generalization in Retinal Vessel Segmentation | MICCAI 2025 | 2025 | Accepted Conference | **High** |
+| COSTA | COSTA: A Multi-Center TOF-MRA Dataset and a Style Self-Consistency Network for Cerebrovascular Segmentation | IEEE TMI | 2024 | Published Journal Article | High |
+| DOMAIN_GAME | Domain Game: Disentangle Anatomical Feature for Single Domain Generalized Segmentation | MICCAI 2024 Workshop (CMMCA) | 2024 | Workshop Paper | Medium |
+| MOSE | Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation | CVPR 2025 Workshop (DG-EBF) | 2025 | Workshop Paper | Low |
 
 ---
 
@@ -101,6 +104,8 @@
 | SDFTOPONET | SDF-TopoNet: A Two-Stage Framework for Tubular Structure Segmentation via SDF Pre-training and Topology-Aware Fine-Tuning | arXiv | 2025 | Preprint Only | Low |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | **High** |
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
+| OVS_NET | Optimized Vessel Segmentation: A Structure-Agnostic Approach with Small Vessel Enhancement and Morphological Correction | IEEE TIP | 2025 | Published Journal Article | Medium |
+| VESSELVERSE | VesselVerse: A Dataset and Collaborative Framework for Vessel Annotation | MICCAI 2025 | 2025 | Accepted Conference | Low |
 
 ---
 
@@ -160,3 +165,4 @@
 | DROPGEN | Why Invariance is Not Enough for Biomedical Domain Generalization and How to Fix It | 2604.02564 | 2026 |
 | VESSHAPE | VessShape: Few-shot 2D Blood Vessel Segmentation by Leveraging Shape Priors from Synthetic Images | 2510.27646 | 2025 |
 | SDAIRM | Semantic Data Augmentation Enhanced Invariant Risk Minimization for Medical Image Domain Generalization | 2502.05593 | 2025 |
+| FL_AUGDG | Federated Learning for Cross-Modality Medical Image Segmentation via Augmentation-Driven Generalization | 2602.20773 | 2026 |
