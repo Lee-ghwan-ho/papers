@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-01  
-> 총 수록 논문: 86편
+> 마지막 업데이트: 2026-06-02  
+> 총 수록 논문: 91편
 
 ---
 
@@ -53,6 +53,8 @@
 | COSTA | COSTA: A Multi-Center TOF-MRA Dataset and a Style Self-Consistency Network for Cerebrovascular Segmentation | IEEE TMI | 2024 | Published Journal Article | High |
 | DOMAIN_GAME | Domain Game: Disentangle Anatomical Feature for Single Domain Generalized Segmentation | MICCAI 2024 Workshop (CMMCA) | 2024 | Workshop Paper | Medium |
 | MOSE | Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation | CVPR 2025 Workshop (DG-EBF) | 2025 | Workshop Paper | Low |
+| MIXSTYLEFLOW | MixStyleFlow: Domain Generalization in Medical Image Segmentation using Normalizing Flows | MICCAI 2025 | 2025 | Accepted Conference | **High** |
+| DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 
 ---
 
@@ -71,6 +73,7 @@
 | AGTA | Improving Single-Source Domain Generalization via Anatomy-Guided Texture Augmentation for Cervical Tumor Segmentation | MICCAI 2024 Workshop (CMMCA) | 2024 | Workshop Paper | High |
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
+| AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
 
 ---
 
@@ -106,6 +109,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | OVS_NET | Optimized Vessel Segmentation: A Structure-Agnostic Approach with Small Vessel Enhancement and Morphological Correction | IEEE TIP | 2025 | Published Journal Article | Medium |
 | VESSELVERSE | VesselVerse: A Dataset and Collaborative Framework for Vessel Annotation | MICCAI 2025 | 2025 | Accepted Conference | Low |
+| VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -166,3 +170,5 @@
 | VESSHAPE | VessShape: Few-shot 2D Blood Vessel Segmentation by Leveraging Shape Priors from Synthetic Images | 2510.27646 | 2025 |
 | SDAIRM | Semantic Data Augmentation Enhanced Invariant Risk Minimization for Medical Image Domain Generalization | 2502.05593 | 2025 |
 | FL_AUGDG | Federated Learning for Cross-Modality Medical Image Segmentation via Augmentation-Driven Generalization | 2602.20773 | 2026 |
+| FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
+| VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |

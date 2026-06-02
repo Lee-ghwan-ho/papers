@@ -2,6 +2,83 @@
 
 ---
 
+## 2026-06-02 — 정기 탐색 (Run #6)
+
+### 실행 환경
+- 날짜: 2026-06-02
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Accepted Conference 2편 + Published Journal 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 MICCAI CVPR arXiv | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization 2026 cerebrovascular TOF-MRA brain arXiv IEEE TMI | 기존 확인, MultiDomain Brain 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization 2025 2026 CVPR ICCV NeurIPS | HarmonySeg 등 기존 재확인 |
+| A | CVPR 2025 domain generalization segmentation structure-preserving augmentation adaptive | 기존 목록 재확인 |
+| B | nonlinear appearance augmentation structure-conditioned observability medical image segmentation 2025 2026 | SPAD (arXiv 2603.07889) 발견 (내 주제와 다름) |
+| A | MICCAI 2025 domain generalization cerebrovascular vessel segmentation augmentation new method | ISAC, MBFCV 재확인 |
+| A | MICCAI 2025 open access domain generalization style augmentation frequency single source new | **MixStyleFlow (MICCAI 2025 Paper 3460)** 발견 — normalizing flows for domain style generation |
+| B | arXiv 2505.10223 Data-Agnostic Augmentations MixUp Fourier OOD MRI segmentation MIDL 2025 | **DAGMRI (MIDL 2025)** 확인: MixUp + AFA in nnU-Net, accepted full paper at MIDL 2025 |
+| B | AADG automatic augmentation domain generalization retinal image segmentation TMI 2022 | **AADG (IEEE TMI 2022)** 확인: adversarial RL로 augmentation policy search, Sinkhorn 기반 domain diversity 극대화. 미인덱스 foundational paper |
+| A | class-invariant test-time augmentation domain generalization segmentation 2025 arXiv | CI-TTA (arXiv 2509.14420) 발견 — 자연영상, 낮은 관련성, 미수록 유지 |
+| A | ICCV 2025 domain generalization segmentation augmentation robust distribution shift | ADAL 재확인, 기존 목록 재확인 |
+| D | NeurIPS 2025 medical image segmentation domain generalization augmentation | 기존 목록 재확인 |
+| B | BucketAugment reinforced domain generalisation CT segmentation Q-learning augmentation policy | BucketAugment (IEEE OJEMB 2024) 발견 — RL+Q-learning으로 CT augmentation policy 탐색. 내 방법과 다른 paradigm (policy search vs. structure-conditioned) |
+| A | arXiv June 2026 domain generalization medical image segmentation vessel new | **FA-SAM (IEEE SMC 2025, arXiv 2507.17281)** 발견 — 낮은 tier (SMC), 낮은 관련성 |
+| A | WACV 2025 invariant causal mechanisms single-source cross-modality medical image segmentation | INVCAUSAL(2411.05223) = WACV 2025 공식 확인 (기존 인덱스 상태 "Preprint Only" → 실제 WACV 2025 Accepted) |
+| C | arXiv 2605 2026 vessel segmentation domain generalization synthetic annotations | **VesselSim (arXiv 2605.26277)** 발견 — 3D vessel 16,500 synthetic volumes + domain randomized intensity, Concordia U |
+| A | arXiv 2605.09925 Frequency Adapter SAM generalized medical image segmentation 2026 | **FreqAdapSAM (arXiv 2605.09925)** 발견 — SAM + frequency adapter for DG, May 2026 preprint |
+| Follow-up | CDDSA contrastive domain disentanglement style augmentation MedIA 2023 | CDDSA (MedIA Oct 2023) 존재 확인 — 2023 논문, 유사 논문(CONSTYX, ICRN) 이미 indexed → 수록 보류 |
+| Follow-up | MixStyleFlow MICCAI 2025 normalizing flows domain generalization | MixStyleFlow 세부 확인: 저자 홍콩대, prostate MRI + fundus, arXiv preprint 미확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 주의)
+
+**AADG (IEEE TMI 2022)** — arXiv: 2207.13249
+- 내 novelty claim과 가장 가까운 foundational 선행 연구
+- Adversarial training + deep RL로 augmentation diversity를 자동 탐색
+- Sinkhorn distance로 multiple augmented domain 간 diversity를 proxy task로 최대화
+- **내 방법과의 차이**: AADG = cross-image augmentation policy search (어떤 operation을 얼마나 강하게 적용할지 전체 이미지 단위로 탐색). 나 = **intra-image structure-specific** augmentation strength 조절 (같은 이미지 내 thin/thick vessel이 서로 다른 강도). AADG는 혈관 내부 구조 이질성(thin vs. thick)을 완전히 무시.
+- foundational paper로 수록 필수
+
+**MixStyleFlow (MICCAI 2025, Paper 3460)** — papers.miccai.org
+- Normalizing flows를 사용해 도메인 스타일 분포를 명시적으로 모델링 후 MixStyle과 결합
+- Feature channel dimension을 따라 원본 통계와 모델링된 스타일을 mix
+- 내 방법과는 paradigm이 다름: MixStyleFlow = feature-level style randomization (전체 feature map 단위), 나 = pixel-level structure-conditioned appearance (intra-image vessel-specific). 직접 충돌은 없지만 같은 DG 문제의 경쟁 방법.
+
+#### 방법론 유사 논문
+
+**DAGMRI (MIDL 2025)** — arXiv: 2505.10223
+- nnU-Net에 MixUp + Auxiliary Fourier Augmentation(AFA)을 통합해 OOD generalization 향상
+- "feature separability + compactness 향상"이 일반화를 개선한다는 관점
+- 내 방법과 겹치지 않음 (MixUp/Fourier aug = 전체 이미지 uniform, 나 = structure-specific)
+
+#### 최신 혈관 특화 논문
+
+**VesselSim (arXiv 2605.26277)** — May 2026
+- 실제 annotation 없이 3D 혈관 분할 학습: 기하학적 혈관 시뮬레이션 + domain-randomized intensity synthesis
+- vesselFM과 경쟁하는 합성 데이터 기반 접근
+- 내 방법과 paradigm 다름 (합성 데이터 학습 vs. real source 기반 SSDG aug)
+
+### 상태 업데이트 (기존 논문)
+
+- **INVCAUSAL** (arXiv 2411.05223): 기존 인덱스에 "Preprint Only"로 기록됨. 실제 WACV 2025에 accepted (pp. 3592-3602). 내용 변경 금지 원칙에 따라 메인 인덱스 수정 안 하되, 이 로그에 기록.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] AADG 전문 독해: augmentation operation search space 구성 및 Sinkhorn proxy 상세
+- [ ] MixStyleFlow 전문 독해: normalizing flow 구성 + prostate/fundus 실험 상세
+- [ ] VesselSim code/data: 합성 혈관 domain randomization scheme (TOF-MRA 적용 가능성)
+- [ ] "vessel observability conditioned augmentation" 키워드 여전히 없음 → Continuous-ONA gap 유지
+- [ ] BucketAugment 독해 가치 평가: Q-learning aug policy search vs. 내 연속적 구조 기반 조절
+- [ ] CI-TTA (arXiv 2509.14420): 자연영상 test-time augmentation, 수록 여부 재검토
+
+---
+
 ## 2026-06-01 — 정기 탐색 (Run #5)
 
 ### 실행 환경
