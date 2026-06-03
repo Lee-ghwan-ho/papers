@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-02  
-> 총 수록 논문: 91편
+> 마지막 업데이트: 2026-06-03  
+> 총 수록 논문: 96편
 
 ---
 
@@ -55,6 +55,8 @@
 | MOSE | Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation | CVPR 2025 Workshop (DG-EBF) | 2025 | Workshop Paper | Low |
 | MIXSTYLEFLOW | MixStyleFlow: Domain Generalization in Medical Image Segmentation using Normalizing Flows | MICCAI 2025 | 2025 | Accepted Conference | **High** |
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
+| DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
+| ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -110,6 +112,8 @@
 | OVS_NET | Optimized Vessel Segmentation: A Structure-Agnostic Approach with Small Vessel Enhancement and Morphological Correction | IEEE TIP | 2025 | Published Journal Article | Medium |
 | VESSELVERSE | VesselVerse: A Dataset and Collaborative Framework for Vessel Annotation | MICCAI 2025 | 2025 | Accepted Conference | Low |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
+| COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
+| AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
 
 ---
 
@@ -130,6 +134,7 @@
 | LANGDAUG | LangDAug: Langevin Data Augmentation for Multi-Source Domain Generalization in Medical Image Segmentation | ICML 2025 | 2025 | Accepted Conference | Medium |
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
+| FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
 
 ---
 
@@ -172,3 +177,4 @@
 | FL_AUGDG | Federated Learning for Cross-Modality Medical Image Segmentation via Augmentation-Driven Generalization | 2602.20773 | 2026 |
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
+| AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |

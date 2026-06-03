@@ -2,6 +2,93 @@
 
 ---
 
+## 2026-06-03 — 정기 탐색 (Run #7)
+
+### 실행 환경
+- 날짜: 2026-06-03
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 3편 + Preprint 1편 + Accepted Conference 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation CVPR MICCAI 2026 arXiv new | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 arXiv new method | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization 2025 2026 | DGSSA 재확인, 기존 gap 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust | DET2PROB, DROPGEN 재확인 |
+| A | arXiv 2606 domain generalization medical image segmentation augmentation vessel 2026 | 기존 목록 재확인 |
+| A | MICCAI 2026 domain generalization vessel segmentation cerebrovascular accepted paper | MICCAI 2026 미공개 확인 |
+| D | CVPR 2026 accepted papers domain generalization segmentation robust | FLEX-Seg arXiv 2511.22948 AAAI 2026 발견 |
+| B | adaptive augmentation strength structure-aware label-preserving transformation medical segmentation 2025 2026 | 기존 목록 재확인 |
+| B | "augmentation budget" OR "augmentation strength" intra-class structure-conditioned medical segmentation DG | **DCON (Pattern Recognition 2025)** 발견 — dual-view aug + bilevel contrastive SSDG |
+| A | DCON "dual-augmentation constraint" SSDG medical image segmentation Pattern Recognition 2025 | **DCON** 상세 확인: Ruofan Wang et al., Prostate +2.52% over SLAug |
+| D | FLEX-Seg arXiv 2511.22948 AAAI 2025/2026 domain generalized segmentation noise robust | **FLEX-SEG (AAAI 2026)** 확인: ojs.aaai.org article 37492 = AAAI 2026 |
+| A | "anatomically-robust" "feature-unbiased" domain generalization medical segmentation ScienceDirect 2025 2026 | **ARFU (Expert Systems w/ Applications 2025)** 발견: SRG+APG, Sep 2025 |
+| C | "topology-aware multiclass segmentation" "Circle of Willis" MRA CTA 2026 arXiv ScienceDirect | **COW_TOPO (Comput. Biol. Med. Vol 204, 2026)** 발견: TopCoW 2024 1위 |
+| C | AG-TAL arXiv 2604.27357 "Anatomically-Guided Topology-Aware Loss" Circle of Willis multi-center | **AG-TAL** 확인: **radius-aware Dice loss** = GT radius를 loss weighting에 직접 활용 |
+| A | SLAug ConStyX SRCSM follow-up citation 2026 new domain generalization medical segmentation | 기존 목록 재확인 |
+| D | NeurIPS 2025 accepted papers medical image segmentation domain generalization augmentation | GRAPHSEG 재확인, 기존 목록 재확인 |
+| D | ICLR 2026 medical image segmentation domain generalization augmentation accepted papers | ICLR 2026 의료영상 DG 직접 히트 없음 (5,355편 중 탐색 어려움) |
+| A | DCON Pattern Recognition 2025 SSDG prostate cardiac fundus experiments | DCON 실험 상세 확인: 3 datasets, code available |
+| A | ARFU "shape regularization" "anatomical prior" DG medical segmentation Expert Systems 2025 | ARFU 상세 확인: CT-MRI abdominal + cardiac, no arXiv preprint found |
+| C | "topology-aware multiclass" "Circle of Willis" "Computers in Biology" 2026 method domain shift | COW_TOPO 상세 확인 + AG-TAL (2604.27357) 발견 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**DCON (Pattern Recognition 2025)**
+- SSDG 직접경쟁, dual-view augmentation (image + feature), bilevel contrastive learning
+- SLAug보다 +2.52% on Prostate (6 centers)
+- **내 방법과의 차이**: DCON = class-level/image-level diversity, 나 = intra-class radius별 augmentation budget. DCON에는 thin vessel 보호 개념 없음.
+
+**AG-TAL (arXiv 2604.27357, April 2026)** — ⚠️ High priority read
+- **radius-aware Dice loss**: GT vessel radius를 localized weighting으로 Dice loss에 통합
+- 내 ONA도 vessel radius를 augmentation budget에 사용 → 동일 "radius" 개념의 다른 활용
+- **완전히 다른 mechanism** (loss vs. augmentation) + **다른 task setting** (closed-set vs. SSDG)
+- 내 동기 지지 근거로 활용 가능: "radius-aware training이 이미 loss 측면에서 효과적임을 AG-TAL이 증명"
+
+#### 방법론 신규 논문
+
+**ARFU (Expert Systems w/ Applications 2025)**
+- Shape Regularization-Guided Augmentation + Anatomical Prior-Guided Augmentation
+- low-frequency 구조를 appearance transform의 regularizer로 활용
+- 내 방법과 유사한 "구조 보존 증강" 방향 — 하지만 organ-level, 나는 intra-vessel level
+
+#### 혈관 특화 신규 논문
+
+**COW_TOPO (Computers in Biology and Medicine Vol 204, March 2026)**
+- Topology refinement post-processing for CoW MRA+CTA multiclass segmentation
+- TopCoW 2024 hidden test 1위, out-of-domain MRA Dice 0.81
+- 내 TOF-MRA 연구와 해부학적으로 인접한 데이터셋/문제
+
+#### Top-tier Vision
+
+**FLEX-SEG (AAAI 2026)**
+- Diffusion-generated image misalignment을 robust learning의 기회로 전환
+- 자연영상 city-scene DG (의료영상 아님)
+- Uncertainty Boundary Emphasis가 내 observability 개념과 방향 유사하나 mechanism 완전히 다름
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** 키워드: Run #7에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"** 키워드: AG-TAL이 radius를 loss에 활용하지만 augmentation에는 없음
+- **내 핵심 gap 유지**: intra-class vessel radius → augmentation budget (continuous) mapping
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] AG-TAL 전문 독해: radius 계산 방식 상세 (skeleton distance transform 공식)
+- [ ] DCON 전문 독해: GLSA "controllability" 파라미터 정의 + ablation 결과
+- [ ] ICLR 2026 DG/augmentation 관련 논문 direct 탐색 (openreview.net에서 직접 검색)
+- [ ] "Topology-Aware Exploration of Circle of Willis" (arXiv 2410.15614) Cat C 추가 여부 검토
+- [ ] Expert Systems w/ Applications / Pattern Recognition에서 추가 SSDG 논문 탐색
+- [ ] IJCAI 2026 accepted list 공개 시 DG 관련 논문 탐색
+
+---
+
 ## 2026-06-02 — 정기 탐색 (Run #6)
 
 ### 실행 환경
