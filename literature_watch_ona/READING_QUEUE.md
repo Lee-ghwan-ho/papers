@@ -20,6 +20,8 @@
 | ★★★ | **ICRN** | **Run #3 신규** Invariant Content Representation + local style augmentation으로 foreground/background style을 분리 증강. 내 "class 내 구조 단위 분리 증강"과 level이 다르지만 "annotation 기반 region-specific aug"라는 개념 유사. IEEE TMI 2024. |
 | ★★★ | **COSTA** | **Run #5 신규** 8-center TOF-MRA multi-vendor dataset + CESAR network (style self-consistency loss). 내 실험 환경과 정확히 동일한 TOF-MRA 도메인 이질성 문제를 다룬 최신 IEEE TMI 2024 논문. 내 방법 평가에 COSTA 데이터셋 활용 가능성 확인 필요. |
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
+| ★★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems w/ Applications 2025). SRG(저주파 구조 정보로 외형 변환 가이드 + 해부학적 왜곡 방지) + APG(기관별 외형 증강 + appearance-agnostic anatomical discrimination). "appearance augmentation이 구조를 파괴해서는 안 된다"는 내 핵심 주장과 방향 일치. 차이: ARFU = inter-class organ-level 보호, 나 = single class 내 intra-vessel continuous thickness-based 보호. 즉시 novelty 구분 필수. |
+| ★★★ | **ADVERIN** | **Run #7 신규** AdverIN: Monotonic Adversarial Intensity Attack for DG in Medical Image Segmentation (Medical Image Analysis 2025, arXiv: 2304.02720). 단조적(monotonic) 강도 매핑 함수 + 마스크 연산으로 intensity order를 보존하면서 diverse style 생성. 내 nonlinear augmentation과 동일한 선상의 foundational 방법. 차이: AdverIN = 이미지 전체 균일 적용, 나 = vessel radius에 따른 intra-image 연속 강도 조절. 매우 높은 novelty 충돌 가능성 — 즉시 독해 필수. |
 
 ---
 
@@ -47,6 +49,7 @@
 | ★★ | **VESSELFM** | **Run #4 신규** vesselFM: Foundation Model for Universal 3D Blood Vessel Segmentation. CVPR 2025. Domain randomization + flow matching generative model로 zero-shot DG. TOF-MRA 포함 4가지 modality 실험. 3D vessel DG의 최신 CVPR 기준 논문. |
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
+| ★★ | **DAGBA** | **Run #7 신규** Multi-Receptive Field Feature Disentanglement + Distance-Aware Gaussian Brightness Augmentation for SSDG (Neurocomputing 2025, DOI: 10.1016/j.neucom.2025.130120). 다중 수용장 특징 분리 + 거리 기반 Gaussian brightness aug. "brightness unevenness"를 거리 기반으로 다르게 처리한다는 개념 → 내 observability-conditioned 아이디어와 방향 유사. 차이: DAGBA는 pixel-to-center distance 기반, 나는 vessel radius 기반. |
 
 ---
 
