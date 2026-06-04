@@ -2,6 +2,92 @@
 
 ---
 
+## 2026-06-04 — 정기 탐색 (Run #7)
+
+### 실행 환경
+- 날짜: 2026-06-04
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 4편 + Accepted Conference 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation arXiv 2026 June | 기존 목록 재확인, UNIDDG 최신 버전 확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2025 2026 arXiv MICCAI | 기존 목록 재확인 |
+| B | structure-conditioned augmentation class-aware morphology-aware medical image segmentation DG 2025 2026 | **ARFU (ESWA 2025)** + **AD-DGCL (Neurocomputing 2025)** 신규 발견 |
+| C | tubular structure thin vessel segmentation domain generalization topology 2025 2026 CVPR ICCV NeurIPS | **VesselSDF (MICCAI 2025)** 발견 |
+| D | CVPR ICCV NeurIPS ICLR 2025 2026 DG augmentation robust segmentation distribution shift | 기존 목록 재확인 |
+| B | arXiv June 2026 domain generalization segmentation augmentation observability nonlinear intensity vessel | 직접 명시 논문 없음 — Continuous-ONA gap 재확인 |
+| Follow-up | SLAug RASS ConStyX MixStyleFlow AADG follow-up citation 2025 2026 | ConStyX arXiv ID (2506.10675) 확인; follow-up 특별 없음 |
+| B | ARFU anatomically-robust feature-unbiased DG medical segmentation shape regularization 2025 | **ARFU (ESWA 2025)** 상세 확인: SRG+APG+FUL, 복부/심장 SSDG |
+| A | adaptive disentangled domain generalization multi-organ medical image segmentation Neurocomputing 2025 | **AD-DGCL (Neurocomputing 2025)** 상세 확인: SSRD+SCT, 반지름 기반 적응 손실 |
+| B | multi-receptive field Distance-Aware Gaussian Brightness Augmentation SSDG Neurocomputing 2025 | **DAGBA/MRFFD (Neurocomputing 2025)** 발견: 다중 수용장 특징 분리 + 거리 기반 Gaussian brightness aug |
+| C | VesselSDF distance field priors vascular network reconstruction arXiv 2506.16556 MICCAI 2025 | **VesselSDF (MICCAI 2025, Paper 2121)** 상세 확인: SDF 기반 연속 혈관 재구성 |
+| B | AdverIN monotonic adversarial intensity domain generalization Medical Image Analysis 2025 | **ADVERIN (MedIA 2025)** 발견: arXiv 2304.02720의 저널 출판 버전, monotonic intensity mapping |
+| B | nonlinear augmentation strength adaptive thin structure vessel fragile domain generalization 2025 2026 | 직접 명시 논문 없음 — Continuous-ONA gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 주의)
+
+**ARFU (Expert Systems with Applications 2025)** — DOI: S0957417425033676
+- SRG: 저주파 구조 정보 regularization으로 외형 변환 시 anatomical 왜곡 방지
+- APG: 기관별 외형 증강 + appearance-agnostic anatomical discrimination
+- FUL: Feature perturbation + dynamic frequency domain filtering
+- **내 방법과의 공통 전제**: "무차별 외형 augmentation은 구조를 파괴한다"
+- **핵심 차이**: ARFU = inter-class organ-level 보호 (abdominal organs), 나 = intra-class continuous thickness 기반 vessel 보호. ARFU는 foreground class 내에서의 heterogeneity를 다루지 않음.
+- novelty 충돌 수준: **높음**. 방어 논리 즉시 구성 필요.
+
+**ADVERIN (Medical Image Analysis 2025)** — arXiv: 2304.02720
+- Monotonic adversarial intensity mapping (nonlinear, content-order-preserving)
+- Adversarial training으로 hardest intensity style 탐색
+- Mask operation으로 특정 region 적용 가능
+- **내 방법과의 공통점**: monotonic/nonlinear intensity transformation for DG
+- **핵심 차이**: AdverIN = 전체 이미지 균일 적용 + adversarial탐색 강도, 나 = vessel radius/observability 기반 intra-image 연속 강도 조절. AdverIN에는 thin vessel 보호 개념 없음.
+- novelty 충돌 수준: **매우 높음**. 즉시 독해 및 명확한 차이 정리 필수.
+
+#### 방법론 유사 논문
+
+**DAGBA / MRFFD (Neurocomputing 2025)** — DOI: 10.1016/j.neucom.2025.130120
+- Multi-Receptive Field Feature Disentanglement: 다중 크기 kernel로 세밀 + 전역 특징 동시 추출
+- Distance-Aware Gaussian Brightness Augmentation: 이미지 중심에서의 거리에 따라 Gaussian brightness aug 강도를 다르게 적용
+- **내 방법과의 유사점**: "spatial position에 따라 augmentation 강도를 다르게 조절"
+- **핵심 차이**: DAGBA는 image center-to-pixel distance 기반, 나는 vessel centerline radius 기반. DAGBA는 brightness augmentation만, 나는 전반적인 nonlinear appearance transformation.
+
+#### 혈관 특화 신규 논문
+
+**VesselSDF (MICCAI 2025, Paper 2121)** — arXiv: 2506.16556
+- SDF (Signed Distance Field)를 이용한 연속 혈관 재구성
+- Voxel binary classification 대신 SDF regression으로 문제 재정의
+- Gaussian regularizer: vessel surface에서 먼 곳은 smooth, 가까운 곳은 정밀하게
+- **내 방법과의 관계**: inference 방식 차이. 내 방법은 training-time aug, VesselSDF는 SDF representation 변경. 직접 경쟁 아님. SDF 기반 vessel thickness 추정이 내 observability score 계산에 참고 가능.
+
+#### 보조 신규 논문
+
+**AD-DGCL (Neurocomputing 2025)** — DOI: S0925231225025184
+- Semi-Supervised Representation Disentanglement (SSRD): style/content 분리
+- Style-induced Consistency Training (SCT): 합성 style perturbation + consistency reg
+- Adaptive region-specific loss: small organ 빈도에 따라 loss weight 동적 조절
+- **내 방법과의 관계**: "작은 구조에 adaptive loss"라는 아이디어가 내 thin vessel 보호와 개념적으로 연결되지만, 방법은 loss weighting (나는 augmentation conditioning). 낮은 충돌 수준.
+
+### 재확인 사항
+
+- **"vessel radius conditioned augmentation" / "thickness-conditioned augmentation strength"**: 여전히 직접적으로 다룬 논문 없음 → **Continuous-ONA의 핵심 novelty gap 유지**
+- **ConStyX arXiv ID**: 2506.10675 (June 2025 preprint). 기존 인덱스에 "CONSTYX (MICCAI 2025)" 이미 수록됨.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] ARFU 전문 독해: SRG의 저주파 추출 방식 + APG의 organ-specific aug 상세
+- [ ] ADVERIN 전문 독해 (MedIA 2025 version): monotonic function 구현 + arXiv 2023과 차이점
+- [ ] DAGBA Neurocomputing: distance 계산 방식 (image center distance? vessel centerline distance?)
+- [ ] VesselSDF: SDF 기반 vessel radius 추정이 내 observability score에 활용 가능한지
+- [ ] AD-DGCL: adaptive loss weight scheme → 내 thin vessel aug 조절과 연결 가능성
+- [ ] "vessel observability conditioned augmentation" 키워드 여전히 없음 → gap 유지
+
+---
+
 ## 2026-06-02 — 정기 탐색 (Run #6)
 
 ### 실행 환경

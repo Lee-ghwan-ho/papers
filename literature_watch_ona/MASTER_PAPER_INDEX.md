@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-02  
-> 총 수록 논문: 91편
+> 마지막 업데이트: 2026-06-04  
+> 총 수록 논문: 96편
 
 ---
 
@@ -55,6 +55,9 @@
 | MOSE | Mixture-of-Shape-Experts (MoSE): End-to-End Shape Dictionary Framework to Prompt SAM for Generalizable Medical Segmentation | CVPR 2025 Workshop (DG-EBF) | 2025 | Workshop Paper | Low |
 | MIXSTYLEFLOW | MixStyleFlow: Domain Generalization in Medical Image Segmentation using Normalizing Flows | MICCAI 2025 | 2025 | Accepted Conference | **High** |
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
+| ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | **High** |
+| ADDGCL | Multi-Organ Medical Image Segmentation via Adaptive Disentangled Domain Generalization Collaborative Learning | Neurocomputing | 2025 | Published Journal Article | Low |
+| DAGBA | Multi-Receptive Field Feature Disentanglement with Distance-Aware Gaussian Brightness Augmentation for Single-Source Domain Generalization in Medical Image Segmentation | Neurocomputing | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -74,6 +77,7 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| ADVERIN | AdverIN: Monotonic Adversarial Intensity Attack for Domain Generalization in Medical Image Segmentation | Medical Image Analysis | 2025 | Published Journal Article | **High** |
 
 ---
 
@@ -110,6 +114,7 @@
 | OVS_NET | Optimized Vessel Segmentation: A Structure-Agnostic Approach with Small Vessel Enhancement and Morphological Correction | IEEE TIP | 2025 | Published Journal Article | Medium |
 | VESSELVERSE | VesselVerse: A Dataset and Collaborative Framework for Vessel Annotation | MICCAI 2025 | 2025 | Accepted Conference | Low |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
+| VESSELSDF | VesselSDF: Distance Field Priors for Vascular Network Reconstruction | MICCAI 2025 | 2025 | Accepted Conference Paper | Medium |
 
 ---
 
