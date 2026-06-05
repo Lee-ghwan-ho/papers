@@ -138,3 +138,11 @@
 3. **Source annotation 기반 observability**: target domain 정보 없이, **source annotation에서 직접 계산 가능한 local radius 또는 vesselness score**를 aug conditioning에 사용. Target distribution을 가정하지 않으므로 진정한 SSDG.
 
 4. **Nonlinear appearance transformation과의 통합**: Bézier/spline 기반 nonlinear intensity mapping 자체는 기존(SLAug, Causality_SDG 등)에서 사용되었으나, 이를 **구조별로 차별화된 강도로 적용**한 것은 없다.
+
+---
+
+## Run #8 (2026-06-05) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **MAMBA_SEA** (IEEE TMI 2025) | 동일 SSDG 설정에서 Prostate dataset 90.34% Dice — 현재 SSDG SOTA. "글로벌 + 로컬 시퀀스 aug"라는 다단계 aug 구조가 내 "uniform vs continuous ONA" 비교 맥락에서 경쟁 baseline이 됨. | 핵심 차이: Mamba-Sea = architecture-level token sequence style perturbation (전체 이미지 토큰 대상). 나 = augmentation-level radius-conditioned appearance budget (얇은 혈관 보호, 굵은 혈관 강화). Mamba-Sea는 intra-class structural observability conditioning 개념 없음. Architecture-agnostic이라는 내 방법의 장점 강조. |

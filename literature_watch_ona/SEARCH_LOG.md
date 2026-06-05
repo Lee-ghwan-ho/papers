@@ -2,6 +2,88 @@
 
 ---
 
+## 2026-06-05 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-05
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **4편** (Published Journal 2편 + Accepted Challenge Paper 1편 + Preprint 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI CVPR new | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 arXiv new method | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust | 기존 목록 재확인, SSMDG (CVPR 2026) 발견 — multimodal DG |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization 2026 | DGSSA 재확인; gap 유지 |
+| D | ICLR 2026 domain generalization segmentation augmentation accepted papers medical image | 직접 신규 없음 |
+| D | NeurIPS 2025 domain generalization augmentation segmentation robust distribution shift medical | 기존 목록 재확인 |
+| A | arXiv 2606 domain generalization medical image segmentation vessel augmentation 2026 new | 기존 목록 재확인 |
+| A | Mamba-Sea arXiv 2504.17515 IEEE TMI 2025 prostate domain generalization | **MAMBA_SEA (IEEE TMI 2025)** 확인: 최초 Mamba 기반 SSDG, Prostate Dice 90.34% |
+| B | inter-class inter-domain semantic augmentation CDSA IEEE TIP 2024 CrossSmooth | **CDSA (IEEE TIP 2024)** 확인: inter-class+inter-domain semantic direction aug |
+| D | CVPR 2026 single source domain generalization segmentation accepted openaccess | **SSMDG (CVPR 2026, arXiv 2602.22917)** 확인 — multimodal DG, 낮은 관련성 |
+| C | topology aware circle of willis arXiv 2410.15614 segmentation MRA exploration 2024 | **TOPOCOW_EXPLORE (arXiv 2410.15614)** 확인: unified CTA+MRA framework |
+| C | TopCoW benchmarking circle willis MICCAI 2025 proceedings journal 2312.17670 | **TOPCOW_CHALLENGE (MICCAI 2024 Challenge)** 확인: 최초 공개 CoW 벤치마크 |
+| A | Mamba-Sea IEEE TMI 2025 single source prostate cardiac fundus segmentation code | Mamba-Sea 상세: arXiv 2504.17515, IEEE 10980210, github.com/orange-czh/Mamba-Sea |
+| B | "augmentation budget" OR "augmentation strength" intra-class structure segmentation DG | 직접 명시 논문 없음 — gap 유지 |
+| C | partial observability thin structure label preserving augmentation tubular 2025 2026 | Label-Preserving Aug for thin MRI (Investigative MRI 2024) 발견 — DG 없음, 낮은 tier |
+| A | SLAug RASS MoreStyle ConStyX follow-up 2025 2026 citing new DG medical | ConStyX arXiv 2506.10675 확인 (기존 MICCAI 2025 논문의 preprint — 기수록) |
+| D | DG-EBF workshop CVPR 2026 domain generalization medical segmentation papers | DG-EBF 2nd edition @CVPR 2026 (Denver, June 3-4) 확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**MAMBA_SEA (IEEE TMI 2025)** — arXiv: 2504.17515, IEEE: 10.1109/TMI.2025.XXXX
+- **최초 Mamba 기반 SSDG** for medical image segmentation (Nanjing University, Yinghuan Shi 그룹)
+- Global augmentation: cross-site appearance variation 시뮬레이션
+- Local sequence augmentation: random continuous sub-sequence 내 style statistics resampling
+- **Prostate dataset Dice 90.34%** — 기존 SOTA(88.61%) 최초 돌파
+- Code: https://github.com/orange-czh/Mamba-Sea
+- **내 방법과의 차이**: Mamba-Sea = architecture-level (SSM token sequence style aug), 나 = augmentation-level (radius-conditioned pixel appearance). Mamba-Sea에도 thin vessel 보호 개념 없음. 직접 benchmark 비교 필요.
+
+#### 방법론 유사 논문
+
+**CDSA (IEEE TIP 2024)** — DOI: 10.1109/TIP.2024.3354420
+- Inter-class semantic direction (CrossSmooth) + inter-domain style (CrossVariance) 결합
+- 자연영상 DG 벤치마크 (PACS, Office-Home, Digits-DG) + semantic seg (GTA, Cityscapes)
+- 내 방법과의 차이: CDSA = inter-class across images (서로 다른 class 간 방향), 나 = intra-class within vessel (동일 class 내 두께별 budget). CDSA는 의료영상 아님.
+
+#### Circle of Willis 특화 논문
+
+**TOPCOW_CHALLENGE (MICCAI 2024 Challenge)** — arXiv: 2312.17670
+- 최초 공개 CoW annotation dataset (200 paired CTA+MRA, 13 vessel classes)
+- 140+ 팀 참가, 상위 팀 Dice 90%+ 달성
+- TopCoW 2024 challenge 기준 benchmark — AG-TAL, COW_TOPO 등이 이 benchmark 사용
+- 내 TOF-MRA CoW 관련 연구의 context 및 데이터셋 배경으로 활용
+
+**TOPOCOW_EXPLORE (arXiv 2410.15614)** — Oct 2024
+- Minghui Zhang et al. (Shanghai Jiao Tong University)
+- Universal framework: CTA + MRA 동시 처리 + topology-aware loss + complement topology refinement
+- TopCoW24 challenge 참가 솔루션 (MRA track 고성능)
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: 여전히 없음 — Continuous-ONA gap 유지
+- **"intra-class augmentation strength variation"**: 없음 → 내 핵심 claim 보호 유지
+- Mamba-Sea가 SSDG에서 새로운 SOTA baseline이 됨 → 내 POC 비교 대상 업데이트 필요
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] Mamba-Sea 전문 독해: sequence-wise aug 구현 상세 (sub-sequence window 크기, style stat 샘플링 방식)
+- [ ] Mamba-Sea 실험 상세: 비교 baseline 목록, fundus/cardiac 결과
+- [ ] CDSA 전문 독해: CrossSmooth 구현 상세, 의료영상 적용 가능성
+- [ ] SSMDG (CVPR 2026, arXiv 2602.22917): semi-supervised multimodal DG, 낮은 관련성 — 수록 보류
+- [ ] DG-EBF @CVPR 2026 workshop 채택 논문 목록 확인 (의료영상 DG 직접 경쟁 있을 수 있음)
+- [ ] ICLR 2026 openreview에서 의료영상 DG 논문 직접 탐색 (기존 검색 성공률 낮았음)
+- [ ] TopBrain 2025 challenge (Zenodo 15084013): whole brain vessel annotation → 내 연구 확장 가능성
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
