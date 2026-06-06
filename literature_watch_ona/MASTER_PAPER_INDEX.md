@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-06  
+> 총 수록 논문: 104편
 
 ---
 
@@ -57,6 +57,9 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| UNIFREQSDG | Universal Frequency Domain Perturbation for Single-Source Domain Generalization | ACM Multimedia 2024 | 2024 | Accepted Conference Paper | High |
+| AEGIS | Aegis: A Domain Generalization Framework for Medical Image Segmentation by Mitigating Feature Misalignment | Pattern Recognition | 2025 | Published Journal Article | Medium |
+| ADDGCL | Multi-organ Medical Image Segmentation via Adaptive Disentangled Domain Generalization Collaborative Learning | Neurocomputing | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -135,6 +138,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| DEPTHFORGE | Stronger, Steadier & Superior: Geometric Consistency in Depth VFM Forges Domain Generalized Semantic Segmentation | ICCV 2025 | 2025 | Accepted Conference Paper | Low |
 
 ---
 
@@ -178,3 +182,7 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | 2603.28463 | 2026 |
+| BREAKVESSEL | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | 2602.23782 | 2026 |
+| UNIVG | Generative Data-engine Foundation Model for Universal Few-shot 2D Vascular Image Segmentation | 2604.10737 | 2026 |
+| XAICEV | XAI-Driven Diagnosis of Generalization Failure in State-Space Cerebrovascular Segmentation Models | 2512.13977 | 2025 |
