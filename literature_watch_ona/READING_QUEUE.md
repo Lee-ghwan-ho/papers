@@ -50,6 +50,7 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **UNIFREQSDG** | **Run #8 신규** Universal Frequency Domain Perturbation for SSDG (ACM Multimedia 2024). LSP: LF radius를 learnable parameter로 두어 per-image frequency perturbation strength 조절. CPR: content decoupling + recombination. ADI loss. **내 방법과 "augmentation strength를 조절"이라는 개념 공유** — 차이: UniFreqSDG = per-image frequency domain, 나 = intra-image vessel structure-level. 즉시 상세 확인 필요. |
 
 ---
 
@@ -78,6 +79,8 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **AEGIS** | **Run #8 신규** Aegis: DG Framework for Medical Image Segmentation via Feature Misalignment Mitigation (Pattern Recognition 2025). DAFC module + UFA loss. Style aug 후 source-augmented feature 간 implicit alignment. Uncertainty-weighted hard pixel focus. Code available. |
+| ★ | **XAICEV** | **Run #8 신규** XAI-Driven Diagnosis of Generalization Failure in State-Space Cerebrovascular Segmentation Models (arXiv:2512.13977). UMamba on RSNA CTA → TopCoW CoW CT: Dice 0.86 → 0.29 붕괴. **내 연구의 motivation(center-to-center domain shift in cerebrovascular)을 실증적으로 지지**. Seg-XRes-CAM으로 attention-GT 정렬 분석. |
 
 ---
 

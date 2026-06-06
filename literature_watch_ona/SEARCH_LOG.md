@@ -2,6 +2,109 @@
 
 ---
 
+## 2026-06-06 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-06
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **8편** (Accepted Conference 2편 + Published Journal 2편 + Preprint 4편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv new method augmentation | UniFreqSDG(ACM MM 2024) 발견, WaveSDG(arXiv:2603.28463) 발견 |
+| C | vessel segmentation domain generalization tubular structure thin 2026 arXiv CVPR MICCAI | Breaking the Data Barrier(arXiv:2602.23782), UniVG(arXiv:2604.10737) 발견 |
+| B | structure-aware region-conditioned appearance augmentation medical image segmentation domain generalization 2025 2026 | AD-DGCL(Neurocomputing 2025) 발견, Aegis(Pattern Recognition 2025) 발견 |
+| D | CVPR ICCV NeurIPS ICLR 2025 2026 domain generalization segmentation augmentation robust distribution shift new | DepthForge(ICCV 2025, arXiv:2504.12753) 발견 |
+| A | "radius-conditioned augmentation" OR "thickness-conditioned augmentation" OR "observability-conditioned augmentation" vessel segmentation 2025 2026 | **직접 명시 논문 없음** → Continuous-ONA gap 재확인 |
+| C | arXiv June 2026 vessel brain MRA cerebrovascular domain generalization 2606 | **2606 신규 논문 없음** (6일 기준), XAI-Driven Cerebrovascular (arXiv:2512.13977) 발견 |
+| A | "adaptive disentangled domain generalization" multi-organ medical segmentation 2025 2026 Neurocomputing | **AD-DGCL (Neurocomputing, Oct 2025)** 상세 확인: SSRD + SCT + adaptive region-specific loss |
+| A | Aegis domain generalization medical image segmentation feature misalignment Pattern Recognition 2025 | **Aegis (Pattern Recognition, Sept 2025)** 확인: DAFC + UFA loss, code@GitHub |
+| A | "Universal Frequency Domain Perturbation" single-source domain generalization ICLR ACM 2024 | **UniFreqSDG (ACM MM 2024)** 확인: DOI 10.1145/3664647.3681536 |
+| C | arXiv 2602.23782 few-shot 3D vessel foundation model 2026 | Breaking the Data Barrier 확인: DINOv3 + 3D Adapter, TopCoW + Lausanne datasets |
+| C | arXiv 2604.10737 generative data-engine foundation model universal few-shot 2D vascular 2026 | UniVG 확인: 2D vascular compositionality learning |
+| D | "Stronger Steadier Superior geometric consistency depth VFM" domain generalized semantic segmentation ICCV 2025 | **DepthForge (ICCV 2025, arXiv:2504.12753)** 확인: depth+visual VFM for DGSS, GitHub 확인 |
+| A | arXiv 2603.28463 decoupling wavelet sub-bands single source fundus segmentation | **WaveSDG** 확인: WISER module, LL/LH/HL/HH 분리, 5 unseen target datasets |
+| Follow-up | GitHub Generalized_MedIA repo 최신 업데이트 확인 | June 2025 이후 업데이트 없음 확인 |
+| Novelty | "augmentation budget intra-class structure vessel domain generalization 2025 2026" | 직접 명시 논문 없음 → gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**UniFreqSDG (ACM MM 2024)** — DOI: 10.1145/3664647.3681536
+- Universal Frequency Domain Perturbation for Single-Source Domain Generalization
+- LSP(Learnable Spectral Perturbation): LF radius를 학습 가능한 파라미터로 두어 단일 source의 주파수 분포 확장
+- CPR(Content-Preserving Recombination): 증강 전/후 feature decoupling + recombination으로 content 보존
+- ADI(Active Domain-variance Inducement) loss: 주파수 공간에서 domain-style feature 분리 강화
+- Fundus (+7.47%) + Prostate (+4.99%) 실험
+- **내 방법과의 차이**: UniFreqSDG = 전체 이미지 단위 frequency perturbation strength를 learnable parameter로 조절. 나 = intra-image vessel radius 기반 pixel-level augmentation budget 연속 조절. UniFreqSDG는 구조 내부 이질성(thin/thick vessel) 개념 없음.
+
+#### 주요 신규 발견 (Published Journal)
+
+**Aegis (Pattern Recognition, Sept 2025)** — pii/S0031320325010672
+- Style augmentation → DAFC(Dual Attention-guided Feature Calibration): source-augmented feature 간 implicit alignment
+- UFA(Uncertainty-guided Feature Alignment) loss: domain shift로 인한 segmentation discrepancy를 uncertainty-weighting으로 hard pixel 집중
+- 3개 의료영상 benchmark, code@GitHub
+- **내 방법과의 관계**: DAFC는 image-level style aug 후 feature alignment → 구조 내부 다른 강도 조절 없음. 내 방법과 level이 다름.
+
+**AD-DGCL (Neurocomputing, Oct 2025)** — pii/S0925231225025184
+- SSRD(Semi-Supervised Representation Disentanglement): domain-specific style / anatomical content 분리 (dual encoder + cross-domain contrastive learning)
+- SCT(Style-induced Consistency Training): synthetic style perturbation + consistency regularization
+- Adaptive region-specific loss: **pixel frequency 기반으로 small organ에 weight 동적 조절**
+- 3D semi-supervised + DG (multi-source 설정)
+- **내 방법과의 차이**: region-specific loss의 weighting 기준이 pixel frequency (small organ 빈도), 나는 local vessel radius (structural observability). 설정도 semi-supervised multi-source vs. SSDG.
+
+#### 혈관 특화 신규 논문 (Preprint)
+
+**Breaking the Data Barrier (arXiv:2602.23782, Feb 2026)**
+- DINOv3 foundation model + lightweight 3D Adapter + multi-scale 3D Aggregator
+- Z-channel embedding으로 2D pre-training → 3D medical 브릿지
+- TopCoW (in-domain) + Lausanne (OOD): 5-shot에서 Dice 43.42%, +30% relative improvement
+- **내 방법과의 관계**: few-shot + foundation model paradigm, SSDG가 아님. 병행 참고용.
+
+**UniVG (arXiv:2604.10737, April 2026)**
+- Generative Data-engine Foundation Model for Universal Few-shot 2D Vascular Segmentation
+- 혈관 이미지의 compositionality 학습, 희소 annotation + unseen domain 대응
+- 2D vascular 전반 (retinal, coronary, cerebral 등)
+
+**XAI Cerebrovascular (arXiv:2512.13977, Dec 2025)**
+- State-Space Model(UMamba) 기반 cerebrovascular segmentation의 도메인 이전 실패를 XAI로 진단
+- RSNA CTA Aneurysm (source) → TopCoW Circle of Willis CT (target): Dice 0.8604 → 0.2902
+- Seg-XRes-CAM으로 attention vs. GT 정렬 분석
+- **내 방법과의 관계**: 도메인 이전 실패의 원인 분석 논문. 내 연구의 motivation (center-to-center domain shift in cerebrovascular) 지지 근거로 활용 가능.
+
+#### Top-tier Vision 신규 논문
+
+**DepthForge (ICCV 2025, arXiv:2504.12753)**
+- Depth+Visual cue integration (DINOv2/EVA02 + Depth Anything V2)
+- Geometric consistency는 style shift에 robust → depth cue를 anchor로 DG 강화
+- Urban scene DGSS, 자연영상 전용
+- **내 방법과의 관계**: "geometry is more stable than appearance" 아이디어는 내 "vessel structure (observability) is more stable than domain-specific intensity pattern" 논리와 구조적으로 유사. 직접 응용은 어렵지만 방법론적 비유로 사용 가능.
+
+### Novelty Gap 재확인 (Run #8)
+
+- **"radius-conditioned augmentation"** → 0 results
+- **"thickness-conditioned augmentation"** → 0 results
+- **"observability-conditioned augmentation"** → 0 results
+- UniFreqSDG (ACM MM 2024): per-image frequency perturbation strength — intra-image structure별 차별 없음
+- AD-DGCL: region-specific loss weighting by pixel frequency — vessel radius/observability 기반 아님
+- **Continuous-ONA의 핵심 gap (intra-image vessel radius → continuous augmentation budget) 여전히 유지됨**
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] UniFreqSDG 전문 독해: LSP의 LF radius 학습 방식 상세 — 내 radius 계산과 비교
+- [ ] Aegis GitHub 코드 확인: augmentation 방식 구현 상세
+- [ ] IELDG (arXiv:2508.19604): Inverse Evolution Layers for DGSS — 자연영상이지만 구조 기반 noise 억제 방식 확인 가치
+- [ ] DG-TTA (Sensors 2025, DOI:10.3390/s25175603): GIN + SSC descriptor + TTA 조합 — low-tier 저널이나 GIN baseline 구현 참고 가능
+- [ ] ICLR 2026 openreview.net 직접 탐색: medical DG augmentation 관련 accepted 논문 확인
+- [ ] CoSAM (arXiv:2411.10136): SAM 기반 DG, DAPSAM과 유사 — 수록 여부 재검토
+- [ ] CVPR 2026 submission arXiv 탐색 (예상 submission deadline: Nov 2025, 공개 Jan 2026 이후)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
