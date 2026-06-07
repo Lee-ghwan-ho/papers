@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-07  
+> 총 수록 논문: 108편
 
 ---
 
@@ -57,6 +57,10 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| UNIFREQ | Universal Frequency Domain Perturbation for Single-Source Domain Generalization | ACM MM 2024 | 2024 | Accepted Conference Paper | High |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| CQI | Color-Quality Invariance for Robust Medical Image Segmentation | arXiv | 2025 | Preprint Only | Low |
+| DGTTA | DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven Domain Generalization, and Test-Time Adaptation | Sensors | 2025 | Published Journal Article | Low |
 
 ---
 
@@ -76,6 +80,8 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| COLORMAP | Colormap Augmentation: A Novel Method for Cross-Modality Domain Generalization | International Journal of Computer Assisted Radiology and Surgery | 2025 | Published Journal Article | Low |
+| SCSD | Exploring Semantic Consistency and Style Diversity for Domain Generalized Semantic Segmentation | AAAI 2025 | 2025 | Accepted Conference Paper | Medium |
 
 ---
 
@@ -114,6 +120,12 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| VESSELSDF | VesselSDF: Distance Field Priors for Vascular Network Reconstruction | MICCAI 2025 | 2025 | Accepted Conference Paper | Medium |
+| URVSM | Universal Vessel Segmentation for Multi-Modality Retinal Images | IEEE TIP | 2025 | Published Journal Article | Medium |
+| TOPOFAST | Topology Optimization in Medical Image Segmentation with Fast Euler Characteristic | IEEE TMI | 2025 | Published Journal Article | Medium |
+| DEFORMCL | Learning Deformable Centerline Representation for Vessel Extraction in 3D Medical Image | arXiv | 2025 | Preprint Only | Low |
+| COLETRA | Disconnect to Connect: A Data Augmentation Method for Improving Topology Accuracy in Image Segmentation | arXiv | 2025 | Preprint Only | **High** |
+| TUBEMLLM | TubeMLLM: A Foundation Model for Topology Knowledge Exploration in Vessel-like Anatomy | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -135,6 +147,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| SCSD | Exploring Semantic Consistency and Style Diversity for Domain Generalized Semantic Segmentation | AAAI 2025 | 2025 | Accepted Conference Paper | Medium |
 
 ---
 
@@ -178,3 +191,8 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| CQI | Color-Quality Invariance for Robust Medical Image Segmentation | 2502.07200 | 2025 |
+| DEFORMCL | Learning Deformable Centerline Representation for Vessel Extraction in 3D Medical Image | 2506.05820 | 2025 |
+| COLETRA | Disconnect to Connect: A Data Augmentation Method for Improving Topology Accuracy | 2503.05541 | 2025 |
+| TUBEMLLM | TubeMLLM: A Foundation Model for Topology Knowledge Exploration in Vessel-like Anatomy | 2603.09217 | 2026 |
