@@ -2,6 +2,116 @@
 
 ---
 
+## 2026-06-07 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-07
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **12편** (Accepted Conference 3편 + Published Journal 4편 + Preprint 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | WaveSDG (2603.28463), CQI (2502.07200) 발견 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular brain 2026 new paper | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization 2025 2026 | 기존 목록 재확인 (DGSSA 재확인) |
+| A | arXiv 2603.28463 "decoupling wavelet sub-bands" SSDG fundus segmentation venue | WaveSDG 확인: ISI Kolkata/Oxford, optic cup/disc SSDG across 5 targets |
+| A | arXiv 2502.07200 "color-quality invariance" robust medical image segmentation | CQI 확인: DCIN + CQG loss, color/quality invariance |
+| D | CVPR 2026 domain generalization segmentation augmentation robust accepted papers | 기존 목록 재확인 |
+| A | "UniFreqSDG" OR "universal frequency perturbation" SSDG medical ACM MM 2024 prostate fundus | **UniFreqSDG (ACM MM 2024)** 확인: DOI 10.1145/3664647.3681536, +7.47% fundus, +4.99% prostate |
+| D | ICCV 2025 domain generalization augmentation adaptive structure-aware segmentation new papers | 기존 목록 재확인, ADAL 등 재확인 |
+| B | arXiv 2025 2026 "augmentation strength" adaptive structure-aware vessel DG medical | 기존 목록 재확인 |
+| D | NeurIPS 2025 domain generalization segmentation augmentation counterfactual robust | 기존 목록 재확인 |
+| B | arXiv 2026 nonlinear augmentation monotonic transformation spline DG medical segmentation | 기존 목록 재확인 (CompStyle CVPR 2024W 발견) |
+| A | arXiv 2406.00298 "complex style image transformations" DG medical CVPR 2024 venue | **CompStyle (CVPR 2024 Workshop)** 확인: CVPR 2024 DEF-AI-MIA Workshop |
+| C | MICCAI 2025 open access cerebrovascular brain vessel segmentation domain new | **VesselSDF (MICCAI 2025)** 발견: arXiv 2506.16556, SDF regression for vessel |
+| D | arXiv 2412.12050 "semantic consistency" "style diversity" DGSS AAAI 2025 venue | **SCSD (AAAI 2025)** 확인: Semantic Query Booster + Text-Driven Style Transform |
+| C | arXiv 2502.06987 "universal vessel segmentation" multi-modality retinal images IEEE TIP | **URVSM (IEEE TIP 2025)** 확인: Vol 34 pp 7903-7918 |
+| C | arXiv 2506.05820 DeformCL deformable centerline representation vessel 3D medical | **DeformCL (arXiv 2506.05820, June 2025)** 확인: 3D vessel extraction with centerline |
+| C | arXiv 2503.05541 "CoLeTra" disconnect-to-connect topology augmentation thin structure | **CoLeTra (arXiv 2503.05541, March 2025)** 확인: OpenReview Dec 2025 |
+| A | "DG-TTA" sensors 2025 out-of-domain medical image segmentation augmentation TTA | **DG-TTA (Sensors 2025)** 확인: DOI 10.3390/s25175603, GIN aug + SSC descriptor + TTA |
+| B | "colormap augmentation" cross-modality domain generalization IJCARS Springer 2025 | **COLORMAP (IJCARS Dec 2025)** 확인: DOI 10.1007/s11548-025-03559-y |
+| C | arXiv 2507.23763 "topology optimization" "euler characteristic" medical IEEE TMI | **TOPOFAST (IEEE TMI 2025)** 확인: Liu Li et al., Fast χ computation |
+| C | arXiv 2603.09217 "TubeMLLM" foundation model topology vessel anatomy 2026 | **TubeMLLM (arXiv 2603.09217, March 2026)** 확인: MLLM for vessel topology |
+| A | SLAug TPAMI follow-up citation vessel SSDG 2025 2026 | WaveSDG가 WaveRNet과 함께 SLAug follow-up 계열 확인 |
+| C | arXiv 2511.13883 "topology-aware augmentation" data scaling medical segmentation venue | arXiv 2511.13883 확인: KAUST 팀, data scaling + topology-aware aug. Preprint, low priority. |
+| C | ICCV 2025 vessel segmentation topology tubular thin structure domain generalization | 기존 목록 재확인 (TopoTTA, HarmonySeg) |
+| A | arXiv radius-aware thickness-conditioned diameter-conditioned augmentation DG medical | **직접 명시 논문 여전히 없음** → Continuous-ONA gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**UniFreqSDG (ACM MM 2024)** — DOI: 10.1145/3664647.3681536 ⚠️
+- SSDG 직접 경쟁 논문. Learnable spectral perturbation으로 hierarchical feature-level frequency perturbation.
+- Active Domain-variance Inducement Loss: 도메인 스타일 feature를 명시적으로 분리/억제.
+- Fundus +7.47%, Prostate +4.99% Dice vs SOTA.
+- **내 방법과의 차이**: UniFreqSDG = 전체 feature map에 frequency-domain perturbation (모든 픽셀 동일 처리). 나 = intra-image vessel radius별 augmentation budget 연속 조절. UniFreqSDG에는 thin vessel 보호 개념 없음.
+- ACM MM 2024 = 좋은 tier (CORE A), MICCAI와 비슷한 수준.
+
+**CoLeTra (arXiv 2503.05541, March 2025, OpenReview Dec 2025)** ⚠️
+- Disconnect-to-Connect augmentation: image inpainting으로 thin structure를 시각적으로 끊어지게 보이게 하면서 label은 원본 그대로.
+- "label에서는 연결됐지만 appearance에서는 끊어진" 구조를 학습 → topology accuracy 향상.
+- **내 동기와 직접 연결**: 내가 우려하는 "label은 thin vessel인데 강한 augmentation 후 appearance에서는 invisible"이 CoLeTra의 label-appearance discrepancy와 같은 계열 문제.
+- **핵심 차이**: CoLeTra는 disconnection을 deliberately 만들어 모델이 resilient하게 만듦. 나는 thin vessel에 강한 aug를 피해서 label-appearance inconsistency 자체를 방지.
+- 둘은 opposite strategy지만 동일한 문제를 다른 각도로 인식.
+
+#### 방법론 신규 논문
+
+**SCSD (AAAI 2025, arXiv 2412.12050)**
+- "Semantic Consistency + Style Diversity" 동시 최적화가 내 Continuous-ONA의 핵심 설계 원리와 개념적으로 동일.
+- SCSD: 자연영상 city-scene DGSS. text-guided style transform + semantic query booster.
+- 내 방법과의 차이: SCSD = cross-domain semantic consistency + style diversity 전체 이미지 단위. 나 = intra-image vessel radius에 따른 augmentation budget 연속 조절 (thin vessel은 conservative, thick는 diverse).
+
+**COLORMAP (IJCARS Dec 2025)**
+- 단순 LUT colormap transformation으로 cross-modality DG 달성.
+- 내 nonlinear augmentation의 baseline 비교 참고용.
+
+#### 혈관 특화 신규 논문
+
+**VesselSDF (MICCAI 2025, arXiv 2506.16556)**
+- 혈관 분할을 binary classification → continuous SDF regression으로 재정의.
+- Distance-weighted regularization이 vessel continuity를 geometric prior로 encoding.
+- 내 observability score 계산(skeleton distance transform)과 동일한 geometric prior 계열.
+
+**TOPOFAST (IEEE TMI, arXiv 2507.23763)**
+- Fast χ (Euler Characteristic) 기반 topology optimization: 2D/3D topology error를 scalar metric으로 빠르게 평가.
+- Topological violation map으로 연결성 오류 공간 위치 시각화.
+- 내 방법의 thin vessel topology 평가 metric으로 직접 활용 가능.
+
+**URVSM (IEEE TIP 2025, arXiv 2502.06987)**
+- Universal retinal vessel segmentation without fine-tuning for different modalities.
+- 내 TOF-MRA setting과 유사한 cross-modality generalization 설계 참고.
+
+#### Top-tier Vision
+
+**WaveSDG (arXiv 2603.28463, March 2026)**
+- SSDG for optic cup/disc segmentation. WISER module = wavelet sub-band decoupling.
+- Low-freq로 anatomy anchor, high-freq로 directional edge enhancement.
+- 내 방법과의 차이: WaveSDG = global frequency decomposition, 나 = local vessel-structure-specific augmentation budget.
+
+### Novelty Gap 재확인
+
+- **"vessel radius / observability conditioned augmentation"** 키워드: Run #8에서도 명시 논문 없음
+- **"intra-class thin vs. thick vessel augmentation budget"** 키워드: 직접 논문 없음
+- **UniFreqSDG**가 가장 근접한 경쟁자 — 하지만 frequency-domain perturbation (image/feature 전체 균일)이고 structure-aware가 아님
+- **CoLeTra**가 label-image inconsistency 문제를 다루지만 방향이 다름 (deliberately create discrepancy vs. avoid discrepancy)
+- **내 핵심 gap 유지**: continuous radius-conditioned augmentation budget for intra-vessel structure-specificity
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] UniFreqSDG 전문 독해: spectral perturbation module의 구체적 구현 + medical 실험 상세 (SLAug와 직접 비교 결과)
+- [ ] CoLeTra 전문 독해: inpainting 방식 상세 (morphological erosion 사용 여부 등) + topology metric 개선 정도
+- [ ] TOPOFAST 전문 독해: fast χ 계산 공식 + topological violation map 활용 방식
+- [ ] CompStyle (CVPR 2024 Workshop, arXiv 2406.00298): low-priority지만 adversarial style transfer 구성 참고
+- [ ] TubeMLLM (arXiv 2603.09217): MLLM-based vessel topology foundation model — 내 방법의 downstream 활용 가능성
+- [ ] ICLR 2026 최종 accepted list 공개 후 DG/augmentation 관련 논문 재탐색
+- [ ] MICCAI 2026 accepted list 공개 시 즉시 탐색 (예상: 2026-07 이후)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
