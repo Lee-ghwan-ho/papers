@@ -2,6 +2,113 @@
 
 ---
 
+## 2026-06-08 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-08
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **3편** (Published Journal 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv CVPR MICCAI | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA thin vessel 2026 arXiv IEEE TMI | 기존 목록 재확인 |
+| C | tubular structure segmentation topology domain generalization thin vessel 2025 2026 CVPR NeurIPS ECCV | **TopoVST (arXiv 2603.14909)** 발견 |
+| D | ICLR 2026 domain generalization segmentation augmentation robust distribution shift accepted | ICLR 2026 DG 직접 의료영상 히트 없음 |
+| B | arXiv 2605 2606 intra-class structure-aware augmentation domain generalization medical segmentation vessel | 기존 목록 재확인 |
+| C | TopoVST vessel skeleton tracking topology arXiv 2603.14909 2025 2026 | **TopoVST** 상세 확인: multi-scale sphere graph + GNN + radius estimation |
+| D | CVPR 2026 domain generalization segmentation robust augmentation accepted papers | CVPR 2026 미공개, IELDG (arXiv 2508.19604) 발견 — 자연영상, 낮은 관련성 |
+| A | arXiv 2606 medical image segmentation domain generalization single source new 2026 | **WaveSDG (arXiv 2603.28463)** 간접 발견 (검색 중 링크 등장) |
+| B | "observability" OR "vessel radius" OR "thickness-conditioned" augmentation domain generalization 2025 2026 | 직접 명시 논문 없음 — Continuous-ONA gap 유지 |
+| A | IELDG "inverse evolution layers" domain generalized semantic segmentation arXiv 2508.19604 | IELDG 확인: 자연영상 DG (city scene), Laplacian-based IEL + IELFormer, 낮은 관련성 수록 보류 |
+| A | MICCAI 2026 accepted papers domain generalization vessel segmentation medical image | MICCAI 2026 미공개 확인 |
+| B | augmentation budget adaptive strength structure-conditioned medical image DG 2025 2026 arXiv | 기존 목록 재확인 |
+| A | DG-TTA descriptor-driven domain generalization augmentation TTA medical segmentation Sensors 2025 | **DG-TTA (Sensors 2025)** 확인: low tier venue, 낮은 관련성, 수록 보류 |
+| A | ICLR 2026 accepted papers list medical segmentation vessel domain generalization | ICLR 2026 의료영상 DG 직접 히트 없음 |
+| A | arXiv 2506 2505 "single-source" OR "single source" domain generalization segmentation medical 2026 | **WaveSDG (arXiv 2603.28463)** 확인: WISER module, fundus SSDG |
+| A | "Decoupling Wavelet Sub-bands" single source domain generalization fundus arXiv 2603.28463 | **WaveSDG** 상세 확인: ISI Kolkata + Oxford, 5 target datasets |
+| A | IJCAI 2026 accepted papers medical image segmentation domain generalization | IJCAI 2026 DG 의료영상 직접 논문 없음 (BucketAugment 재발견 — 이미 인식됨) |
+| A | "teacher-student" "instance-level adversarial" single domain generalized medical segmentation IEEE TMI 2026 | **TSIAA (IEEE TMI 2026)** 발견: DOI 11146907, Zhengshan Wang et al. |
+| A | TSIAA instance-level adversarial augmentation "over-augmentation" single domain medical segmentation | **TSIAA** 상세 확인: IIAG + IAMs (learnable constrained Bezier), Teacher-Student, Code available |
+| A | Yunpeng Cai TSIAA instance augmentation single domain generalization IEEE TMI 2026 | TSIAA 저자 확인: Zhengshan Wang (1st author), Yunpeng Cai (Semantic Scholar author 연관) |
+| C | TopoVST vessel skeleton arXiv 2603.14909 venue conference | venue 미확인 — arXiv preprint |
+| B | "label-preserving" OR "structure-preserving" augmentation intensity transformation DG medical 2025 2026 | 기존 목록 재확인 |
+| C | coronary vessel airway road crack thin structure DG segmentation CVPR ICCV 2025 | 기존 목록 재확인 |
+| A | SLAug follow-up citation domain generalization augmentation 2025 2026 single source | 직접 SLAug cite follow-up 없음 |
+| B | nonlinear intensity monotonic spline Bezier DG medical segmentation 2025 2026 | 기존 목록 재확인 |
+| A | NeurIPS 2025 proceedings accepted vessel tubular segmentation DG augmentation | GRAPHSEG 재확인 (이미 인덱싱됨) |
+| D | "Prototypical Progressive Alignment" domain generalization segmentation arXiv 2507.11955 | PPAR 확인: 자연영상 semantic DG, CLIP 기반, 낮은 관련성 수록 보류 |
+| A | "Causal Transfer" medical image analysis arXiv 2603.24388 domain generalization | CTL Survey (arXiv 2603.24388) 확인: survey 논문, 내 방법에 관련성 낮음, 수록 보류 |
+| A | NeurIPS 2025 ICLR 2025 augmentation policy adaptive strength DG segmentation | 기존 목록 재확인 |
+| A | retinal vessel coronary artery segmentation DG appearance augmentation MICCAI NeurIPS 2025 2026 | 기존 목록 재확인 |
+| A | "Pixel-level Counterfactual Contrastive Learning" medical image segmentation arXiv 2603.17110 | PCL 확인: counterfactual contrastive for medical seg (Imperial College London, arXiv March 2026). 직접적인 DG 논문은 아님 — CAT B 후보이나 수록 보류 (domain robustness 초점, DG 설정 아님) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련) — P0 추가
+
+**TSIAA (IEEE TMI 2026)** — DOI: 10.1109/TMI.11146907 ⚠️ 최고 주의
+- **Teacher-Student Instance-Level Adversarial Augmentation** for SDGMIS
+- 핵심: Instance-level Image Augmenter (IIAG) = 여러 Instance-level Augmentation Module(IAM)로 구성, 각 IAM은 learnable constrained Bézier transformation 기반
+- "image-level adversarial augmentation에 비해 **instance-level 연산이 이미지 내 구조별 augmentation rule의 uniformity를 깨서** 더 큰 diversity 제공"
+- "over-augmentation 문제를 instance-level 연산으로 해결"이라고 명시 — 내 핵심 주장(uniformity 파괴)과 방향 일치
+- Teacher-Student adversarial learning: student = generalized representation, teacher = out-of-source aug generator
+- Code: https://github.com/Wangzts0228/TSIAA
+- 실험: prostate MRI (6 centers), cardiac MRI
+
+- **내 방법과의 관계**:
+  - **공통점**: "image 내 구조별 augmentation 균일성 파괴"라는 동일한 동기
+  - **핵심 차이**:
+    - TSIAA = adversarial training으로 구조별 최대 다양성 탐색 (adversarial 방향)
+    - 나 = vessel radius/observability에 따라 augmentation strength를 연속적으로 **제한** (보수적 방향)
+    - TSIAA = "diversity 극대화"가 목표, 나 = "thin vessel appearance 보호"가 목표
+    - TSIAA = prostate/cardiac (blob-shape organ), 나 = cerebrovascular (tubular structure)
+    - TSIAA = instance의 정의가 annotation mask region 단위 (foreground/background), 나 = continuous radius-based gradation
+  - **Novelty 위협도**: Medium-High — 동기 및 instance-level 개념이 가장 유사한 논문. 즉시 구분 논거 작성 필요.
+
+#### 신규 발견 논문 (P1)
+
+**WaveSDG (arXiv 2603.28463, March 2026)** — ISI Kolkata + University of Oxford
+- Wavelet sub-band decomposition으로 anatomy structure와 domain-specific appearance를 분리
+- **WISER module**: low-freq → global anatomy 앵커, high-freq → edge 강화 + noise 억제
+- fundus optic disc/cup SSDG, 1 source + 5 unseen target datasets
+- 내 방법과 비교: frequency domain structure preservation (WaveSDG) vs. spatial radius-conditioned appearance (나). 접근법 다름.
+
+**TopoVST (arXiv 2603.14909, March 2026)** — EndoluminalSurgicalVision-IMR
+- Multi-scale sphere graph + GNN으로 vessel skeleton tracking + **vessel radius 동시 추정**
+- Geometry-aware weighting scheme for directional loss (class imbalance 처리)
+- 내 방법 연결성: TopoVST의 radius estimation pipeline을 내 observability score 계산의 preprocessing으로 활용 가능성
+
+### 미수록 검토 논문
+
+- **IELDG** (arXiv 2508.19604): diffusion model + IEL for natural image DGSS. 의료영상 아님, 낮은 관련성 → 수록 보류
+- **DG-TTA** (Sensors 2025, arXiv 2312.06275): SSC descriptor + GIN aug + TTA. Low-tier venue (Sensors), 방법론적 novelty 낮음 → 수록 보류
+- **PCL** (arXiv 2603.17110): Pixel-level Counterfactual Contrastive for medical seg. DG 설정 아님, domain robustness 목적 → 수록 보류
+- **PPAR** (arXiv 2507.11955): CLIP-based prototypical alignment for natural image DG. 의료영상 아님 → 수록 보류
+- **CTL Survey** (arXiv 2603.24388): causal transfer learning survey. Survey 논문, 방법 없음 → 수록 보류
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: TSIAA가 instance-level까지 접근했으나 radius conditioning은 없음
+- TSIAA가 "uniformity 파괴"라는 동기를 공유하지만, thin vessel protection의 concept은 없음
+- **내 핵심 gap 유지**: intra-class vessel radius → augmentation budget (continuous, protective) mapping
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: IIAG 내 IAM 수 및 적용 방식 상세 (foreground instance 정의, 결과 ablation)
+- [ ] TSIAA code 확인: https://github.com/Wangzts0228/TSIAA — IAM 구현이 vessel에 적용 가능한지
+- [ ] WaveSDG 전문 독해: WISER module에서 wavelet frequency band 선택 기준 상세
+- [ ] TopoVST 전문 독해: vessel radius estimation 방법 (skeleton distance transform vs. direct estimation)
+- [ ] CVPR 2026 accepted list 공개 시 즉시 탐색
+- [ ] ConStyX arXiv 2506.10675 내용 확인 (이미 인덱싱되었으나 arXiv ID 재확인)
+- [ ] "instance-level" + "vessel" + "domain generalization" 조합 재탐색 (TSIAA 이후 유사 논문 가능성)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

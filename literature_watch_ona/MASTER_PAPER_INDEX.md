@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-08  
+> 총 수록 논문: 99편
 
 ---
 
@@ -57,6 +57,7 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
 
 ---
 
@@ -88,6 +89,7 @@
 | HESSIAN_VF | Domain Generalization for Retinal Vessel Segmentation via Hessian-based Vector Field | Medical Image Analysis | 2024 | Published Journal | High |
 | ANGIODG | AngioDG: Interpretable Channel-informed Feature-modulated Single-source Domain Generalization for Coronary Vessel Segmentation in X-ray Angiography | arXiv | 2025 | Preprint Only | High |
 | WAVERNETV | WaveRNet: Wavelet-Guided Frequency Learning for Multi-Source Domain-Generalized Retinal Vessel Segmentation | arXiv | 2026 | Preprint Only | High |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
 | ISAC | ISAC: Redefining the Vascular Segmentation Paradigm Through Mask Completion for Cross-Domain Generalization | MICCAI 2025 | 2025 | Accepted Conference | High |
 | TOPOTTA | TopoTTA: Topology-Enhanced Test-Time Adaptation for Tubular Structure Segmentation | ICCV 2025 | 2025 | Accepted Conference | Medium |
 | HARMONYSEG | HarmonySeg: Tubular Structure Segmentation with Deep-Shallow Feature Fusion and Growth-Suppression Balanced Loss | ICCV 2025 | 2025 | Accepted Conference | Medium |
@@ -114,6 +116,7 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -178,3 +181,5 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | 2603.28463 | 2026 |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | 2603.14909 | 2026 |
