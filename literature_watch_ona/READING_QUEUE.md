@@ -50,6 +50,7 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, Mar 2026). WISER 모듈: 저주파 서브밴드로 글로벌 해부학 고정, 고주파로 방향성 엣지 강화+잡음 억제. 해부학과 appearance를 wavelet 분해로 분리 → SSDG에 적용. 7개 SOTA와 비교. 내 방법과의 유사점: anatomy vs. appearance decoupling 개념; 차이: WAVESDG = 글로벌 주파수 기반, 나 = 로컬 혈관 반경 기반 연속적 조절. novelty 구분점 파악 필수. |
 
 ---
 
@@ -78,6 +79,8 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **FEDGIN** | **Run #8 신규** FedGIN: Federated Learning with Dynamic GIN Augmentation for Multi-modal Organ Segmentation (MICCAI 2025, LNCS 16135). GIN 기반 비선형 intensity 증강이 federated multi-modal (CT+MRI) 설정에서 30% Dice 향상. 내 uniform nonlinear aug baseline 구성 근거 — GIN이 modality-specific domain shift에 효과적임을 실험적으로 증명. Federated setting이라는 점에서 내 SSDG와 패러다임 다름. |
+| ★ | **DGTTA** | **Run #8 신규** DG-TTA: Out-of-Domain Medical Image Segmentation via Augmentation + Descriptor-Driven DG + TTA (MDPI Sensors, Sep 2025; arXiv 2312.06275). SSC descriptor + GIN 입력 공간 증강 → DG 사전학습 후 TTA. CT→MRI 교차 모달 실험. abdominal +46%, spine +73%. GIN이 CT-MRI domain gap에도 효과적임을 showing. 내 비선형 증강 기저의 GIN 활용 근거로 참고 가능. |
 
 ---
 
@@ -115,3 +118,5 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| VESSELGPT | **Run #8 신규** VesselGPT: Autoregressive Modeling of Vascular Geometry (MICCAI 2025 oral, arXiv 2505.13318). VQ-VAE + GPT-2로 혈관 트리 합성. B-spline 혈관 단면 표현. DG/증강 연구는 아님 — 혈관 형상 생성 분야 최신 동향 파악 목적. |
+| VESSELSDF | **Run #8 신규** VesselSDF: Distance Field Priors for Vascular Network Reconstruction (MICCAI 2025, arXiv 2506.16556). 혈관 분할을 SDF 회귀로 재정의 → 연속적 기하 표현. Gaussian regularization + 2-stage network. DG 연구 아님 — thin vessel 연속성 표현 방법 참고용. |
