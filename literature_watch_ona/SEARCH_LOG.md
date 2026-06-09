@@ -2,6 +2,98 @@
 
 ---
 
+## 2026-06-09 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-09
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Accepted Conference 4편 + Preprint 1편) + Preprint 보조 1편
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv MICCAI augmentation new method | **WaveSDG (arXiv 2603.28463)** 발견 — wavelet sub-band SSDG for fundus |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new paper | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust | CVPR 2026 미공개 확인 |
+| A | arXiv 2603.28463 WaveSDG decoupling wavelet sub-bands SSDG fundus | WaveSDG 상세 확인: WISER 모듈, 저주파=anatomy/고주파=edge, 5 target datasets |
+| B | class-wise structure-conditioned augmentation medical image domain generalization 2026 arXiv | 기존 목록 재확인 (SLAug/SRCSM 등) |
+| B | morphology-aware augmentation vessel radius thickness conditioned domain generalization 2025 2026 | **직접 명시 논문 없음** — Continuous-ONA gap 재확인 |
+| D | NeurIPS 2025 ICLR 2026 domain generalization robust segmentation augmentation accepted | **IELDG (arXiv 2508.19604)** 발견 — 자연영상 DG 세그, Laplacian IEL + 확산모델 |
+| B | nonlinear intensity augmentation label-preserving structure-aware medical segmentation DG 2026 | **FedGIN (MICCAI 2025)** 발견 — Dynamic GIN in federated multi-modal organ seg |
+| B | FedGIN "global intensity non-linear augmentation" MICCAI 2025 organ segmentation arXiv 2508.05137 | FedGIN 상세 확인: MICCAI 2025 LNCS 16135, MRI +30% Dice, federated CT+MRI |
+| A | DG-TTA augmentation descriptor domain generalization test-time adaptation medical 2025 | **DG-TTA (MDPI Sensors 2025)** 확인: SSC descriptor + GIN + TTA, arXiv 2312.06275v3 |
+| D | ICCV 2025 domain generalization segmentation augmentation shape structure-aware new method | 기존 목록 재확인 |
+| C | MICCAI 2025 open access vessel vascular cerebrovascular domain generalization new paper | **VesselGPT (MICCAI 2025 oral)**, **VesselSDF (MICCAI 2025)** 발견 |
+| C | VesselGPT "autoregressive modeling" vascular geometry MICCAI 2025 | VesselGPT 상세: VQ-VAE + GPT-2, B-spline vessel cross-section, 최초 autoregressive vessel 생성 |
+| C | VesselSDF "distance field priors" vascular reconstruction MICCAI 2025 | VesselSDF 상세: SDF 회귀로 vessel seg 재정의, Gaussian regularization |
+| A | arXiv June 2026 single source domain generalization augmentation vessel new 2606 | 신규 직접 논문 없음 |
+| A | MICCAI 2025 domain generalization intensity augmentation cerebrovascular brain vessel new | 기존 목록 재확인 |
+| B | "augmentation budget" OR "augmentation strength" intra-class structure-conditioned vessel DG 2025 2026 | **직접 명시 논문 없음** — Continuous-ONA gap 재확인 |
+| A | arXiv 2025 2026 "thin vessel" "small vessel" augmentation domain generalization label-preserving | 기존 목록 재확인 |
+| D | topology-aware domain generalization segmentation MICCAI CVPR ICCV NeurIPS 2026 new accepted | 기존 목록 재확인 |
+| A | SLAug RASS MoreStyle ConStyX follow-up citation 2026 new vessel domain generalization | ConStyX arXiv 2506.10675 (기존 MICCAI 2025 논문의 preprint 버전) 확인 — 기존 인덱스 유지 |
+| B | "radius-aware" OR "thickness-conditioned" OR "diameter-conditioned" augmentation medical seg DG | **직접 명시 논문 없음** — Continuous-ONA 핵심 gap 재확인 |
+| A | "observability" OR "visibility" conditioned augmentation thin structure segmentation DG 2025 2026 | **직접 명시 논문 없음** — 내 핵심 gap 유지 |
+| B | CVPR 2025 2026 augmentation policy adaptive structure preserving DG segmentation accepted | 기존 목록 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### Cat A — SSDG 직접 경쟁
+
+**WaveSDG (arXiv 2603.28463, March 2026)** — Preprint Only
+- WISER 모듈로 encoder feature를 wavelet 서브밴드로 분해: 저주파=글로벌 anatomy anchor, 고주파=방향성 엣지+잡음 억제
+- 1 source → 5 unseen target, optic disc/cup segmentation, 7 SOTA 대비 최고 balanced Dice + 95th HD
+- **내 방법과의 차이**: WaveSDG = 글로벌 이미지 수준 주파수 분리. 나 = 로컬 혈관 단위 연속 조절. 목표 해부구조도 다름(optic disc vs vessel). **Novelty 충돌 없음.**
+
+#### Cat B — 방법론 유사
+
+**FedGIN (MICCAI 2025, LNCS 16135)**
+- GIN(Global Intensity Non-linear) 증강을 federated learning에 통합, multi-modal (CT+MRI)
+- "Dynamic GIN": federated round마다 GIN 파라미터 동적 갱신
+- 내 방법의 baseline GIN의 효과성을 다른 설정(federated, multi-modal)에서 재확인
+
+**DG-TTA (MDPI Sensors, Sep 2025; arXiv 2312.06275v3)**
+- SSC descriptor + GIN → DG 사전학습, TTA로 test-time 적응
+- Sensors = 낮은 tier (priority venue 외). 방법 자체는 기존 GIN+TTA의 결합.
+- 참고 수준. GIN이 CT-MRI 교차 도메인에서도 효과적임을 보여주는 근거.
+
+#### Cat C — 혈관 특화
+
+**VesselGPT (MICCAI 2025 oral, arXiv 2505.13318)**
+- 최초의 autoregressive 혈관 트리 생성 모델. VQ-VAE → 이산 vocabulary → GPT-2 자기회귀 생성.
+- B-spline 단면 표현으로 세밀한 기하 보존. DG 직접 연관 없음 — 혈관 생성 분야 새 패러다임.
+
+**VesselSDF (MICCAI 2025, arXiv 2506.16556)**
+- 혈관 분할을 SDF 회귀로 재정의. 가지치는 thin vessel 연속성 암묵적 보존.
+- Gaussian regularization + 2-stage. DG 직접 아님 — thin vessel 표현 기법 참고용.
+
+#### 보조 목록 추가 (Preprint Only)
+
+**IELDG (arXiv 2508.19604, Aug 2025)** — Cat D 후보
+- 자연영상 DGSS. 확산 모델 생성 데이터의 구조 결함을 Laplacian IEL로 필터링.
+- 의료영상 아님, Preprint만 존재 — Preprint 보조 목록에만 추가.
+
+### Novelty Gap 재확인
+
+- **"vessel radius conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"thickness-conditioned augmentation budget"**: 없음
+- **"observability conditioned augmentation"**: 없음
+- **Continuous-ONA의 핵심 gap 유지**: intra-class vessel radius → continuous augmentation strength mapping
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] WAVESDG 전문 독해: WISER 모듈 구체적 구현 (어떤 wavelet 기저, 서브밴드 처리 방식)
+- [ ] IJCAI 2026 accepted paper list 공개 여부 확인 (예상: 2026-07 이후)
+- [ ] MICCAI 2026 early submission arXiv 급증 구간 (예상: 2026-07)에 재탐색
+- [ ] VesselSDF SDF 표현 → 내 vessel observability score 계산에 signed distance 활용 가능성
+- [ ] FedGIN GitHub 코드: Dynamic GIN 파라미터 조정 방식 확인 (내 uniform baseline 설계 참고)
+- [ ] ConStyX arXiv 2506.10675: 기존 MICCAI 2025 논문의 preprint인지 신규 버전인지 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
