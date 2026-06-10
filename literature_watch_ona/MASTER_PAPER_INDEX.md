@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-10  
+> 총 수록 논문: 103편
 
 ---
 
@@ -57,6 +57,10 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| MRFFD | Multi-receptive Field Feature Disentanglement with Distance-Aware Gaussian Brightness Augmentation for Single-source Domain Generalization in Medical Image Segmentation | Neurocomputing | 2025 | Published Journal Article | **High** |
+| DG-TTA | DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven Domain Generalization, and Test-Time Adaptation | Sensors | 2025 | Published Journal Article | Medium |
+| GLP-SEG | Enhancing Domain Generalization in Medical Image Segmentation With Global and Local Prompts | IEEE TMI | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -114,6 +118,7 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -135,6 +140,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| MAMBA-SEA | Mamba-Sea: A Mamba-based Framework with Global-to-Local Sequence Augmentation for Generalizable Medical Image Segmentation | arXiv | 2025 | Preprint Only | Medium |
 
 ---
 
@@ -178,3 +184,6 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESG | WaveSDG: Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | 2603.28463 | 2026 |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation for Thin-Structure Cross-Domain Segmentation | 2601.02273 | 2026 |
+| MAMBA-SEA | Mamba-Sea: Mamba-based Framework with Global-to-Local Sequence Augmentation for Generalizable Medical Seg | 2504.17515 | 2025 |

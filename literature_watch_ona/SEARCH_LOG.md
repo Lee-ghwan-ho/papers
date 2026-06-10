@@ -2,6 +2,115 @@
 
 ---
 
+## 2026-06-10 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-10
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **7편** (Published Journal 4편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv June MICCAI vessel | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new method arXiv | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization 2025 2026 | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust | 기존 논문 재확인, CVPR 2026 미공개 확인 |
+| D | ICLR 2026 accepted papers domain generalization segmentation medical image augmentation | ICLR 2026 proceedings 탐색 시도 (부분 접근) |
+| A | arXiv 2606 medical image domain generalization segmentation augmentation vessel 2026 June new | arXiv 2606.08749 (source-free DA, 낮은 관련성) 발견 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | HarmonySeg 등 기존 재확인 |
+| B | nonlinear appearance augmentation adaptive strength medical image domain generalization 2025 2026 | ADA 재확인 |
+| A | MICCAI 2026 accepted papers domain generalization vessel segmentation cerebrovascular | MICCAI 2026 미공개 확인 |
+| D | ICLR 2026 openreview domain generalization augmentation segmentation robust invariance | ICLR 2026 목록 부분 탐색 |
+| A | DG-TTA arXiv 2312.06275 GIN SSC descriptor sensors journal 2025 domain generalization | **DG-TTA (Sensors 2025)** 발견: GIN+SSC+TTA combination |
+| A | arXiv June 2026 domain generalization vessel vascular segmentation new paper 2606 | **LightVesselNet (2606.05354)** 발견 (관련성 낮음, 미수록) |
+| A | causal transfer medical image analysis arXiv 2603.24388 domain generalization 2026 | Causal Transfer in MIA (Survey, arXiv 2603.24388) — survey 논문 미수록 |
+| A | SLAug ConStyX follow-up citation 2026 new domain generalization medical segmentation | ConStyX arXiv ID 확인: 2506.10675 |
+| B | augmentation strength adaptive structure morphology domain generalization medical 2025 2026 | **MRFFD (Neurocomputing 2025)** 발견: DAGBA = distance-aware brightness aug |
+| A | teacher-student instance-level adversarial augmentation single domain generalized IEEE TMI 2026 | **TSIAA (IEEE TMI Vol 45, 2026)** 발견: instance-level Bézier aug, p.764-776 |
+| C | topology-aware vessel segmentation domain generalization 2026 arXiv new MICCAI CVPR IEEE TMI | **TopoLoRA-SAM (arXiv 2601.02273)** 발견: SAM+LoRA+clDice for thin structure DG |
+| C | TopoLoRA-SAM 2601.02273 retinal vessel SAM LoRA clDice cross-domain 2026 | TopoLoRA-SAM 세부 확인: 5 benchmarks, 5.2% params, best retina-average Dice |
+| D | NeurIPS 2025 domain generalization medical image segmentation augmentation robust new accepted | Mamba-Sea (arXiv 2504.17515) 발견 |
+| A | Mamba-Sea arXiv 2504.17515 sequence augmentation generalizable medical segmentation DG | **Mamba-Sea** 확인: first Mamba-based medical DG, global+sequence-wise aug |
+| A | enhancing domain generalization global local prompts medical image segmentation IEEE TMI 2025 2026 | **GLP-SEG (IEEE TMI 11119233)** 발견: GLP + domain adapter |
+| A | WaveSDG wavelet sub-bands SSDG fundus segmentation arXiv 2603.28463 | **WaveSDG** 확인: WISER module for wavelet-SSDG |
+| A | MRFFD DAGBA distance-aware gaussian brightness SSDG Neurocomputing 2025 details | MRFFD 상세 확인: prostate + fundus, dual-branch + DAGBA |
+| B | radius-aware thickness-conditioned observability-conditioned augmentation vessel DG 2025 2026 | 직접 명시 논문 없음 — Continuous-ONA gap 재확인 |
+| A | TSIAA instance-level Bezier transformation Yunpeng Cai IEEE TMI 2026 details | TSIAA 세부 확인: IIAG + IAM, adversarial teacher-student |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI Vol 45, pp 764-776, 2026)** ⚠️ P0 즉시 독해 필수
+- "Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation"
+- **핵심**: Instance-level Image Augmenter(IIAG) + Instance-level Augmentation Modules(IAMs) — Bézier 기반
+- "Compared to image-level adversarial augmentation, **instance-level adversarial augmentation breaks the uniformity of augmentation rules across different structures within an image**"
+- Teacher-Student adversarial framework: teacher explores out-of-source distribution, student learns domain-invariant
+- **내 방법과의 공통점**: "uniform augmentation은 안 된다" — image 내 다른 구조에 다른 aug 규칙 적용
+- **핵심 차이(확인 필요)**: TSIAA = "different structures" = 서로 다른 semantic class/instance 간 다른 aug 규칙 (cross-instance), 나 = 동일 vessel class 내 radius/observability에 따른 연속 조절 (intra-class)
+- IEEE TMI 출판으로 직접 경쟁 논문. 즉시 full text 확인으로 "instance" 정의 파악 필수.
+
+**MRFFD (Neurocomputing 2025, DOI: 10.1016/j.neucom.2025.130120)** ⚠️ P0
+- "Multi-Receptive Field Feature Disentanglement with Distance-Aware Gaussian Brightness Augmentation"
+- **DAGBA**: "dynamically adjusts brightness based on **distance from pixels to the foreground and image edges**"
+- 픽셀이 foreground 경계에서 얼마나 떨어져 있는지에 따라 brightness aug를 다르게 적용
+- **내 방법과의 공통점**: 공간적 위치에 따른 aug 강도 차별화 (위치-conditioned augmentation)
+- **핵심 차이**: DAGBA = foreground boundary에서의 거리 기반 (edge-proximity), 나 = vessel local radius 기반 (fragility/observability). DAGBA는 혈관 두께 개념 없음; 모든 foreground 픽셀에 boundary-distance를 동일 적용.
+- Neurocomputing (보조 venue), 직접 경쟁도는 Medium-High
+
+#### 방법론 신규 논문 (P1)
+
+**DG-TTA (Sensors 2025 Vol 25 Issue 17, arXiv 2312.06275)**
+- GIN 강도 증강 + SSC descriptor를 결합한 DG 사전 훈련 + test-time consistency adaptation
+- 3D CT/MRI (abdominal, spine, cardiac) 5 datasets
+- 내 nonlinear aug baseline(GIN 계열) 연구에서 baseline 참고 가능
+- Sensors = 보조 venue
+
+**GLP-SEG (IEEE TMI, Document ID: 11119233)**
+- Global+Local Prompt(GLP)로 domain-shared/domain-specific 지식 분리
+- Individualized domain adapter + ViT 기반 PVM
+- 내 방법과 paradigm 완전히 다름 (prompt-based vs. augmentation-based)
+- Related work 참고용
+
+#### Preprint 신규 논문 (P2)
+
+**WaveSDG (arXiv 2603.28463, March 2026)**
+- WISER module: wavelet sub-band 분해로 low-freq(anatomy) + high-freq(edge) 분리 증강
+- Fundus optic cup/disc SSDG
+- 새로운 wavelet-based SSDG 방향
+
+**TopoLoRA-SAM (arXiv 2601.02273, January 2026)**
+- SAM + LoRA + 공간 adapter + clDice for thin structure cross-domain binary segmentation
+- Retinal vessel (DRIVE/STARE/CHASE_DB1) + polyp + SAR
+- Only 5.2% params, best clDice on DRIVE/CHASE_DB1
+
+**Mamba-Sea (arXiv 2504.17515, April 2025)**
+- Mamba + global sequence aug + token sub-sequence style aug
+- First Mamba-based medical image DG approach
+- 의료영상 DG에서 Mamba 적용 트렌드 주목
+
+### Novelty Gap 재확인
+
+- **"radius-conditioned augmentation budget"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"observability-conditioned augmentation"** 키워드: 없음
+- **"intra-class vessel thickness-aware augmentation"** 키워드: 없음
+- TSIAA = 가장 위협적 논문이나 "instance" = cross-class level로 추정 → 확인 필요
+- MRFFD/DAGBA = boundary-distance, 나 = radius-conditioned → 다른 mechanism 확인됨
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA full text 즉시 독해: "instance-level"의 정확한 정의 파악 (cross-class vs. intra-class)
+- [ ] MRFFD full text: DAGBA의 정확한 수식 및 적용 방식 (boundary distance vs. radius)
+- [ ] ICLR 2026 accepted list 전수 탐색 (openreview.net에서 직접 확인)
+- [ ] CVPR 2026 accepted list (2026년 6월 이후 공개 예정) 탐색
+- [ ] "vessel diameter conditioned augmentation" 키워드 재탐색
+- [ ] Mamba 계열 DG 논문 추가 탐색 (2025-2026)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

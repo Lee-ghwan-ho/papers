@@ -22,6 +22,8 @@
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
+| ★★★ | **TSIAA** | **Run #8 신규** Teacher-Student Instance-Level Adversarial Augmentation for SDG (IEEE TMI Vol 45, pp 764-776, 2026). **Instance-level Bézier augmentation**: "breaks the uniformity of augmentation rules across different structures within an image"라고 명시. Teacher-Student adversarial framework으로 out-of-source distribution 탐색. 내 핵심 주장("uniform augmentation budget은 안 된다")과 방향 일치 — **즉시 full text 확인으로 "instance-level"의 정확한 정의와 내 방법과의 차이(intra-class radius conditioning)를 명확히 파악 필수**. IEEE TMI published. |
+| ★★★ | **MRFFD** | **Run #8 신규** Multi-Receptive Field Feature Disentanglement + Distance-Aware Gaussian Brightness Augmentation for SSDG (Neurocomputing 2025). **DAGBA**: "dynamically adjusts brightness based on distance from pixels to foreground and image edges" — 경계 거리 기반 위치별 aug 강도 조절. 내 방법과 유사한 "구조 위치에 따른 aug 강도 차별화"라는 방향. 차이: DAGBA = edge proximity (boundary-aware), 나 = vessel radius/observability (fragility-aware). 즉시 독해 필요. |
 
 ---
 
@@ -50,6 +52,8 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **DG-TTA** | **Run #8 신규** Out-of-Domain Medical Image Segmentation via GIN Augmentation + SSC Descriptor + TTA (Sensors 2025 Vol 25). GIN으로 intensity 변환 + SSC descriptor로 domain-invariant representation 학습, 이후 consistency-based TTA. 3D CT/MRI 5 datasets. 내 nonlinear aug baseline(GIN 계열) 비교 구성에서 참고할 수 있는 표준 baseline 논문. |
+| ★★ | **GLP-SEG** | **Run #8 신규** Enhancing Domain Generalization in Medical Image Segmentation With Global and Local Prompts (IEEE TMI 2025). Global+Local Prompt(GLP)로 domain-shared/domain-specific knowledge 분리, individualized domain adapter. ViT 기반 PVM을 DG에 활용. 내 방법과는 paradigm 다름(prompt-based vs. aug-based). baseline 비교군 및 related work 참고. |
 
 ---
 
@@ -78,6 +82,9 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **WAVESG** | **Run #8 신규** WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, March 2026). WISER module: low-freq(global anatomy) + high-freq edge enhancement. Optic cup/disc. 새로운 wavelet-SSDG 방향. |
+| ★ | **TOPOLORASAM** | **Run #8 신규** TopoLoRA-SAM: SAM+LoRA+clDice for thin structure cross-domain binary segmentation (arXiv 2601.02273, Jan 2026). 5 benchmarks: retinal vessel + polyp + SAR. Only 5.2% params. Topology-preserving foundation model adaptation. |
+| ★ | **MAMBA-SEA** | **Run #8 신규** Mamba-Sea: Mamba-based Framework with Global-to-Local Sequence Augmentation for DG in Medical Segmentation (arXiv 2504.17515, April 2025). Sequence-wise style augmentation for token sub-sequences. First Mamba-based medical DG method. |
 
 ---
 
