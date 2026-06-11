@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-11  
+> 총 수록 논문: 102편
 
 ---
 
@@ -57,6 +57,10 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| AD_DGCL | Multi-organ Medical Image Segmentation via Adaptive Disentangled Domain Generalization Collaborative Learning | Neurocomputing | 2025 | Published Journal Article | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| CQI | Color-Quality Invariance for Robust Medical Image Segmentation | arXiv | 2025 | Preprint Only | Low |
+| DDFP | DDFP: Data-dependent Frequency Prompt for Source Free Domain Adaptation of Medical Image Segmentation | Knowledge-Based Systems | 2025 | Published Journal Article | Low |
 
 ---
 
@@ -114,6 +118,8 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| GRINADAPT | GrInAdapt: Scaling Retinal Vessel Structural Map Segmentation Through Grounding, Integrating and Adapting Multi-device, Multi-site, and Multi-modal Fundus Domains | MICCAI 2025 | 2025 | Accepted Conference | Medium |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -178,3 +184,6 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| TOPOVST | TopoVST: Topology-fidelitous Vessel Skeleton Tracking (radius estimation + GNN) | 2603.14909 | 2026 |
+| CQI | Color-Quality Invariance for Robust Medical Image Segmentation | 2502.07200 | 2025 |
