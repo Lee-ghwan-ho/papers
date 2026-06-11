@@ -2,6 +2,99 @@
 
 ---
 
+## 2026-06-11 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-11
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Accepted Conference 1편 + Published Journal 2편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new | WaveSDG (arXiv 2603.28463) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new method | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class vessel radius thickness DG 2025 2026 | "radius-conditioned augmentation" 직접 명시 논문 여전히 없음 → gap 재확인 |
+| C | tubular structure segmentation topology thin vessel domain generalization CVPR ICCV ECCV NeurIPS 2025 2026 | TopoVST (arXiv 2603.14909) 발견 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift | CVPR 2026 미공개 확인 |
+| A | arXiv 2603.28463 WaveSDG "Decoupling Wavelet Sub-bands" SSDG fundus | WaveSDG 상세 확인: WISER 모듈, ISI 저자들 |
+| C | TopoVST "Topology-fidelitous Vessel Skeleton Tracking" arXiv 2603 tubular 2026 | TopoVST 상세 확인: multi-scale sphere graph + GNN + **radius 추정** |
+| A | ICLR 2026 openreview domain generalization segmentation augmentation | ICLR 2026 의료영상 DG 직접 히트 없음 |
+| A | arXiv June 2026 2606 domain generalization medical image segmentation new | 미공개 (2606 arXiv는 6월 중 업로드 진행 중) |
+| A | "observability" OR "visibility" conditioned augmentation vessel segmentation DG 2025 2026 | **직접 명시 논문 없음** → ONA gap 최종 재확인 |
+| A | WACV 2026 accepted domain generalization medical image segmentation | Human Knowledge Integrated SSDG (WACV 2026 Poster #325) 발견 — classification, 수록 제외 |
+| A | arXiv 2506 domain generalization medical image segmentation 2026 new MICCAI CVPR | 기존 목록 재확인 |
+| A | "color-quality invariance" robust medical image segmentation 2502.07200 | **CQI (arXiv 2502.07200)** 확인: DCIN + CQG loss, fundus SSDG |
+| A | AD-DGCL "adaptive disentangled domain generalization" multi-organ Neurocomputing 2025 | **AD-DGCL (Neurocomputing 2025)** 확인: SSRD + SCT + adaptive region-aware loss |
+| C | GrInAdapt source-free multi-target domain adaptation retinal vessel MICCAI 2025 | **GrInAdapt (MICCAI 2025, arXiv 2503.05991)** 확인: grounding+integrating+adapting |
+| C | arXiv 2602.23782 "breaking the data barrier" few-shot 3D vessel foundation models 2026 | **BREAK3DVESSEL (arXiv 2602.23782)** 확인: DINOv3 + 3D Adapter, Feb 2026 |
+| A | DDFP arXiv 2505.09927 data-dependent frequency prompt source-free DA medical segmentation | **DDFP (Knowledge-Based Systems 2025)** 확인: SFDA (target 필요, SSDG 아님) |
+| A | SLAug RASS ConStyX DCON 후속 2026 domain generalization follow-up | 기존 목록 재확인 |
+| D | NeurIPS 2025 ICLR 2026 domain generalization tubular vessel thin structure new | 직접 신규 없음 |
+| A | "augmentation strength" "augmentation budget" intra-class structure-specific DG 2025 2026 | **직접 명시 논문 없음** → ONA핵심 gap 재확인 |
+| A | MICCAI 2025 open access portal vessel brain domain shift new | GrInAdapt, Towards Robust Retinal (noise) 발견, GrInAdapt만 수록 |
+| Follow-up | AG-TAL DCON ArXiv WACV 2026 후속 탐색 | 직접 후속 없음 |
+
+### 핵심 신규 발견 요약
+
+#### Cat A — 직접 경쟁 신규 논문
+
+**WaveSDG (arXiv 2603.28463, March 2026)** — Preprint Only
+- Single-source DG for fundus segmentation via wavelet sub-band decomposition
+- WISER 모듈: 저주파(anatomy anchor) + 고주파(directional edge selective) 처리
+- optic cup/disc × 1 source, 5 unseen target datasets
+- **내 방법과의 차이**: WaveSDG = feature-level frequency separation (whole-image), 나 = pixel-level vessel radius-conditioned appearance aug. WaveSDG는 intra-class thin/thick vessel 구분 없음.
+
+**AD-DGCL (Neurocomputing 2025, Oct 2025)** — Published Journal
+- Multi-organ DG: SSRD(컨텐츠/스타일 dual encoder 분리) + SCT(style perturbation + consistency) + adaptive region-aware loss
+- **소기관 우선 loss weighting** (pixel frequency 기반) → 내 "작은 구조 우선" 동기와 방향 유사
+- **차이**: organ-level adaptive weighting, 나 = intra-vessel (single-class 내) radius별 augmentation budget. FLARE2024 Task 3 (semi-supervised multi-organ CT).
+
+**CQI (arXiv 2502.07200, Feb 2025)** — Preprint Only
+- Color-Quality Invariance for Robust Medical Image Segmentation
+- DCIN(Dynamic Color Image Normalization) + CQG(Color-Quality Generalization) loss
+- Fundus SSDG: high-quality → low-quality domain shift에 강인
+- 내 방법과 낮은 충돌 (color/quality shift vs. 나 = appearance nonlinearity)
+
+#### Cat C — 혈관·Tubular 특화 신규 논문
+
+**TopoVST (arXiv 2603.14909, March 2026)** — Preprint Only ⭐
+- Topology-fidelitous Vessel Skeleton Tracking
+- Multi-scale sphere graph + GNN: **vessel radius + tracking direction 동시 추정**
+- wave-propagation skeleton tracking: space-occupancy filtering으로 spurious skeleton 제거
+- **ONA 연결**: TopoVST가 명시적으로 추정하는 vessel radius = 내 observability score의 핵심 입력값. "radius를 명시적으로 측정해야 한다"는 전제 공유 → 내 동기 강화 가능.
+
+**GrInAdapt (MICCAI 2025, arXiv 2503.05991)** — Accepted Conference
+- Source-free Multi-Target Domain Adaptation for Retinal Vessel Segmentation
+- 3단계: Grounding(공통 anchor space 등록) → Integrating(다중 뷰 예측 통합) → Adapting(target DA)
+- Multi-device, multi-site, multi-modal (fundus + OCTA)
+- **차이**: Source-free DA (target data 필요), 나 = SSDG (target 불필요). 다른 problem setting.
+
+**BREAK3DVESSEL (arXiv 2602.23782, Feb 2026)** — Preprint Only
+- Robust Few-Shot 3D Vessel Segmentation using Foundation Models (DINOv3)
+- 3D Adapter + multi-scale 3D Aggregator + Z-channel embedding
+- 5 샘플로 Dice 43.42%, nnUNet 대비 +30%
+- 내 방법과 paradigm 다름 (few-shot foundation model vs. SSDG augmentation)
+
+### Novelty Gap 재확인 (Run #8)
+
+- **"vessel radius-conditioned augmentation"** / **"observability-conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음 ✅
+- **"thickness-conditioned augmentation budget"** for SSDG: 여전히 없음 ✅
+- **intra-class (single class 내) appearance augmentation budget 차별화**: WaveSDG, ADA, DCON 등 모두 image-level 또는 class-level 단위 → intra-class (vessel thickness별 연속 조절)은 여전히 내 고유 주장 ✅
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] MICCAI 2026 accepted list (7월 이후 공개 예정)
+- [ ] CVPR 2026 proceedings (6월 중 공개 예정)
+- [ ] arXiv 2606 (June 2026) 신규 논문: 현재 업로드 진행 중, 다음 Run에서 재탐색
+- [ ] ICLR 2026 proceedings 공식 공개 후 DG/augmentation 논문 탐색
+- [ ] TopoVST의 radius 추정 방법 상세 독해: GNN architecture + sphere graph radius output
+- [ ] WaveSDG 전문 독해: WISER 모듈의 주파수 분리 상세 + 타 fundus SSDG와 비교
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

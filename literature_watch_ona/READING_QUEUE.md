@@ -50,6 +50,8 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, March 2026). WISER 모듈: 저주파(global anatomy) + 고주파(directional edge) 분리. Optic cup/disc × 5 unseen target. Cat A 직접 경쟁. 차이: wavelet 기반 frequency separation (whole-image), 나 = vessel radius별 appearance aug. |
+| ★★ | **GRINADAPT** | **Run #8 신규** GrInAdapt: Scaling Retinal Vessel Structural Map Segmentation (MICCAI 2025, arXiv 2503.05991). Source-free multi-target DA: grounding → integrating → adapting 3단계. 多device 멀티모달 fundus. Cat C 혈관 DG. 설정 차이: source-free DA (target 필요), 나 = SSDG (target 불필요). |
 
 ---
 
@@ -78,6 +80,8 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **AD_DGCL** | **Run #8 신규** Multi-organ Medical Image Segmentation via Adaptive Disentangled DG Collaborative Learning (Neurocomputing 2025). SSRD(Semi-Supervised Representation Disentanglement) + SCT(Style-induced Consistency Training) + adaptive region-aware loss (small organ weighting). MICCAI FLARE2024 Task 3 실험. 내 방법과 관계: organ-level adaptive weighting → 나 = intra-vessel radius adaptive aug. 직접 충돌 없음. |
+| ★ | **TOPOVST** | **Run #8 신규** TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking (arXiv 2603.14909, March 2026). Multi-scale sphere graphs + GNN으로 **vessel radius 추정** + wave-propagation tracking. **ONA 반경 개념과 직접 연결**: TopoVST가 GNN으로 추정하는 vessel radius가 내 observability score의 대리 측정값. radius 추정 방법론 참고 가능. |
 
 ---
 
@@ -115,3 +119,5 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| CQI | **Run #8 신규** Color-Quality Invariance for Robust Medical Image Segmentation (arXiv 2502.07200, Feb 2025). DCIN(동적 색상 정규화) + CQG loss로 color/quality 불변 SSDG. fundus seg. 내 방법과 간접 참고 — 색상/품질 cue에 대한 shortcut 억제 관련. |
+| DDFP | **Run #8 신규** Data-dependent Frequency Prompt for Source-Free DA (Knowledge-Based Systems 2025, arXiv 2505.09927). Source-free DA = target 필요, SSDG 아님. BN 통계 재조정 + prompt learning. 내 설정과 다름. 간접 참고. |
