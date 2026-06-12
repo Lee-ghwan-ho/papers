@@ -2,6 +2,95 @@
 
 ---
 
+## 2026-06-12 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-12
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Published Journal 3편 + Accepted Conference 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | WaveSDG (arXiv 2603.28463) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new arXiv | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization 2025 2026 | DGSSA 재확인 (기존 인덱스) |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust accepted | ICLR 2026 탐색 시도 (미공개 확인) |
+| A | ICCV 2025 domain generalization medical segmentation augmentation robust structure new papers | 기존 목록 재확인 |
+| A | arXiv June 2026 domain generalization medical image segmentation augmentation vessel 2026 | 기존 목록 재확인 |
+| A/B | "decoupling wavelet" single source domain generalization fundus segmentation arXiv 2603.28463 | **WaveSDG (arXiv 2603.28463)** 상세 확인 |
+| A | "pixel-level disentanglement" "structure-aware single-source" domain generalization fundus optic disc | **PCSDG (Biomedical Signal Processing and Control 2025)** 발견 |
+| A | SLAug ConStyX RASS MoreStyle follow-up citation domain generalization 2026 | 기존 목록 재확인 |
+| B | MRFFD "distance-aware Gaussian" single source domain generalization medical image Neurocomputing 2025 | **MRFFD (Neurocomputing 2025)** 발견 — DAGBA: distance-to-foreground-based brightness aug |
+| C | GrInAdapt source-free multi-target domain adaptation retinal vessel MICCAI 2025 | **GrInAdapt (MICCAI 2025)** 확인: arXiv 2503.05991 |
+| A | "deep learning" "domain randomization" "image feature space" abdominal multiorgan segmentation Radiology AI 2025 2026 | **DOMAINRANDOM_RADAI (Radiology: AI 2025)** 발견: DOI 10.1148/ryai.240586 |
+| C | arXiv 2512.13977 XAI cerebrovascular segmentation domain shift RSNA TopCoW | **XAI_CEREBRO (arXiv 2512.13977)** 확인: Dec 2025 preprint |
+| B | MRFFD DAGBA "distance-aware Gaussian" "brightness augmentation" what is distance measure vessel | DAGBA = pixel ↔ foreground boundary distance 기반 brightness, NOT vessel radius |
+| A | ICLR 2026 accepted papers domain generalization augmentation segmentation medical imaging openreview | ICLR 2026 미공개 (탐색 불가) |
+| A | arXiv June 2026 2606 domain generalization augmentation segmentation medical image new | 추가 신규 논문 미발견 |
+| D | CVPR 2025 ICCV 2025 counterfactual augmentation hard example generation shape bias robust segmentation | Generative Hard Example Aug (CVPR 2025, point cloud, 낮은 관련성) 확인 |
+| A | single source domain generalization medical image segmentation 2026 new method arXiv May June published | 기존 목록 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**MRFFD + DAGBA (Neurocomputing 2025)**
+- Distance-Aware Gaussian Brightness Augmentation: pixel ↔ foreground 경계 거리 기반으로 brightness를 Gaussian 형태로 조절
+- **내 방법과의 표면적 유사성**: "spatial distance를 conditioning variable로 사용한 structure-conditioned augmentation"
+- **핵심 차이 확인**: DAGBA = boundary-distance conditioning for brightness, 나 = intra-vessel-radius conditioning for nonlinear appearance. 목적/mechanism/conditioning variable 모두 다름.
+- Novelty 위협도: Medium. Related work에서 반드시 구분 언급 필요.
+
+**PCSDG + SABA (Biomedical Signal Processing and Control 2025)**
+- Structure-Aware Brightness Augmentation: anatomy 보존하며 brightness diversity 증폭
+- **내 방법과의 공통점**: "structure-aware aug for SSDG" 키워드
+- **핵심 차이**: optic disc/cup class-level boundary 보존, 내 방법은 vessel intra-class radius conditioned. 다른 structure 단위.
+
+#### 방법론 유사 논문
+
+**WaveSDG (arXiv 2603.28463, March 2026)**
+- Wavelet sub-band 분해로 encoder feature에서 anatomy-appearance 분리
+- 방향 유사 (structure-appearance separation for SSDG) but mechanism 완전히 다름
+- Fundus optic disc/cup 특화, 혈관 아님
+
+#### 혈관 특화
+
+**GrInAdapt (MICCAI 2025)**
+- Retinal vessel structural map segmentation with source-free multi-target adaptation
+- Domain adaptation paradigm → 내 SSDG와 다른 설정
+
+**XAI_CEREBRO (arXiv 2512.13977)**
+- Cerebrovascular segmentation에서 domain generalization failure의 XAI 분석
+- spurious correlation이 domain shift에서 attention을 real vessels에서 멀어지게 함
+- 내 연구의 motivation 강화에 활용 가능 ("기존 모델의 취약성, 특히 thin vessel")
+
+#### 방법론 참고
+
+**DOMAINRANDOM_RADAI (Radiology: AI 2025)**
+- Image + feature combined domain randomization in nnU-Net for CT+MRI
+- 내 uniform baseline 구성 맥락 참고
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: MRFFD/DAGBA = boundary-distance conditioning이나, vessel radius conditioning 아님
+- **"intra-class vessel thickness augmentation"**: 여전히 직접 다룬 논문 없음
+- **내 핵심 gap 유지**: vessel foreground 내 local radius → augmentation strength mapping (continuous, nonlinear)
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] MRFFD 전문 독해: DAGBA distance 계산 공식 상세 (skeleton distance vs. Euclidean to nearest foreground pixel?)
+- [ ] PCSDG 전문 독해: SABA의 구체적 구현 방식 및 "structure-awareness" 정의
+- [ ] ICLR 2026 DG/augmentation 관련 논문 — openreview.net 직접 접근 시도
+- [ ] CVPR 2026 accepted list 탐색 (현재 미공개 상태)
+- [ ] "vessel radius conditioned augmentation" OR "observability-weighted" augmentation 키워드 재탐색
+- [ ] Radiology: AI journal 2025-2026에서 추가 DG 관련 논문 탐색
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
