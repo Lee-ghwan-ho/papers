@@ -29,6 +29,10 @@
 
 | 우선순위 | KEY | 이유 |
 |---------|-----|------|
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, March 2026). WISER 모듈이 wavelet sub-band를 통해 anatomy(저주파)와 appearance(고주파)를 명시적으로 분리. Continuous-ONA와 동일한 "구조-외양 분리" 동기를 가지나 mechanism이 완전히 다름 (feature-space frequency vs. input-space radius-conditioned augmentation). 내 방법의 conceptual parallel이자 비교 후보. |
+
+| 우선순위 | KEY | 이유 |
+|---------|-----|------|
 | ★★ | **ANGIODG** | Vessel segmentation SSDG 직접 경쟁. Channel-informed feature reweighting. arXiv:2511.17724 |
 | ★★ | **STYCONA** | Content+Style decomposition aug. 유사 구조 포함. arXiv:2502.20619 |
 | ★★ | **HESSIAN_VF** | Hessian-based vessel DG. 내 observability 계산 근거로 사용 가능. MedIA 2024. |
@@ -54,6 +58,12 @@
 ---
 
 ## P2 — 중간 우선순위 (방법 구현 참고)
+
+| 우선순위 | KEY | 이유 |
+|---------|-----|------|
+| ★ | **VESSELTTOK** | **Run #8 신규** VesselTok (arXiv 2603.18797). Centerline + pseudo-radius 인코딩으로 혈관 그래프를 latent token으로 표현, anatomy/modality 간 전이 가능. **내 ONA의 핵심 가정인 "vessel radius = domain-invariant signal"을 독립적으로 지지하는 empirical 증거**. 내 방법 동기 강화에 활용 가능. |
+| ★ | **VESSELPOSE** | **Run #8 신규** VesselPose (arXiv 2605.00538). Voxel-wise direction vectors + TEASAR로 vascular graph 추출. False-split/false-merge topology metric 도입. **내 thin vessel DG 평가에서 Dice 외에 false-split 지표 추가 가능** — evaluation protocol 강화용. |
+| ★ | **TUBEMLLLM** | **Run #8 신규** TubeMLLM (arXiv 2603.09217). MLLM + 자연어 topology priors for vessel seg. Zero-shot cross-modality transfer (fundus→XCA). Betti number β₀ error metric. Foundation model 기반 DG 접근법으로 내 방법과 paradigm 비교용. |
 
 | 우선순위 | KEY | 이유 |
 |---------|-----|------|
