@@ -2,6 +2,99 @@
 
 ---
 
+## 2026-06-13 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-13
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2026-06 신규 (arXiv 2606.XXXXX), 보조: late May 2026 catch-up
+- 신규 발견: **5편** (Preprint 5편 — WAVESDG/TUBEMLLLM/VESSELTTOK/VESSELPOSE/ASFOSDA)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv June | ASFOSDA(2606.08749) 발견 — domain adaptation, 낮은 관련성 |
+| A | domain generalization vessel segmentation cerebrovascular TOF-MRA arXiv 2606 | 직접 hit 없음 |
+| A | SSDG medical image segmentation appearance augmentation MICCAI 2026 new | MICCAI 2026 아직 미공개 |
+| A | arXiv 2606 domain generalization medical segmentation augmentation | ASFOSDA 재확인 |
+| A | single domain generalization style augmentation intensity June 2026 | 직접 신규 없음 |
+| B | structure-conditioned augmentation domain generalization medical image 2026 | 직접 신규 없음 |
+| B | class-wise augmentation strength adaptive perturbation segmentation DG 2026 | 직접 신규 없음 |
+| B | observability-conditioned augmentation vessel radius medical segmentation 2026 | 직접 신규 없음 (Continuous-ONA gap 유지) |
+| B | SLAug ConStyX follow-up citing paper 2026 new | 신규 follow-up 없음 |
+| B | ADA MICCAI 2025 Bezier remap adaptive augmentation follow-up 2026 | 신규 follow-up 없음 |
+| C | vessel segmentation domain generalization topology 2026 arXiv June | WAVESDG(2603.28463) 발견 — late March 2026 catch-up |
+| C | tubular structure segmentation thin vessel DG 2026 CVPR ICCV MICCAI | **TUBEMLLLM(2603.09217)** 발견 |
+| C | arXiv 2605 2026 vessel segmentation topology graph | **VESSELPOSE(2605.00538)** 발견 |
+| C | arXiv 2603 vessel representation radius encoding generative | **VESSELTTOK(2603.18797)** 발견 |
+| C | arXiv 2606 vessel segmentation brain retinal coronary artery | LightVesselNet(2606.05354) 발견 — 낮은 관련성, 미수록 |
+| C | VesselMorph HESSIAN_VF follow-up retinal vessel generalization 2026 | 직접 후속 없음 |
+| C | clDice topology vessel segmentation follow-up new 2026 | 기존 목록 재확인 (FlowAxis 이미 인덱싱) |
+| D | CVPR 2026 accepted papers domain generalization segmentation | DG-EBF Workshop 확인 (특정 신규 논문 미확인) |
+| D | NeurIPS ICLR ICML AAAI 2026 DG augmentation medical vessel | 직접 신규 없음 (대부분 proceedings 미공개) |
+| D | arXiv 2606 CVPR ICCV NeurIPS domain generalization robust segmentation 2026 | 직접 신규 없음 |
+| Follow-up | SLAug TPAMI 2023 citing 2026 new vessel domain generalization | 신규 citing 논문 없음 |
+| Follow-up | RASS random amplitude spectrum MICCAI 2024 citation 2026 | 신규 citation 없음 |
+| Follow-up | vesselFM foundation model blood vessel follow-up 2026 | VESSELTTOK이 관련성 있으나 직접 후속 아님 |
+| Follow-up | DomainDrop domain-sensitive feature suppression 2026 | 후속 없음 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**WAVESDG (arXiv 2603.28463, March 31, 2026)**
+- SSDG를 위한 wavelet sub-band 기반 structure-appearance 분리
+- WISER 모듈: 저주파 = 해부학 앵커, 고주파 = 엣지 디테일 강화, 노이즈 억제
+- **내 방법과의 공통점**: "구조(anatomy)와 appearance를 분리하여 SSDG 개선"이라는 동일한 동기
+- **핵심 차이**: WaveSDG = feature-space frequency decomposition (파장 대역별 역할 분리); Continuous-ONA = input-space augmentation strength conditioning by local vessel radius (공간적 연속 조절)
+- WaveSDG는 intra-class 구조 이질성(thin vs. thick vessel)을 다루지 않음
+- 2D fundus disc/cup segmentation vs. 내 3D TOF-MRA 혈관 — 서로 다른 modality/task
+- **Novelty 위협도**: Medium — 개념적으로 유사하나 mechanism 완전히 다름
+
+#### 방법론 인접 논문
+
+**VESSELTTOK (arXiv 2603.18797, March 2026)**
+- Centerline + pseudo-radius로 혈관 그래프를 latent token으로 인코딩
+- Pseudo-radius encoding이 anatomy/modality 간 전이를 가능하게 함
+- **내 방법에 대한 함의**: vessel radius가 domain-invariant한 stable geometric attribute임을 지지하는 독립적 증거
+
+#### 혈관 특화 신규 논문
+
+**TUBEMLLLM (arXiv 2603.09217, March 13, 2026)**
+- MLLM + 자연어 prompted topology priors for vessel segmentation
+- Zero-shot cross-modality transfer (fundus → X-ray angiography Dice 67.50%)
+- Betti number error β₀를 topology metric으로 사용
+
+**VESSELPOSE (arXiv 2605.00538, May 1, 2026)**
+- Voxel-wise direction vectors → TEASAR 기반 vascular graph extraction
+- False-split/false-merge 위상 metric 도입 — Dice보다 tubular structure에 적합
+- **내 방법에 대한 함의**: thin vessel evaluation에 false-split 지표 추가 가능
+
+#### 낮은 관련성 arXiv 2606 신규 논문
+
+**ASFOSDA (arXiv 2606.08749, June 7, 2026)**
+- Active source-free domain **adaptation** (not generalization) for open-set medical seg
+- 관련성 낮음 — paradigm 자체가 다름 (test-time adaptation vs. training-time SSDG)
+
+### Novelty Gap 재확인
+
+- **"radius-conditioned augmentation budget"** / **"observability-conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"vessel thickness-conditioned augmentation strength"**: 여전히 없음
+- WaveSDG가 가장 유사한 motivation을 가지나 mechanism이 완전히 다름 → **Continuous-ONA core gap 유지**
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] WAVESDG 전문 독해: WISER 모듈 구현 상세 및 fundus disc/cup 실험 결과
+- [ ] VESSELTTOK: pseudo-radius 계산 방식 상세 (내 ONA radius 계산과 비교)
+- [ ] VESSELPOSE: false-split/false-merge metric 정의 상세 (내 evaluation에 추가 가능성)
+- [ ] TUBEMLLLM: TubeMData benchmark 데이터 접근 가능성
+- [ ] MICCAI 2026 submission deadline/notification 확인 (내 논문 제출 일정)
+- [ ] DG-EBF Workshop @ CVPR 2026 proceedings 공개 후 재탐색
+- [ ] ICLR 2026 / ICML 2026 proceedings 공개 후 DG/augmentation 논문 탐색
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
