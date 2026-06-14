@@ -2,6 +2,120 @@
 
 ---
 
+## 2026-06-14 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-14
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **9편** (Published Journal 6편 + Accepted Conference 1편 + Official Proceedings 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | WaveSDG (arXiv 2603.28463) 발견, INVCAUSAL→WACV 2025 재확인 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular 2026 new arXiv IEEE TMI | 기존 목록 재확인 |
+| B | structure-aware region-conditioned augmentation medical image segmentation domain generalization 2026 | **AD-DGCL** (Neurocomputing 2025) 발견 — adaptive region-specific loss for small organs |
+| A | arXiv 2603.28463 "decoupling wavelet sub-bands" SSDG fundus segmentation | **WaveSDG** 상세 확인: WISER module, wavelet sub-band decomposition for anatomy-appearance decoupling |
+| A/B | "Universal Frequency Domain Perturbation" single-source domain generalization ICLR 2026 | **UniFreqSDG (ACM MM 2024)** 확인: LSP + CPR + ADI, Dice +7.47% on fundus |
+| A | adaptive disentangled domain generalization collaborative learning Neurocomputing 2026 | **AD-DGCL** 상세 확인: SSRD + SCT modules, adaptive region-specific loss, Oct 2025 |
+| A | arXiv 2502.07200 "color-quality invariance" robust medical image segmentation | **CQI** 확인: DCIN + CQG loss for color/quality variance SSDG |
+| B | "distance-aware gaussian brightness" "multi-receptive field" single source domain generalization Neurocomputing 2025 | **MRFD-DAGBA** 발견: ⚠️ Distance-Aware Gaussian Brightness Augmentation for SSDG → P0 novelty check |
+| B | "structure-aware brightness augmentation" SABA PCSDG optic disc cup SSDG pixel disentanglement | **PCSDG** 확인: Pixel-level Contrastive SDG + SABA for fundus OD/cup |
+| C | arXiv 2506.16556 VesselSDF distance field priors vascular reconstruction MICCAI 2025 | **VesselSDF (MICCAI 2025)** 확인: SDF regression for vessel reconstruction, Paper 2121 |
+| A | "style randomization" "style normalization" retinal image segmentation cross-domain generalization 2025 | **RETSTYNORM** (Image and Vision Computing 2025) 발견: LAB style randomization + channel feature normalization |
+| D | "causal inference" style bias deconfounding domain generalization TPAMI 2025 | **SDCL (IEEE TPAMI 2025)** 확인: SCM + backdoor adjustment for style deconfounding DG |
+| A | arXiv June 2026 domain generalization medical image segmentation vessel 2606 | ASFDA-OS (2606.08749) 발견 — domain adaptation (not DG), 낮은 관련성, 미수록 |
+| A | "radius-conditioned" OR "thickness-conditioned" augmentation vessel domain generalization 2025 2026 | **직접 명시 논문 여전히 없음** → Continuous-ONA gap 재확인 |
+| Follow-up | MICCAI 2025 open access vessel cerebrovascular augmentation domain generalization new | 기존 목록 재확인 (ISAC, MBFCV, VesselSDF 확인) |
+| Follow-up | SLAug follow-up citation vessel SSDG 2025 2026 | AAAI 2023 확인 (SLAug 원 venue = AAAI not TPAMI → 인덱스 discrepancy 발견, 수정 금지) |
+| Follow-up | NeurIPS 2025 proceedings DG augmentation medical segmentation | GRAPHSEG 재확인, NeurIPS 2025 전체 탐색 (papers.cool 접근 불가) |
+
+### 핵심 신규 발견 요약
+
+#### ⚠️ 최우선 주의 논문 (Novelty 충돌 가능성)
+
+**MRFD-DAGBA (Neurocomputing 2025)** — DOI: 10.1016/j.neucom.2025.130120
+- **Distance-Aware Gaussian Brightness Augmentation (DAGBA)**: 공간적 거리 정보를 활용해 밝기 증강의 패턴을 결정하는 방법
+- Multi-Receptive Field Feature Disentanglement(MRFFD): 다중 커널 크기로 style/structure feature 분리
+- 내 방법과의 잠재적 충돌: "distance-aware"라는 개념이 vessel radius / observability 기반 augmentation 조절과 연결될 수 있음
+- **그러나**: DAGBA의 "distance"는 이미지 공간 내 거리 (아마도 image center에서의 거리 또는 tissue boundary에서의 거리)로 brightness pattern을 생성하는 것으로 보임 — 이는 내 vessel radius 기반 augmentation budget과는 다른 mechanism임
+- 핵심 차이 가설: DAGBA = 이미지 전체의 spatial brightness variation 시뮬레이션, 나 = 혈관 구조 관찰 가능성에 따른 augmentation strength 조절 (같은 이미지 내에서도 혈관마다 다른 강도)
+- **즉시 독해 필수**: DAGBA의 정확한 "distance" 정의가 vessel-level인지 image-level인지 확인
+
+**PCSDG (Biomedical Signal Processing and Control 2025)** — DOI: 10.1016/j.bspc.2024.106801
+- **Structure-Aware Brightness Augmentation (SABA)**: annotation-guided saliency map을 이용해 structure 영역에서 brightness 변환 조절
+- 내 방법과의 공통점: "annotation을 활용해 structure-aware brightness augmentation"
+- **핵심 차이**: PCSDG의 SABA = optic disc와 cup의 class-level binary region (disc vs. non-disc), 나 = 혈관 foreground 내 연속적 radius별 조절. PCSDG는 intra-class 구조 이질성 개념 없음.
+
+#### 최고 티어 신규 논문
+
+**SDCL (IEEE TPAMI 2025)** — arXiv: 2503.16852
+- Style Deconfounding Causal Learning: SCM(구조인과모델) + backdoor adjustment로 style confounding 제거
+- Style-guided Expert Module (SGEM): style clustering 기반 expert 할당 (no domain labels 필요)
+- 자연영상 DG, medical image 아님 — 하지만 TPAMI 수준의 causal DG 이론적 기여
+- 내 방법의 "shortcut suppression" 관점 강화에 활용 가능: augmentation으로 style shortcuts 제거
+
+#### 구조·혈관 특화 신규 논문
+
+**VesselSDF (MICCAI 2025, Paper 2121)** — arXiv: 2506.16556
+- Vessel segmentation을 continuous SDF regression으로 재정의
+- SDF는 vessel surface까지의 거리를 자연스럽게 인코딩 → vessel radius 개념과 수학적으로 연결
+- Adaptive Gaussian regularizer: vessel surface에서 먼 영역은 smooth, 가까운 영역은 precise
+- 내 observability 측정의 대안적 공식화로 참고 가능 (SDF 기반 radius 추정)
+- Domain generalization이 아닌 reconstruction task — 직접 경쟁 없음
+
+#### 방법론적 신규 논문
+
+**UniFreqSDG (ACM Multimedia 2024)** — DOI: 10.1145/3664647.3681536
+- Learnable Spectral Perturbation(LSP) + Content-Preserving Recombination(CPR) + Adaptive Domain Intervention(ADI)
+- Fundus +7.47%, Prostate +4.99% Dice improvement over SOTA SSDG
+- 내 방법과 겹치지 않음 (frequency-domain global perturbation, 나 = structure-specific nonlinear aug)
+- ADA, ConStyX와 같은 competition pool에 추가해야 할 직접 경쟁 방법
+
+**WaveSDG (arXiv 2603.28463, March 2026)**
+- Wavelet-based Invariant Structure Extraction and Refinement (WISER) module
+- LL sub-band: global structural context (anatomy), LH/HL: edges, HH: noise/artifacts
+- SSDG에서 anatomy-appearance decoupling을 wavelet domain에서 수행
+- WaveRNet (2601.05942)과 유사한 방향이지만 wavelet sub-band 역할을 명시적으로 분리
+
+**RETSTYNORM (Image and Vision Computing Aug 2025)**
+- LAB 색공간에서 style randomization (scaling) + channel-wise style normalization
+- Retinal vessel/OD/cup/exudate 4개 task에서 평가
+- 내 방법과 직접 충돌 없음 (global color aug, 나 = structure-specific nonlinear intensity)
+
+**AD-DGCL (Neurocomputing Oct 2025)**
+- Semi-supervised setting에서 disentanglement + style-induced consistency training
+- adaptive region-specific loss: pixel frequency 기반 소기관 가중치 조절
+- 내 방법과 달리 semi-supervised + multi-organ (혈관 아님)
+
+### Novelty Gap 재확인
+
+- **"radius-conditioned augmentation"** 또는 **"observability-conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"thickness-conditioned augmentation"**: 역시 없음
+- MRFD-DAGBA의 "distance-aware" 메커니즘이 가장 가까운 선행 개념이지만, vessel radius/centerline 기반이 아닌 image-level spatial brightness variation으로 추정됨
+- **내 핵심 gap 유지**: intra-class vessel radius → continuous augmentation budget mapping (SSDG context)
+
+### SLAug 인덱스 discrepancy 메모
+
+- 검색 결과: SLAug 원 venue = AAAI 2023 (ojs.aaai.org/index.php/AAAI/article/view/25332 확인)
+- MASTER_PAPER_INDEX에는 "TPAMI 2023"으로 기록되어 있음
+- 이는 AAAI conference paper의 TPAMI extended journal version이 있을 가능성 OR 인덱싱 오류
+- **수정 금지 원칙** 유지 (기존 항목 수정 안 함): 이 로그에만 기록
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] MRFD-DAGBA 전문 독해: DAGBA의 정확한 "distance" 정의 — vessel centerline 기반인지 이미지 공간 기반인지 확인 (P0 필수)
+- [ ] PCSDG 전문 독해: SABA의 saliency map 생성 방식 — distance transform 기반인지 확인
+- [ ] UniFreqSDG 전문 독해: LSP의 learnable frequency radius 파라미터가 내 observability 개념과 겹치는지 확인
+- [ ] VesselSDF: SDF를 vessel radius 추정에 활용하는 방식 → 내 observability 계산 alternative 검토
+- [ ] ICLR 2026 accepted papers 공식 목록 (openreview.net 직접 탐색 필요)
+- [ ] AAAI 2026 accepted papers 중 의료영상 DG 추가 탐색
+- [ ] NeurIPS 2025 medical DG 논문: GRAPHSEG 외 추가 논문 여부 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
