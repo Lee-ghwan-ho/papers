@@ -2,6 +2,96 @@
 
 ---
 
+## 2026-06-15 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-15
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 2편 + Accepted Conference 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI | WaveSDG(2603.28463) 발견, TSIAA 단서 확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new method arXiv | 기존 목록 재확인 |
+| B | structure-aware augmentation nonlinear intensity transformation domain generalization medical segmentation 2025 2026 | 기존 목록 재확인, ADA 재확인 |
+| A | TSIAA "teacher-student" "instance-level adversarial" "Bezier" IEEE TMI 2026 | **TSIAA (IEEE TMI 2026)** 확인: Vol 45 pp.764-776 |
+| A | arXiv 2603.28463 "Decoupling Wavelet Sub-bands" single source domain generalization fundus | **WaveSDG** 상세 확인: WISER module, wavelet LL/LH/HL/HH 분리 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift accepted papers | CVPR 2026 accepted list 미공개 |
+| D | NeurIPS 2025 medical image segmentation domain generalization augmentation new accepted paper | **CDG(NeuralLio, NeurIPS 2025)** 발견, arXiv 2505.13519 |
+| A | MICCAI 2025 single source domain generalization vessel segmentation new paper 2025 | GrInAdapt(domain adaptation, 제외), ISAC 재확인 |
+| B | "augmentation strength" OR "augmentation budget" region-adaptive structure-aware domain generalization 2025 2026 | 기존 목록 재확인, ONA gap 유지 확인 |
+| A | uncertainty guided augmentation domain generalization segmentation 2025 2026 medical image | **Aegis (Pattern Recognition 2025)** 발견: DAFC + UFA loss |
+| C | airway coronary artery retinal vessel thin structure segmentation domain shift generalization new 2026 | **RLAD(arXiv 2503.01190)** 발견: layout-aware generative modelling for retinal vessel DG |
+| A | "DG-TTA" "out-of-domain" medical image segmentation Sensors 2025 | DG-TTA(Sensors 2025) 확인 — 다중 소스 설정이라 SSDG 아님, 제외 |
+| B | CoSAM "Self-Correcting SAM" domain generalization medical segmentation MICCAI venue | CoSAM(arXiv 2411.10136) — Preprint Only, 기존 목록 제외 유지 |
+| A | SLAug follow-up citation 2026 domain generalization medical 2025 2026 | 기존 목록 재확인, 후속 논문 없음 |
+| C | retinal vessel segmentation domain generalization 2026 new arXiv MICCAI IEEE TMI MedIA paper | WaveRNet(WAVERNETV) 재확인, SDM-ISBI2026 lead 확인 어려움 |
+| D | ICCV 2025 medical image segmentation all papers domain generalization augmentation open access | 기존 목록 재확인 (ADAL, TOPOTTA, HARMONYSEG 등) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** — ⚠️ P0 즉시 독해 필요
+- "Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation"
+- Published: IEEE Transactions on Medical Imaging, Vol. 45, pp. 764-776, 2026
+- IEEE Xplore: DOI 10.1109/TMI.11146907
+- 핵심: Instance-level Image Augmenter (IIAG) + learnable constrained Bézier transformation → per-sample adversarial augmentation
+- 문제의식: 기존 adversarial aug은 image-level (단순 구조) → over-augmentation 문제 → instance-level로 해결
+- **내 방법과의 차이**: TSIAA = 이미지 전체를 대상으로 adversarial hard example 생성 (intra-image 구조 구분 없음). 나 = 동일 이미지 내에서 vessel radius별로 augmentation budget을 연속적으로 달리 적용 (thick 혈관: 강함, thin 혈관: 약함). TSIAA는 "label-image inconsistency for fragile vessels" 문제를 다루지 않음.
+- 실험: prostate(6 centers) + fundus(4 centers) — 내 cerebrovascular/TOF-MRA 도메인 아님
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463, March 2026)** — P1
+- "Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation"
+- 핵심: WISER module이 wavelet sub-band (LL=구조, LH/HL=에지, HH=노이즈)를 각 semantic role에 따라 처리
+- LL sub-band = 해부학적 레이아웃 보존 / HH sub-band = 도메인 노이즈 포함
+- 방향: frequency(wavelet) 분해로 anatomy-appearance 분리 → 내 방법과 다른 mechanism (radius vs. wavelet)
+- Preprint Only (arXiv 2603.28463)
+
+**Aegis (Pattern Recognition 2025)** — P1
+- "Aegis: A Domain Generalization Framework for Medical Image Segmentation by Mitigating Feature Misalignment"
+- Published: Pattern Recognition, ScienceDirect (September 5, 2025)
+- 핵심: style aug → augmented features 생성 → Dual Attention Feature Calibration (DAFC) → uncertainty-guided feature alignment (UFA) loss
+- 내 방법과의 차이: Aegis = feature-space 정렬 (image-level style aug + feature-space constraint), 나 = input-space augmentation budget 공간적 조절
+- 실험: prostate, fundus, cardiac
+
+#### 혈관 특화 신규 논문
+
+**RLAD (arXiv 2503.01190, March 2025)** — P2
+- "Enhancing Retinal Vessel Segmentation Generalization via Layout-Aware Generative Modelling"
+- 핵심: diffusion model에 retinal layout (A/V, optic cup/disc 등) 조건을 결합하여 diverse synthetic retinal image 생성 → DG 강화
+- 성능: 최대 +8.1% on vessel seg cross-domain
+- Preprint Only
+
+#### Top-tier Vision
+
+**CDG (NeurIPS 2025, arXiv 2505.13519)** — P2
+- "Continuous Domain Generalization"
+- 핵심: NeuralLio (Neural Lie Transport Operator) — Lie Group theory로 parameter manifold를 기하학적 연속성 보존하며 이동
+- 의료영상 아님 (remote sensing, traffic 등)
+- "연속적 도메인 변화"라는 추상 개념에서 내 "continuous observability" 아이디어와 철학적 공명
+
+### Novelty Gap 재확인
+
+- **"intra-image radius-conditioned augmentation budget"** 개념: Run #8에서도 직접 명시 논문 없음
+- **TSIAA의 instance-level Bézier**: 여전히 이미지 전체에 single augmentation strength → intra-image spatial variation 없음
+- **내 핵심 gap 유지**: thick vs. thin vessel에 서로 다른 augmentation budget을 연속적으로 적용하는 방법 = 미발견
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: ADA (MICCAI 2025)와 TSIAA의 차이점 상세 (둘 다 Bézier, 무엇이 다른가?)
+- [ ] WaveSDG 전문 독해: WISER module의 wavelet feature weighting 방식 상세
+- [ ] CVPR 2026 proceedings 공개 시 DG 관련 논문 탐색 (현재 미공개)
+- [ ] MICCAI 2026 submission 결과 (August 2026 예정)
+- [ ] Aegis와 DCON 비교: 둘 다 Pattern Recognition 2025 SSDG — 실험 overlap 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
