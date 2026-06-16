@@ -50,6 +50,9 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, March 2026). WISER 모듈로 저주파(global anatomy) + 고주파(directional edges + noise)를 분리 처리. Optic disc/cup 5 unseen domains에서 7개 SOTA 능가. 내 방법과의 차이: WAVESDG = 전체 이미지 주파수 분해 (domain-specific = high-freq noise), 나 = 동일 이미지 내 vessel radius별 augmentation budget 조절. 두 방법 모두 SSDG이지만 augmentation 축이 다름. |
+| ★★ | **SDCL** | **Run #8 신규** Causal Inference via Style Bias Deconfounding for Domain Generalization (IEEE TPAMI 2025, arXiv 2503.16852). SCM으로 style을 confound로 모델링, SGEM+BDCL 모듈로 backdoor adjustment. 자연영상+의료영상 DG 모두 SoTA. **내 causal DG 논거 지원**: "style confound 효과가 관찰 가능성 낮은 구조에서 더 강하다"는 causal narrative에 인용 가능. IEEE TPAMI = 최고 tier. |
+| ★★ | **VESSELSDF** | **Run #8 신규** VesselSDF: Distance Field Priors for Vascular Network Reconstruction (MICCAI 2025, arXiv 2506.16556). SDF 기반 연속 혈관 기하 표현. **핵심**: SDF value가 vessel surface까지의 거리 = vessel radius proxy. 내 observability score 계산에 대안적 방법 (centerline EDT 대신 SDF 사용 가능성). 내 방법은 DG augmentation이고 이 논문은 reconstruction이지만 SDF 기반 radius 표현 참고. |
 
 ---
 
@@ -78,6 +81,8 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **UVSM** | **Run #8 신규** Universal Vessel Segmentation for Multi-Modality Retinal Images (IEEE TIP 2025, arXiv 2502.06987). Image translation → Topcon CF normalization으로 modality-agnostic vessel seg. 내 방법과 paradigm 다름 (translation-based vs. aug-based SSDG). Retinal vessel DG 최신 TIP 논문. |
+| ★ | **XAI_DX** | **Run #8 신규** XAI-Driven Diagnosis of Generalization Failure in State-Space Cerebrovascular Segmentation Models (arXiv 2512.13977, Dec 2025). UMamba RSNA→TopCoW Dice 0.86→0.29. Z-resolution + background noise = 주요 confound. 방법 논문 아님이지만 TOF-MRA/CT cerebrovascular domain shift 실증 데이터로 내 동기 지지에 활용. |
 
 ---
 

@@ -2,6 +2,102 @@
 
 ---
 
+## 2026-06-16 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-16
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 2편 + Accepted Conference 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | WAVESDG (2603.28463) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 arXiv new | 기존 목록 재확인 |
+| B | structure-conditioned augmentation observability-aware vessel radius domain generalization 2025 2026 | 기존 목록 재확인, Continuous-ONA gap 유지 |
+| A | "Decoupling Wavelet Sub-bands" SSDG fundus segmentation arXiv 2603 | WAVESDG 상세 확인: WISER module, optic disc/cup 5 unseen target domains |
+| A | arXiv 2603.12369 "human knowledge integrated multi-modal" SSDG | GenEval (arXiv 2603.12369) 확인 — DR grading/fMRI 분류, 수록 보류 |
+| A | arXiv June 2026 domain generalization medical image segmentation vessel new | XAI_DX (2512.13977) 발견 — cerebrovascular DG failure diagnosis |
+| A | arXiv 2512.13977 XAI "generalization failure" cerebrovascular segmentation TopCoW | XAI_DX 상세 확인: UMamba RSNA→TopCoW Dice 0.86→0.29, XAI diagnosis |
+| B | adaptive augmentation strength intra-class structure conditional medical DG 2025 2026 | 기존 목록 재확인, "augmentation budget" gap 유지 |
+| C | arXiv 2506 June 2026 tubular vessel thin structure domain generalization new paper | VesselSDF (2506.16556) 발견 — MICCAI 2025, SDF prior for vessel reconstruction |
+| C | VesselSDF MICCAI 2025 distance field vascular reconstruction Edinburgh 2506.16556 | VesselSDF 공식 확인: papers.miccai.org/miccai-2025/1003-Paper2121.html |
+| C | UVSM "universal vessel segmentation" multi-modality retinal images IEEE TIP 2025 | UVSM (2502.06987) 확인: IEEE TIP 2025 published, modality-agnostic retinal vessel |
+| D | arXiv 2503.16852 "style bias deconfounding" causal inference domain generalization | SDCL 상세 확인: IEEE TPAMI published (IEEE Xplore 11344809), SCM+backdoor adjustment |
+| D | CVPR 2026 medical image segmentation domain generalization augmentation structure aware | CVPR 2026 미공개, 기존 목록 재확인 |
+| D | ICLR 2026 openreview domain generalization segmentation medical imaging robust | ICLR 2026 5,355편 accepted, 주요 DG 의료영상 논문 직접 hit 없음 |
+| A | MGC-net multi-granularity consistency semi-supervised DG segmentation Neurocomputing 2025 | MGC-net 확인: Neurocomputing, semi-supervised multi-domain (수록 보류 — 관련성 낮음) |
+| A | AD-DGCL adaptive disentangled domain generalization multi-organ segmentation Neurocomputing 2025 | AD-DGCL 확인: Neurocomputing Oct 2025 (수록 보류 — 이차 venue + semi-supervised) |
+| Follow-up | SLAug ConStyX ISAC MBFCV citation follow-up 2026 vessel domain generalization | ConStyX arXiv ID(2506.10675) 확인 — 기존 인덱스 CONSTYX와 동일 논문 |
+| Follow-up | arXiv 2026 vessel segmentation cerebrovascular single source domain generalization new | XAI_DX 재확인, 기존 목록 재확인 |
+| Follow-up | VesselGPT autoregressive modeling vascular geometry MICCAI 2025 | VesselGPT (2505.13318) 확인: DG와 무관, 수록 보류 |
+| Lane 5 | "radius-conditioned augmentation" OR "thickness-conditioned augmentation" training vessel | 직접 명시 논문 여전히 없음 — Continuous-ONA gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### Category A 신규 논문 (직접 경쟁)
+
+**WAVESDG (arXiv 2603.28463, March 2026)** — ★ P1 추가
+- WISER(Wavelet-based Invariant Structure Extraction and Refinement) 모듈: 저주파는 global anatomy anchor로, 고주파는 directional edge 강화 + noise 억제
+- 5개 unseen target domain에서 7개 SOTA 방법 능가 (optic disc/cup 분할)
+- **내 방법과의 차이**: WAVESDG = 전체 이미지 단위 주파수 분해, 나 = single class 내 vessel radius별 augmentation budget. WAVESDG는 thin/thick vessel 내부 이질성 개념 없음.
+
+**XAI_DX (arXiv 2512.13977, December 2025)** — ★ Preprint Only
+- UMamba를 RSNA CTA → TopCoW CT에 직접 적용 시 Dice 0.8604 → 0.2902로 급락
+- XAI(explainability)로 DG 실패 원인 진단: Z-resolution 차이 + background noise 가 주요 confound
+- **내 연구 관련성**: 정확히 같은 cerebrovascular domain shift 문제를 다룸. "관찰 가능성이 낮은 얇은 혈관일수록 도메인 이동에 취약하다"는 내 가설의 실증적 근거 제공 가능. 방법 논문 아님(분석 논문).
+
+#### Category C 신규 논문 (혈관 특화)
+
+**UVSM (arXiv 2502.06987, IEEE TIP 2025)** — Published Journal
+- 모든 retinal 모달리티(CF, MC 등)에서 fine-tuning 없이 범용 혈관 분할
+- Image translation으로 target modality → Topcon CF로 정규화 후 분할
+- **내 연구 관련성**: cross-modality vessel generalization 방법론. TOF-MRA 도메인과는 다르나, 혈관 분할의 domain-agnostic 표현 학습 방향 참고 가능.
+
+**VESSELSDF (arXiv 2506.16556, MICCAI 2025)** — Accepted Conference
+- SDF(Signed Distance Field) 기반 혈관 재구성: binary voxel 분류 → continuous geometry regression으로 패러다임 전환
+- Adaptive Gaussian regularizer로 floating segment artifact 제거
+- **내 연구 관련성**: SDF representation이 vessel radius / observability와 직접 연결됨. ψ(x) = SDF value → vessel radius proxy로 활용 가능성. 내 observability score 계산에 대안적 방법으로 제시 가능.
+
+#### Category D 신규 논문 (Top-tier Vision 아이디어 전이)
+
+**SDCL (arXiv 2503.16852, IEEE TPAMI 2025)** — Published Journal (최고 tier)
+- Style Deconfounding Causal Learning: SCM(Structural Causal Model)으로 style을 confound로 명시 모델링
+- SGEM(style-guided expert module) + BDCL(backdoor causal learning) 모듈
+- multi-domain + single-domain DG 모두에서 SoTA 성능 (자연영상 + 의료영상)
+- **내 연구 관련성**: "style = confounding factor → causal intervention으로 제거"라는 프레임을 thin vessel observability에 적용 가능. "관찰 가능성 낮은 얇은 혈관에서는 style confound 효과가 더 크다"는 causal 논거 지원.
+
+### Novelty Gap 재확인
+
+- **"radius-conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"observability-conditioned augmentation"** 키워드: 여전히 없음 → Continuous-ONA의 핵심 gap 유지
+- WAVESDG (wavelet 기반 SSDG)는 frequency-space 방법이므로 내 nonlinear intensity mapping 방법과 다른 축
+
+### 검토했으나 수록 보류한 논문
+
+| 논문 | 이유 |
+|------|------|
+| VesselGPT (arXiv 2505.13318, MICCAI 2025) | Autoregressive vessel geometry 생성 모델, DG와 무관 |
+| GenEval (arXiv 2603.12369) | DR grading + fMRI 분류, segmentation과 무관 |
+| MGC-net (Neurocomputing 2025) | Semi-supervised multi-source DG, secondary venue, SSDG 아님 |
+| AD-DGCL (Neurocomputing 2025) | Semi-supervised, secondary venue, SSDG 아님 |
+| DG-TTA (Sensors 2025, arXiv 2312.06275) | 기존 GIN+SSC 기반 방법, 2023 arXiv, 새로운 아이디어 아님 |
+| ConStyX arXiv 2506.10675 | 기존 인덱스 CONSTYX(MICCAI 2025)와 동일 논문 |
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] WAVESDG 전문 독해: WISER의 wavelet sub-band별 역할 + SSDG prostate/cardiac에도 적용됐는지 확인
+- [ ] VESSELSDF 전문 독해: SDF computation 방식 → vessel radius proxy 활용 가능성
+- [ ] SDCL 전문 독해: SCM 구성 + backdoor adjustment 세부 사항 → 내 causal DG 논거에 인용 가능성
+- [ ] ICML 2026 accepted papers (July 2026 예정) — 공개 시 DG/augmentation 관련 탐색
+- [ ] ECCV 2026 accepted papers — 하반기 예정
+- [ ] "vessel observability conditioned augmentation" 키워드 여전히 없음 → Continuous-ONA gap 확인 완료
+- [ ] XAI_DX의 "Z-resolution difference" 분석 → TOF-MRA inter-site 도메인 이동의 주요 factor로 인용 가능
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
