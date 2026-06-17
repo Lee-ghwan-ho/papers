@@ -23,6 +23,8 @@
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
 
+| ★★★ | **SMILEUHURA** | **Run #8 신규** SMILE-UHURA Challenge: 7T TOF MRA에서 소혈관(mesoscopic scale) 분절 ISBI 2023 challenge. 16개 방법 비교, Dice 최고 0.838. "현재 3T에서 보이지 않는 작은 혈관이 7T에서 가시화됨"이라는 진술이 내 thin vessel observability 동기와 직접 연결. 내 Introduction/Related Work에서 "혈관 관찰 가능성의 scale dependency" 주장 지지 근거로 활용 가능. arXiv:2411.09593. |
+
 ---
 
 ## P1 — 높은 우선순위 (기준선 및 배경 이해)
@@ -50,6 +52,8 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **DG_TTA** | **Run #8 신규** DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven Domain Generalization, and Test-Time Adaptation (Sensors 2025, DOI: 10.3390/s25175603). GIN intensity augmentation + SSC descriptor 결합 → DG pre-training + TTA. 5개 3D CT/MRI에서 CT→MRI cross-domain 평가. **GIN augmentation baseline과의 직접 비교 가능**: DG-TTA의 GIN = uniform nonlinear aug, 나의 ONA = structure-conditioned nonlinear aug. DG-TTA baseline performance 파악 필수. |
+| ★★ | **GENIE** | **Run #8 신규** One-Step Generalization Ratio Guided Optimization for Domain Generalization (ICML 2025, arXiv:2606.16301). OSGR metric으로 파라미터별 generalization 기여도 측정, GENIE optimizer로 spurious correlation 파라미터 억제. 기존 DG methods (SLAug 포함)와 통합 가능. 내 ONA aug과 GENIE optimizer를 조합하면 추가 이득 가능성. 이론적 DG optimization 근거로 참고. |
 
 ---
 
@@ -78,6 +82,8 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **URVSM** | **Run #8 신규** Universal Vessel Segmentation for Multi-Modality Retinal Images (IEEE TIP 2025, arXiv:2502.06987). Image translation으로 arbitrary modality → Topcon CF로 변환 후 단일 모델로 분절. modality-agnostic 첫 사례. 내 방법과 다른 paradigm이나 multi-modality 혈관 DG의 최신 reference로 참고. |
+| ★ | **BREAKDATA** | **Run #8 신규** Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models (arXiv:2602.23782, Feb 2026). DINOv3 + 3D Adapter + Z-channel embedding. TopCoW + Lausanne OOD: 5-shot Dice 43.42% (+30% over nnU-Net). Few-shot paradigm이지만 TopCoW 데이터셋 공유. |
 
 ---
 

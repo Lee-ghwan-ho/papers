@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-17  
+> 총 수록 논문: 102편
 
 ---
 
@@ -57,6 +57,8 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| DG_TTA | DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven Domain Generalization, and Test-Time Adaptation | Sensors | 2025 | Published Journal Article | Medium |
+| RETHINK_DG_MRI | Rethink Domain Generalization in Heterogeneous Sequence MRI Segmentation | arXiv | 2025 | Preprint Only | Medium |
 
 ---
 
@@ -114,6 +116,9 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| URVSM | Universal Vessel Segmentation for Multi-Modality Retinal Images | IEEE Transactions on Image Processing | 2025 | Published Journal Article | Medium |
+| SMILEUHURA | SMILE-UHURA Challenge -- Small Vessel Segmentation at Mesoscopic Scale from Ultra-High Resolution 7T Magnetic Resonance Angiograms | ISBI 2023 Challenge / arXiv | 2024 | Preprint Only | **High** |
+| BREAKDATA | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -135,6 +140,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| GENIE | One-Step Generalization Ratio Guided Optimization for Domain Generalization | ICML 2025 | 2025 | Accepted Conference Paper | Medium |
 
 ---
 
@@ -178,3 +184,6 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| RETHINK_DG_MRI | Rethink Domain Generalization in Heterogeneous Sequence MRI Segmentation | 2507.23110 | 2025 |
+| SMILEUHURA | SMILE-UHURA Challenge -- Small Vessel Segmentation at Mesoscopic Scale from 7T MRA | 2411.09593 | 2024 |
+| BREAKDATA | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | 2602.23782 | 2026 |

@@ -2,6 +2,102 @@
 
 ---
 
+## 2026-06-17 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-17
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Published Journal 2편 + Accepted Conference 1편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation arXiv 2606 2026 June new paper | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 June arXiv new method | 기존 목록 재확인 |
+| A | arxiv 2606 domain generalization segmentation 2026 new | GENIE (2606.16301, ICML 2025) 발견; OSDF-DA (open-set) 발견 (낮은 관련성) |
+| A | arXiv "2606" "SSDG" OR "single-source domain generalization" medical image 2026 | 기존 목록 재확인 |
+| A | DG-TTA 2312.06275 augmentation descriptor GIN segmentation Sensors 2025 | **DG-TTA (Sensors 2025)** 재발견 — 기존 "재확인" 상태에서 공식 인덱싱 |
+| A | "2507.23110" rethink domain generalization heterogeneous MRI segmentation 2025 | **RETHINK_DG_MRI (arXiv 2507.23110)** 확인: semi-supervised pretraining for heterogeneous MRI sequence DG |
+| B | augmentation budget OR augmentation strength medical segmentation domain generalization 2025 2026 | 기존 목록 재확인 (DCON, ADA 등) |
+| B | arXiv June 2026 intra-class observability structure-conditioned augmentation medical | 직접 명시 논문 없음 — Continuous-ONA gap 재확인 |
+| C | arXiv 2606 tubular vessel segmentation thin structure domain generalization new 2026 | LightVesselNet (2606.05354) 발견 (낮은 관련성); 기존 목록 재확인 |
+| C | arXiv 2602.23782 Breaking the Data Barrier few-shot vessel 3D foundation model 2026 | **BREAKDATA (arXiv 2602.23782)** 확인: DINOv3 + 3D adapter, TopCoW + Lausanne |
+| C | arXiv 2502.06987 Universal Vessel Segmentation multi-modality retinal IEEE TIP 2025 | **URVSM (IEEE TIP)** 확인: published journal, UCSD, multi-modality retinal vessel |
+| C | SMILE-UHURA challenge 7T MRA small vessel segmentation ISBI 2023 arXiv 2411.09593 | **SMILEUHURA (arXiv 2411.09593)** 확인: ISBI 2023 challenge, 7T TOF MRA, Dice 0.838 |
+| C | arXiv 2604.10737 UniVG generative data-engine foundation model vascular few-shot | UniVG (arXiv 2604.10737) 발견: 2D 혈관 합성 few-shot, 내 주제와 거리 있어 preprint 후보 검토 후 미수록 결정 |
+| D | ICML 2026 domain generalization segmentation augmentation accepted paper | ICML 2026 = 6,352편 수락, DG 특화 목록 미확인 |
+| D | GENIE 2606.16301 ICML 2025 one-step generalization ratio optimization domain generalization | **GENIE (ICML 2025)** 공식 확인: icml.cc/virtual/2025/poster/45152, Sumin Cho et al. |
+| D | ICLR 2026 domain generalization segmentation augmentation medical imaging accepted papers | ICLR 2026 = 5,355편 수락; DG/의료영상 직접 신규 hit 없음 |
+| Follow-up | SLAug RASS ConStyX ADA 인용 follow-up 2026 June | 기존 목록 재확인; 직접적 신규 follow-up 없음 |
+| Follow-up | AG-TAL DCON ARFU follow-up citation 2026 | 기존 목록 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### Category A — 직접경쟁 신규
+
+**DG-TTA (Sensors 2025)** — arXiv:2312.06275, DOI: 10.3390/s25175603
+- GIN intensity augmentation + SSC descriptor + test-time adaptation 조합으로 out-of-domain 의료영상 분절
+- 5개 3D CT/MRI 데이터셋에서 cross-domain 평가 (abdominal, spine, cardiac)
+- CT→MRI abdominal: +46.2, +28.2 Dice point 개선
+- **내 방법과의 관계**: DG-TTA = uniform GIN aug + TTA (target data 접근 필요), 나 = training-time SSDG + structure-conditioned ONA (target 불필요). 완전히 다른 paradigm.
+- 기존 Run에서 "재확인"으로만 처리되어 미인덱싱 상태였으나, Sensors Published Journal로 공식 인덱싱
+
+**RETHINK_DG_MRI (arXiv:2507.23110)** — July 2025 preprint
+- "Rethink Domain Generalization in Heterogeneous Sequence MRI Segmentation"
+- Sequence variation (venous phase → out-of-phase imaging)이 center shift보다 어려운 DG challenge
+- Semi-supervised pretraining 방식으로 existing DG methods와 large segmentation models 능가
+- **내 방법과의 관계**: 다른 MRI sequence 간 DG (sequence shift), 나 = same modality (TOF-MRA) 간 multi-center shift (appearance shift). 문제 설정 다름.
+
+#### Category C — 혈관·구조 특화 신규
+
+**SMILEUHURA (arXiv:2411.09593)** — ISBI 2023 challenge paper ⚠️ 동기 지지
+- 7T TOF MRA에서 소혈관 (mesoscopic scale) 분절 challenge (ISBI 2023, Cartagena de Indias)
+- 16개 제출 방법 + 2 baseline 비교; Dice up to 0.838 ±0.066
+- 현재 표준 3T MRA로 보이지 않는 소혈관이 7T에서 가시화 → 내 thin vessel motivation과 직결
+- **내 연구에의 활용**: "작은 혈관일수록 관찰 가능성이 낮고 augmentation vulnerability가 크다"는 동기 강화에 활용 가능
+- **ISBI 2023 challenge benchmark**: MPVR-Net, SegNet 계열 16개 방법 비교
+
+**URVSM (IEEE TIP 2025)** — arXiv:2502.06987
+- "Universal Vessel Segmentation for Multi-Modality Retinal Images" — IEEE TIP published
+- Image translation을 이용한 modality-agnostic 망막혈관 분절: CF, MC, 신규 modality 포함
+- 모달리티 무관 혈관 분절 첫 사례
+- **내 방법과의 관계**: multi-modality adaptation (image translation 기반), 나 = SSDG + radius conditioned aug. 완전히 다른 paradigm. 혈관 DG 방법론 다양성 참고.
+
+**BREAKDATA (arXiv:2602.23782)** — Feb 2026 preprint
+- "Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models"
+- DINOv3 + 3D Adapter + Z-channel embedding for TopCoW + Lausanne out-of-distribution 테스트
+- 5-shot: Dice 43.42% (+30% over nnU-Net 33.41%)
+- **내 방법과의 관계**: few-shot foundation model (target support 필요), 나 = training-time SSDG (no target). TopCoW 데이터셋 연결점 있음.
+
+#### Category D — Top-tier Vision 신규
+
+**GENIE (ICML 2025)** — arXiv:2606.16301
+- "One-Step Generalization Ratio Guided Optimization for Domain Generalization"
+- OSGR (One-Step Generalization Ratio): 각 파라미터의 loss 기여도와 gradient alignment 동시 측정
+- GENIE optimizer: OSGR 균등화로 일부 파라미터의 spurious correlation 지배 방지 → domain-invariant feature 학습 촉진
+- 기존 DG methods (SLAug, SSDG 등)과 통합 가능한 범용 optimizer
+- **내 방법과의 관계**: optimizer-level DG 이론. 내 augmentation 방법과 orthogonal 관계 — GENIE + ONA 조합 가능성 있음.
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget" 또는 "intra-class augmentation strength"**: 여전히 없음
+- GENIE는 "어떤 파라미터가 DG에 기여하는가"를 분석하지만, "어떤 픽셀/구조가 augmentation을 얼마나 허용해야 하는가"는 다루지 않음
+- DG-TTA의 GIN이 my baseline과 관련되나, DG-TTA = uniform aug (intra-image 이질성 없음)
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] ICML 2026 (Seoul, July 6-11, 2026) accepted papers 중 DG/augmentation 관련 논문: 현재 미공개/미인덱싱 — 7월 이후 재탐색
+- [ ] ICLR 2026 papers 직접 openreview.net 검색으로 DG+segmentation+augmentation 탐색
+- [ ] MICCAI 2026 accepted papers (7월 발표 예정) — submission deadline 이미 지남, 결과 대기
+- [ ] GENIE 전문 독해: OSGR 계산 방식 + 내 ONA와 통합 가능성
+- [ ] DG-TTA 전문 독해: SSC descriptor 상세 + GIN과의 조합 방식
+- [ ] SMILEUHURA 전문 독해: 7T MRA에서 소혈관 Dice 세부 분석 + 상위 방법들의 thin vessel 처리 전략
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
