@@ -25,6 +25,15 @@
 
 ---
 
+## P0 추가분 (Run #8 신규)
+
+| 우선순위 | KEY | 이유 |
+|---------|-----|------|
+| ★★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463). WISER module이 LL(구조)과 LH/HL/HH(외관)을 sub-band별로 분리 → 내 방법의 "구조 보존 + appearance 차별 증강"과 방향 유사하나 mechanism이 다름. 구분 논거 파악 필수. |
+| ★★★ | **VASOMIM** | **Run #8 신규** VasoMIM: Anatomy-guided MIM for vessel seg (arXiv 2508.10794). "vessel-rich region(=두꺼운 vessel)을 우선 마스킹 → 더 큰 training signal" 개념이 내 ONA의 "resolved vessel → larger augmentation budget"과 방향 인접. 차이: pretraining MIM masking vs. training-time augmentation. 구분 논거 및 동기 지지 논거 동시 확인 필요. |
+
+---
+
 ## P1 — 높은 우선순위 (기준선 및 배경 이해)
 
 | 우선순위 | KEY | 이유 |
@@ -77,6 +86,7 @@
 | ★ | **GRAPHSEG** | **Run #4 신규** Generalizable Retina Vessel Segmentation with Deformable Graph Priors. NeurIPS 2025. Variational Bayesian + retinal atlas deformable graph prior + structure-preserved/degraded decomposition. CHASE/DRIVE/HRF. |
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
+| ★★ | **TOPOLORASAM** | **Run #8 신규** TopoLoRA-SAM: LoRA + SAM + clDice for thin-structure cross-domain segmentation (arXiv 2601.02273). DRIVE/STARE/CHASE_DB1에서 5.2% parameters로 best Dice. 내 방법과 cross-domain 방향 유사하나 paradigm 다름 (fine-tuning vs. SSDG augmentation). |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
 
 ---
@@ -85,6 +95,9 @@
 
 | KEY | 이유 |
 |-----|------|
+| VAMAE | **Run #8 신규** VAMAE: Vessel-Aware MAE for OCTA (arXiv 2604.06583). vesselness+skeleton 기반 선택적 마스킹. 낮은 관련성 (OCTA modality, pretraining focus). |
+| TUBEMLLLM | **Run #8 신규** TubeMLLM: Foundation model for vessel topology (arXiv 2603.09217). Adaptive loss weighting for topology-critical regions. 내 방법과 mechanism 완전히 다름. 낮은 관련성. |
+| TUBENET | **Run #8 신규** tUbeNet: Generalizable 3D vessel DG tool (Biology Methods Nov 2025). Low-tier venue but covers multi-modality 3D vessel DG. vesselFM/VesselSim과 유사 방향. |
 | DET2PROB | Probabilistic modeling for DG. 간접 참고. |
 | MCDRL | Multimodal causal DG. 간접 참고. |
 | INVCAUSAL | Cross-modality causal mechanisms. |
