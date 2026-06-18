@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-18  
+> 총 수록 논문: 102편
 
 ---
 
@@ -57,6 +57,7 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | High |
 
 ---
 
@@ -114,6 +115,11 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| VASOMIM | VasoMIM: Vascular Anatomy-Aware Masked Image Modeling for Vessel Segmentation | arXiv | 2025 | Preprint Only | Medium |
+| VAMAE | VAMAE: Vessel-Aware Masked Autoencoders for OCT Angiography | arXiv | 2026 | Preprint Only | Low |
+| TUBEMLLLM | TubeMLLM: A Foundation Model for Topology Knowledge Exploration in Vessel-like Anatomy | arXiv | 2026 | Preprint Only | Low |
+| TUBENET | tUbeNet: a generalizable deep learning tool for 3D vessel segmentation | Biology Methods and Protocols | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -178,3 +184,8 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (WaveSDG) | 2603.28463 | 2026 |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware LoRA Adaptation of SAM for Thin-Structure & Cross-Domain Segmentation | 2601.02273 | 2026 |
+| VASOMIM | VasoMIM: Vascular Anatomy-Aware MIM for Vessel Segmentation (X-ray angiogram) | 2508.10794 | 2025 |
+| VAMAE | VAMAE: Vessel-Aware Masked Autoencoders for OCT Angiography | 2604.06583 | 2026 |
+| TUBEMLLLM | TubeMLLM: Foundation Model for Topology Knowledge in Vessel-like Anatomy | 2603.09217 | 2026 |

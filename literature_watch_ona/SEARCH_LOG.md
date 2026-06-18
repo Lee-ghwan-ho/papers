@@ -2,6 +2,107 @@
 
 ---
 
+## 2026-06-18 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-18
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Published Journal 1편 + Preprint 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new paper | Multi-Domain Brain Vessel 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | SPIRONet(2024), TopoLoRA-SAM(2601.02273) 발견 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust new paper | 기존 목록 재확인 |
+| A/C | SPIRONet spatial-frequency vessel segmentation AAAI 2026 arxiv | SPIRONet(2406.19749) 확인 — AAAI 2026 미확인, 2024 preprint |
+| A | CoSAM self-correcting SAM domain generalization medical image segmentation 2025 2026 | CoSAM(2411.10136) 확인 — SAM_SDG와 유사, 수록 보류 |
+| A | arXiv 2606 domain generalization medical image segmentation vessel augmentation June 2026 new | 기존 목록 재확인 + VesselSim 재확인 |
+| A/C | MICCAI 2026 papers arXiv vessel segmentation domain generalization topology | **"Devil is in Channels" (CCSDG, MICCAI 2023)** 재확인 (기존 논문); TubeMLLM(2603.09217) 발견 |
+| A | "Decoupling Wavelet Sub-bands" single source domain generalization fundus arXiv 2603.28463 | **WAVESDG (arXiv 2603.28463)** 발견 — SSDG for fundus, WISER wavelet module |
+| C | TopoLoRA-SAM topology-aware SAM thin structure cross-domain segmentation arXiv 2601.02273 | **TOPOLORASAM** 상세 확인: LoRA + clDice, 5 benchmarks (retinal vessel, polyp, SAR) |
+| C | VasoMIM vascular anatomy-aware masked image modeling vessel segmentation arXiv 2508.10794 | **VASOMIM** 확인: anatomy-guided masking + anatomical consistency loss for X-ray angiogram |
+| C | VAMAE vessel-aware masked autoencoders OCT angiography arXiv 2604.06583 | **VAMAE** 확인: vesselness+skeleton masking cue for OCTA pretraining |
+| C | TubeMLLM foundation model topology knowledge vessel-like anatomy arXiv 2603.09217 | **TUBEMLLLM** 확인: MLLM + topology-aware prompting, TubeMData benchmark |
+| C | tUbeNet generalizable deep learning 3D vessel segmentation domain generalization 2026 | **TUBENET** 확인: Biology Methods and Protocols Nov 2025, multi-modality 3D vessel DG |
+| D | ICLR 2026 domain generalization segmentation medical image augmentation accepted papers openreview | ICLR 2026 의료영상 DG 직접 히트 없음 |
+| D | ICML 2026 domain generalization segmentation medical image vessel accepted papers | ICML 2026 관련 직접 히트 없음 |
+| A | arXiv 2606 single domain generalization augmentation medical image segmentation 2026 June | 기존 목록 재확인; 2606.xxxxx SSDG 의료영상 신규 논문 없음 |
+| C | Vesselpose OpenReview vessel graph reconstruction 3D vascular arXiv 2605.00538 | Vesselpose (2605.00538) 확인 — 그래프 재구성 특화, Cat C 저관련성 |
+| B | causal transfer medical image analysis arXiv 2603.24388 | Survey 논문, 수록 보류 |
+| A | NeurIPS 2025 minimal semantic sufficiency unsupervised domain generalization | MS-UDG(2509.15791) 확인 — 자연영상 UDG, 낮은 관련성 |
+
+### 핵심 신규 발견 요약
+
+#### Category A — 직접 경쟁 신규 논문
+
+**WAVESDG (arXiv 2603.28463, April 2026)**
+- SSDG for fundus image segmentation (optic cup/disc) via wavelet sub-band decoupling
+- **WISER module**: LL sub-band = global structural anchor (anatomy), LH/HL = directional edges, HH = noise suppression
+- Source appearance를 sub-band별로 분리해 augmentation을 differential하게 적용
+- 5개 unseen fundus 데이터셋에서 7개 SOTA 방법 능가
+- **내 방법과의 관계**: 주파수 기반 구조-외관 분리라는 Cat A 방향 공유. 차이: WAVESDG = sub-band별 feature channel 분리 (global), 나 = intra-image vessel radius별 augmentation budget 조절 (local, structure-specific)
+
+#### Category C — 혈관·구조 특화 신규 논문
+
+**TOPOLORASAM (arXiv 2601.02273, January 2026)**
+- SAM ViT encoder에 LoRA 주입 + convolutional adapter + clDice supervision
+- Thin structure (retinal vessel) + cross-domain segmentation
+- DRIVE/STARE/CHASE_DB1에서 full parameter training 대비 5.2% parameter로 best retina-average Dice
+- **내 방법과의 관계**: SAM-based cross-domain + thin vessel topology; 내 방법은 training-time augmentation 기반 SSDG (다른 paradigm)
+
+**VASOMIM (arXiv 2508.10794, August 2025)**
+- X-ray angiogram vessel seg 위한 anatomy-guided MIM pretraining
+- Anatomy-guided masking: vessel-containing patch를 우선 마스킹하여 vessel reconstruction에 집중
+- Anatomical consistency loss: original과 reconstructed image 간 vascular semantic 일치성 강화
+- XCAD 등 3개 dataset SOTA
+- **내 방법과의 관계**: 'vessel-rich region에 더 큰 training signal' 개념 → 내 'observability-conditioned augmentation budget'과 방향 유사. 차이: VASOMIM = pretraining time MIM (어떤 위치를 마스킹할지), 나 = augmentation time (어떤 vessel에 더 강한 appearance change 허용)
+
+**VAMAE (arXiv 2604.06583, April 2026)**
+- OCTA vessel seg를 위한 vessel-aware MAE pretraining
+- Vesselness + skeleton 기반 anatomically informed masking
+- Connectivity and branching pattern focus
+- **내 방법과의 관계**: 얇은 혈관 구조에 집중하는 선택적 마스킹 → 내 thin vessel protection 동기와 방향 유사하나 다른 setting (pretraining vs. augmentation)
+
+**TUBEMLLLM (arXiv 2603.09217, March 2026)**
+- MLLM(멀티모달 LLM) + explicit natural language topology prompting for vessel-like anatomy
+- TubeMData 벤치마크 (topology-centric tasks)
+- Adaptive loss weighting strategy emphasizing topology-critical regions
+- Out-of-distribution performance: β₀ error 37.42→8.58 vs baselines
+- **내 방법과의 관계**: topology-critical region에 adaptive loss weighting → 내 radius-conditioned augmentation budget과 개념적 인접성. 다른 mechanism (LLM prompting + loss vs. augmentation strength)
+
+**TUBENET (Biology Methods and Protocols, Nov 2025, DOI: 10.1093/biomethods/bpaf087)**
+- 3D vessel seg foundation tool across modalities (CT, optical, photoacoustic)
+- Human-in-the-loop training with 0.3% fine-tuning volume for adaptation
+- DICE 0.81~0.98 across applications
+- vesselFM/VesselSim과 유사한 방향의 3D vessel generalization 논문 (낮은 venue tier)
+- **내 방법과의 관계**: modality-agnostic 3D vessel DG background 이해에 유용; 직접 경쟁 아님
+
+### Novelty Gap 재확인
+
+Run #8에서도 다음 키워드로 명시적으로 다룬 논문은 발견되지 않았다:
+- "vessel observability conditioned augmentation"
+- "intra-class radius-conditioned augmentation budget"
+- "thin vessel appearance protection during appearance augmentation"
+- "continuous augmentation strength by tubular structure observability"
+
+VASOMIM이 "vessel-rich region에 더 큰 training signal"이라는 아이디어를 공유하지만 완전히 다른 paradigm (MIM masking vs. augmentation budget).
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] WAVESDG 전문 독해: WISER module의 sub-band별 증강 강도 조절 방식 상세 (내 방법과 구분 논거)
+- [ ] VASOMIM 전문 독해: anatomy-guided masking이 thin vessel에 미치는 효과 vs. 두꺼운 vessel
+- [ ] ICML 2026 proceedings 공개 후 DG/augmentation 관련 논문 탐색
+- [ ] MICCAI 2026 accepted list 공개 시 vessel/DG 논문 탐색
+- [ ] SPIRONet (arXiv 2406.19749) AAAI 2026 실제 acceptance 여부 재확인
+- [ ] "intra-class structure-specific augmentation" 또는 "per-pixel augmentation budget" 키워드 추가 탐색
+- [ ] Vesselpose (OpenReview) 향후 conference acceptance 추적
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
