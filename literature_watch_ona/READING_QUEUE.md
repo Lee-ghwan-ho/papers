@@ -22,6 +22,7 @@
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
+| ★★★ | **TSIAA** | **Run #8 신규** Teacher–Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation (IEEE TMI 2026, Vol 45, pp 764-776). 핵심: IIAG(Instance-level Image Augmenter)가 learnable constrained Bézier transformation을 per-instance로 적용. teacher-student로 over-augmentation 방지. "aug 강도를 image content에 따라 인스턴스 단위로 adaptive하게 결정"이라는 아이디어. **내 방법과 차이**: TSIAA = per-image-instance 단위 adversarial aug (전체 이미지), 나 = intra-image vessel radius별 augmentation budget (같은 이미지 내 thin/thick vessel 구분). TSIAA는 혈관 내부 구조 이질성을 무시. 즉시 full-text 확인 필수. |
 
 ---
 
@@ -78,6 +79,7 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **CORONARYDG** | **Run #8 신규** Single-Source Domain Generalization for Coronary Vessels Segmentation in X-Ray Angiography (STACOM 2024 Workshop, DOI: 10.1007/978-3-031-87756-8_1). Gaussian posterior at latent space + supervised prior 로 broader data variation 노출. DomainFlow method. 내 SSDG 방법과 같은 setting, 다른 vessel modality (XCA vs TOF-MRA). 내 baseline 비교 목록 참고용. |
 
 ---
 

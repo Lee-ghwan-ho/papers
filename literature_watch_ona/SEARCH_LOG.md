@@ -2,6 +2,78 @@
 
 ---
 
+## 2026-06-19 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-19
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **3편** (Published Journal 1편 + Workshop 1편 + Preprint 1편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new | WaveSDG (2603.28463) 발견 — SSDG fundus wavelet sub-band |
+| C | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 IEEE TMI arXiv new method | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | TopoVST (2603.14909) 발견 — vessel skeleton tracking (DG 직접 관련 낮음) |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust accepted papers | PEPR 등 자연영상 DG 재확인, CVPR 2026 의료영상 DG 직접 hit 없음 |
+| A | "teacher-student" "instance-level" "adversarial augmentation" "single domain" medical image IEEE TMI 2026 | **TSIAA (IEEE TMI 2026, Vol 45, pp 764-776)** 발견 — 핵심 신규 논문 |
+| A | WaveSDG "decoupling wavelet sub-bands" SSDG fundus MICCAI 2026 arXiv 2603.28463 venue | WaveSDG April 2026 preprint, MICCAI 2026 acceptance 미확인 |
+| A | "single-source domain generalization" coronary vessels segmentation x-ray angiography 2025 2026 SpringerLink | **DomainFlow/CORONARYDG (STACOM 2024 Workshop, DOI 10.1007/978-3-031-87756-8_1)** 발견 |
+| B | structure-conditioned observability-aware augmentation strength vessel radius medical image DG 2026 | 직접 명시 논문 없음 — 내 gap 재확인 |
+| B | class-wise region-conditioned appearance transformation intra-class vessel segmentation DG 2026 new | 기존 목록 재확인 (DGSSA, ICRN 등) |
+| D | ICLR 2026 domain generalization augmentation segmentation accepted papers openreview | ICLR 2026 의료영상 DG 직접 hit 없음 |
+| A | arXiv 2505.23173 pseudo multi-source domain generalization single source bridging gap | PMDG (arXiv 2505.23173) 발견 — 일반 DG, 의료영상 직접 X → 수록 보류 |
+| A | arXiv June 2026 2606 single domain generalization medical image segmentation vessel new | 기존 목록 재확인, TSIAA IEEE TMI 재확인 |
+| A | MICCAI 2026 accepted papers arXiv single source domain generalization vessel brain augmentation | Awesome-MICCAI-2026 repo 확인 — MICCAI 2026 미공개 (2026년 7-8월 예상) |
+| D | ECCV 2025 tubular thin vessel segmentation topology domain generalization robust | 기존 목록 재확인 |
+| B | NeurIPS 2025 ECCV 2025 domain generalization augmentation medical image thin structure tubular vessel | 기존 목록 재확인 |
+| Follow-up | SpringerLink 978-3-031-87756-8 확인 | STACOM 2024 workshop volume 확인 → CORONARYDG = STACOM 2024 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** — ⚠️ 즉시 읽기
+- Instance-level Image Augmenter(IIAG): learnable constrained Bézier transformation을 이미지의 **instance(patch/region) 단위**로 독립 적용
+- Teacher-student framework으로 over-augmentation 방지
+- **내 방법과의 차이**: TSIAA = spatial instance(patch) 단위, 나 = anatomical vessel radius 단위. TSIAA에는 thin vessel 보호 개념 없음.
+- ADA → TSIAA → ONA 계층적 progression 논거 구성 가능: 점점 더 세밀한 단위의 adaptive augmentation
+
+#### 방법론 신규 논문
+
+**CORONARYDG (STACOM 2024 Workshop)**
+- DomainFlow: Gaussian posterior + supervised prior at latent space
+- Connectivity mask 예측으로 도메인 불변 구조 관계 학습
+- Coronary vessel SSDG. Workshop 논문 (낮은 tier)
+
+#### Preprint 후보
+
+**WaveSDG (arXiv 2603.28463)**
+- WISER module: wavelet sub-band 분해로 domain-invariant anatomy vs. domain-specific style 분리
+- Fundus optic disc/cup SSDG (1 source + 5 targets)
+- MICCAI 2026 acceptance 여부 미확인
+
+### Novelty Gap 재확인
+
+- **"radius-conditioned augmentation budget"** 또는 **"observability-conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **내 핵심 gap 유지**: intra-class vessel radius → augmentation budget (continuous) mapping
+- ADA(per-image) → TSIAA(per-instance spatial patch) → ONA(per-vessel observability): 점점 세밀한 adaptive augmentation의 계층 최전선에 내 방법이 위치함
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: 실험 결과 (데이터셋, Dice, ablation) 확인 — IEEE Xplore 접근 필요
+- [ ] WaveSDG MICCAI 2026 acceptance 여부 확인 (arXiv abstract에 "accepted" 표기 확인)
+- [ ] MICCAI 2026 official accepted list 공개 시 탐색 (2026년 7-8월 예상)
+- [ ] ICLR 2026 openreview.net 직접 탐색 — 이번 run에서 hit 없었음
+- [ ] Pattern Recognition, Expert Systems w/ Applications, Neural Networks 보조 venue 추가 탐색
+- [ ] CORONARYDG arXiv preprint 존재 여부 확인 (Atwany et al.)
+- [ ] AG-TAL 전문 독해 (Run #7 미탐색 carry-over)
+- [ ] DCON 전문 독해 (Run #7 미탐색 carry-over)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
