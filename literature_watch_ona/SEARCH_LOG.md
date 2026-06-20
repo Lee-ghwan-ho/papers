@@ -2,6 +2,97 @@
 
 ---
 
+## 2026-06-20 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-20
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 1편 + Accepted Conference 1편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv June July new | TSIAA (IEEE TMI 2026) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain arXiv 2026 June new method | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization 2026 CVPR MICCAI new | TopoVST (arXiv 2603.14909), TubeMLLM (arXiv 2603.09217) 발견 |
+| D | CVPR 2026 domain generalization segmentation augmentation robust distribution shift accepted papers | 직접 신규 없음 (CVPR 2026 미개최) |
+| B | structure-conditioned augmentation intra-class observability vessel radius domain generalization medical 2026 | 기존 목록 재확인, novelty gap 유지 |
+| A | TSIAA IEEE TMI 2026 instance-level adversarial augmentation Bezier SSDG arXiv | TSIAA (IEEE TMI 2026, vol. 45, pp. 764-776) 확인 |
+| A | arXiv 2603.28463 "Decoupling Wavelet Sub-bands" single source domain generalization fundus | WaveSDG 확인: WISER 모듈 + 1→5 도메인 평가 |
+| A | teacher-student instance-level adversarial augmentation single domain generalized medical IEEE TMI 2026 | TSIAA 상세 확인: IIAG + IAMs + learnable Bézier transform |
+| C | arXiv 2603.14909 TopoVST topology vessel skeleton tracking 2026 | TopoVST 확인: multi-scale sphere graphs + GNN + wave-propagation |
+| C | arXiv 2603.09217 TubeMLLM foundation model topology vessel anatomy 2026 | TubeMLLM 확인: MLLM + TubeMData benchmark |
+| C | GraphMorph NeurIPS 2024 tubular structure extraction graph morphing vessel road | GraphMorph (NeurIPS 2024) 확인: Graph Decoder + SkeletonDijkstra |
+| A | "radius-aware" OR "thickness-conditioned" OR "observability-conditioned" augmentation vessel DG 2025 2026 | 직접 명시 논문 없음 — Continuous-ONA novelty gap 재확인 |
+| A | "augmentation budget" OR "augmentation strength" structure-aware adaptive medical image segmentation DG 2025 2026 | 기존 목록 (ADA 등) 재확인 |
+| A | arXiv 2505.23173 "pseudo multi-source domain generalization" bridging single multi-source | PMDG 확인: 일반 vision DG, 의료 전용 아님, 수록 보류 |
+| D | ICLR 2026 domain generalization medical image segmentation accepted papers openreview | ICLR 2026: 총 5,355편 accept. 의료 DG 직접 히트 없음 |
+| C | layout-aware generative retinal vessel segmentation generalization arXiv 2503.01190 | RLAD (arXiv 2503.01190) 확인: 생성 모델 기반, 낮은 관련성, 수록 보류 |
+| C | arXiv 2502.06987 universal vessel segmentation retinal multi-modality | UVSM 확인: IEEE Xplore 11218739, multi-modality adaptation, 수록 보류 (domain shift 아님) |
+| A | MICCAI 2026 domain generalization vessel segmentation accepted | MICCAI 2026 아직 미발표 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI 2026, vol. 45, pp. 764-776)** — IEEE Xplore doc. 11146907
+- Teacher-Student framework + Instance-level Image Augmenter (IIAG) 구성
+- Instance-level Augmentation Modules (IAMs): **learnable constrained Bézier transformation function** 사용
+- 기존 adversarial DG 방법이 image-level (전체 이미지 단위)인 반면, TSIAA는 instance(sample)-level로 다양성 확장
+- "over-augmentation problem" 언급: 기존 방법은 구조가 단순해 image-level에만 작용하여 다양성이 제한됨
+- **내 방법과의 공통점**: Bézier 기반 nonlinear appearance transformation 사용, over-augmentation 문제 인식
+- **핵심 차이**: TSIAA = per-sample adversarial diversity (전체 이미지 단위 인스턴스별), 나 = intra-image vessel structure별 연속 radius 기반 augmentation budget 조절. TSIAA에는 얇은 혈관 보호 개념 없음.
+- ADA (MICCAI 2025)와 함께 Bézier 계열 SSDG의 최신 published 논문으로 관리 필요.
+- **즉시 full text 독해 필수**
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463)** — April 2026 preprint
+- WISER (Wavelet-based Invariant Structure Extraction and Refinement) 모듈
+- Low-freq sub-band → global anatomy anchor, High-freq sub-band → directional edge 선택적 강화 + noise 억제
+- Optic disc/cup segmentation, 1 source → 5 unseen target domains
+- 7개 SOTA 능가
+- **내 방법과의 차이**: WaveSDG = frequency-domain 해부 구조 분리 (전체 이미지 단위), 나 = intra-image vessel별 augmentation budget. 직접 충돌 없음.
+
+#### 혈관·Tubular 신규 논문
+
+**GraphMorph (NeurIPS 2024)** — arXiv: 2502.11731, NeurIPS 2024 Poster 94063
+- Branch-level feature learning: Graph Decoder + Morph Module (SkeletonDijkstra 알고리즘)
+- Pixel-level classification 대신 branch-level에서 tubular topology 복원
+- False positive 억제 post-processing
+- 혈관 + 도로 네트워크 적용
+- **내 방법 관련성**: topology-faithful centerline 추출 방식 → thin vessel branch connectivity 보존 참고
+
+**TopoVST (arXiv 2603.14909)** — March 2026 preprint
+- Multi-scale sphere graphs + GNN으로 혈관 skeleton tracking 방향 + 반경 동시 추정
+- Geometry-aware weighting scheme → class imbalance 완화 (내 thin vessel 보호 동기와 방향 유사)
+- Wave-propagation skeleton tracking: spurious skeleton 방지
+
+**TubeMLLM (arXiv 2603.09217)** — March 2026 preprint
+- MLLM 기반 vessel-like anatomy topology 이해 + 생성 통합
+- TubeMData 멀티모달 벤치마크
+- Zero-shot cross-modality X-ray angiography: Dice 67.50%
+- **관련성**: Foundation model 차원의 vessel topology 이해 — 내 방법 motivation 섹션 배경으로 참고
+
+### Novelty Gap 재확인
+
+- **"observability-conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: 여전히 없음 (AG-TAL은 loss에만, TSIAA는 per-sample adversarial)
+- **내 핵심 gap 유지**: intra-image vessel-specific augmentation strength → continuous observability mapping
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: IAMs Bézier 파라미터 범위 + ADA와 비교 실험 여부
+- [ ] GraphMorph 전문 독해: SkeletonDijkstra 상세 + TOF-MRA 적용 가능성
+- [ ] ICLR 2026 의료영상 DG 논문 직접 탐색 (openreview.net 직접 검색)
+- [ ] MICCAI 2026 논문 공개 시 즉시 탐색 (예상: 2026-09)
+- [ ] WaveSDG 발표 venue 확인 (MICCAI 2026 제출 가능성)
+- [ ] "partial volume effect vessel MRI" 명시적 augmentation 논문 여전히 없음
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
