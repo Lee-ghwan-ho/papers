@@ -2,6 +2,155 @@
 
 ---
 
+## 2026-06-21 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-21
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **9편** (Published Journal 4편 + Accepted Conference 2편 + Preprint 3편)
+- **⚠️ 접속 제한**: WebFetch 403 Forbidden (arXiv, SemanticScholar, OpenReview 등 전체), WebSearch 결과 없음 → GitHub MCP code search로 우회 탐색 수행
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | GitHub code search: "SSDG" "domain generalization" medical segmentation 2025 2026 | **CCSDG (MICCAI 2023)** 발견 — Contrastive Single DG via channel statistics |
+| A | GitHub code search: "domain generalization" brain segmentation ICCV 2025 hypergradient synthesis | **LEARN2SYNTH (ICCV 2025)** 발견 — bilevel optimization for data synthesis |
+| C | GitHub code search: "thin anatomical structures" segmentation 2026 arXiv MICCAI | **CSWINUNETR (arXiv 2606.19824)** 발견 — CSWin Transformer UNet for thin structures |
+| A | Background agent WebSearch: "Domain-Generalized Discrete Diffusion Model" medical segmentation IEEE TMI | **DG-DDM-SEG (IEEE TMI 2025)** 발견 — Discrete diffusion model for cross-domain medical seg |
+| A | Background agent WebSearch: "instance-level adversarial augmentation" single domain generalization medical TMI | **TSIAA (IEEE TMI 2026, pp.764-776)** 발견 ⚠️ — Instance-level per-structure adversarial aug |
+| A | Background agent WebSearch: "structure-aware" "pixel-level" SSDG optic disc single domain generalization | **PCSDG (BSPC 2025)** 발견 — pixel-level structure-aware brightness aug for SSDG |
+| B | Background agent WebSearch: "style bias" "causal" domain generalization TPAMI 2025 arxiv | **SDCL (TPAMI 2025, arXiv 2503.16852)** 발견 — causal style deconfounding for DG |
+| A | Background agent WebSearch: "wavelet sub-band" "fundus" single source domain generalization 2026 | **WAVESDG (arXiv 2603.28463)** 발견 — wavelet anatomy-appearance decoupling for SSDG |
+| C | Background agent WebSearch: TopBrain whole-brain vessel segmentation MRA CTA 2026 benchmark | **TOPBRAIN (medRxiv 2026)** 발견 — whole-brain MRA benchmark with caliber measurements |
+| A | Background agent: BucketAugment domain generalization CT segmentation | BucketAugment (IEEE OJEMB 2024) — Run #6에서 이미 확인, 미수록 유지 |
+| A | Background agent: "label-aware augmentation" "segmentation-aware augmentation" DG medical | 기존 목록 재확인, 직접 명시 논문 없음 |
+| C | Background agent: "small vessel" "thin vessel" augmentation generalization domain shift 2025 2026 | OVS-Net 재확인 (기존 인덱스), 신규 없음 |
+| A-D | Background agent: SRCSM, SEMDIR, UNIDDG, RANDDG, WAVERNETV, DCON, ADAL, SDAIRM, MULTIDOMAIN_BRAIN | 기존 인덱스 확인 (중복 — 수록 건너뜀) |
+
+### 핵심 신규 발견 요약
+
+#### Category A — 신규 직접경쟁 논문
+
+**CCSDG (MICCAI 2023 Early Accept)** — arXiv: 2306.05254
+- "Devil is in Channels: Contrastive Single Domain Generalization for Medical Image Segmentation"
+- Authors: Shishuai Hu, Zehui Liao, Yong Xia
+- Channel-level feature statistics를 contrastive learning으로 domain-invariant화
+- 채널 단위 domain gap: 일부 채널은 domain-specific, 일부는 domain-invariant → 채널별 분리
+- Prostate MRI SSDG 및 skin lesion 실험
+- **내 방법과의 관계**: CCSDG = feature channel 단위 domain gap 분리, 나 = augmentation budget의 intra-class spatial 연속 조절. 목적(representation)과 메커니즘(contrastive vs. augmentation) 완전히 다름. Novelty 위협 없음.
+
+**DG-DDM-SEG (IEEE TMI April 2025)** — DOI: 10.1109/TMI.2025.3564474
+- "Domain-Generalized Discrete Diffusion Model for Cross-Domain Medical Image Segmentation"
+- Authors: Heran Yang et al.
+- Discrete conditional distribution of segmentation masks를 생성하는 diffusion model
+- Robust Feature Extraction Subnet + Mask-Generation Transformer로 domain-generalized discrete conditional distribution 학습
+- Two-path reverse diffusion process로 pseudo-label 활용
+- Code: https://github.com/HeranYang/DG-DDM-Seg
+- **내 방법과의 관계**: 생성 모델 기반 DG (diffusion) vs. augmentation 기반 SSDG. 목적과 architecture 모두 다름. Novelty 위협 없음.
+
+#### Category D — 신규 Top-tier Vision 논문
+
+**LEARN2SYNTH (ICCV 2025)** — arXiv: 2411.16719
+- "Learn2Synth: Learning Optimal Data Synthesis Using Hypergradients for Brain Image Segmentation"
+- Authors: Xiaoling Hu et al.
+- Bilevel optimization: inner loop에서 segmentation model 학습, outer loop에서 synthesis strategy를 hypergradient로 최적화
+- 최적 synthetic data 생성 전략을 자동으로 학습
+- Brain MRI segmentation에서 합성 데이터 기반 DG 실험
+- **내 방법과의 관계**: 합성 데이터 생성 전략 최적화 (bilevel) vs. 내 실제 데이터 기반 augmentation. 목적과 설정 다름. ICCV 2025 top-tier venue.
+
+**TSIAA (IEEE TMI 2026, pp.764-776)** — IEEE Xplore doc. 11146907 ⚠️ 주목
+- "Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation"
+- Authors: Zhengshan Wang, Long Chen, Xuelin Xie, Weiping Ding
+- Code: https://github.com/Wangzts0228/TSIAA
+- **Instance-level Image Augmenters (IIAG)**: Instance-level Augmentation Modules (IAMs) 기반 Learnable Constrained Bézier Transformation 사용
+- Image-level augmentation과 달리 단일 이미지 내 **다른 해부학적 구조가 서로 다른 augmentation**을 받음
+- Teacher-student adversarial training으로 intra-image diversity 극대화
+- **내 방법과의 관계 (⚠️ 고관련성)**: "단일 이미지 내 서로 다른 해부학적 구조에 서로 다른 augmentation"이라는 핵심 아이디어를 TSIAA가 adversarial training으로 구현. 내 Continuous-ONA는 vessel radius/observability 기반으로 연속적으로 augmentation budget을 조절함.
+- **핵심 차이**: TSIAA = 구조별 augmentation magnitude를 adversarial (learnable) 방식으로 탐색. 나 = vessel radius(구조의 물리적 특성, observability)에 따라 deterministic/continuous하게 조절. TSIAA는 "무엇이 다른 augmentation을 받아야 하는가"에 대한 명시적 기준 없음; 나는 vessel caliber를 직접 conditioning signal로 사용.
+- **Novelty 위협도**: Medium-High — "intra-image structure-specific augmentation"의 첫 번째 명시적 구현. 하지만 conditioning signal(adversarial vs. radius), mechanism(binary instance vs. continuous observability), 도메인(일반 의료영상 vs. TOF-MRA 혈관)이 다름. 상세 full text 즉시 독해 필요.
+
+**PCSDG (Biomedical Signal Processing and Control, Vol.99, 2025)** — DOI: 10.1016/j.bspc.2024.106801
+- "Structure-Aware Single-Source Generalization with Pixel-Level Disentanglement for Joint Optic Disc and Cup Segmentation"
+- Authors: Jia-Xuan Jiang, Yuee Li, Zhong Wang
+- **SABA (Structure-Aware Brightness Augmentation)**: disentanglement module으로 content map + style map 분리, pixel-wise multiplication으로 saliency 기반 structure attention map 생성 후 augmentation 적용
+- Pixel-level 구조 정보를 사용해 brightness augmentation 강도를 조절
+- Optic disc/cup segmentation (RIGA+ dataset)
+- **내 방법과의 관계**: Pixel-level structure map에 따라 augmentation 강도를 조절한다는 아이디어 공유. 차이: PCSDG = saliency-based binary attention (salient/non-salient region), 나 = vessel radius 기반 연속 observability score. PCSDG는 vessel caliber 이질성 개념 없음.
+- **Novelty 위협도**: Low-Medium — BSPC 낮은 tier, optic disc 특화, binary attention vs. continuous conditioning.
+
+#### Category B — 신규 방법론 유사 논문
+
+**SDCL (IEEE TPAMI 2025)** — arXiv: 2503.16852
+- "Causal Inference via Style Bias Deconfounding for Domain Generalization"
+- Authors: Jiaxi Li, Di Lin, Hao Chen, Hongying Liu, Liang Wan, Wei Feng
+- Structural Causal Model(SCM)으로 style을 confounding factor로 모델링 → backdoor adjustment로 style 영향 제거
+- Style frequency bias를 explicitly 다루는 인과론적 접근
+- **내 방법과의 관계**: 인과론적 style deconfounding vs. 내 augmentation-level approach. 방향이 다르지만 "appearance 변화에도 구조가 보존되어야 한다"는 동기 유사. TPAMI 최고 tier 논문으로 Related Work 언급 가치 있음.
+- **Novelty 위협도**: Low — 완전히 다른 mechanism (causal SCM vs. augmentation budget).
+
+#### Category C — 신규 구조·혈관 특화 논문 (Preprint)
+
+**WAVESDG (arXiv 2603.28463, April 2026)** — Preprint Only
+- "Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation"
+- Authors: Shramana Dey, Varun Ajith, Abhirup Banerjee, Sushmita Mitra
+- **WISER (Wavelet-based Invariant Structure Extraction and Refinement)**: LL sub-band(low-freq)을 global anatomy 보존에, high-freq sub-band를 edge 강화에 사용
+- Appearance-structure decoupling for optic disc/cup SSDG across fundus datasets
+- **내 방법과의 관계**: "appearance을 바꾸되 structure는 보존한다"는 원칙 공유. 차이: 주파수 분해 기반 전역 보존 vs. 내 vessel radius 기반 local/continuous 조절. Fundus, 의료영상 DG 아님.
+- **Novelty 위협도**: Low — 주파수 분해 기반 전역 구조 보존, intra-class radius conditioning 없음.
+
+**TOPBRAIN (medRxiv 2026)** — Preprint Only
+- "TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy"
+- DOI: 10.64898/2026.05.28.26354312
+- 48 landmark vessel classes (arterial + venous) in MRA + CTA, 90 annotated volumes, 50 training volumes 공개
+- **가장 중요한 특징**: vessel caliber measurements along centerlines — 뇌혈관 전체에 걸친 혈관 직경 측정값 제공
+- **내 방법과의 관계**: 직접 DG 방법은 아닌 벤치마크 논문. 하지만 TOF-MRA/MRA 전 뇌혈관에서의 caliber 분포 데이터가 내 observability score 계산 방법론의 외부 검증 근거로 활용 가능. 48 vessel classes에 걸친 혈관 직경 이질성이 내 동기 지지.
+
+**CSWINUNETR (arXiv 2606.19824, June 2026)** — Preprint Only
+- "CSWinUNETR: Segmentation of Thin Anatomical Structures in Medical Images"
+- Authors: Junho Moon, Haejun Chung, Ikbeom Jang
+- CSWin Transformer + UNETR 아키텍처: thin anatomical structure에 특화된 attention 구조
+- Thin structure의 anisotropic geometry에 맞춘 shifted window attention 설계
+- likely MICCAI 2026 제출 (June 2026 preprint 타이밍)
+- **내 방법과의 관계**: thin structure에 특화된 architecture (attention 설계) vs. 내 training-time augmentation budget 조절. 메커니즘 다름. 하지만 "thin structure가 다른 처리가 필요하다"는 동기를 공유 → 내 motivation 지지. Rel: High.
+
+### Novelty Gap 재확인
+
+이번 Run #8에서도 다음 키워드로 명시적으로 다룬 논문은 발견되지 않았다:
+
+- "vessel observability conditioned augmentation"
+- "radius-conditioned augmentation budget"
+- "intra-class continuous augmentation strength based on vessel radius"
+- "thin vessel appearance protection during nonlinear augmentation"
+
+**⚠️ 주의 (TSIAA)**: TSIAA (IEEE TMI 2026)가 "단일 이미지 내 서로 다른 해부학적 구조마다 서로 다른 augmentation"을 adversarial 방식으로 구현함. 이는 내 Continuous-ONA의 핵심 동기(intra-image structure-specific augmentation)와 가장 근접한 선행연구. 하지만 conditioning signal이 완전히 다름:
+- **TSIAA**: adversarial(learnable) augmentation — 어떤 구조가 어떤 augmentation을 받을지를 데이터로 학습
+- **Continuous-ONA**: observability(vessel radius)에 의해 결정적으로 conditioning — "얇은 혈관은 fragile하다"는 물리적/해부학적 원칙에 기반
+
+따라서 내 핵심 novelty claim("vessel radius/observability에 따라 augmentation budget을 연속적으로 조절한다")은 여전히 유효.
+
+### 탐색 제한 사항
+
+- **WebFetch 403 Forbidden**: arXiv.org, semanticscholar.org, openreview.net, paperswithcode.com, ieeexplore.ieee.org 등 학술 사이트 전체 접속 차단
+- **WebSearch 결과 없음**: 네트워크 정책에 의한 차단 (미국 외 환경)
+- **우회 방법**: GitHub MCP `search_code` API로 public GitHub repo에서 논문 정보 탐색
+- Background agent는 WebSearch 접속 가능 (다른 환경에서 실행) → DG-DDM-SEG 발견
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] **TSIAA 즉시 전문 독해 (P0)**: Instance-level Augmentation Module(IAM) 구조 상세 — 내 Continuous-ONA와 conditioning 방식 차이 명확히 파악 필수. IEEE Xplore doc 11146907.
+- [ ] AG-TAL 전문 독해: GT radius 계산 방식 (skeleton-based distance transform) 상세 → 내 observability score 계산법과 비교
+- [ ] DCON 전문 독해: bilevel contrastive loss + GLSA controllability 파라미터 정의
+- [ ] CSWINUNETR 전문 독해: thin structure attention 설계 상세 + MICCAI 2026 최종 게재 여부 확인
+- [ ] MICCAI 2026 accepted list 공개 시 DG/vessel 관련 논문 탐색 (2026-07 예상)
+- [ ] CCSDG 전문 독해: channel selection mechanism + contrastive loss 구성
+- [ ] TOPBRAIN caliber measurement data 확인: whole-brain vessel caliber 분포 — 내 observability score 설계의 외부 근거로 활용 가능
+- [ ] PCSDG 전문 독해: SABA의 구조적 attention map이 saliency-based인지 segmentation mask-based인지 확인
+- [ ] SDCL full text: SCM 구성 방식 및 backdoor adjustment 적용 범위 확인 (TPAMI 관련 연구 필요)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
