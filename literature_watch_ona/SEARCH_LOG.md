@@ -2,6 +2,120 @@
 
 ---
 
+## 2026-06-22 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-22
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Accepted Conference 1편 + Published Journal 1편 + Preprint 4편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv new method | 기존 목록 재확인, UniDDG/SRCSM 재확인 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular 2025 2026 new paper | 기존 목록 재확인 |
+| B | structure-conditioned augmentation intra-class observability medical image segmentation DG 2026 | **WaveSDG (arXiv:2603.28463)** 발견 — wavelet sub-band SSDG |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift accepted paper | CVPR 2026 구체 리스트 미확인 |
+| A | arXiv 2603.28463 decoupling wavelet sub-bands SSDG fundus segmentation | **WaveSDG** 상세 확인: WISER 모듈, 1 source → 5 target optic disc/cup |
+| C | tubular structure segmentation thin vessel topology DG CVPR ICCV ECCV 2026 | **VasoMIM AAAI 2026** 단서 발견 |
+| D | NeurIPS 2025 ICLR 2026 augmentation policy domain generalization segmentation | ICLR 2026 DG/aug 논문 직접 히트 없음 |
+| A | arXiv June 2026 domain generalization medical segmentation vessel brain new | 기존 목록 재확인 |
+| C | VasoMIM vascular anatomy masked image modeling vessel segmentation AAAI 2026 | **VasoMIM (arXiv:2508.10794)** 확인: AAAI 2026 accepted, anatomy-guided MIM |
+| A | CoSAM self-correcting SAM domain generalization medical image segmentation 2411.10136 | CoSAM 확인 (preprint only, 미수록 유지) |
+| A | arXiv 2025 2026 radius-conditioned observability-aware thin vessel augmentation SSDG | 직접 명시 논문 없음 → Continuous-ONA gap 재확인 |
+| A | MICCAI 2026 accepted papers domain generalization vessel brain segmentation | MICCAI 2026 미공개 확인 |
+| C | arXiv 2602.23782 few-shot 3D vessel segmentation foundation models OOD | **BreakDataBarrier** 확인: DINOv3 + 3D Adapter, TopCoW+Lausanne OOD |
+| D | ICLR 2026 accepted papers domain generalization segmentation medical image | ICLR 2026 직접 DG medical 논문 찾기 어려움 |
+| A | arXiv June 2026 2606 single source domain generalization appearance augmentation new | 기존 목록 재확인 |
+| B | augmentation budget structure-aware intra-class morphology-aware DG CVPR ICCV NeurIPS 2025 2026 | **MorphGen (arXiv:2509.00311)** 발견: morphology-guided SSDG (histopathology) |
+| B | inter-class inter-domain semantic augmentation CDSA domain generalization IEEE TIP 2024 | CDSA (IEEE TIP 2024) 확인 — 자연영상, 수록 보류 |
+| B | MorphGen morphology-guided representation learning SSDG histopathology arXiv 2509.00311 | MorphGen 상세 확인: 핵 형태 + 공간 구조 보존, contrastive learning, SWA |
+| C | arXiv 2604.10737 generative data-engine foundation model few-shot 2D vascular segmentation | **UniVG** 확인: compositionality 기반 universal few-shot vascular seg |
+| A | arXiv 2603.24388 causal transfer medical image analysis domain generalization | Causal Transfer survey (2026) 확인 — survey 논문, 수록 보류 |
+| A | DG-TTA SSC descriptor GIN augmentation out-of-domain medical segmentation Sensors 2025 | **DG-TTA (Sensors 2025)** 확인: Vol.25(17), Sep 2025, Published Journal |
+| A | SLAug RASS MoreStyle ConStyX ADA follow-up citation 2026 | 기존 목록 재확인 |
+| A | arXiv 2025 2026 "thin vessel" OR "small vessel" domain generalization protection augmentation SSDG | 직접 명시 논문 없음 → Continuous-ONA gap 재확인 |
+| C | arXiv 2602.11536 vascular anatomy-aware self-supervised pre-training X-ray angiogram | VasoMIM-X (2602.11536) 확인 = VasoMIM 확장 버전 (170K XA), 별도 수록 보류 |
+| A | arXiv 2409.19774 crafting distribution shifts validation training SSDG WACV 2025 | WACV 2025 Oral 확인 — 자연영상 validation set 구성 방법, 수록 보류 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**WaveSDG (arXiv:2603.28463, April 2026)**
+- SSDG for fundus image segmentation (optic disc/cup)
+- **WISER 모듈**: wavelet sub-band decomposition으로 anatomical structure ↔ domain-specific appearance 분리
+  - Low-freq sub-band → 전역 해부 구조 anchor (structure 보존)
+  - High-freq sub-band → 방향성 edge 선택적 강화 + noise 억제 (style 분리)
+- U-Net backbone에 WISER를 encoder → decoder fusion 전에 삽입
+- 1 source / 5 unseen target에서 7개 SOTA 논문을 Dice + HD95 양면에서 능가
+- **내 방법과의 관계**:
+  - 공통점: SSDG에서 structure-preserving 원칙 적용
+  - **핵심 차이**: WaveSDG = frequency-domain 분리 (전체 feature map 단위), 나 = pixel-level intra-image vessel radius별 augmentation budget. WaveSDG에는 intra-class vessel observability 차별화 개념 없음.
+  - 적용 도메인도 다름: WaveSDG = fundus optic disc/cup, 나 = TOF-MRA cerebrovascular SSDG
+- **Novelty 위협도**: Low-Medium (SSDG 직접 경쟁, 방법 방향 다름)
+
+#### 혈관 특화 신규 논문
+
+**VasoMIM (arXiv:2508.10794, AAAI 2026)**
+- Vessel-specific masked image modeling for X-ray angiogram analysis
+- Anatomy-guided masking: vessel patch를 우선 마스킹 → 혈관 representation 집중
+- Anatomical consistency loss: 재구성 이미지의 혈관 구조 일관성 강화
+- AAAI 2026 예비 버전; 확장 버전(2602.11536)은 XA-170K 데이터셋 포함
+- **내 방법과의 관계**: DG augmentation이 아닌 self-supervised pre-training. 혈관 특화 설계의 anatomy-guided 원칙은 내 동기와 방향 유사. 직접 충돌 없음.
+
+**BreakDataBarrier (arXiv:2602.23782, Feb 2026)**
+- DINOv3 foundation model + lightweight 3D Adapter + multi-scale 3D Aggregator
+- TopCoW (in-domain) + Lausanne (OOD) 실험: OOD에서 nnUNet 대비 +50% relative improvement
+- Few-shot 3D vessel segmentation (5개 training sample만으로 작동)
+- **내 방법과의 관계**: Foundation model few-shot vs. SSDG training-time augmentation. 겹치지 않음. TopCoW 데이터셋 사용 → 내 TOF-MRA와 해부학적 인접.
+
+**UniVG (arXiv:2604.10737, April 2026)**
+- Generative foundation model for universal few-shot 2D vascular segmentation
+- 혈관 이미지의 compositionality 학습 → universal 일반화
+- 직접 DG 충돌 없음.
+
+#### 방법론 유사 신규 논문
+
+**MorphGen (arXiv:2509.00311, Sept 2025)**
+- 핵 형태(nuclear atypia), 공간 구조(structural atypia), 전체 morphological atypia를 contrastive learning에 통합
+- stochastic weight averaging(SWA)으로 OOD robustness 강화
+- 적용: 조직병리 암 분류 (segmentation 아님)
+- **내 방법과의 관계**: "morphological prior를 domain-invariant 학습에 통합"이라는 방향 유사. 차이: MorphGen = 분류, 나 = segmentation; MorphGen = cell-level morphology, 나 = intra-vessel radius.
+
+#### 방법론 참고 (Published Journal)
+
+**DG-TTA (Sensors 2025, Vol. 25(17), arXiv:2312.06275)**
+- SSC (Shape Space Correspondence) descriptor + GIN intensity augmentation 조합
+- CT→MRI 크로스 모달리티에서 abdominal (+46%), spine (+73%), cardiac (+14%) 개선
+- Test-time adaptation(TTA) = target 데이터 필요 → pure SSDG 설정 아님
+- **내 방법과의 관계**: GIN aug baseline 구성 근거로 참고 가능. 직접 충돌 없음.
+
+### Novelty Gap 재확인
+
+Run #8에서도 다음 키워드로 명시적으로 다룬 논문은 발견되지 않았다:
+- "vessel observability conditioned augmentation"
+- "radius-conditioned augmentation budget"
+- "intra-class vessel thickness augmentation strength"
+- "thin vessel protection during appearance augmentation"
+- "continuous observability-conditioned nonlinear augmentation"
+
+**→ Continuous-ONA의 핵심 novelty gap 유지 확인 (Run #8)**
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] WaveSDG full text 독해: WISER module 상세 (wavelet sub-band별 역할 분리 공식)
+- [ ] VasoMIM AAAI 2026 full paper 접근: anatomy-guided masking threshold 및 consistency loss 공식
+- [ ] BreakDataBarrier 전문: OOD Lausanne 결과 상세, 3D Adapter 구조
+- [ ] UniVG 전문: compositionality 모델링 방식 및 few-shot generalization mechanism
+- [ ] ICLR 2026 openreview.net 직접 탐색: DG/augmentation/medical 관련 accepted paper 목록
+- [ ] CVPR 2026 accepted paper 목록 공개 시 DG/vessel 관련 논문 즉시 탐색
+- [ ] Topo-R1 (arXiv:2603.13054) "Detecting Topological Anomalies via VLMs" — Cat C 추가 여부 검토
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

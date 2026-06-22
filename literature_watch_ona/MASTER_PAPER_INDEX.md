@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-22  
+> 총 수록 논문: 102편
 
 ---
 
@@ -57,6 +57,8 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | High |
+| DGTAA | DG-TTA: Out-of-Domain Medical Image Segmentation Through Augmentation, Descriptor-Driven Domain Generalization, and Test-Time Adaptation | Sensors | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -65,6 +67,7 @@
 | KEY | 제목 | Venue | Year | Status | Rel |
 |-----|------|-------|------|--------|-----|
 | DGSSA | DGSSA: Domain Generalization with Structural and Stylistic Augmentation for Retinal Vessel Segmentation | Neural Networks | 2025 | Published Journal | High |
+| MORPHGEN | MorphGen: Morphology-Guided Representation Learning for Robust Single-Domain Generalization in Histopathological Cancer Classification | arXiv | 2025 | Preprint Only | Low-Medium |
 | BIRF_SDG | BIRF-SDG: Band Importance Aware Random Frequency Filter Based Single-Source Domain Generalization for Retinal Vessel Segmentation | ICIC 2025 | 2025 | Accepted Conference | High |
 | SHAPEBIAS | Shape Bias and Robustness Evaluation via Cue Decomposition for Image Classification and Segmentation | arXiv | 2025 | Preprint Only | Medium |
 | SHAPEBIAS_CNN | Promoting Shape Bias in CNNs: Frequency-Based and Contrastive Regularization for Corruption Robustness | arXiv | 2025 | Preprint Only | Medium |
@@ -114,6 +117,9 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| VASOMIM | VasoMIM: Vascular Anatomy-Aware Masked Image Modeling for Vessel Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Medium |
+| BREAKDATABARRIER | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | arXiv | 2026 | Preprint Only | Medium |
+| UNIVG | Generative Data-engine Foundation Model for Universal Few-shot 2D Vascular Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -178,3 +184,7 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (WaveSDG) | 2603.28463 | 2026 |
+| BREAKDATABARRIER | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | 2602.23782 | 2026 |
+| UNIVG | Generative Data-engine Foundation Model for Universal Few-shot 2D Vascular Image Segmentation | 2604.10737 | 2026 |
+| MORPHGEN | MorphGen: Morphology-Guided Representation Learning for SSDG in Histopathological Cancer Classification | 2509.00311 | 2025 |
