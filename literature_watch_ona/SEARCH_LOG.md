@@ -2,6 +2,126 @@
 
 ---
 
+## 2026-06-23 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-23
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **9편** (Published Journal 2편 + Accepted Conference 3편 + Workshop 1편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv MICCAI new method | WaveSDG(2603.28463), TSIAA(IEEE TMI 2026) 발견 |
+| A | teacher student adversarial augmentation single domain generalization medical image segmentation IEEE TMI 2026 | **TSIAA (IEEE TMI 2026, Vol 45 pp 764-776)** 상세 확인: instance-level learnable Bézier, adversarial |
+| A | "Decoupling Wavelet Sub-bands" single source domain generalization fundus segmentation arXiv 2603 | **WaveSDG (arXiv 2603.28463)** 확인: April 2026, WISER module, wavelet sub-band decoupling |
+| A | arXiv 2606 domain generalization medical image segmentation vessel augmentation 2026 | 기존 목록 재확인 |
+| A | "pseudo multi-source domain generalization" bridging single multi-source arXiv 2505.23173 | **PMDG (arXiv 2505.23173)** 확인: 단일 소스에서 pseudo 다중 도메인 생성 (낮은 관련성으로 미수록) |
+| A | "causal inference via style bias deconfounding" domain generalization IEEE TPAMI 2025 | **SDCL (IEEE TPAMI, arXiv 2503.16852)** 확인: SCM + backdoor adjustment, SLAug 능가, medical seg 포함 |
+| A | "single domain generalization with adversarial memory" arXiv 2503.06288 | **SDGAM (arXiv 2503.06288)** 확인: adversarial memory bank feature augmentation |
+| A | SLAug RASS ConStyX follow-up citation 2026 new domain generalization | 기존 목록 재확인 |
+| A | "devil is in channels" contrastive single domain generalization MICCAI 2026 | CCSDG = MICCAI 2023 (이미 알려진 논문, 미수록) |
+| C | tubular structure segmentation domain generalization thin vessel 2026 CVPR ICCV arXiv new | TopoVST(2603.14909), VasoMIM(AAAI 2026), VesselSDF(MICCAI 2025) 발견 |
+| C | VasoMIM "vascular anatomy-aware masked image modeling" vessel segmentation AAAI 2026 | **VasoMIM (AAAI 2026, arXiv 2508.10794)** 확인: anatomy-guided masking + anatomical consistency loss |
+| C | TopoVST "topology-fidelitous vessel skeleton tracking" arXiv 2603.14909 2026 | **TopoVST (arXiv 2603.14909)** 확인: multi-scale sphere graph + vessel radius estimation + wave-propagation skeleton tracking |
+| C | VesselSDF MICCAI 2025 "distance field" vessel segmentation signed distance | **VesselSDF (MICCAI 2025, arXiv 2506.16556)** 확인: SDF 회귀로 thin vessel 기하학적 보존 |
+| C | PASC-Net "plug-and-play shape self-learning" convolutions vessel segmentation arXiv 2507 | **PASC-Net (Biomed Signal Proc 2025)** 확인: strip conv + HTC. Cat C Medium 해당하나 venue 낮아 미수록 |
+| C | "Bridging the Geometry Mismatch" frequency-aware anisotropic serialization thin-structure SSMs arXiv 2603 | **FGOS-Net (arXiv 2603.28503)** 확인: frequency-geometric disentanglement for thin-structure SSMs |
+| C | tUbeNet "generalizable deep learning" 3D vessel Oxford Biology Methods 2026 | tUbeNet (Oxford Biology Methods, Nov 2025): foundation model for 3D vessel. 낮은 tier (Biology Methods and Protocols), DG 직접 아님, 미수록 |
+| A | "Single-Source Domain Generalization for Coronary Vessels" SpringerLink STACOM 2024 | **DomainFlow (STACOM 2024 Workshop)**: connectivity mask prediction for DG, coronary vessel |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift robust | CVPR 2026 papers 미공개 확인 |
+| D | AAAI 2026 domain generalization segmentation medical image augmentation accepted | 기존 목록 재확인 (FLEX-SEG, VasoMIM 발견) |
+| D | ICCV 2025 open access medical image segmentation domain generalization vessel | 기존 목록 재확인 |
+| D | NeurIPS 2025 domain generalization segmentation augmentation structure-aware robust | 기존 목록 재확인 |
+| B | class-wise structure conditioned augmentation medical segmentation domain generalization intra-class 2025 2026 | **SDCL** 재확인, 기존 목록 재확인 |
+| B | augmentation budget intra-class structure heterogeneity domain generalization segmentation thin thick 2025 2026 | CDSA (IEEE TIP 2024) 발견 — 낮은 직접성, 미수록 |
+| B | MorphGen "morphology-guided representation learning" single-domain generalization histopathology arXiv 2509 | **MorphGen (arXiv 2509.00311)**: 조직병리 SDG, morphology-guided contrastive learning. 낮은 도메인 관련성, 미수록 |
+| B | structure-aware augmentation observability conditioned vessel radius domain generalization 2025 2026 | "vessel observability conditioned augmentation" 직접 명시 논문 여전히 없음 → ONA gap 재확인 |
+| Lane5 | VesselSDF, VasoMIM의 MICCAI 2025 / AAAI 2026 인용 추적 | 기존 목록 재확인 |
+| Lane5 | MICCAI 2026 accepted papers (June notification) | MICCAI 2026 notification 6월 12일 → papers.miccai.org 미공개, Awesome-MICCAI-2026 GitHub 탐색 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** — ieeexplore.ieee.org/document/11146907
+- **Teacher-Student Instance-Level Adversarial Augmentation**
+- Instance-level Image Augmenter (IIAG): IAM 모듈 여러 개를 스택하여 per-instance learnable constrained Bézier 변환 적용
+- 기존 adversarial aug (image-level, simple structure)의 "over-augmentation 제한 다양성" 문제를 해결한다고 주장
+- **내 방법과의 차이**: TSIAA = 전체 이미지 단위 per-instance 적응 (discriminator adversarial training 기반), 나 = 동일 이미지 내 spatial location별 vessel radius 기반 augmentation strength 연속 조절. TSIAA에는 "thin vessel 보호" 개념 없음 → 내 핵심 novelty 미침범.
+- **주의점**: ADA(MICCAI 2025)도 Bezier 기반 per-sample 적응인데, TSIAA는 adversarial + teacher-student로 추가. 세 방법(ADA, TSIAA, 내 ONA) 비교 테이블 구성 필요.
+
+**SDCL (IEEE TPAMI 2025)** — arXiv 2503.16852
+- **Causal Inference via Style Bias Deconfounding for Domain Generalization**
+- Style-Guided Expert Module (SGEM) + Backdoor Causal Learning Module (BDCL)
+- Causal SCM: content ← domain ← style 구조, backdoor adjustment로 style confounding 제거
+- Medical image segmentation 실험 포함: SLAug 대비 성능 향상 확인
+- **내 방법과의 차이**: SDCL = style을 인과적으로 제거 (전체 이미지 단위 causal intervention), 나 = appearance augmentation strength를 spatial structure에 따라 조절. 접근 방식 완전히 다름.
+- IEEE TPAMI 출판 논문 (early access) → 높은 권위.
+
+#### 혈관·tubular 특화 신규 논문
+
+**VesselSDF (MICCAI 2025)** — arXiv 2506.16556, papers.miccai.org Paper 2121
+- Signed Distance Field 회귀로 vessel binary label 예측을 대체
+- adaptive Gaussian regularizer: vessel 표면 근처 정밀, 멀어질수록 smooth
+- thin vessel connectivity와 기하학적 fidelity 향상
+- **내 방법과의 관계**: 출력 표현 방식(SDF vs binary). 내 aug 접근과 보완적. SDF는 vessel radius를 self-referential하게 제공 → 내 observability score 계산에 활용 가능성
+
+**VasoMIM (AAAI 2026)** — arXiv 2508.10794
+- Anatomy-guided masking: vessel patch를 우선적으로 mask해 representation 학습 집중
+- Anatomical consistency loss: original과 reconstructed 사이 vascular semantic 일관성
+- X-ray angiogram 3-dataset SOTA
+- Self-supervised pretraining 방향. 내 supervised SSDG와 직접 경쟁 없음.
+
+**TopoVST (arXiv 2603.14909)** — March 2026, under review
+- Multi-scale sphere graph + GNN으로 tracking direction + vessel radius 동시 추정
+- geometry-aware weighting scheme: 내 observability 개념과 유사한 "radius 기반 가중치"
+- Wave-propagation skeleton tracking: space-occupancy filtering으로 spurious skeleton 제거
+
+**FGOS-Net (arXiv 2603.28503)** — March 2026, under review
+- Frequency-Geometric Disentangling: stable topology carrier + directional high-frequency band 분리
+- Frequency-aligned scanning: direction-consistent trace 보존으로 anisotropic thin structure
+- DeepCrack (crack segmentation), STARE (retinal vessel) 등 다수 thin structure benchmark
+- 내 ONA와 "frequency band 분리"라는 아이디어는 다르지만, thin structure의 anisotropic 특성을 명시적으로 다루는 것이 유사.
+
+#### Cat A 추가 논문
+
+**WaveSDG (arXiv 2603.28463)** — April 2026, under review
+- WaveSDG: wavelet sub-band를 통해 anatomical structure와 domain-specific appearance를 분리
+- WISER (Wavelet-based Invariant Structure Extraction and Refinement) module
+- 각 wavelet sub-band의 semantic role을 활용 (low-freq → structure, high-freq → domain style)
+- Fundus vessel SSDG. 내 방법과 frequency 분리 vs spatial radius 조절로 다름.
+
+**DomainFlow (STACOM 2024 Workshop)** — Springer link.springer.com/chapter/10.1007/978-3-031-87756-8_1
+- Connectivity mask prediction instead of binary segmentation mask → domain-invariant spatial relationships
+- Coronary vessel segmentation DG
+- "connectivity mask"가 domain-invariant: 구조 연결성을 도메인 불변 proxy로 활용
+- Workshop paper (STACOM at MICCAI 2024). 낮은 tier지만 내 연구와 직접 연관.
+
+**SDGAM (arXiv 2503.06288)** — March 2025
+- Adversarial memory bank: training/testing feature를 invariant subspace로 투영
+- Memory-based feature augmentation → cross-domain alignment
+- General SDG (vision classification 위주). 의료영상 직접 실험 여부 미확인.
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** / **"radius-conditioned augmentation budget"** 직접 명시: Run #8에서도 해당 논문 없음 → Continuous-ONA gap 유지
+- TSIAA (IEEE TMI 2026): instance-level adversarial Bézier, 전체 이미지 단위 → 내 intra-image spatial radius 기반과 구분 명확
+- SDCL: causal style 제거 → 내 aug strength spatial 조절과 접근법 완전히 다름
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: IIAG의 IAM 구성 상세 + 데이터셋 실험 (prostate/cardiac/fundus?) → 내 방법과 실험 overlap 확인
+- [ ] SDCL 전문 독해: SGEM expert 수 파라미터 + medical seg ablation 상세
+- [ ] MICCAI 2026 공식 papers.miccai.org 공개 후 (9월 예상) DG/vessel 논문 재탐색
+- [ ] CVPR 2026 accepted list 공개 시 DG/augmentation/vessel 논문 탐색
+- [ ] TopoVST radius 추정 방식 상세: skeleton tracking radius와 내 observability score 통합 가능성
+- [ ] VesselSDF: SDF output → vessel radius 자동 추출 pipeline 가능성 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

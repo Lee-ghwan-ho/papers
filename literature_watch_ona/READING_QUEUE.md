@@ -22,6 +22,8 @@
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
+| ★★★ | **TSIAA** | **Run #8 신규** Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation (IEEE TMI 2026, Vol 45 pp 764-776). Instance-Level Image Augmenter(IIAG): learnable constrained Bézier 기반 IAM을 여러 단계 스택. per-instance 적응적 augmentation strength. **ADA(MICCAI 2025)와 유사한 Bezier 기반 per-sample 적응이지만 adversarial + teacher-student 추가.** 내 방법과 차이: TSIAA는 전체 이미지 단위 adversarial aug, 나는 intra-image vessel radius 기반 공간적 연속 조절 — 구분 명확. 즉시 full text 확인 필수. |
+| ★★★ | **SDCL** | **Run #8 신규** Causal Inference via Style Bias Deconfounding for Domain Generalization (IEEE TPAMI 2025, arXiv 2503.16852). SGEM(style-guided expert) + BDCL(backdoor causal learning)으로 style confounding 제거. Medical image segmentation 포함: SLAug 대비 성능 향상. 내 방법과의 관계: SDCL = 전체 이미지 단위 style 인과 제거, 나 = spatial structure별 augmentation strength 조절. 직접 충돌은 없으나 같은 problem에 다른 causal 접근 → novelty 구분 논거 확보 필요. |
 
 ---
 
@@ -78,6 +80,9 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **VASSELSDF** | **Run #8 신규** VesselSDF: Distance Field Priors for Vascular Network Reconstruction (MICCAI 2025, arXiv 2506.16556). SDF 회귀로 thin vessel geometry 보존 + floating segment 제거. SDF 거리장 = 암묵적 vessel radius → 내 observability score 계산에 활용 가능. |
+| ★ | **WAVESDG** | **Run #8 신규** WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus (arXiv 2603.28463). WISER module로 wavelet sub-band semantic 역할 분리. 내 방법과 비교 baseline 후보. |
+| ★ | **TOPOVSST** | **Run #8 신규** TopoVST: Topology-fidelitous Vessel Skeleton Tracking (arXiv 2603.14909). multi-scale sphere graph + vessel radius 동시 추정 → 내 radius 계산 방식 참고. |
 
 ---
 
