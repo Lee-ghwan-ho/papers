@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-23  
+> 총 수록 논문: 105편
 
 ---
 
@@ -57,6 +57,11 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| SDCL | Causal Inference via Style Bias Deconfounding for Domain Generalization | IEEE TPAMI | 2025 | Published Journal Article | **High** |
+| SDGAM | Single Domain Generalization with Adversarial Memory | arXiv | 2025 | Preprint Only | Medium |
+| DOMAINFLOW | Single-Source Domain Generalization for Coronary Vessels Segmentation in X-Ray Angiography | STACOM 2024 (MICCAI Workshop) | 2025 | Workshop Paper | Medium |
 
 ---
 
@@ -114,6 +119,10 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| VASOMIM | VasoMIM: Vascular Anatomy-Aware Masked Image Modeling for Vessel Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Medium |
+| TOPOVSST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | Medium |
+| VESSELSDF | VesselSDF: Distance Field Priors for Vascular Network Reconstruction | MICCAI 2025 | 2025 | Accepted Conference Paper | Medium |
+| FGOSNET | Bridging the Geometry Mismatch: Frequency-Aware Anisotropic Serialization for Thin-Structure SSMs | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -135,6 +144,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| SDCL | Causal Inference via Style Bias Deconfounding for Domain Generalization | IEEE TPAMI | 2025 | Published Journal Article | **High** |
 
 ---
 
@@ -178,3 +188,7 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| SDGAM | Single Domain Generalization with Adversarial Memory | 2503.06288 | 2025 |
+| TOPOVSST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | 2603.14909 | 2026 |
+| FGOSNET | Bridging the Geometry Mismatch: Frequency-Aware Anisotropic Serialization for Thin-Structure SSMs | 2603.28503 | 2026 |
