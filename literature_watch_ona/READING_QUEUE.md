@@ -50,6 +50,10 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★★ | **TSIAA** | **Run #8 신규** Teacher-Student Instance-Level Adversarial Augmentation (IEEE TMI 2026). Instance-level Bézier augmentation이 "same image 내 다른 structure에 다른 augmentation 규칙"을 적용. **내 방법과 가장 유사한 표현**: "breaks the uniformity of augmentation rules across different structures within an image." 차이: TSIAA = inter-structure adversarial diversity, 나 = intra-class vessel-radius observability conditioning. 즉시 full text 확인 및 차별화 논거 정리 필수. Code: https://github.com/Wangzts0228/TSIAA |
+| ★★ | **WAVESDG** | **Run #8 신규** WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463, April 2026). WISER module: LL(구조) vs HH(노이즈) 분리로 domain-invariant structural representation 학습. 내 방법과 방향 유사(구조 vs. 외관 분리) — 차이: wavelet decomposition (나는 augmentation budget conditioning). 비교 baseline 후보. |
+| ★★ | **SCNP** | **Run #8 신규** Same Class Neighbor Penalization for topology accuracy (CVPR 2026, arXiv 2603.18671). 13 datasets, multiple morphologies. topology accuracy를 pixel-neighbor 관계로 정의하는 새로운 접근. tubular 구조에도 효과적이면 내 thin vessel 보호 loss와 결합 가능. |
+| ★★ | **FVAC** | **Run #8 신규** Pixel-wise Divide and Conquer for Federated Vessel Segmentation (IJCAI 2025). "vessel morphology inconsistency" 문제를 global uncertainty로 픽셀별 differentiated guidance 제공. 내 "intra-class morphology conditioning"과 방향 유사. 차이: federated learning setting, uncertainty-based (나는 radius-based). |
 
 ---
 
@@ -115,3 +119,10 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| TOPGUARSEG | **Run #8 신규** Topology-Guaranteed Image Segmentation (SIAM JIS 2026). Persistent homology + PDE smoothing for width-aware topology. 혈관 두께를 topology에서 직접 표현하는 수학적 framework. 참고용. |
+| UVSM | **Run #8 신규** Universal Vessel Segmentation for Multi-Modality Retinal Images (IEEE TIP 2025). Image translation을 domain adaptation으로 활용. 데이터 레벨 대비 참고용. |
+| GRINA | **Run #8 신규** GrInAdapt: Source-Free Multi-Target DA for Retinal Vessel Segmentation (MICCAI 2025). 도메인 적응 논문이지만 multi-view registration-based label consensus 참고. |
+| SOMA | **Run #8 신규** SoMA: Singular Value Decomposed Minor Components Adaptation (CVPR 2025 Highlight). SVD 기반 DG fine-tuning. 내 방법과 직접 관련 없으나 representation-level DG 참고용. |
+| FASAM | **Run #8 신규** FA-SAM: Fully Automated SAM for SSDG (arXiv 2507.17281, Jul 2025). Auto-prompted generation + uncertainty modeling. SAM 계열 SSDG 최신 동향 참고. |
+| TOPOVST | **Run #8 신규** TopoVST: Topology-fidelitous Vessel Skeleton Tracking (arXiv 2603.14909, Mar 2026). Multi-scale sphere graphs + GNN for vessel tracking + radius estimation. wave-propagation skeleton tracking. Vessel radius 계산 방법 참고. |
+| IELDG | **Run #8 신규** IELDG: Suppressing Domain-Specific Noise (arXiv 2508.19604, Aug 2025). Diffusion model + Laplacian-based inverse evolution layers for DGSS. 자연영상 DGSS, 낮은 직접 관련성. |

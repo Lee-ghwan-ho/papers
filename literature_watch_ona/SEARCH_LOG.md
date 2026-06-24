@@ -2,6 +2,85 @@
 
 ---
 
+## 2026-06-24 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-24
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **11편** (Published Journal 3편 + Accepted Conference 5편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 MICCAI CVPR augmentation | **TSIAA** (IEEE TMI 2026) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA 2026 arxiv | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization 2026 CVPR MICCAI | **TOPOVST** (arXiv 2603.14909) 발견 |
+| D | CVPR 2025 domain generalization segmentation augmentation structure-aware robustness | **SoMA** (CVPR 2025 Highlight) 발견 |
+| A | nonlinear intensity augmentation structure conditioned appearance DG segmentation arxiv 2026 | 기존 gap 재확인 |
+| A | teacher student instance-level adversarial Bezier augmentation SSDG IEEE TMI 2026 | **TSIAA** 상세 확인: Instance-level IAM, learnable constrained Bézier, 4 SDG tasks |
+| A | decoupling wavelet sub-bands single source domain generalization fundus segmentation 2603.28463 | **WaveSDG** 확인: WISER module, LL/HH sub-band separation, April 2026 |
+| C | TopoVST topology vessel skeleton tracking 2603.14909 | **TopoVST** 확인: multi-scale sphere graph + GNN + wave-propagation, radius estimation |
+| C | topology guaranteed segmentation connectivity genus width constraints 2601.11409 | **TOPGUARSEG** (SIAM JIS 2026) 확인: persistent homology + PDE smoothing |
+| C | universal vessel segmentation multi-modality retinal 2502.06987 | **UVSM** (IEEE TIP 2025) 확인: image translation for domain adaptation |
+| D | IELDG inverse evolution layers domain generalized semantic segmentation 2508.19604 | **IELDG** 확인: Laplacian-based IEL + diffusion model for DGSS |
+| D | SoMA singular value decomposed minor components adaptation CVPR 2025 2412.04077 | **SoMA** (CVPR 2025 Highlight) 확인: SVD fine-tuning for DG representation |
+| A | AAAI 2026 domain generalization medical image segmentation vessel augmentation | 추가 신규 없음 (기존 목록 재확인) |
+| A | morphology conditioned observability vessel radius augmentation budget DG 2025 2026 | 직접 명시 논문 없음 — 내 방법의 gap 재확인 |
+| A | ConStyX HarmonySeg TopoTTA follow-up citation DG vessel 2026 | **GrInAdapt** (MICCAI 2025) 발견 |
+| A | GrInAdapt source-free multi-target domain adaptation retinal vessel MICCAI 2025 | **GrInAdapt** 확인: grounding + integrating + adapting, OCTA 기반 |
+| A | SLAug follow-up citation 2025 2026 TPAMI SSDG medical segmentation | **FASAM** (arXiv 2507.17281) 발견, 기존 목록 재확인 |
+| A | fully automated SAM single source domain generalization medical 2507.17281 | **FASAM** 확인: Auto-prompted Generation Model + SUFM, July 2025 |
+| C | MICCAI 2025 vessel segmentation augmentation domain generalization new papers | 기존 목록 재확인 (ISAC, MBFCV, L2CP 재확인) |
+| C | towards high-quality image segmentation topology accuracy penalizing neighbor pixels 2603.18671 | **SCNP** (CVPR 2026) 확인: Same-Class Neighbor Penalization, 13 datasets |
+| C | pixel-wise divide conquer federated vessel segmentation IJCAI 2025 | **FVAC** 확인: vessel morphology uncertainty-based differentiated guidance |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI 2026)** — https://ieeexplore.ieee.org/document/11146907/
+- Instance-level Bézier-based adversarial augmentation for SSDG
+- **"breaks the uniformity of augmentation rules across different structures within an image"**
+- Teacher-Student 학습 + Instance-level Image Augmenter (IIAG) + IAMs
+- 4 SDG tasks: cardiac / prostate / fundus retina / skin lesion
+- **내 방법과의 핵심 차이**:
+  - TSIAA = 서로 다른 semantic structure 간 inter-structure diversity (adversarial)
+  - 나 = 동일 vessel class 내 intra-class radius-conditioned observability (non-adversarial)
+  - TSIAA는 thin vs. thick vessel을 하나의 vessel class 내에서 구분하지 않음
+- **Novelty 위협도**: Medium — paper note TSIAA.md 작성 완료
+
+#### 주목할 신규 발견
+
+**SCNP (CVPR 2026)** — arXiv 2603.18671
+- "Same Class Neighbor Penalization": 같은 클래스 인접 픽셀에 대한 topology penalty
+- 13 datasets에서 검증, semantic + instance segmentation 모두 적용
+- 내 thin vessel topology 보존 논거의 보완 loss로 결합 가능
+
+**WaveSDG (arXiv 2603.28463, April 2026)**
+- WISER module: wavelet sub-band decomposition으로 structural feature 분리
+- LL sub-band = anatomical structure, HH = noise/artifacts
+- 내 방법의 "content-style 분리" 아이디어와 방향 유사하나 mechanism이 다름
+
+**FVAC (IJCAI 2025)**
+- Federated vessel segmentation에서 "vessel morphology inconsistency"를 global uncertainty로 해결
+- 픽셀별 차별화 guidance 개념이 내 radius-conditioned augmentation과 방향 유사
+
+**TOPGUARSEG (SIAM JIS 2026)**
+- Topology guarantee: connectivity + genus + width 동시 제약
+- width 제약은 vessel thickness와 직접 연결 — 내 observability 개념의 수학적 배경으로 활용 가능
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA full text 확인: adversarial aug이 instance 내 thin/thick vessel을 구분하는지 여부
+- [ ] SCNP 실험에서 tubular/vessel 데이터셋 포함 여부 확인
+- [ ] ICLR 2026 proceedings 상세 탐색 (의료영상 DG 논문 확인)
+- [ ] FVAC 상세 확인: uncertainty-based morphology conditioning mechanism
+- [ ] Pattern Recognition / Expert Systems with Applications 2026 SSDG 논문 추가 탐색
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
