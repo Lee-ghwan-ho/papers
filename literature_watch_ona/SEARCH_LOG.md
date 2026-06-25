@@ -2,6 +2,122 @@
 
 ---
 
+## 2026-06-25 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-25
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **11편** (Published Journal 1편 + Accepted Conference 5편 + Preprint 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv June new method | WaveSDG(2603.28463) 재확인 |
+| A | IEEE TMI 2026 single source domain generalization augmentation new paper | **TSIAA (IEEE TMI 2026)** 발견 — instance-level Bézier aug |
+| A | "teacher-student" "instance-level adversarial augmentation" single domain generalized segmentation IEEE TMI 2026 | TSIAA (DOI 10.1109/TMI.2025.3605162) 상세 확인 |
+| A | arXiv 2603.28463 "Decoupling Wavelet Sub-bands" single source domain generalization fundus | **WaveSDG** 상세 확인: WISER module, April 27 2026 |
+| A | CVPR 2026 domain generalization medical image segmentation accepted | **SegMoTE (CVPR 2026 Oral)**, SD-FSMIS, MedCLIPSeg 발견 |
+| A | arXiv 2504.17515 "Mamba-Sea" sequence augmentation generalizable medical segmentation | **MAMBA_SEA** 확인: Mamba-based global-to-local sequence aug |
+| B | "intra-class" OR "within-class" augmentation structure vessel domain generalization 2025 2026 thin thick | 직접 명시 논문 없음 — ONA gap 재확인 |
+| B | arXiv 2602.23496 "Structurally-Guided Dynamic Convolution" medical image segmentation 2026 | **SGDC** 확인: structure-extraction branch → dynamic kernel guidance |
+| B | "augmentation strength" OR "augmentation budget" vessel tubular structure-aware domain generalization medical | 직접 명시 논문 없음 — ONA gap 재확인 |
+| C | arXiv 2502.11731 "GraphMorph" tubular structure extraction morphing predicted graphs NeurIPS 2024 | **GraphMorph (NeurIPS 2024)** 확인: branch-level features, Graph Decoder + Morph Module |
+| C | arXiv 2603.14909 "TopoVST" topology vessel skeleton tracking 2026 | **TopoVST** 확인: multi-scale sphere graphs + GNN, vessel radii 추정 |
+| C | arXiv 2602.23782 "Breaking the Data Barrier" few-shot 3D vessel segmentation foundation models 2026 | **BREAKDATABARRIER** 확인: DINOv3 기반, TopCoW 실험, Feb 2026 |
+| C | CVPR 2026 curvilinear structure tubular vessel segmentation prompt-free adapter | **DUALADAPTER_CURV (CVPR 2026 Oral)** 발견: prompt-free curvilinear seg |
+| D | ICLR 2026 domain generalization segmentation accepted medical imaging | Primus (ICLR 2026, 3D med seg architecture) 발견, 직접 DG 없음 |
+| D | IJCAI 2026 domain generalization medical image segmentation | IJCAI 2026 proceedings 미인덱스 — 발견 없음 |
+| D | arXiv 2606 domain generalization segmentation vessel medical June 2026 | **GENIE (ICML 2026, arXiv 2606.16301)** 발견: OSGR 기반 DG optimizer |
+| D | arXiv 2503.16852 "casual inference style bias deconfounding" domain generalization 2025 | **SDCL** 확인: structural causal model + backdoor adjustment for DG |
+| Follow-up | TSIAA IEEE TMI 2026 Bezier instance-level augmentation single domain | TSIAA 상세: Vol.45, pp.764-776, online Sep 2025; student-teacher adversarial loop |
+| Follow-up | CVPR 2026 accepted papers medical imaging segmentation domain generalization full list | SD-FSMIS, MedCLIPSeg, SPEGC, SegMoTE(oral), DUALADAPTER_CURV(oral), R²-Seg(oral) 확인 |
+| Follow-up | "observability conditioned augmentation" "radius conditioned augmentation" "thickness conditioned" vessel DG 2026 | **여전히 없음** → Continuous-ONA gap 재확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 — 즉시 독해 필수)
+
+**TSIAA (IEEE TMI 2026)** ⚠️ — DOI: 10.1109/TMI.2025.3605162
+- Teacher-Student 구조에서 Instance-level Image Augmenter (IIAG)를 Bézier transformation으로 구성
+- "breaks the uniformity of augmentation rules across different structures within an image, thereby providing greater diversity"라고 논문에서 명시
+- **내 방법과의 공통점**: "같은 이미지 내 다른 구조에 동일한 augmentation 규칙을 적용하지 말아야 한다"는 핵심 주장 공유
+- **핵심 차이**:
+  - TSIAA = semantic instance 단위 (서로 다른 anatomical object들: 심장 vs 폐 vs 신장 등)
+  - 내 ONA = 하나의 foreground class(혈관) 내에서 local radius/observability 기반 continuous 조절
+  - TSIAA는 thin vs. thick vessel이라는 intra-class 이질성을 전혀 다루지 않음
+  - TSIAA는 adversarial teacher-student loop, 나는 training-time source augmentation
+- **대응 전략**: "TSIAA가 inter-instance uniformity를 깼다면, ONA는 intra-class spatial uniformity를 깬다. 혈관과 같은 tubular foreground는 class boundary 내에서도 structure-conditional augmentation이 필요한 유일한 해부학적 구조다."
+- IEEE TMI online publish: September 2, 2025 (volume 45, print 2026)
+
+#### 최고 티어 신규 논문 (High-impact venue)
+
+**SegMoTE (CVPR 2026 Oral)** — arXiv 2602.19213
+- SAM 기반 Token-Level Mixture of Experts for generalizable medical image segmentation
+- MedSeg-HQ로 data-efficient + cross-domain zero-shot 일반화 달성
+- 내 방법과 paradigm 완전히 다름 (foundation model MoE vs. SSDG augmentation)
+- 같은 문제 공간의 최신 CVPR 2026 방향 파악용
+
+**DUALADAPTER_CURV (CVPR 2026 Oral)** — arXiv 미공개
+- Prompt-free curvilinear structure segmentation with dual-level adapters
+- 혈관, 신경 등 curvilinear 구조 특화 — 내 Cat C 연구와 직접 인접
+- arXiv 아직 미공개: CVPR 2026 proceedings에서 직접 검색 필요
+
+**GENIE (ICML 2026)** — arXiv 2606.16301
+- One-Step Generalization Ratio Guided Optimization for Domain Generalization
+- OSGR: 각 파라미터의 loss reduction 기여도 + gradient alignment 평가로 DG 최적화
+- General DG optimizer (의료영상 아님) → 내 training에 적용 가능성 낮음
+- 최신 ICML 2026 DG 방법론 동향 파악용
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463, April 2026)** — Shramana Dey et al. (Indian Statistical Institute)
+- WISER module: encoder feature를 wavelet sub-band별로 분리 (저주파=global anatomy, 고주파=style)
+- 내 방법과 다른 mechanism (wavelet freq decomp vs. spatial radius budget) but 목적 유사: structure-style decoupling for SSDG
+- Fundus 실험: optic cup/disc, 5 unseen domains. SLAug 등 7가지 SOTA 능가
+
+**SGDC (arXiv 2602.23496, Feb 2026)**
+- Structure-extraction branch로 dynamic convolution kernel 생성 guide
+- "structure-aware feature modulation" 방향 — 내 "vessel morphology 기반 augmentation" 방향과 conceptual 유사
+- Dermatology (ISIC) + pathology (CoNIC) 실험, vessel DG 아님
+
+#### 혈관 특화 신규 논문
+
+**GraphMorph (NeurIPS 2024)** — arXiv 2502.11731
+- Branch-level features + Graph Decoder + SkeletonDijkstra 알고리즘으로 topologically accurate tubular extraction
+- NeurIPS 2024 Poster 94063 — 주요 venue 논문
+- 내 skeleton/topology 동기 지지 근거로 참고
+
+**TopoVST (arXiv 2603.14909, March 2026)**
+- Multi-scale sphere graphs + GNN: 추적 방향 + vessel radii 동시 추정
+- Wave-propagation 기반 skeleton tracking (spurious segment 억제)
+- **vessel radii 추정이 primary task** — 내 observability 계산의 관련 방법론
+
+**BREAKDATABARRIER (arXiv 2602.23782, Feb 2026)**
+- DINOv3 + 3D Adapter + Z-channel embedding으로 few-shot 3D vessel segmentation
+- TopCoW out-of-distribution에서 nnU-Net 대비 50% 상대적 개선
+- 내 방법과 paradigm 완전히 다름 (foundation few-shot vs. SSDG aug)
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** — Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"** — 여전히 없음
+- **"intra-class continuous augmentation strength"** — 여전히 없음
+- **TSIAA** (IEEE TMI 2026)가 "intra-image non-uniform augmentation"의 상위 개념을 다루지만, intra-class level (혈관 두께별 조절)로 내려가는 논문은 없음
+- **내 핵심 gap 유지**: thin vs. thick vessel에 서로 다른 augmentation budget을 연속적으로 할당하는 방법은 발표된 논문 없음
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] DUALADAPTER_CURV 전문 접근: CVPR 2026 Oral ID 40317, arXiv 아직 미공개
+- [ ] SegMoTE 실험 상세: zero-shot 일반화에서 어떤 augmentation 전략 사용했는지 확인
+- [ ] TSIAA 전문 독해: IIAG 구조 상세 + ablation — 특히 "intra-image structure differentiation" 범위 정확히 파악
+- [ ] IJCAI 2026 accepted list: 2026-08-15 이후 공개 예정 → 다음 Run에서 탐색
+- [ ] "vessel radius estimation" 관련 survey: TopoVST 인용 논문을 통해 radius 계산 방법론 계보 파악
+- [ ] CVPR 2026 전체 accepted list에서 medical DG 관련 추가 탐색 (전체 목록 접근 필요)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
