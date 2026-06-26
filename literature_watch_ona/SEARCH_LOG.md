@@ -2,6 +2,115 @@
 
 ---
 
+## 2026-06-26 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-26
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **7편** (Published Journal 2편 + Preprint Only 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation arXiv 2026 June new method vessel | **WaveSDG (arXiv 2603.28463)** 발견, **TSIAA (IEEE TMI 2026)** 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain arXiv 2026 MICCAI new | 기존 목록 재확인 |
+| B | structure-aware augmentation strength intra-class observability morphology-aware domain generalization segmentation 2026 | DGSSA, DCON 재확인 |
+| D | ICLR 2026 domain generalization segmentation augmentation accepted papers openreview | ICLR 2026 의료영상 DG 직접 히트 없음 |
+| D | CVPR 2026 accepted papers domain generalization segmentation augmentation robust distribution shift | CVPR 2026 4,090편 accepted 확인, 의료영상 DG 직접 히트 없음 |
+| A | arXiv 2603.28463 "Decoupling Wavelet Sub-bands" single source domain generalization fundus segmentation | **WaveSDG** 상세 확인: WISER module, optic disc/cup 1→5 SSDG |
+| A | "teacher-student" "adversarial augmentation" "single domain" medical image segmentation IEEE TMI 2026 | **TSIAA** 상세 확인: IIAG, IAMs, Bézier transformation, IEEE TMI Vol 45 pp 764-776 |
+| D | IELDG "inverse evolution layers" domain generalized semantic segmentation arXiv 2508.19604 | **IELDG** 확인: Laplacian-based IELs + IELDM + IELFormer, Aug 2025, natural image DGSS |
+| D | CVPR 2026 medical image segmentation domain generalization vessel augmentation accepted paper | GitHub MedAIerHHL/CVPR-MIA 확인, 의료영상 직접 DG 히트 없음 |
+| C | tubular structure segmentation thin vessel domain generalization MICCAI 2026 early accept preprint arXiv June 2026 | **TopoVST (arXiv 2603.14909)** 발견 |
+| C | arXiv 2603.09217 TubeMLLM foundation model topology vessel-like anatomy segmentation | **TubeMLLM** 상세 확인: 15 vessel datasets, MLLM + topology, MICCAI 2026 제출 |
+| C | TopoLoRA-SAM "topology-aware" "parameter-efficient" thin-structure cross-domain binary semantic segmentation 2026 | **TopoLoRA-SAM (arXiv 2601.02273)** 확인: SAM + LoRA + clDice, DRIVE/STARE/CHASE |
+| A | "Devil is in Channels" contrastive single domain generalization medical image segmentation MICCAI 2026 arXiv | MICCAI 2023 논문임 확인 (신규 아님) |
+| B | "structure-aware single-source generalization" "pixel-level disentanglement" optic disc cup segmentation 2025 | **PCSDG (Biomedical Signal Processing and Control 2025)** 발견: SABA 기법 |
+| A | "structure-aware brightness augmentation" "pixel-level disentanglement" optic disc domain generalization SSDG 2025 journal | PCSDG 상세 확인: SABA = grayscale curve 기반 brightness aug + contrastive disentanglement |
+| A | TSIAA IEEE TMI 2026 "instance-level adversarial augmentation" Bezier arXiv preprint DOI number authors | TSIAA 저자: Zhengshan Wang, Long Chen et al.; GitHub: Wangzts0228/TSIAA |
+| Follow-up | MICCAI 2026 awesome github papers domain generalization vessel segmentation augmentation brain | ambicuity/Awesome-MICCAI-2026 GitHub 확인: 자동 트래킹 리포지터리 존재 |
+| Lane 5 | SLAug follow-up citation 2025 2026 "rethinking data augmentation" TPAMI 2023 vessel cerebrovascular | 직접 후속 없음 (기존 목록 재확인) |
+| Lane 5 | NeurIPS 2025 domain generalization augmentation segmentation structure-aware new paper proceedings | 기존 목록 재확인 (GRAPHSEG 등) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** — IEEE Xplore: 11146907 ⚠️ High Priority
+- "Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation"
+- 저자: Zhengshan Wang, Long Chen et al. | GitHub: Wangzts0228/TSIAA
+- Instance-level Image Augmenter (IIAG): IAM = **learnable constrained Bézier transformation function** (per-instance)
+- Teacher-student adversarial learning으로 out-of-source 분포 탐색
+- **내 방법과의 공통점**: Bézier nonlinear appearance transformation + SSDG
+- **핵심 차이**: TSIAA = per-image(instance-level) 균일 적용, 나 = intra-image vessel radius별 연속 strength 조절. TSIAA에는 thin vessel 보호 개념 없음. "instance-level"이 내 방법에서 의미하는 intra-structure level과 다름.
+- **Novelty 위협도**: Medium-High — Bézier 변환이 겹치나, TSIAA는 영상 단위 adversarial aug, 나는 구조 단위 observability-conditioned aug. 반드시 full text 독해 필요.
+
+**PCSDG (Biomedical Signal Processing and Control 2025)** — DOI: S1746809424008590 ⚠️
+- "Structure-Aware Single-Source Generalization with Pixel-Level Disentanglement for Joint Optic Disc and Cup Segmentation"
+- 저자: Jia-Xuan Jiang, Yuee Li, Zhong Wang | GitHub: HopkinsKwong/PCSDG
+- **SABA (Structure-Aware Brightness Augmentation)**: pixel grayscale 값 기반 curve로 brightness를 구조 정보에 따라 차별화, truncated Gaussian으로 domain shift 시뮬레이션
+- **내 방법과의 공통점**: "structure-aware brightness augmentation"이라는 용어 및 개념이 내 ONA와 가장 근접. 구조 정보에 따라 증강을 차별화.
+- **핵심 차이**: SABA = pixel grayscale intensity(명도) 기반 brightness curve → 밝은/어두운 픽셀 구분, 나 = vessel radius/observability 기반 연속 nonlinear appearance (thin/thick vessel 구분). 내 방법은 tubular structure의 관찰 가능성에 기반하고 SSDG DG 맥락. SABA는 optic disc segmentation이고 내 관심 구조(혈관)와 다름.
+- **Novelty 위협도**: Medium — "structure-aware aug"의 방향이 겹치나, SABA는 pixel intensity 기반, 나는 vessel geometry 기반. 혈관 두께-관찰가능성 conditioning은 없음.
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463, April 2026)**
+- "Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation"
+- WISER module: low-freq sub-band → global anatomy anchor, high-freq sub-band → directional edge enhancement + noise suppression
+- 1 source → 5 unseen target fundus domains, optic disc/cup
+- 기존 7개 SOTA 능가 (Dice + Hausdorff 모두)
+- **내 방법과의 차이**: WaveSDG = frequency-domain 구조/스타일 분리, 나 = spatial-domain vessel radius conditioned aug budget
+
+#### 혈관·구조 특화 신규 논문
+
+**TopoVST (arXiv 2603.14909, March 2026)**
+- Multi-scale sphere graph + GNN: vessel tracking direction + **vessel radius** 동시 추정
+- Geometry-aware weighting: class imbalance를 skeleton geometry로 보정
+- Wave-propagation algorithm: spurious skeleton 제거
+- **내 방법과의 관계**: vessel radius 추정 방법론이 내 observability score 계산에 직접 활용 가능
+
+**TubeMLLM (arXiv 2603.09217, March 2026)**
+- MLLM + natural language topological priors, 15 vessel-like datasets (2 modalities)
+- TubeMData benchmark, adaptive loss weighting for topology-critical regions
+- MICCAI 2026 extended version 제출
+
+**TopoLoRA-SAM (arXiv 2601.02273, January 2026)**
+- SAM ViT encoder에 LoRA + spatial convolutional adapter + optional clDice topology supervision
+- 5.2% parameter만 학습, DRIVE/STARE/CHASE DB1 + polyp + SAR
+- Cross-domain thin-structure 분할 PEFT
+
+#### Top-tier Vision 신규 논문
+
+**IELDG (arXiv 2508.19604, August 2025)**
+- Laplacian-based Inverse Evolution Layers (IELs): 공간적 불연속성 + 의미론적 불일치 강조
+- IELDM (확산 기반 생성) + IELFormer (구조 안내 segmentation head) → IELDG 통합 프레임워크
+- 자연영상 DGSS, Cityscapes → 다른 도시 장면 일반화
+- **Category D 참고 수준** (의료영상 아님)
+
+### Novelty Gap 재확인
+
+이번 Run에서도 다음 키워드로 명시적으로 다룬 논문은 발견되지 않았다:
+- "vessel observability conditioned augmentation"
+- "radius-conditioned augmentation budget" (augmentation side)
+- "intra-class continuous augmentation strength" for vessel
+- "thin vessel appearance protection during domain generalization training"
+
+**TSIAA가 Bézier transformation을 instance-level SSDG에 적용**했으나, per-image 단위 adversarial aug로 내 intra-image vessel radius conditioning과 level이 다름. **PCSDG의 SABA가 "structure-aware brightness augmentation"으로 가장 근접**했으나, pixel grayscale 기반 (vessel geometry 무관)이고 optic disc/cup 설정.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA full text 독해: IAM Bézier function 수식 + adversarial training 방식 상세 → 내 방법과 구분 논거 확보
+- [ ] PCSDG full text 독해: SABA curve function 정의 + 실험 데이터셋 상세 → 비교 대상 여부 검토
+- [ ] WaveSDG full text 독해: WISER 세부 구조, 내 방법과 frequency vs. spatial aug 차이 정리
+- [ ] MICCAI 2026 early accept list 공개 시 재탐색 (Awesome-MICCAI-2026 GitHub 활용)
+- [ ] TopoVST radius 추정 방식 상세: multi-scale sphere graph에서 radius computation 공식
+- [ ] IJCAI 2026 accepted papers (2026.ijcai.org/accepted-papers/) 탐색: DG/segmentation 관련 논문
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

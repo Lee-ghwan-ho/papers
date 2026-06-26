@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-06-26  
+> 총 수록 논문: 103편
 
 ---
 
@@ -57,6 +57,8 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WAVEADG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | High |
 
 ---
 
@@ -76,6 +78,7 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| PCSDG | Structure-Aware Single-Source Generalization with Pixel-Level Disentanglement for Joint Optic Disc and Cup Segmentation | Biomedical Signal Processing and Control | 2025 | Published Journal Article | **High** |
 
 ---
 
@@ -114,6 +117,9 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | Medium |
+| TUBEMLLM | TubeMLLM: A Foundation Model for Topology Knowledge Exploration in Vessel-like Anatomy | arXiv | 2026 | Preprint Only | Medium |
+| TOPOLORA | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -135,6 +141,7 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| IELDG | IELDG: Suppressing Domain-Specific Noise with Inverse Evolution Layers for Domain Generalized Semantic Segmentation | arXiv | 2025 | Preprint Only | Low |
 
 ---
 
@@ -178,3 +185,8 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVEADG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | 2603.14909 | 2026 |
+| TUBEMLLM | TubeMLLM: Foundation Model for Topology in Vessel-like Anatomy | 2603.09217 | 2026 |
+| TOPOLORA | TopoLoRA-SAM: Topology-Aware PEFT for Thin-Structure Cross-Domain Segmentation | 2601.02273 | 2026 |
+| IELDG | IELDG: Inverse Evolution Layers for Domain Generalized Semantic Segmentation | 2508.19604 | 2025 |
