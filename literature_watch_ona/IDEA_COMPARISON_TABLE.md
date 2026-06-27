@@ -53,6 +53,7 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **TSIAA** *(Run#8)* | Instance-level (per-semantic-region) | **Adversarially learned** (per-instance Bézier) | ❌ 구조 물리적 속성 미사용 | ❌ 얇은 구조 보호 없음 (diversity 극대화 목적) | ❌ | ❌ | "breaks uniformity across structures" — 내 주장과 표현 동일. **핵심 차이**: TSIAA = different semantic instances 간 discrete adversarial Bézier. 나 = single vessel class 내 continuous radius→budget. Label-image consistency 보호 개념 없음. |
 
 ---
 
@@ -89,6 +90,14 @@
 | TopoTTA | TTA for tubular topology | Cross-domain topological shift 탐지 |
 
 ---
+
+---
+
+## Run #8 (2026-06-27) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | "breaks the uniformity of augmentation rules across different structures within an image"라는 표현이 내 핵심 주장과 거의 동일. Instance-level Bézier aug + teacher-student. IEEE TMI 2026 published. | **핵심 차이 강조**: TSIAA의 "instance-level"은 서로 다른 semantic instance(전경 region) 간 discrete adversarial Bézier 파라미터 다양화. 나는 단일 vessel class 내에서 **연속 물리량**(local radius)에 따른 nonlinear aug budget 조절. TSIAA는 radius/observability signal 없음, thin vessel label-image consistency 보호 목표 없음. 동기도 다름: TSIAA = diversity for generalization, ONA = consistency preservation for fragile structures. |
 
 ---
 

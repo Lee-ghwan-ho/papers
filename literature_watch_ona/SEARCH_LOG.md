@@ -2,6 +2,121 @@
 
 ---
 
+## 2026-06-27 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-27
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **9편** (Published Journal 3편 + Accepted Conference 3편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv new | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new method arXiv | 기존 목록 재확인 |
+| A | "decoupling wavelet" fundus segmentation single source domain generalization arXiv 2603 | **WaveSDG (arXiv:2603.28463)** 발견: WISER 모듈, fundus SSDG, March 2026 |
+| A | TSIAA teacher student instance level adversarial Bezier augmentation IEEE TMI 2026 single domain | **TSIAA (IEEE TMI 2026, vol 45, pp 764-776)** 발견: instance-level Bézier aug, teacher-student |
+| A | multi-organ adaptive disentangled domain generalization collaborative learning 2026 Neurocomputing | **AD-DGCL (Neurocomputing 2026)** 발견: SSRD + SCT + adaptive region-specific loss |
+| A | "pseudo multi-source" single domain generalization bridging gap arXiv 2505.23173 | **PMDG (arXiv:2505.23173)** 확인: pseudo-domain generation from single source |
+| B | nonlinear intensity augmentation adaptive strength structure morphology medical segmentation DG 2026 | 기존 목록 재확인 |
+| C | arXiv June 2026 vessel segmentation topology thin tubular new paper 2606 | **CSWinUNETR (arXiv:2606.19824, MICCAI 2026)** 발견: cross-shaped stripe self-attention for thin structures |
+| C | TopoVST topology vessel skeleton tracking arXiv 2603 | **TopoVST (arXiv:2603.14909)** 발견: multi-scale sphere graphs + GNN + wave propagation |
+| C | VesselSDF distance field priors vascular network reconstruction arXiv 2506 | **VesselSDF (arXiv:2506.16556, MICCAI 2025)** 발견: SDF regression for vessel reconstruction |
+| C | topology-guaranteed segmentation width connectivity SIAM 2026 | **TopoGuar (arXiv:2601.11409, SIAM 2026)** 발견: width-aware persistent homology |
+| C | Towards high quality topology accuracy penalizing neighbor pixels segmentation 2603.18671 | **SCNP (arXiv:2603.18671, CVPR 2026)** 발견: same-class neighbor penalization, 13 datasets |
+| D | CVPR 2026 domain generalization segmentation augmentation robust distribution shift | 기존 목록 재확인 |
+| D | CVPR 2026 vessel thin structure segmentation topology loss new accepted | SCNP 재확인 |
+| Follow-up | SLAug AGTA ConStyX follow-up citation 2026 domain generalization vessel medical image | 기존 목록 재확인, CCSDG (MICCAI 2023) 재확인 |
+| Follow-up | ICLR 2026 domain generalization medical image segmentation augmentation accepted | ICLR 2026 직접 hit 없음 |
+| Follow-up | MICCAI 2026 accepted papers domain generalization vessel segmentation medical image | CSWinUNETR (MICCAI 2026) 확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련) ⚠️
+
+**TSIAA (IEEE TMI 2026)** — IEEEXplore doc 11146907, vol 45, pp 764-776
+- "Instance-level adversarial augmentation **breaks the uniformity of augmentation rules across different structures within an image**, thereby providing greater diversity."
+- Instance-level Image Augmenter (IIAG): 여러 IAM 모듈로 구성, 각 모듈은 learnable constrained Bézier transformation 기반
+- Teacher-Student 구조: adversarial aug (out-of-source data 탐색) + consistent representation learning
+- 실험: prostate MRI (NCI-ISBI13 → 5 target sites), fundus (REFUGE → 3 sites)
+- **내 방법과의 공통점**: "uniformity of augmentation rules를 구조마다 다르게" — 정확히 내 핵심 주장과 동일한 표현
+- **핵심 차이**: TSIAA의 "instance-level"은 semantic instance (각 전경 픽셀/패치) 단위 discrete break. 나는 vessel foreground class 내에서 **local radius라는 연속 물리량**에 따라 continuous하게 augmentation budget 조절. TSIAA는 radius/observability를 conditioning signal로 사용하지 않음. TSIAA는 adversarial (teacher-student), 나는 annotation-derived non-adversarial.
+- **즉시 P0 논문으로 독해 필요** — novelty 구분 논거 명확히 해야 함
+
+#### 방법론 신규 논문
+
+**AD-DGCL (Neurocomputing 2026)** — ScienceDirect pii/S0925231225025184
+- Semi-supervised 3D multi-organ DG: SSRD (style-content disentanglement) + SCT (style-induced consistency training)
+- **adaptive region-specific loss**: pixel frequency에 따라 small organ에 동적으로 loss weight를 높임
+- 내 방법과 유사점: "small/fragile structure는 특별히 취급" — 개념 방향 동일. 단, 내 방법은 augmentation budget 조절이고 AD-DGCL은 loss weighting. 또한 AD-DGCL은 multi-organ semi-supervised, 나는 single-vessel SSDG.
+
+**WaveSDG (arXiv:2603.28463)** — March 2026 preprint
+- WISER (Wavelet-based Invariant Structure Extraction and Refinement) module
+- Wavelet sub-band 분해: LL(global anatomy 고정) + LH/HL/HH(directional edge + noise 제거)
+- fundus optic disc/cup, 1 source → 5 target, 7개 SOTA 능가
+- 내 방법과 직접 경쟁 없음 (wavelet frequency 기반 vs. local radius 기반)
+
+**PMDG (arXiv:2505.23173)** — May 2025 preprint, NTT 연구
+- Single source → pseudo multi-domain 생성 (style transfer + aug)
+- MDG 알고리즘을 SSDG에 적용하는 bridge
+- 내 방법과 직접 경쟁 없음 (다른 DG 패러다임)
+
+#### 혈관 및 Tubular Structure 신규 논문
+
+**CSWinUNETR (arXiv:2606.19824, MICCAI 2026)** — June 18, 2026
+- MICCAI 2026 accepted: 저자 Junho Moon, Haejun Chung, Ikbeom Jang
+- Cross-shaped stripe self-attention (CSWin): 주축 방향 long-range context 모델링
+- detail-enhanced multi-scale self-attention module for fine-grained detail preservation
+- 적용: retinal vessels, cerebral vasculature, facial wrinkles (얇고 토르투오스한 구조)
+- 내 방법과 complementary: 나는 training aug, CSWinUNETR은 architecture. 함께 언급 가능.
+
+**VesselSDF (arXiv:2506.16556, MICCAI 2025)** — 최근 arXiv 업로드
+- SDF regression으로 vessel 재구성: smooth tubular geometry 고유하게 포착
+- Adaptive Gaussian regularizer로 floating segment 제거
+- TOF-MRA 아닌 CT 기반, 재구성 위주 (segmentation augmentation과 직접 경쟁 없음)
+
+**TopoGuar (arXiv:2601.11409, SIAM J. Imaging Sciences 2026)**
+- Width-aware persistent homology: width 정보(vessel thickness, length)를 topological energy에 통합
+- "single-pixel-width connectivity achieves topology but compromises blood perfusion analysis"
+- **내 thin vessel 보호 동기와 직접 연결**: width 유지가 의학적으로 중요하다는 외부 근거
+- 내 방법과는 mechanism이 다름 (variational/deep learning loss vs. augmentation budget)
+
+**TopoVST (arXiv:2603.14909)** — March 2026 preprint
+- Vessel skeleton tracking: multi-scale sphere graphs + GNN tracking direction + vessel radii estimation
+- Wave propagation 기반 skeleton tracking, class imbalance는 geometry-aware weighting으로 해결
+- **vessel radii 동시 추정**: 내 radius 기반 conditioning의 기술적 구현 참고 가능
+
+#### Top-tier Vision 신규 논문
+
+**SCNP (arXiv:2603.18671, CVPR 2026)**
+- SCNP (Same-Class Neighbor Penalization): 가장 잘못 분류된 이웃 픽셀의 logit을 penalty로 사용
+- 모델이 이웃 픽셀을 개선하기 전에 현재 픽셀을 개선하도록 강제
+- 13 datasets, semantic + instance segmentation, 3 frameworks에 통합
+- topology accuracy 직접 개선 목적의 CVPR 2026 논문
+- 내 방법과 mechanism 다름 (inference-time loss vs. training aug), 하지만 thin structure topology metric에서 비교 참고 가능
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: TSIAA가 "breaks uniformity across structures"를 주장하지만, continuous radius conditioning 아님
+- **"intra-class continuous augmentation conditioning"**: 여전히 내 방법만 해당 — Novelty gap 유지 확인
+- TSIAA가 가장 위험한 신규 경쟁 논문 (표현 유사). 구분: discrete instance ≠ continuous radius.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: "instance-level"의 정확한 구현 (per-pixel? per-semantic-region? per-patch?)
+- [ ] SCNP 전문 독해 (CVPR 2026): neighbor penalty가 thin vessel topology에 미치는 효과
+- [ ] WaveSDG 전문 독해: WISER 모듈이 vessel DG에 적용 가능한지 확인
+- [ ] AD-DGCL의 "adaptive region-specific loss" 구현 상세: pixel frequency 기반 weighting 공식
+- [ ] TopoVST의 vessel radii 추정 방법: 내 observability score 계산과 연결 가능성
+- [ ] TopoGuar의 width-aware persistent homology: thin vessel 보호 동기의 수학적 근거로 인용 가능성
+- [ ] MICCAI 2026 추가 accepted 논문 탐색 (CSWinUNETR 외 DG 관련)
+- [ ] NeurIPS 2026 / ECCV 2026 submission deadline 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
