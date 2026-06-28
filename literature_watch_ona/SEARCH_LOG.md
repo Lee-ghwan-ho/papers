@@ -2,6 +2,117 @@
 
 ---
 
+## 2026-06-28 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-28
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **5편** (Published Journal 2편 + Accepted Conference 1편 + Preprint 2편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv MICCAI augmentation | WAVESDG(2603.28463), TSIAA(TMI 2026) 발견 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain 2026 new method | 기존 목록 재확인 |
+| A | teacher student instance-level adversarial augmentation single domain generalized medical TMI 2026 | **TSIAA (IEEE TMI Vol 45 pp 764-776)** 발견 |
+| A | Mamba-Sea IEEE TMI 2025 2026 Mamba generalizable medical image segmentation domain shift | **MAMBA_SEA (IEEE TMI 2025)** 발견 |
+| A | CVPR 2026 domain generalization segmentation augmentation accepted | CVPR 2026 미공개 확인 |
+| A | ICLR 2026 openreview domain generalization augmentation medical segmentation | 직접 히트 없음 |
+| A | IJCAI 2026 domain generalization medical image segmentation | 직접 히트 없음 (953편 수록 확인) |
+| A | WACV 2026 domain generalization medical image segmentation | Zero-LEAD (source-free DA) 발견, DG 직접 논문 없음 |
+| A | arXiv 2603.28463 Decoupling Wavelet Sub-bands SSDG fundus segmentation | **WAVESDG (arXiv 2603.28463)** 확인: WaveSDG + WISER module, April 2026 |
+| B | "augmentation strength" OR "augmentation budget" medical image domain generalization structure 2025 2026 | 기존 목록 재확인 |
+| B | "radius-conditioned" OR "thickness-conditioned" OR "vessel thickness" augmentation DG 2025 2026 | 직접 명시 논문 없음 → ONA gap 유지 |
+| B | arXiv 2025 2026 "intra-class" OR "structure-conditioned" OR "observability" augmentation DG vessel | 직접 명시 논문 없음 |
+| C | tubular structure segmentation domain generalization thin vessel topology MICCAI 2026 arXiv June 2026 | TOPOVST(2603.14909), GraphMorph(NeurIPS 2024) 발견 |
+| C | GraphMorph NeurIPS 2024 tubular structure extraction branch-level graph vessel road | **GRAPHMORPH (NeurIPS 2024)** 확인: neurips.cc/virtual/2024/poster/94063 |
+| C | TopoVST topology-fidelitous vessel skeleton tracking arXiv 2603.14909 | **TOPOVST (arXiv 2603.14909)** 확인: GNN + sphere graphs + vessel radius, March 2026 |
+| C | arXiv 2026 vessel segmentation domain generalization new method retinal IEEE | NeuroVascU-Net(2511.18422) 발견, DG 아님 제외 |
+| D | NeurIPS 2025 domain generalization segmentation medical image augmentation accepted | 기존 목록 재확인 |
+| D | CVPR 2026 domain generalization segmentation distribution shift | 미공개 확인 |
+| Follow-up | SLAug ConStyX SRCSM follow-up 2026 single source domain generalization medical new | ConStyX arXiv(2506.10675) 존재 확인 (기존 CONSTYX와 동일 논문 preprint), 기존 목록 재확인 |
+| Follow-up | TSIAA IEEE TMI 2026 instance-level Bezier adversarial augmentation detail segment region | TSIAA 세부 확인: IAM이 segment region별로 다른 Bézier curve 적용 |
+
+### 핵심 신규 발견 요약
+
+#### ⚠️ 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** — IEEE Xplore: 11146907
+- "Teacher-Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation"
+- IEEE Transactions on Medical Imaging, Vol. 45, pp. 764–776, 2026
+- **핵심 메커니즘**: Instance-level Image Augmenter (IIAG) + Instance-level Augmentation Modules (IAMs)
+  - IAMs: learnable constrained Bézier transformation을 segment region마다 적용
+  - 이미지 내 서로 다른 segment region에 서로 다른 Bézier curve 적용 → intra-image non-uniform augmentation
+  - Adversarial training: segmentation model이 어렵다고 판단하는 방향으로 Bézier 파라미터 최적화
+  - Teacher-Student framework로 augmented와 original feature 일관성 유지
+- **내 방법과의 관계**:
+  - **공통점**: "intra-image 내 다른 구조에 다른 augmentation 강도 적용" — 나와 같은 방향
+  - **핵심 차이 1**: TSIAA = adversarial (어렵게 만드는 방향), 나 = structural observability 기반 (얇은 혈관 보호)
+  - **핵심 차이 2**: TSIAA = segment region (패치 단위) 분리, 나 = vessel radius 연속값에 따른 pointwise conditioning
+  - **핵심 차이 3**: TSIAA = 균일하게 "더 어렵게", 나 = thin vessel은 "덜 변형" (반대 방향)
+  - TSIAA 논문에 thin vessel protection 개념 없음 (adversarial 방향은 thin vessel도 강하게 변형할 수 있음)
+- **Novelty 위협도**: High — 상세한 구분 필요. 주요 구분 논거:
+  1. TSIAA는 어려운 example 생성 (adversarial), 나는 fragile structure 보호 (conservative)
+  2. TSIAA는 binary segment region, 나는 continuous vessel radius
+  3. TSIAA에는 label-image inconsistency 문제의식 없음
+
+#### 방법론 신규 논문
+
+**MAMBA_SEA (IEEE TMI 2025)** — arXiv 2504.17515, IEEE Xplore 10980210
+- Mamba 기반 SSDG 프레임워크: Global Augmentation (전체 style variation) + Local Sequence Augmentation (sub-sequence 단위 token style resampling)
+- Medical SSDG에서 Mamba를 처음 사용한 논문
+- Prostate Dice >90% (SOTA 88.61% 능가)
+- 내 방법과 paradigm 다름: feature space sequence augmentation vs. input space structure-conditioned aug
+- 같은 DG 경쟁 방법으로 비교 목록에 추가 필요
+
+**WAVESDG (arXiv 2603.28463, April 2026)** — Preprint Only
+- WaveSDG: WISER (Wavelet-based Invariant Structure Extraction and Refinement) module로 wavelet sub-band 분리
+- LL sub-band (저주파) → anatomical structure 추출, LH/HL/HH (고주파) → edge + sensor noise 분리
+- Fundus image SSDG에 적용 (retinal vessel + optic disc)
+- 내 방법과 mechanism 다름: wavelet 주파수 분리 vs. vessel radius conditioned spatial aug
+
+#### 혈관·구조 신규 논문
+
+**GRAPHMORPH (NeurIPS 2024)** — arXiv 2502.11731, neurips.cc/virtual/2024/poster/94063
+- Branch-level graph-based tubular structure extraction
+- Graph Decoder: multi-scale feature로 branch-level 특성 학습 + tubular structure graph 생성
+- Morph Module: SkeletonDijkstra 알고리즘으로 centerline mask 정렬
+- 혈관 + 도로망 등 다양한 tubular 구조에 적용
+- NeurIPS 2024 accepted, 내 Cat C 레퍼런스로 추가
+
+**TOPOVST (arXiv 2603.14909, March 2026)** — Preprint Only (under review)
+- Multi-scale sphere graph + GNN으로 vessel skeleton tracking
+- vessel radius를 jointly 추정하는 gating-based feature fusion
+- Geometry-aware weighting + wave-propagation skeleton tracking
+- DG 직접 관련은 없지만 vessel radius 추정 방법이 내 ONA의 observability score 계산에 참고 가능
+
+### Novelty Gap 재확인
+
+이번 Run에서도 다음 키워드는 발견되지 않았다:
+- "radius-conditioned augmentation budget" (여전히 없음)
+- "vessel observability conditioned augmentation" (여전히 없음)
+- "thin vessel appearance protection during augmentation" (여전히 없음)
+
+TSIAA가 "intra-image non-uniform augmentation"이라는 방향을 공유하지만:
+- 방향이 반대 (adversarial = harder, mine = protective = conservative for thin vessels)
+- radius-continuous conditioning vs. segment region binary conditioning
+- label-image inconsistency 문제의식 없음
+
+**내 ONA의 핵심 gap은 이번 Run에서도 유지**됨.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: IAM의 segment region 정의 방법 + adversarial optimization 상세 → 내 방법과의 명확한 구분 논거 정리
+- [ ] MAMBA_SEA 전문 독해: local sequence augmentation의 sub-sequence 정의 + prostate 실험 수치 상세
+- [ ] MICCAI 2026 submissions (마감 2026-03): arXiv preprint 형태로 나온 논문 탐색 (Awesome-MICCAI-2026 GitHub 활용)
+- [ ] WACV 2026 open access: DG/SSDG 의료영상 세그멘테이션 추가 논문 탐색
+- [ ] GraphMorph 실험: 혈관 데이터셋에서 thin/thick vessel 별 성능 분석 포함 여부 확인
+- [ ] "augmentation strength" "structure-specific" 또는 "non-uniform augmentation strength" 직접 키워드 재탐색 (매 Run 지속)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
