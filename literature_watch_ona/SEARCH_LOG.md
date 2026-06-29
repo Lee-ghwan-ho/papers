@@ -2,6 +2,136 @@
 
 ---
 
+## 2026-06-29 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-29
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **11편** (Published Journal 4편 + Accepted Conference 2편 + Preprint 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation arXiv 2026 | WAVESDG (2603.28463) 발견, 기존 목록 재확인 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular 2025 2026 new method | 기존 목록 재확인 (NeuroVascU-Net 등 DG 아닌 논문들) |
+| A | teacher-student instance-level adversarial augmentation single domain generalized medical IEEE TMI 2026 | **TSIAA (IEEE TMI 2026)** 발견 — Vol. 45, pp. 764-776 |
+| A | structure-adaptive augmentation budget intra-class medical image segmentation domain generalization 2025 2026 | **MAMBA_SEA (arXiv 2504.17515)** 발견: Mamba 기반 DG |
+| A | arXiv 2605 2606 single source domain generalization medical image segmentation augmentation 2026 | 직접 arXiv 2606 논문 없음 확인 |
+| A | ICLR 2026 accepted papers domain generalization augmentation segmentation openreview | **YPILEARN (ICLR 2026, arXiv 2503.06717)** 발견 |
+| A | IEEE TMI 2026 single domain generalization medical image segmentation new published | TSIAA 재확인 (Vol. 45, pp. 764-776, 2026) |
+| A | Neurocomputing 2026 domain generalization medical image segmentation adaptive disentangled | **AD_DGCL (Neurocomputing Vol. 659, Jan 2026)** 발견 |
+| A | "pseudo multi-source domain generalization" single source bridging arXiv 2025 | **PMDG (arXiv 2505.23173)** 발견 |
+| B | "radius-conditioned" OR "thickness-conditioned" augmentation vessel domain generalization 2025 2026 | 직접 명시 논문 여전히 없음 → Continuous-ONA gap 재확인 |
+| B | observability-conditioned augmentation fragile structure tubular vessel domain generalization 2025 2026 | 직접 명시 논문 없음 |
+| C | arXiv 2503.01190 retinal vessel segmentation generalization layout-aware generative modelling | **RLAD (arXiv 2503.01190)** 확인: diffusion 기반 layout-aware retinal vessel DG |
+| C | arXiv 2603.14909 TopoVST vessel skeleton tracking topology tubular | **TOPOVST (arXiv 2603.14909)** 확인: multi-scale sphere graph + radius estimation |
+| C | arXiv 2502.06987 universal vessel segmentation multi-modality retinal | **UVSM (IEEE TIP Vol. 34, pp. 7903-7918, 2025)** 확인 |
+| C | hierarchical multi-scale Mamba tubular structure-aware convolution retinal vessel segmentation PMC 2026 | HM_MAMBA (Entropy 2025) 발견 — 낮은 venue, DG 아님, 미수록 |
+| C | AMAP cerebral aneurysm domain-adaptive prompting TOF-MRA npj Digital Medicine 2025 | **AMAP (npj Digital Medicine 2025)** 확인 |
+| D | CVPR 2026 domain generalization segmentation augmentation distribution shift | **PEPR (CVPR 2026, arXiv 2602.04583)** 발견 |
+| D | CVPR 2026 multimodal domain generalization few labels SSMDG | SSMDG (CVPR 2026) 발견 — 의료 seg 아님, 미수록 |
+| Follow-up | TSIAA "Teacher-Student Instance-Level Adversarial Augmentation" full detail | TSIAA 상세 확인: 저자 Zhengshan Wang, Long Chen 등, IEEE Xplore doc 11146907 |
+| Follow-up | WaveSDG wavelet WISER module fundus SSDG 2603.28463 | WAVESDG 상세 확인: WISER = Wavelet-based Invariant Structure Extraction and Refinement |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**TSIAA (IEEE TMI 2026)** ⚠️ P0 — 즉시 읽기 필요
+- **IEEE Transactions on Medical Imaging, Vol. 45, pp. 764-776, 2026**
+- DOI: ieeexplore.ieee.org/document/11146907/
+- 저자: Zhengshan Wang, Long Chen et al.
+- **방법**: Instance-Level Image Augmenter (IIAG) = 여러 Instance-level Augmentation Module (IAM)으로 구성, 각 IAM은 **learnable constrained Bézier transformation function** 기반
+- **Teacher-student 구조**: teacher model로 per-instance 최적 augmentation 방향 학습, student model로 segmentation
+- adversarial 방식: 모델이 틀리게 만드는 instance-level 강도의 augmentation 탐색
+- "over-augmentation 방지"를 명시적으로 언급 — 내 thin vessel 보호 동기와 방향 유사
+
+**내 방법과의 관계:**
+- 공통점: adversarial/adaptive한 방식으로 per-instance Bézier aug 강도를 content에 따라 조절
+- **핵심 차이**: TSIAA = 전체 이미지 단위 per-instance adversarial (어떤 이미지에 얼마나 강하게 할지), 나 = 동일 이미지 내 thin/thick vessel별 augmentation budget (intra-image vessel observability)
+- TSIAA는 혈관 두께 또는 observability라는 개념이 없음; 나는 vessel radius/observability를 spatial map으로 생성 후 augmentation을 공간적으로 조절
+
+**Novelty 위협도**: High — ADA (MICCAI 2025)보다 방향이 더 가깝고 venue가 IEEE TMI 2026로 최고 권위. 하지만 intra-image spatial conditioning의 차이는 명확함. 즉시 전문 독해 필요.
+
+---
+
+**WAVESDG (arXiv 2603.28463, April 2026)** — P0~P1
+- "WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation"
+- **WISER module**: 각 wavelet sub-band (LL: 저주파 구조, LH/HL/HH: 고주파 엣지)의 semantic role을 분리하여 domain-specific appearance를 LL에서 분리
+- 내 방법과의 차이: WAVESDG = frequency-domain global decomposition (전체 영상 단위), 나 = spatial domain structure-specific conditioning (혈관별 radius)
+
+---
+
+#### 방법론 유사 논문
+
+**MAMBA_SEA (arXiv 2504.17515)** — P1/P2
+- "First Mamba-based framework for domain generalization in medical image segmentation"
+- Global sequence augmentation + local sequence augmentation을 Mamba SSM에 통합
+- 내 방법과의 차이: architecture (Mamba SSM) 기반 DG, 내 방법은 augmentation pipeline 기반
+
+**PMDG (arXiv 2505.23173)** — P2
+- "Pseudo Multi-Source Domain Generalization": 단일 소스에서 pseudo-domain을 생성해 MDG 알고리즘을 SSDG에 적용
+- 내 방법과 다른 paradigm (domain multiplexing vs. intra-image structure conditioning)
+
+**AD_DGCL (Neurocomputing Vol. 659, 2026)** — P2
+- Multi-organ 3D DG: SSRD + SCT module, adaptive loss for small organ
+- small organ adaptive loss → 내 thin vessel 보호 동기와 표면적 유사, 그러나 organ-level이고 multi-source setting
+
+---
+
+#### 혈관 특화 신규 논문
+
+**AMAP (npj Digital Medicine 2025)** — P1
+- TOF-MRA + CTA를 모두 활용한 cerebral aneurysm detection/segmentation
+- Anatomically-guided MAE + domain-adaptive prompting + boundary-aware contrastive generalization
+- 내 연구와 동일한 TOF-MRA 도메인, 해부학적으로 인접
+- 분절 대상이 다름 (aneurysm detection vs. vessel segmentation)
+
+**TOPOVST (arXiv 2603.14909)** — P1
+- Topology-fidelitous vessel skeleton tracking
+- Multi-scale sphere graph + GNN으로 tracking direction + **vessel radius** 동시 추정
+- **radius estimation이 핵심 구성 요소** → 내 observability score 계산 방식과 유사한 approach
+- Geometry-aware weighting scheme으로 class imbalance 처리
+
+**UVSM (IEEE TIP 2025)** — P2
+- Universal vessel segmentation across fundus modalities (Color Fundus, SLO 등)
+- Single unified model for multiple modalities without per-modality fine-tuning
+- 내 방법과 다른 paradigm (modality-universal vs. domain-generalization)
+
+---
+
+#### Top-tier Vision
+
+**YPILEARN (ICLR 2026)** — P3
+- Test-time adaptation for medical imaging distribution shifts via click-based user correction
+- ICLR 2026 Paper (arXiv 2503.06717, OpenReview n0vHjCiLD2)
+- 설정이 test-time (target 필요), 나는 SSDG → 직접 비교 불필요
+
+**PEPR (CVPR 2026)** — P3
+- Event camera의 domain-invariant property를 privileged information으로 활용
+- 자연영상 DG, 내 방법과 관련 없음. Category D 참고용.
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"**: Run #8에서도 직접 명시 논문 없음
+- **"radius-conditioned augmentation budget"**: TOPOVST가 radius estimation을 하지만 DG/augmentation 아님; AG-TAL이 radius를 loss에 쓰지만 augmentation 아님
+- **"intra-image structure-specific augmentation strength"**: TSIAA는 per-image이고 나는 intra-image spatial, 간극 유지
+- **핵심 novelty gap 유지**: 내 Continuous-ONA의 핵심(intra-vessel-pixel radius → spatial augmentation strength map)을 명시적으로 다룬 논문 없음
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: instance-level IAM 구조 상세 + Bézier 적용 방식 → ADA와의 차이 및 내 방법과의 구분점 논거 구체화
+- [ ] TOPOVST radius estimation: sphere graph distance → 내 observability score 계산과 비교
+- [ ] WAVESDG 전문 독해: WISER module의 LL/HH sub-band 조절 방식
+- [ ] AMAP: domain-adaptive prompting 메커니즘 상세 (내 SSDG 설정과 비교)
+- [ ] MAMBA_SEA: Mamba state-space model의 sequence augmentation 방식
+- [ ] arXiv 2606.x 탐색: 6월 2026 논문 더 있을 수 있음 (현재까지 직접 히트 없음)
+- [ ] MICCAI 2026 accepted papers: 접수 마감 후 공개 시점에 재탐색 필요
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
