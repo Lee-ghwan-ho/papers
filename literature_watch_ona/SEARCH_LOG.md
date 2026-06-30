@@ -2,6 +2,100 @@
 
 ---
 
+## 2026-06-30 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-06-30
+- 모델: claude-sonnet-4-6
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **6편** (Published Journal 2편 + Accepted Conference 1편 + Preprint 3편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation augmentation 2026 arXiv June MICCAI | WaveSDG (2603.28463) 발견, UniDDG 기존 재확인 |
+| A | vessel segmentation domain generalization cerebrovascular TOF-MRA brain arXiv 2606 2026 new method | 기존 목록 재확인 |
+| C | tubular structure segmentation thin vessel topology domain generalization CVPR ICCV 2026 new | TopoVST (2603.14909) 발견, 기존 재확인 |
+| A | arXiv 2603.28463 "Decoupling Wavelet Sub-bands" SSDG fundus segmentation WISER | **WaveSDG** 확인: WISER module, low/high-frequency 분리, March 2026 preprint |
+| A | "teacher-student" "adversarial augmentation" "single domain generalized" medical segmentation IEEE TMI 2026 | **TSIAA (IEEE TMI 2026, Vol.45 pp.764-776)** 발견: instance-level adversarial Bezier aug |
+| C | TopoVST arXiv 2603.14909 vessel skeleton tracking topology 2026 | **TopoVST** 확인: multi-scale sphere graphs + GNN, wave-propagation skeleton, March 2026 |
+| D | CVPR 2026 domain generalization segmentation augmentation robust distribution shift accepted papers | CVPR 2026 proceedings 아직 미공개 확인 |
+| A | arXiv 2506 June 2026 medical image segmentation domain generalization structure intra-class augmentation | ROBUST-WT (2606.03069) 발견 (저품질), Mamba-Sea (2504.17515) 발견 |
+| A | Mamba-Sea IEEE TMI 2025 global-to-local sequence augmentation generalizable medical segmentation | **Mamba-Sea (IEEE TMI 2025 accepted)** 상세 확인: Prostate 90% Dice 최초 돌파 |
+| C | arXiv 2602.23782 "Breaking the Data Barrier" few-shot 3D vessel foundation models 2026 | **Breaking the Data Barrier** 확인: DINOv3, TopCoW + Lausanne datasets, Feb 2026 |
+| C | arXiv 2603.18797 VesselTok tokenizing vessel 3D biomedical graph 2026 | VesselTok 확인: vessel graph tokenization (generation, 내 연구와 무관) — 수록 제외 |
+| B | "AdvST" revisiting augmentations single domain generalization AAAI 2024 arXiv 2312.12720 | **AdvST (AAAI 2024)** 확인: adversarial semantics transformation, TSIAA의 선행 논문 |
+| A | arXiv 2603.27263 DeepBayesFlow Bayesian prostate segmentation DG 2026 | DeepBayesFlow 확인 (Bayesian inference 접근, 내 연구와 무관) — 수록 제외 |
+| A | TSIAA experiments prostate fundus polyp cardiac SDG 2026 IEEE TMI instance-level | TSIAA 4개 SDG task 실험 확인, Code: https://github.com/Wangzts0228/TSIAA |
+| Follow-up | SLAug ConStyX ADA SRCSM citation follow-up 2026 new papers SDG medical segmentation | 기존 목록 재확인, 직접 신규 없음 |
+| A | ICCV 2025 domain generalization segmentation structure-aware augmentation new papers | 기존 목록 재확인 (ADAL, TOPOTTA 등) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 ⚠️ (Novelty 충돌 위험 최고)
+
+**TSIAA (IEEE TMI 2026, Vol. 45, pp. 764-776)** — DOI: 10.1109/TMI.2026.11146907
+- IEEE TMI 2026 게재 확정 논문. Run #8에서 가장 중요한 신규 발견.
+- **핵심 주장**: "instance-level adversarial augmentation breaks the uniformity of augmentation rules across different structures within an image, thereby providing greater diversity"
+- **방법**: IIAG(Instance-level Image Augmenter) — IAMs(Instance-level Augmentation Modules), 각각 learnable constrained Bézier transformation 사용
+- Teacher-Student adversarial learning: 학생은 더 강한 adversarial aug을 생성, 교사는 일관된 표현 유지
+- 4개 SDG task에서 SOTA 초과 성능
+- **내 방법과의 직접 충돌 가능성**: "intra-image 비균일 augmentation" 아이디어 공유
+- **결정적 차이점**:
+  1. TSIAA = adversarial diversity maximization (강한 aug을 찾는 방향), 나 = conservative protection (얇은 혈관에 약한 aug 적용)
+  2. TSIAA의 "instance" = semantic object instance (전체 구조 단위), 나 = 동일 혈관 class 내 radius별 연속 조절
+  3. TSIAA는 "얇은 혈관 보호" 개념 없음: 모든 structure에 동일하게 adversarial maximization 적용
+  4. TSIAA = generic medical image SDG, 나 = tubular/vessel 특화 (label-image inconsistency in thin vessel)
+- **위치 조정 전략**: TSIAA를 "같은 문제의 다른 해결책"으로 인용: "TSIAA가 intra-image non-uniformity의 필요성을 adversarial 관점에서 확인했다면, ONA는 vessel physics(observability)에서 출발해 비대칭적(conservative-for-thin) 해결책을 제공한다"
+
+#### 중요 신규 발견
+
+**Mamba-Sea (IEEE TMI 2025, arXiv:2504.17515)** — 최초 Prostate DG Dice 90% 달성
+- Global: 다양한 site appearance 시뮬레이션
+- Local: Mamba 입력 sequence 중 random sub-sequence의 style statistics를 모델링 후 재샘플링
+- 내 방법과의 관계: 방식은 다름(token sub-sequence vs. pixel-level radius-conditioned). 그러나 Mamba 아키텍처 + DG aug 결합이 새로운 SSDG 방향임을 제시 → 내 방법도 Mamba backbone 실험 참고 가능
+
+**WaveSDG (arXiv:2603.28463, March 2026)** — Preprint
+- WISER module: wavelet sub-band별 다른 역할 활용 (low-freq = anatomy anchor, high-freq = edge enhancement + noise suppression)
+- fundus segmentation 5개 unseen target에서 7개 SOTA 초과
+- 내 방법과의 관계: 둘 다 "appearance의 비균일 처리" 방향이지만, WISER = frequency domain 분리, ONA = spatial observability 조절. 겹치지 않음.
+
+**AdvST (AAAI 2024, arXiv:2312.12720)** — Foundational
+- semantics transformation을 learnable parameter로 구성
+- adversarial learning으로 diverse SDG 샘플 생성
+- TSIAA의 선행 논문 (IIAG의 adversarial 설계가 AdvST에서 발전)
+- 내 방법과 차이: TSIAA와 동일 — diversity maximization, thin structure 보호 없음
+
+**TopoVST (arXiv:2603.14909, March 2026)** — Preprint
+- Multi-scale sphere graphs + GNN으로 vessel 추적 방향 + vessel radius 동시 추정
+- Wave-propagation skeleton tracking으로 spurious skeleton 억제
+- geometry-aware weighting: class imbalance 문제를 tracking directional loss에 통합
+- 내 방법과의 관계: vessel radius estimation 방식 참고 가능 (내 observability score 계산에 GNN 활용 가능성)
+
+**Breaking the Data Barrier (arXiv:2602.23782, Feb 2026)** — Preprint
+- Foundation model(DINOv3) + lightweight 3D Adapter + multi-scale 3D Aggregator
+- TopCoW + Lausanne OOD dataset에서 few-shot 5-sample Dice 43.42% (+30% over nnU-Net)
+- 내 방법과의 관계: paradigm 다름 (few-shot foundation model vs. SSDG augmentation)
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **TSIAA는 "intra-image non-uniform augmentation"을 인정하지만**, 얇은 혈관 보호(conservative-for-thin) 개념을 명시적으로 다루지 않음
+- **내 핵심 ONA gap 유지**: continuous vessel radius → conservative augmentation for thin, aggressive for thick
+- 단, TSIAA로 인해 "intra-image non-uniform augmentation" 자체가 novel하다는 주장은 약화됨 → 차별화를 observability/radius-driven conservative protection에 집중해야 함
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA full text 독해: "instance" 정의 (semantic instance = whole structure, not part?) + Bezier parameter space + 4개 task 실험 상세
+- [ ] Mamba-Sea full text: local token sub-sequence style augmentation 구현 상세
+- [ ] WaveSDG full text: WISER module 구현 + fundus 실험 → fundus vs. vessel 적용 가능성
+- [ ] CVPR 2026 proceedings 공개 시 재탐색 (2026-07 예정)
+- [ ] MICCAI 2026 accepted papers 공개 시 vessel/DG 탐색 (2026-08 예정)
+- [ ] "thin vessel protection" OR "conservative augmentation" 키워드: 여전히 직접 명시 없음 → Continuous-ONA gap 유지
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
