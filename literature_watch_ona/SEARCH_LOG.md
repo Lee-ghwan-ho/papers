@@ -2,6 +2,83 @@
 
 ---
 
+## 2026-07-01 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-01
+- 모델: claude-sonnet-5
+- 실행 방식: Category A/B/C/D를 4개의 독립 병렬 search agent로 분리 실행 (WebSearch 기반)
+- 연도 우선: 2025–2026, 보조: foundational만
+- 이전 Run(#7, 2026-06-03) 이후 약 4주 공백 — CVPR 2026(6월 개최, accepted 공개), MICCAI 2026 accept 통보(~6/12) 시점을 겹쳐서 탐색
+- 신규 발견 (최종 채택): **7편** (Published Journal Article 2편 + Accepted Conference Paper 1편 + Preprint Only 4편)
+
+### 수행한 검색 (에이전트별 요약)
+
+| Agent | 범위 | 주요 쿼리 | 핵심 발견 |
+|-------|------|-----------|-----------|
+| Cat A | SSDG 직접경쟁 (Lane 1, 5) | single source DG medical seg 2026, MICCAI 2026 accepted, CVPR 2026 DG medical seg, cerebrovascular TOF-MRA DG 2026, SLAug/RASS/ConStyX/ADA/DCON follow-up | **TSIAA (IEEE TMI 2026)**, WAVE_SDG (arXiv 2026), Multi-Domain Brain Vessel(중복 확인·제외), AngioDG(중복 확인·제외) |
+| Cat B | 방법론 유사 (Lane 3) | class/region/structure-conditioned aug, nonlinear/monotonic intensity, Bézier/spline, counterfactual appearance, shortcut suppression 2025-2026 | **TSIAA (독립 재발견)**, **ADVERIN (Medical Image Analysis 2025)**, PIXCF_CL (arXiv 2026), EAGT 벤치마크(품질기준 미달·제외) |
+| Cat C | 혈관·tubular 특화 (Lane 2) | thin/tubular structure DG, MICCAI 2026 accepted, Circle of Willis, clDice/skeleton follow-up, radius/vesselness 2026 | **CSWinUNETR (MICCAI 2026)**, **TopoVST (arXiv 2026)**, **TubeMLLM (arXiv 2026, MICCAI 2026 submission)**, 다수 저관련성 논문(VesselTok, SCNP, skeleton correction 등) 품질기준 미달로 제외 |
+| Cat D | Top-tier Vision 전이 (Lane 4) | CVPR 2026 accepted DG/aug, ICML 2026 accepted, counterfactual/uncertainty-guided aug, shape bias, frequency robustness | PEPR, Shape-Bias-MaxPool-Dilation, Magnitude-Aware-Phase-Jittering(DG-EBF workshop) — **모두 venue/전문 미확인으로 채택 보류**, 다음 Run에서 재확인 필요 |
+
+### 핵심 신규 발견 요약
+
+#### ⚠️ 최우선 주의 논문
+
+**TSIAA — Teacher–Student Instance-Level Adversarial Augmentation (IEEE TMI 2026)**
+- Cat A, Cat B 두 개의 독립 agent가 **각각 별도로** 발견 — 신뢰도 높음
+- "이미지 내에서 구조마다 non-uniform하게 augmentation 강도를 적용"한다는 주장이 내 핵심 claim과 표현 수준에서 가장 근접
+- 핵심 차이(잠정): TSIAA는 adversarial min-max로 강도를 **학습**(model-driven), 나는 vessel radius로 강도를 **explicit하게 결정**(data-driven, interpretable, 방향성 명확)
+- **paper_notes/TSIAA.md 작성 완료. 다음 세션에서 전문 확인 최우선.**
+
+#### 방법론 신규 논문
+
+**ADVERIN (Medical Image Analysis 2025, 원 아이디어 arXiv:2304.02720 2023)**
+- Adversarial하게 학습된 monotonic intensity mapping — 내 nonlinear/monotonic transform family와 mechanism 형태 유사
+- 차이: 강도를 adversarial loss로 결정 (구조 신호 없음) vs. 나는 radius로 결정
+- Baseline 비교 후보로 유력
+
+**PIXCF_CL (arXiv 2603.17110, Ben Glocker Lab, 2026)**
+- Causal generative model 기반 pixel-level counterfactual contrastive pretraining
+- Shortcut suppression/label-preserving intervention이라는 목표는 유사하나 mechanism이 근본적으로 다름(pretraining vs. augmentation)
+
+#### 혈관·구조 특화 신규 논문
+
+**CSWinUNETR (MICCAI 2026 accepted, arXiv 2606.19824)**
+- Thin/tortuous 구조(retinal vessel, cerebral vasculature 포함) 전용 attention backbone
+- DG 논문은 아니나 "얇은 구조의 낮은 contrast로 인한 fragmentation" 문제의식이 내 동기와 직결. Architecture-only, augmentation과 직교
+
+**TopoVST (arXiv 2603.14909, 2026)**
+- GNN 기반 skeleton tracking이 매 step마다 **local vessel radius를 명시적으로 함께 예측**
+- 내 observability score 계산(local radius 추정) 방법론과 직접 비교 가능한 최신 기법. DG 논문 아님
+
+**TubeMLLM (arXiv 2603.09217, MICCAI 2026 submission, accept 미확정)**
+- Vessel-like anatomy에 특화된 topology-aware foundation model. Topology-critical 영역에 adaptive loss weighting 부여 + zero-shot cross-modality OOD 일반화
+- Radius를 augmentation에 쓰지 않지만 "구조 중요도에 따른 차등 처리"라는 상위 motivation 공유
+
+### Novelty Gap 재확인
+
+- **"vessel radius/observability를 augmentation strength에 continuous하게 conditioning"**하는 논문은 Run #8에서도 발견되지 않음 — 핵심 gap 유지
+- 단, **TSIAA의 등장으로 "이미지 내 non-uniform augmentation"이라는 상위 프레이밍 자체는 더 이상 unique하지 않음** → 논문의 novelty 서술을 "non-uniform augmentation" 수준이 아니라 **"data-driven, interpretable, source-annotation-derived radius conditioning"**으로 한 단계 더 구체화해야 함 (TSIAA의 adversarial/model-driven 방식과의 대비를 명확히 서술)
+- CVPR 2026 / ICML 2026 accepted 목록이 공개되었으나(Cat D agent 확인), 직접적 의료영상 SSDG/vessel DG 논문은 아직 검색으로 발견되지 않음 — venue coverage 자체는 확인됨(다음 Run 재탐색 가치 있음)
+- MICCAI 2026 정식 accepted list는 아직 비공개 (notification ~6/12 이루어졌으나 official list 미공개, 개별 논문의 self-report만 확인 가능) — CSWinUNETR가 그 사례
+
+### 품질 기준 미달로 제외한 후보 (기록용)
+
+- Cat D의 PEPR / Shape-Bias-MaxPool-Dilation / Magnitude-Aware-Phase-Jittering: venue/acceptance 상태 미확인, 전문 접근 실패(403). 다음 Run에서 재확인 후 채택 여부 결정
+- 중복 발견(이미 인덱스에 존재하여 제외): "Multi-Domain Brain Vessel Segmentation Through Feature Disentanglement"(MULTIDOMAIN_BRAIN과 동일), AngioDG 채널 정규화 설명(ANGIODG와 동일 arXiv ID)
+- 저관련성으로 제외: VesselSDF, VesselTok, SCNP topology neighbor penalty, skeleton MST correction, FLOw-Loss(XCA), tubular metric benchmark, EAGT augmentation benchmark, causal style deconfounding(2025년 3월 preprint, 검색 윈도우 밖)
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해 최우선 (instance-level 정의, radius/anatomical prior 사용 여부, teacher-student의 target 정보 사용 여부)
+- [ ] ADVERIN 전문 독해: monotonic mapping 수식과 spatial mask 정의, SLAug/Causality_SDG와의 실험 비교
+- [ ] MICCAI 2026 공식 accepted list 공개 시 전체 재탐색
+- [ ] CVPR 2026 / ICML 2026 accepted 목록에서 의료영상 DG 세부 트랙 직접 탐색 (aggregate 통계만 확인됨, topic-filtered 검색 실패)
+- [ ] PEPR / Shape-Bias-MaxPool-Dilation / Magnitude-Aware-Phase-Jittering venue 및 전문 재확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

@@ -53,6 +53,8 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **TSIAA** *(Run#8)* ⚠️최우선 | **Instance-level** (non-uniform within image) | **Adversarial** (learned, not explicit) | ❌ (radius 등 명시적 신호 미확인) | ❌ (오히려 취약 구조를 더 공격할 위험) | ❌ (SSDG 주장) | ❌ | 이미지 내 non-uniform augmentation 강도라는 **문장 수준 claim이 내 것과 가장 근접**. 차이: TSIAA는 model-driven adversarial optimization으로 강도를 "학습"하지만, 나는 source annotation에서 유도한 radius로 강도를 explicit하게 "결정". Interpretability와 fragile-structure 보호 방향성이 핵심 차별점. **전문 독해 필수**. |
+| **ADVERIN** *(Run#8)* | Global (per-image adversarial) | **Monotonic** intensity mapping (adversarial) | ❌ | ❌ | ❌ | ❌ | Adversarially 학습된 monotonic intensity map + spatial mask. Nonlinear/monotonic transform family는 공유하지만 강도가 구조 관찰가능성이 아닌 adversarial loss로 결정됨. Baseline 후보로 유력. |
 
 ---
 
@@ -92,6 +94,15 @@
 
 ---
 
+## Run #8 (2026-07-01) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | "이미지 내에서 구조마다 non-uniform하게 augmentation 강도를 다르게 적용한다"는 주장이 내 핵심 novelty claim과 문장 구조 수준에서 가장 유사. 두 개의 독립 search agent가 모두 최우선 경쟁 논문으로 지목. | Mechanism 차이 강조: TSIAA = adversarial min-max로 강도를 **학습**(model-driven, 블랙박스, 취약 구조를 더 공격할 위험). 나 = source annotation에서 유도한 local radius로 강도를 **explicit하게 결정**(data-driven, interpretable, fragile 구조를 명시적으로 보호). 전문 확인 후 재검증 필요 — paper_notes/TSIAA.md 참고. |
+| **ADVERIN** (Medical Image Analysis 2025) | Monotonic intensity mapping 기반 adversarial augmentation. 내 nonlinear/monotonic transform family와 mechanism 형태가 유사. | 핵심 차이: ADVERIN은 강도를 adversarial loss로 결정 (구조 신호 없음). 나는 강도를 vessel radius로 결정. Nonlinear transform 자체보다 "무엇이 강도를 결정하는가"가 novelty 구분점. |
+
+---
+
 ## Run #4 (2026-05-31) 신규 위험 논문 업데이트
 
 | 논문 | 위험 이유 | 대응 방향 |
@@ -121,6 +132,7 @@
 
 | 논문 | 위험 이유 | 대응 방향 |
 |------|-----------|-----------|
+| **TSIAA** *(Run#8, 최신 최우선)* | Instance-level non-uniform augmentation. 현재까지 발견된 논문 중 표현 수준에서 내 claim과 가장 근접. | Adversarial(model-driven, 방향성 없음) vs. radius-conditioned(data-driven, fragile 구조 명시적 보호)의 mechanism 차이가 핵심 방어선. 전문 독해 최우선. |
 | **SLAug** | Class-level location-scale aug의 원조. 내 방법이 "SLAug를 thin/thick class로 나눈 것"처럼 보일 위험 | 핵심 차이 강조: SLAug는 FG/BG binary class, 내 방법은 single class 내 continuous structural property. SLAug는 class간 다양성, 나는 class 내 구조 보호. |
 | **FIESTA** | Uncertainty-guided augmentation. Pixel-level epistemic uncertainty로 aug 강도 조절 | FIESTA는 prediction uncertainty 기반(model-centric), 나는 annotation-derived structural observability 기반(data-centric). FIESTA는 thin vessel 보호 목적이 명시적이지 않음. |
 | **StyCona** | Local content augmentation 포함 | StyCona의 content augmentation은 전체 해부 구조 변형(이동/크기 변환), 내 방법은 intensity/appearance 변환의 강도 조절. |
