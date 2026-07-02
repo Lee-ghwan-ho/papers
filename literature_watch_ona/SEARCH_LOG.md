@@ -2,6 +2,88 @@
 
 ---
 
+## 2026-07-02 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-02
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 검색 방식: 4개 병렬 리서치 에이전트 (Cat A/B/C/D 각각 담당)로 fan-out 후 통합·중복 제거
+- 신규 발견: **22편** (Published Journal 3편 + Accepted Conference 1편 + Workshop 1편 + Preprint 17편)
+
+### 수행한 검색 쿼리 (요약, 총 44개 쿼리)
+
+| Lane | 대표 쿼리 | 주요 발견 |
+|------|-----------|-----------|
+| A | single source domain generalization medical image segmentation 2026 | 대부분 기존 목록 재확인 |
+| A | medical image segmentation style augmentation domain generalization TMI MedIA 2026 | **TSIAA (IEEE TMI 2026)** 발견 |
+| A | single domain generalization vessel segmentation medical image 2026 | FASAM(=기존 평가된 FA-SAM 재확인, 낮은 관련성으로 미수록 유지) |
+| A | arxiv 2606 / 2607 domain generalization medical image segmentation | **WAVESDG**, **ROBUSTWT** 발견 |
+| B | label-preserving transformation content-style disentanglement segmentation DG 2026 | MULTIDOMAIN_BRAIN 중복 재확인 (VESSELDIS/MDBVFD로 재발견됨 — 이미 인덱싱된 논문, 스킵) |
+| B | acquisition-inspired augmentation medical imaging segmentation DG 2026 | WAVESDG(중복 발견), SEMDIR 중복 재확인(SEMDIRFA로 재발견됨 — 스킵) |
+| B | (Bezier/spline follow-up) | TSIAA 재확인 (Cat A와 교차 발견) |
+| C | vesselness Hessian local radius scale-space vessel representation segmentation 2026 | 직접 히트 없음, radius 관련 loss 논문들은 별도 발견 |
+| C | thin structure segmentation topology preservation MICCAI 2026 | **TOPOVST**, **TOPOLORA_SAM**, **SEMIR** 발견 |
+| C | Circle of Willis segmentation 2026 | **AC2RUNET**, **COWCENTERLINE** 발견 (AG-TAL 자체는 이미 인덱싱, published 버전 재확인) |
+| C | (follow-up: vesselFM-CT, MorVess, TopoVST) | **VESSELFM_CT** (TubeLoss로 radius heterogeneity 명시적 처리), **MORVESS** (thickness map을 auxiliary supervision으로 사용) 발견 — 둘 다 High relevance |
+| D | CVPR 2026 domain generalization segmentation augmentation accepted papers | **SACM (CVPR 2026 Oral)** — Segment Anything Curve Model, dual-level adapter, curvilinear structure DG. paper #40317 확인 |
+| D | frequency domain robustness low-level transformation generalization 2026 | **MAPJITTER (CVPR 2026 Workshop, DG-EBF)** 확인 — magnitude-aware phase jittering |
+| D | (follow-up: curvilinear/flow-matching cluster) | **R2DCURVE**, **CURVSEGFLOW**, **CRACKSEGFLOW** 발견 — 2026년 상반기 급부상 중인 "flow-matching for thin/curvilinear structures" 서브트렌드 확인 |
+| D | causal representation learning invariance segmentation augmentation 2026 | **CAUSALTUNE**, **BRIDGECAUSAL** 발견 |
+| D | (follow-up: learned aug policy, shape bias) | **EVOAUG**, **MAXPOOLSHAPE** 발견; BISDG/LEASGD(=ADAL)/FMS2는 이미 인덱싱된 논문과 중복 확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI 2026)** — doc 11146907, code: github.com/Wangzs0228/TSIAA — ⚠️ **가장 위험한 신규 경쟁 논문**
+- Teacher-Student Instance-Level Adversarial Augmentation: 여러 개의 learnable constrained Bézier transformation 기반 Instance-level Augmentation Module(IAM)을 조합해 **이미지 내 서로 다른 구조(instance)마다 다른 augmentation 규칙을 적용**
+- 논문 자체 표현: "Instance-level adversarial augmentation breaks the uniformity of augmentation rules across different structures within an image" — 내 핵심 주장("uniform augmentation budget should not be applied")과 문장 수준에서 거의 동일한 문제의식
+- **결정적 차이**: TSIAA는 (1) instance/structure identity 기반 discrete 조건화이지 vessel radius 같은 continuous geometric quantity 기반이 아님, (2) 조건화 방식이 adversarial teacher-student 학습으로 결정되지 hand-specified radius/observability 함수가 아님, (3) tubular/vessel-specific 문제의식이 아닌 일반 medical segmentation(장기 등) 대상
+- **필수 조치**: full text 정독 후 Related Work에서 명시적으로 인용·차별화. "structure-level 불균일 augmentation"이라는 상위 개념은 TSIAA가 선점했으므로, 내 논문은 반드시 "continuous, geometry-grounded (vessel radius), tubular-structure-specific"이라는 하위 차별점을 명확히 해야 함.
+
+**VESSELFM_CT / MORVESS / TOPOVST (모두 2026 preprint)** — radius/thickness를 training signal로 사용하는 최신 사례 3편 추가 발견
+- VESSELFM_CT: TubeLoss로 혈관 tree 전체의 radius 이질성을 loss에서 처리 (vesselFM의 CT 후속작)
+- MorVess: distance map + **thickness map**을 auxiliary supervision으로 명시적 예측 (pulmonary vessel)
+- TopoVST: vessel radius를 GNN으로 공동 추정 후 directional loss의 weighting에 사용 (skeleton tracking)
+- 세 논문 모두 **loss/supervision 측면**에서 radius를 사용하며, **augmentation budget** 측면에서 사용하는 논문은 여전히 없음 → Continuous-ONA의 gap이 "radius-aware training" 전체 트렌드 안에서 augmentation 쪽 유일한 빈틈임을 강화하는 근거로 활용 가능. 단, 3편 모두 병렬로 이 방향이 활발해지고 있음을 시사하므로 신속한 논문화가 유리.
+
+#### Top-tier Vision 신규 발견 — "flow-matching for curvilinear structures" 서브트렌드
+
+**SACM (CVPR 2026 Oral)**: SAM 기반, dual-level adapter(block-level internal + external)로 12개 curvilinear 데이터셋에서 18장만으로 강한 cross-domain 일반화. Continuous-ONA와 직접 경쟁하지 않지만(아키텍처 vs. augmentation), "local structure refinement + cross-domain alignment 분리"라는 설계 철학은 참고할 가치 있음.
+
+**CurvSegFlow / CrackSegFlow / R2DCURVE / FMS²(기존 인덱싱)**: 2026년 상반기에 curvilinear/thin-structure 분할을 위한 flow-matching 기반 방법이 클러스터로 등장. 대부분 synthesis/decoder 측면의 혁신이며 augmentation-strength conditioning과는 무관하지만, "vessel/curvilinear DG"라는 인접 연구 커뮤니티가 빠르게 성장 중임을 시사 — 경쟁 압박 증가로 판단, 우선순위 상향 권고.
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation strength (continuous)"**: Run #8에서도 직접 명시 논문 없음 — gap 유지
+- **"radius-conditioned augmentation budget"**: 여전히 없음. 다만 TSIAA가 "구조별 비균일 augmentation"이라는 상위 개념을 (non-continuous, non-radius 방식으로) 처음 명시적으로 주장한 논문으로 확인됨 → 반드시 구분 논거 준비 필요
+- **"radius-aware training" 전체 트렌드**: AG-TAL(loss) + VESSELFM_CT/MORVESS/TOPOVST(loss/supervision) 로 4편까지 늘어남. Augmentation 측면은 여전히 0편 — 내 gap은 유지되나 인접 연구가 빠르게 채워지고 있어 **경쟁 압박 증가**
+
+### 중복 발견 처리 기록 (QA — 향후 재탐색 방지용)
+
+이번 Run에서 여러 에이전트가 "신규"로 보고했으나 실제로는 이미 인덱싱된 논문과 동일한 것으로 확인되어 제외한 항목:
+- "SARCS" (arXiv 2512.01510) = 이미 인덱싱된 **SRCSM**과 동일 논문
+- "MDBVFD"/"VESSELDIS" (arXiv 2510.00665, MELBA 2025) = 이미 인덱싱된 **MULTIDOMAIN_BRAIN**과 동일 논문
+- "WAVERNET" (arXiv 2601.05942) = 이미 인덱싱된 **WAVERNETV**와 동일 논문
+- "SEMDIRFA" (arXiv 2507.23326) = 이미 인덱싱된 **SEMDIR**과 동일 논문
+- "FMS2" (Category D 재발견) = 이미 인덱싱된 **FMS2**와 동일 논문 (Cat C에 이미 존재)
+- "BISDG" (Category D 재발견) = 이미 인덱싱된 **BISDG**와 동일 논문 (preprint 후보 목록에 이미 존재)
+- "LEASGD" (arXiv 2507.04302) = 이미 인덱싱된 **ADAL**과 동일 논문
+- "DGSSA" (Category C 재발견) = 이미 인덱싱된 **DGSSA**와 동일 논문 (Neural Networks 저널 출판 확정 상태만 갱신 확인)
+- "FASAM" (arXiv 2507.17281) = Run #6에서 이미 검토 후 낮은 관련성으로 미수록 결정된 FA-SAM과 동일 논문 — 결정 유지
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해: IAM의 Bézier 파라미터화 방식, instance/structure 정의 방법 (annotation 기반인지 unsupervised인지) 확인 최우선
+- [ ] VESSELFM_CT의 TubeLoss 공식 상세 확인 (radius weighting이 continuous인지 binned인지)
+- [ ] MorVess의 thickness map을 augmentation conditioning으로 전환 가능성 검토 (loss供給 방식과 내 augmentation 방식의 상호보완 논거)
+- [ ] SACM, R2DCURVE의 실제 venue 최종 확정 여부 재확인 (특히 R2DCURVE의 ECCV 2026 accept 여부 — 이번 탐색에서는 arXiv 페이지만 확인, accept 여부 미확인 상태로 Preprint Only 유지)
+- [ ] AC2RUNET(EUSIPCO 2026), SEMIR(ECCV 2026) 자체 보고 venue의 공식 accept 여부 재확인
+- [ ] "flow-matching for curvilinear structures" 서브트렌드 전체 지도화 — 후속 Run에서 클러스터 성장 추적
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

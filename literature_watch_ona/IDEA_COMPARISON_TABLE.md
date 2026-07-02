@@ -92,6 +92,15 @@
 
 ---
 
+## Run #8 (2026-07-02) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | ⚠️ **현재까지 발견된 가장 위험한 경쟁 논문.** "Instance-level adversarial augmentation breaks the uniformity of augmentation rules across different structures within an image"라는 문장이 내 핵심 주장("uniform augmentation budget should not be applied to tubular structures")과 상위 개념 수준에서 거의 동일. Bézier 기반 IAM을 이미지 내 서로 다른 구조(instance)마다 다르게 적용, teacher-student adversarial 학습으로 강도 결정. | 구분 논거: (1) TSIAA는 instance/structure identity 기반 **discrete** 조건화, 나는 vessel radius라는 **continuous geometric quantity** 기반 조건화. (2) TSIAA는 augmentation 강도를 adversarial 학습으로 **암묵적으로 발견**, 나는 source annotation에서 **명시적으로 계산 가능한** radius/observability로 조건화 (target 불필요, deterministic, interpretable). (3) TSIAA는 일반 medical segmentation(장기 등) 대상, 나는 tubular/vessel 구조의 label-image inconsistency라는 **구체적 실패 모드**에서 출발. (4) "구조가 다르면 augmentation도 달라야 한다"는 상위 주장은 이미 TSIAA가 선점했으므로, 논문에서는 이를 인정하고 "우리는 이 직관을 tubular structure에서 continuous, geometry-grounded 방식으로 최초로 구체화한다"는 포지셔닝이 필요. |
+| **VESSELFM_CT / MORVESS / TOPOVST** (2026 preprints) | Vessel radius/thickness를 training signal(loss 또는 auxiliary supervision)로 사용하는 사례가 AG-TAL 이후 3편 추가 발견됨. Radius-aware training 트렌드가 loss 측면에서 빠르게 성장 중. | Augmentation 측면은 여전히 미개척(0편) — Related Work에서 "radius-aware training: loss (AG-TAL, TopoVST), auxiliary supervision (MorVess), tree-level loss (vesselFM-CT의 TubeLoss) 모두 탐색되었으나 augmentation budget 측면은 없다"는 문단으로 gap을 더 강하게 주장할 수 있음. 단, 경쟁 압박이 커지고 있으므로 신속한 논문화 권장. |
+
+---
+
 ## Run #4 (2026-05-31) 신규 위험 논문 업데이트
 
 | 논문 | 위험 이유 | 대응 방향 |
@@ -121,6 +130,7 @@
 
 | 논문 | 위험 이유 | 대응 방향 |
 |------|-----------|-----------|
+| **TSIAA** (Run #8) | 현재까지 발견된 최고 위험도. "구조마다 다른 augmentation" 상위 주장을 명시적으로 선점 (IEEE TMI 2026). | Discrete instance-adversarial 조건화 vs. continuous radius-conditioned 조건화로 명확히 구분. 상세는 위 "Run #8 신규 위험 논문 업데이트" 참조. |
 | **SLAug** | Class-level location-scale aug의 원조. 내 방법이 "SLAug를 thin/thick class로 나눈 것"처럼 보일 위험 | 핵심 차이 강조: SLAug는 FG/BG binary class, 내 방법은 single class 내 continuous structural property. SLAug는 class간 다양성, 나는 class 내 구조 보호. |
 | **FIESTA** | Uncertainty-guided augmentation. Pixel-level epistemic uncertainty로 aug 강도 조절 | FIESTA는 prediction uncertainty 기반(model-centric), 나는 annotation-derived structural observability 기반(data-centric). FIESTA는 thin vessel 보호 목적이 명시적이지 않음. |
 | **StyCona** | Local content augmentation 포함 | StyCona의 content augmentation은 전체 해부 구조 변형(이동/크기 변환), 내 방법은 intensity/appearance 변환의 강도 조절. |

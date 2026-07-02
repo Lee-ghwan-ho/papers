@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-02  
+> 총 수록 논문: 116편 (신규 22편 추가, Run #8)
 
 ---
 
@@ -57,6 +57,9 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher–Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| ROBUSTWT | ROBUST-WT: Robust Uncertainty-aware Segmentation Transform via Whitening and Training Enhancements | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -76,6 +79,7 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| NOISEUNET | Implicit Fuzzification via Bounded Noise Injection for Robust Medical Image Segmentation | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -114,6 +118,15 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images for System-Level Cardiovascular Analysis | arXiv | 2026 | Preprint Only | **High** |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | **High** |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | **High** |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware Circle of Willis Segmentation | arXiv (EUSIPCO 2026 self-reported, unverified) | 2026 | Preprint Only | Medium |
+| TOPOLORA_SAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| TOPOWIDTH | Topology-Guaranteed Image Segmentation: Enforcing Connectivity, Genus, and Width Constraints | SIAM Journal on Imaging Sciences | 2026 | Published Journal Article | Medium |
+| COWCENTERLINE | Circle of Willis Centerline Graphs: A Dataset and Baseline Algorithm | (ScienceDirect journal) | 2026 | Published Journal Article | Medium |
+| TOPOFIELD | Learning Topology-Aware Implicit Field for Unified Pulmonary Tree Modeling with Incomplete Topological Supervision | arXiv | 2026 | Preprint Only | Low |
+| SEMIR | SEMIR: Topology-Preserving Graph Minors for Thin-Structure Segmentation | arXiv (ECCV 2026 self-reported, unverified; non-medical data) | 2026 | Preprint Only | Low |
 
 ---
 
@@ -135,6 +148,15 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| SACM | Dual-level Adapter Boosting Prompt-free Curvilinear Structure Segmentation (Segment Anything Curve Model) | CVPR 2026 (Oral) | 2026 | Accepted Conference Paper | **High** |
+| R2DCURVE | From Reconstruction to Decision: A Post-Encoder Plug-in Adapter for Curvilinear Segmentation | arXiv (ECCV 2026 self-reported, unverified) | 2026 | Preprint Only | Medium |
+| CURVSEGFLOW | CurvSegFlow: Time-Conditioned Flow Matching for Robust Segmentation of Curvilinear Structures in Noisy Biomedical Images | arXiv | 2026 | Preprint Only | **High** |
+| CRACKSEGFLOW | CrackSegFlow: Controllable Flow Matching Synthesis for Generalizable Crack Segmentation with a 50K Image-Mask Benchmark | arXiv | 2026 | Preprint Only | Medium |
+| MAPJITTER | Magnitude-Aware Phase Jittering for Domain-Generalized Semantic Segmentation | CVPR 2026 Workshop (DG-EBF) | 2026 | Workshop Paper | **High** |
+| CAUSALTUNE | Causal-Tune: Mining Causal Factors from Vision Foundation Models for Domain Generalized Semantic Segmentation | arXiv | 2025 | Preprint Only | Medium |
+| BRIDGECAUSAL | Bridge: Basis-Driven Causal Inference Marries VFMs for Domain Generalization | arXiv | 2026 | Preprint Only | Medium |
+| EVOAUG | Beyond Cropping and Rotation: Automated Evolution of Powerful Task-Specific Augmentations with Generative Models | arXiv | 2026 | Preprint Only | Medium |
+| MAXPOOLSHAPE | Quantifying and Inducing Shape Bias in CNNs via Max-Pool Dilation | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -178,3 +200,20 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| ROBUSTWT | ROBUST-WT: Whitening + Training Enhancements | 2606.03069 | 2026 |
+| NOISEUNET | Implicit Fuzzification via Bounded Noise Injection | 2606.04427 | 2026 |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images | 2606.09400 | 2026 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation | 2606.24214 | 2026 |
+| TOPOVST | TopoVST: Topology-fidelitous Vessel Skeleton Tracking | 2603.14909 | 2026 |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for CoW Segmentation | 2606.12319 | 2026 |
+| TOPOLORA_SAM | TopoLoRA-SAM: Topology-Aware PEFT for Thin-Structure Segmentation | 2601.02273 | 2026 |
+| TOPOFIELD | Learning Topology-Aware Implicit Field for Pulmonary Tree Modeling | 2602.02186 | 2026 |
+| SEMIR | SEMIR: Topology-Preserving Graph Minors for Thin-Structure Segmentation | 2606.24935 | 2026 |
+| R2DCURVE | From Reconstruction to Decision: Post-Encoder Plug-in Adapter (PEPA) | 2606.23486 | 2026 |
+| CURVSEGFLOW | CurvSegFlow: Time-Conditioned Flow Matching for Curvilinear Structures | 2606.21608 | 2026 |
+| CRACKSEGFLOW | CrackSegFlow: Controllable Flow Matching Synthesis for Crack Segmentation | 2601.03637 | 2026 |
+| CAUSALTUNE | Causal-Tune: Mining Causal Factors from VFMs for DGSS | 2512.16567 | 2025 |
+| BRIDGECAUSAL | Bridge: Basis-Driven Causal Inference Marries VFMs for DG | 2604.26820 | 2026 |
+| EVOAUG | Beyond Cropping and Rotation: Automated Evolution of Augmentations | 2602.03123 | 2026 |
+| MAXPOOLSHAPE | Quantifying and Inducing Shape Bias via Max-Pool Dilation | 2601.05599 | 2026 |
