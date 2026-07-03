@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-03  
+> 총 수록 논문: 129편
 
 ---
 
@@ -57,6 +57,19 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher–Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WISER | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| MAMBASEA | Mamba-Sea: A Mamba-based Framework with Global-to-Local Sequence Augmentation for Generalizable Medical Image Segmentation | IEEE TMI | 2025/2026 | Published Journal Article | Medium |
+| SDCL | Causal Inference via Style Bias Deconfounding for Domain Generalization | arXiv | 2025 | Preprint Only | Medium |
+| ADDGCL | Multi-organ Medical Image Segmentation via Adaptive Disentangled Domain Generalization Collaborative Learning | Neurocomputing | 2025 | Published Journal Article | Medium |
+| RLAD | Enhancing Retinal Vessel Segmentation Generalization via Layout-Aware Generative Modelling | arXiv | 2025 | Preprint Only | Medium |
+| CQINV | Color-Quality Invariance for Robust Medical Image Segmentation | arXiv | 2025 | Preprint Only | Low |
+| GENEVAL | Human Knowledge Integrated Multi-modal Learning for Single Source Domain Generalization | WACV 2026 | 2026 | Accepted Conference Paper | Low |
+| NEUROVASCU | NeuroVascU-Net: Cross-Domain Adaptive Feature Fusion for Brain Vessel Segmentation | arXiv | 2025 | Preprint Only | Low |
+| FSDADG | FSDA-DG: Improving Cross-Domain Generalizability of Medical Image Segmentation with Few Source Domain Annotations | Medical Image Analysis | 2025 | Published Journal Article | Medium |
+| PMDG | Pseudo Multi-Source Domain Generalization | arXiv | 2025 | Preprint Only | Low |
+| FGMLDG | FGML-DG: Feynman-Inspired Cognitive Science Paradigm for Cross-Domain Medical Image Segmentation | arXiv | 2026 | Preprint Only | Low |
+| CONDISR | ConDiSR: Contrastive Disentanglement and Style Regularization for Single Domain Generalization | WACV 2025 | 2025 | Accepted Conference Paper | Low |
 
 ---
 
@@ -114,6 +127,18 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | **High** |
+| SEMIR | SEMIR: Topology-Preserving Graph Minors for Thin-Structure Segmentation | ECCV 2026 | 2026 | Accepted Conference Paper | High |
+| FGOSNET | Bridging the Geometry Mismatch: Frequency-Aware Anisotropic Serialization for Thin-Structure SSMs | arXiv | 2026 | Preprint Only | Medium |
+| MARVEL | MARVEL: Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation | arXiv | 2026 | Preprint Only | Medium |
+| VESSELTOK | VesselTok: Tokenizing Vessel-like 3D Biomedical Graph Representations for Reconstruction and Generation | arXiv | 2026 | Preprint Only | Medium |
+| TOPOGUARANTEE | Topology-Guaranteed Image Segmentation: Enforcing Connectivity, Genus, and Width Constraints | SIAM J. Imaging Sciences | 2026 | Published Journal Article | Medium |
+| COROBENCH | A Clinically-Informed Benchmark for Topology-Aware Coronary Artery Segmentation | MICCAI 2026 | 2026 | Official Proceedings Paper | Medium |
+| LIVASNET | LIVAS-Net: A Parameter-Efficient 3D Architecture for Intracranial Artery Segmentation in TOF-MRA | Electronics (MDPI) | 2026 | Published Journal Article | Medium |
+| CORO3STAGE | A Topology-Preserving Three-Stage Framework for Fully-Connected Coronary Artery Extraction | Medical Image Analysis | 2025 | Published Journal Article | Medium |
+| PULMTREE | Learning Topology-Aware Implicit Field for Unified Pulmonary Tree Modeling with Incomplete Topological Supervision | arXiv | 2026 | Preprint Only | Low |
+| AIRWAYMULTI | Multiscope Topology Learning with Conditional Updating for Airway Segmentation | Pattern Analysis and Applications | 2025 | Published Journal Article | Low |
+| EISEG | Explicable Intensity-Aware 3D Cerebrovascular Segmentation with Planar Representation | Medical Image Analysis | 2026 | Published Journal Article | Medium |
 
 ---
 
@@ -135,6 +160,14 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| SENSAUG | Adaptive Sensitivity Analysis for Robust Augmentation against Natural Corruptions in Image Segmentation | ICML 2025 | 2025 | Accepted Conference Paper | Medium |
+| FLATMIN | A Flat Minima Perspective on Understanding Augmentations and Model Robustness | AAAI 2026 | 2026 | Accepted Conference Paper | Medium |
+| SRANDAUG | Sample-aware RandAugment: Search-free Automatic Data Augmentation for Effective Image Recognition | IJCV | 2025 | Published Journal Article | Medium |
+| DASA | Difficulty-Aware Sample Allocation for Adaptive Data Augmentation in Semantic Segmentation | Research Square | 2026 | Preprint Only | **High** |
+| SADA | On-the-Fly Data Augmentation via Gradient-Guided and Sample-Aware Influence Estimation | arXiv | 2025 | Preprint Only | Low |
+| A3MDA | Adaptive Hardness-driven Augmentation and Alignment Strategies for Multi-Source Domain Adaptations | IEEE Access/Journal | 2025 | Published Journal Article | Low |
+| IPFRDA | IPF-RDA: An Information-Preserving Framework for Robust Data Augmentation | arXiv (TPAMI submission) | 2025 | Preprint Only | **High** |
+| GEOINVLEARN | The Geometry of Invariant Learning: An Information-Theoretic Analysis of Data Augmentation and Generalization | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -178,3 +211,19 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WISER | Decoupling Wavelet Sub-bands for SSDG Fundus Segmentation | 2603.28463 | 2026 |
+| SDCL | Causal Inference via Style Bias Deconfounding for DG | 2503.16852 | 2025 |
+| RLAD | Layout-Aware Generative Modelling for Retinal Vessel DG | 2503.01190 | 2025 |
+| CQINV | Color-Quality Invariance for Robust Medical Image Segmentation | 2502.07200 | 2025 |
+| NEUROVASCU | NeuroVascU-Net: Cross-Domain Brain Vessel Segmentation (T1CE) | 2511.18422 | 2025 |
+| PMDG | Pseudo Multi-Source Domain Generalization | 2505.23173 | 2025 |
+| FGMLDG | FGML-DG: Feynman-Inspired Cross-Domain Medical Segmentation | 2604.10524 | 2026 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation | 2606.24214 | 2026 |
+| FGOSNET | Frequency-Aware Anisotropic Serialization for Thin-Structure SSMs | 2603.28503 | 2026 |
+| MARVEL | Murray's Law-informed Vessel Tree Segmentation | 2605.25363 | 2026 |
+| VESSELTOK | VesselTok: Tokenizing Vessel-like 3D Biomedical Graphs | 2603.18797 | 2026 |
+| PULMTREE | Topology-Aware Implicit Field for Pulmonary Tree Modeling | 2602.02186 | 2026 |
+| DASA | Difficulty-Aware Sample Allocation for Adaptive Augmentation | Research Square rs-10044069 | 2026 |
+| SADA | On-the-Fly Augmentation via Gradient-Guided Influence Estimation | 2510.00434 | 2025 |
+| IPFRDA | IPF-RDA: Information-Preserving Framework for Robust Augmentation | 2509.16678 | 2025 |
+| GEOINVLEARN | The Geometry of Invariant Learning (info-theoretic aug analysis) | 2602.14423 | 2026 |

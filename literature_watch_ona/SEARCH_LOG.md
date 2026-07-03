@@ -2,6 +2,80 @@
 
 ---
 
+## 2026-07-03 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-03 (직전 실행: 2026-06-03, 약 1개월 공백)
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: foundational 한정
+- 조사 방식: Category A/B/C/D 각각 독립 subagent 병렬 조사 + Lane 5 (기준 논문 후속) 통합 검색
+- 신규 발견: **33편** (Published Journal Article 14편 + Preprint Only 15편 + Accepted Conference Paper 3편 + Official Proceedings Paper 1편)
+
+### 수행한 검색 (병렬 subagent, 대표 쿼리)
+
+| Lane | 담당 | 대표 쿼리 | 주요 발견 |
+|------|------|-----------|-----------|
+| A + Lane5 | Category A subagent | single source domain generalization medical image segmentation 2026 / SLAug COSTA follow-up citation 2026 | **TSIAA (IEEE TMI 2026)** — instance-level adversarial Bézier augmentation, 최고 novelty 위험 |
+| B | Category B subagent | structure-aware augmentation strength / label-preserving transformation / shortcut suppression 2026 | TSIAA 재확인(교차), Hallucinated DG Network UDH(기존 HALLUDG와 동일 논문으로 판정, 미추가), FSDA-DG(binary local/global region split) 발견 |
+| C + Lane5 | Category C subagent | vessel segmentation domain generalization 2026 / tubular topology CVPR ICCV ECCV MICCAI 2026 / clDice VesselMorph VFT follow-up | MorVess(thickness-map supervision), SEMIR(ECCV 2026 thin-structure graph minor), AG-TAL/clDice 계열 직접 후속 없음 확인 |
+| D | Category D subagent | CVPR/ICCV/ECCV/NeurIPS/ICLR/AAAI/ICML 2025-2026 augmentation policy / structure-preserving perturbation | **IPF-RDA**(local importance-conditioned continuous aug, 가장 근접한 general-vision mechanism), SensAug(ICML 2025), DASA(미검증 preprint, 가장 근접한 segmentation mechanism) |
+
+### 핵심 신규 발견 요약
+
+#### ⚠️ 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI, Vol. 45, 2026)** — Published Journal Article
+- Teacher–Student Instance-Level Adversarial Augmentation. "instance-level adversarial augmentation breaks the uniformity of augmentation rules across different structures within an image"라는 문구가 내 핵심 문제의식과 사실상 동일
+- Constrained Bézier transform을 구조(instance)별로 다르게 adversarial teacher-student loop로 학습
+- **현재까지 발견된 논문 중 가장 강한 novelty 충돌 후보**. Published journal이라 영향력도 높음
+- 잠정 차이: adversarial optimization(학습, black-box) vs. 내 방법(annotation 기반 radius, 명시적, deterministic). 단, 전문 미확인 — arXiv 접근 403으로 원문 확인 실패. **다음 세션 최우선 전문 확인 대상**
+- paper_notes/TSIAA.md 작성 완료
+
+**IPF-RDA (arXiv 2509.16678, TPAMI 심사 중 추정)** — Preprint Only
+- General vision(classification/re-ID)에서 local importance score로 augmentation 강도를 continuous하게 조절 — mechanism 구조가 Continuous-ONA와 가장 유사한 general-vision 논문
+- 차이: task(classification vs. segmentation), 신호 성격(학습된 discriminativeness vs. 물리적 radius)
+- paper_notes/IPFRDA.md 작성 완료
+
+**DASA (Research Square, 미검증 preprint)** — Preprint Only
+- Segmentation에서 continuous difficulty score → continuous augmentation 강도 매핑. Segmentation 세팅에서는 가장 근접한 mechanism
+- 차이: sample-level(전체 이미지) vs. 내 intra-image structure-level, model-dependent dynamic 신호 vs. annotation 기반 static 신호
+- 동료평가 전이므로 최상위 추천에서 제외, 별도 후보 목록에 포함
+- paper_notes/DASA.md 작성 완료
+
+#### 구조/혈관 특화 신규 논문
+
+**MorVess (arXiv 2606.24214, 2026)** — Preprint Only
+- Pulmonary vessel segmentation에서 vessel thickness map을 명시적 supervision target으로 사용
+- Radius를 augmentation이 아닌 supervision에 쓴다는 점에서 ONA와 구분되나 "vessel radius가 first-class signal로 부상 중"이라는 트렌드 근거로 활용 가능
+- paper_notes/MORVESS.md 작성 완료
+
+**SEMIR (ECCV 2026)** — Accepted Conference Paper
+- Thin-structure connectivity를 보존하는 parameterized graph minor 표현. Power line/crack/lane marking 등 cross-domain thin-structure 통합 검증
+- Loss/representation 관점 topology 보존, augmentation과 무관 — Category C 참고문헌 우선순위로 P1 등록
+
+#### 방법론 신규 논문
+
+**FSDA-DG (Medical Image Analysis 2025)** — Published Journal Article
+- Global broad region vs. semantics-guided local region의 binary 2-tier augmentation. ICRN/AGTA와 함께 "binary region-split" 계열로 분류
+
+**Mamba-Sea (IEEE TMI, early access)** — Published Journal Article
+- Global appearance-variation + local sequence-wise(Mamba token) style transformation의 2-tier 구조. "granularity of augmentation" 논의에서 대조군
+
+### 중복 판정 (추가하지 않은 논문)
+
+- "Hallucinated Domain Generalization Network with Domain-aware/Domain-Aware Dynamic Representation" — 제목이 기존 HALLUDG(Neural Networks 2025)와 완전히 동일. 두 subagent가 각각 "Neural Networks 2025"와 "Pattern Recognition Letters Vol.199 2026"으로 다른 venue를 보고했으나, 제목이 character-for-character 동일하여 동일 논문의 venue 정보 불일치로 판단. 기존 항목 수정 금지 원칙에 따라 추가하지 않고, venue 재확인만 다음 run 과제로 등록
+- DGSSA, Multi-Domain Brain Vessel, RandDG, WaveRNet, SEMDIR, UniDDG, LangDAug, OVS_NET — 두 subagent가 독립적으로 재발견했으나 모두 기존 MASTER_PAPER_INDEX 수록 논문과 동일 판정, 추가 안 함
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 확인 (arXiv 프리프린트 존재 여부 포함) — 최우선
+- [ ] "Hallucinated DG Network" venue 불일치 해소 (Neural Networks vs. Pattern Recognition Letters)
+- [ ] IPF-RDA의 TPAMI 심사 결과 추적
+- [ ] DASA의 동료평가 통과 여부 추적
+- [ ] MICCAI 2026 정식 accepted paper list 공개 시 재탐색 (현재 옵션 미공개 다수)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

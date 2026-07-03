@@ -53,6 +53,9 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **TSIAA** *(Run#8)* ⚠️ | Instance-level (구조별) | **Adversarially learned** (per-instance Bézier param) | ❌ radius/observability 아님 (adversarial 학습) | ❌ 명시적 보호 없음 | ❌ | ❌ (teacher-student adversarial loop) | 현재까지 가장 강한 novelty 충돌 후보. "이미지 내 서로 다른 구조에 비균일 augmentation"이라는 문제의식은 동일하나, 강도를 결정하는 신호가 **anatomical radius가 아니라 adversarial optimization**. 내 방법은 source annotation에서 직접 계산되는 continuous physical quantity(radius)로 조건화 — target 없이 deterministic. TSIAA는 adversarial teacher-student loop 필요 + 어떤 구조가 강한/약한 aug를 받을지 학습에 위임(해석 불가능). Full text 확인 후 "physically-grounded continuous conditioning vs. adversarially-learned discrete per-instance augmentation"으로 구분 논거 확정 필요. |
+| **DASA** *(Run#8)* | Sample-level (전체 이미지) | **Continuous** (difficulty score) | ❌ (loss/ambiguity/rarity/boundary complexity 합성 점수, anatomical 아님) | ❌ | ❌ | ❌ | Segmentation에서 "continuous score → continuous augmentation strength" 매핑을 시도한 구조적으로 가장 유사한 사례지만 **sample-level**(이미지 전체 단위)이고 미검증 preprint. 내 방법은 sample이 아닌 **intra-image, intra-class local structure** 단위로 연속 조건화. |
+| **IPFRDA** *(Run#8)* | Region-level (일반 vision) | **Continuous** (learned importance score) | ❌ (class-discriminativeness, anatomical 아님) | ⚠️ 개념적으로 유사("중요 영역 보호") | ❌ | ❌ | Classification/re-ID 대상 general vision 논문. "local importance score로 augmentation 강도 연속 조절"이라는 mechanism이 가장 근접하나 (1) segmentation이 아님, (2) importance signal이 vessel radius 같은 물리적 proxy가 아니라 학습된 discriminativeness. |
 
 ---
 
@@ -89,6 +92,16 @@
 | TopoTTA | TTA for tubular topology | Cross-domain topological shift 탐지 |
 
 ---
+
+---
+
+## Run #8 (2026-07-03) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | ⚠️ **최고 위험**. "Instance-level augmentation이 이미지 내 서로 다른 구조에 대해 균일한 규칙을 깬다(breaks uniformity of augmentation rules across different structures within an image)"는 문구가 내 문제의식과 사실상 동일. Published journal (TMI)이라 영향력도 높음. | 핵심 차이: TSIAA는 **어떤 구조가 강/약 augmentation을 받는지 adversarial teacher-student 최적화로 학습**(black-box, 데이터에 내재된 discriminative 정보 이용). 나는 **source annotation에서 직접 계산되는 local vessel radius/observability라는 명시적, 해석 가능한, target-agnostic한 continuous physical proxy**로 조건화. 또한 TSIAA는 fragile structure 보호라는 명시적 동기(label-image inconsistency)가 없고, thin vessel 관련 실험도 없음. **전문 확인 최우선 (P0)**. |
+| **IPFRDA** (arXiv 2509.16678, TPAMI 심사 중) | General vision(classification/re-ID)에서 "local importance score → continuous augmentation 강도"라는 mechanism 자체가 Continuous-ONA의 최상위 추상화와 동일 패턴. | segmentation이 아닌 classification, importance signal이 anatomical radius가 아니라 학습된 class-discriminativeness라는 점에서 명확히 구분 가능. Related work에서 "general-vision에서도 continuous importance-conditioned augmentation 강도 조절이라는 방향이 나타나고 있으나, 의료영상 tubular structure의 물리적 radius를 signal로 사용한 사례는 없다"는 논거로 활용. |
+| **DASA** (Research Square, 미검증 preprint) | Segmentation에서 continuous difficulty score → continuous augmentation 강도 매핑 — mechanism 구조가 가장 유사. | Sample-level(전체 이미지 단위) 조건화이고, 동료평가 전 preprint. 내 방법은 intra-image, intra-class, structure-level 조건화. Preprint이므로 최상위 경쟁 목록에는 넣지 않되 반드시 인용/구분. |
 
 ---
 
