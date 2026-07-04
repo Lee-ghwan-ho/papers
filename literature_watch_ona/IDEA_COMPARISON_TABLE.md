@@ -53,6 +53,9 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **TSIAA** *(Run#8)* | **Intra-image instance-level** | **비균일(non-uniform), but 학습된/adversarial 값** | ❌ structure signal 없음 (adversarial search로 대체) | ❌ 명시적 fragile 보호 없음 | ❌ | ❌ | ⚠️ **가장 위험한 신규 경쟁**: "구조마다 다른 증강"이라는 상위 주장 자체가 이미 IEEE TMI 2026에 출판됨. 차별점은 conditioning 신호: TSIAA=adversarially learned per-instance Bézier param (opaque), 나=annotation-derived continuous local radius (explicit, interpretable). TSIAA는 vessel/tubular 특화가 아니고 thin structure 보호 개념이 없음. |
+| **Split-and-Combine** *(Run#8, ICCV 2025)* | **Patch-level (spatially local)** | Entropy-gated iterative 강도 조절 | ❌ (entropy는 예측 기반, structure 무관) | ❌ | ❌ | ❌ | 공간적으로 국소화된 augmentation 강도 조절이라는 구조는 유사하나, 조건 신호가 model-predicted entropy(implicit)이고 patch 단위(고정 격자)라 vessel 형태를 따라가지 않음. 내 방법은 vessel radius(explicit) + vessel-shape-aligned local scaling. |
+| **MSSSeg/StructAug** *(Run#8)* | Pixel-level, structural-complexity 기반 | **Continuous** (box-counting complexity) | ⚠️ fractal/box-counting complexity | ❌ | ❌ | ⚠️ (Persistent Homology Loss 병행) | 유일하게 "continuous structure signal → continuous aug 강도"라는 내 방법과 동일한 형태의 매핑을 사용. 단, self-supervised 세팅, signal이 fractal complexity(box-counting)이지 vessel radius가 아님, thin vessel 보호라는 동기가 아니라 shortcut 방지가 목적. Radius와 fractal complexity의 상관관계를 검증해 "같은 신호의 다른 근사"인지 "본질적으로 다른 신호"인지 논거 필요. |
 
 ---
 
@@ -92,6 +95,17 @@
 
 ---
 
+## Run #8 (2026-07-04) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | ⚠️⚠️⚠️ **최우선 경계.** "Image-level uniform augmentation은 suboptimal이며 instance-level augmentation이 이미지 내 구조 간 증강 규칙의 균일성을 깬다"는 주장이 내 핵심 novelty claim의 상위 명제와 거의 동일한 논리 구조를 이미 저널 출판함. | 방어선: (1) TSIAA는 instance-level 조건화 신호가 **adversarial하게 학습된 opaque parameter**인 반면 나는 **annotation에서 직접 계산되는 continuous vessel radius/observability**라는 해석 가능한 기하학적 신호. (2) TSIAA는 vessel/tubular structure에 특화되지 않았고 "얇은 구조 보호"라는 label-image consistency 문제의식이 없음. (3) TSIAA의 "instance"는 아마도 object/lesion 단위이지 단일 vessel class 내부의 continuous thickness spectrum이 아님(전문 확인 필요). Related Work에서 "구조별 비균일 증강" 아이디어의 우선권을 TSIAA에 명시적으로 양보하되, "무엇을 조건 신호로 쓰는가"와 "왜 얇은 구조를 보호해야 하는가"에서 차별화. |
+| **Split-and-Combine** (ICCV 2025) | Patch-wise 국소 증강 강도를 entropy 기반으로 adaptively 조절 — 공간적 국소화라는 상위 개념 공유. | 핵심 차이: patch는 고정 격자 단위, entropy는 모델 예측 기반(implicit, 학습 도중 변함). 나는 vessel 형태를 따라가는 연속 신호(radius, annotation 기반, 고정)를 사용. Patch 경계가 vessel 경계와 무관하다는 점을 명시적으로 대비. |
+| **MSSSeg/StructAug** | "Continuous structural signal → continuous augmentation 강도"라는 정확히 같은 형태의 매핑 함수를 사용한 첫 사례. | Signal 정의가 다름(fractal box-counting complexity vs. vessel radius/observability), 목적이 다름(shortcut 방지 for self-supervised repr. vs. label-image consistency 보호), task가 다름(self-supervised segmentation vs. SSDG). 두 signal 간 상관관계를 실증적으로 짚어주는 것이 논문 강건성에 도움. |
+| **KEEPSAGE** (Keep the Core) | "Fragility가 높은 영역은 augmentation을 억제해야 한다"는 논리가 내 "얇은 혈관 보호" 동기와 정확히 대칭. | Fragility 정의가 adversarial sensitivity(모델 관점)인 반면 나는 geometric radius(데이터/annotation 관점) — model-centric vs. data-centric 구분을 FIESTA 대응 논리와 동일하게 적용 가능. |
+
+---
+
 ## Run #4 (2026-05-31) 신규 위험 논문 업데이트
 
 | 논문 | 위험 이유 | 대응 방향 |
@@ -121,6 +135,7 @@
 
 | 논문 | 위험 이유 | 대응 방향 |
 |------|-----------|-----------|
+| **TSIAA** *(Run#8, IEEE TMI 2026)* | 최상위 경계 대상. "구조마다 다른 증강 규칙"이라는 상위 주장이 이미 저널 출판됨. | Conditioning 신호(adversarial-learned vs. annotation-derived continuous radius)와 목적(일반 SSDG vs. vessel fragility 보호)에서 차별화. |
 | **SLAug** | Class-level location-scale aug의 원조. 내 방법이 "SLAug를 thin/thick class로 나눈 것"처럼 보일 위험 | 핵심 차이 강조: SLAug는 FG/BG binary class, 내 방법은 single class 내 continuous structural property. SLAug는 class간 다양성, 나는 class 내 구조 보호. |
 | **FIESTA** | Uncertainty-guided augmentation. Pixel-level epistemic uncertainty로 aug 강도 조절 | FIESTA는 prediction uncertainty 기반(model-centric), 나는 annotation-derived structural observability 기반(data-centric). FIESTA는 thin vessel 보호 목적이 명시적이지 않음. |
 | **StyCona** | Local content augmentation 포함 | StyCona의 content augmentation은 전체 해부 구조 변형(이동/크기 변환), 내 방법은 intensity/appearance 변환의 강도 조절. |

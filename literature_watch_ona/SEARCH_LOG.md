@@ -2,6 +2,78 @@
 
 ---
 
+## 2026-07-04 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-04
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 실행 방식: 5개 Search Lane을 병렬 서브에이전트로 동시 수행 (Lane 1: SSDG 직접경쟁, Lane 2: 혈관/tubular DG, Lane 3: 증강 방법론, Lane 4: Top-tier Vision, Lane 5: 기준논문 후속연구)
+- 신규 발견: **24편** (Published Journal 4편 + Accepted Conference 6편 + Preprint 14편)
+- 참고: 서브에이전트의 WebFetch가 arxiv.org / ieeexplore.ieee.org / openaccess.thecvf.com 등에 대해 프록시 단에서 지속적으로 403을 반환하여, 아래 논문 정보는 WebSearch 스니펫 기반으로 재구성됨. 인용 전 원문 대조 권장.
+
+### 수행한 검색 쿼리 (5개 Lane, 총 약 60개 쿼리)
+
+| Lane | 대표 쿼리 | 주요 발견 |
+|------|-----------|-----------|
+| 1 (SSDG 직접경쟁) | single source domain generalization medical image segmentation 2026 MICCAI CVPR arXiv | **TSIAA (IEEE TMI 2026)** 발견 |
+| 1 | domain generalization medical image segmentation arXiv June/July 2026 | WaveSDG, Revisiting Data Scaling 발견 |
+| 2 (혈관/tubular) | Circle of Willis segmentation 2026, tubular structure topology 2026 | AC2RUNet, MorVess, MARVEL, TopoVST, CSWinUNETR, vesselFM-CT, TopoLoRA-SAM 등 다수 발견 |
+| 2 | coronary artery / airway segmentation domain generalization 2026 | CorSegRec (MedIA 2025), TPNet (IEEE TMI 2026) 발견 |
+| 3 (증강 방법론) | radius-conditioned augmentation / observability-conditioned augmentation (모든 연도) | **여전히 직접 명시 논문 없음 — 핵심 novelty gap 재확인.** 가장 근접한 선행연구는 TSIAA |
+| 3 | counterfactual appearance augmentation, Bezier vessel perturbation 2026 | BTECF (Bézier Tree Counterfactual, 혈관 caliber 조건부 perturbation이지만 질병 분류 목적) 발견 |
+| 3 | structure-complexity conditioned augmentation, sample-aware influence augmentation 2025 2026 | MSSSeg (StructAug), SADA 발견 |
+| 4 (Top-tier Vision) | ICCV 2025 style augmentation domain generalization | **Split-and-Combine (ICCV 2025)** 발견 — patch-wise entropy-gated 증강 강도 조절 |
+| 4 | ICCV 2025 domain adapter / augmentation policy search | ConstStyle, Customizing Domain Adapters, Adapt Foundational Segmentation Models (모두 ICCV 2025) 발견 |
+| 4 | CVPR/ECCV 2026 topology-aware segmentation | SCNP (CVPR 2026), SEMIR (ECCV 2026) 발견 |
+| 4 | adversarial fragility-gated augmentation suppression brain MRI 2025 2026 | **Keep the Core / SAGE-KEEP (arXiv 2512.15811)** 발견 — adversarial-sensitivity 기반 augmentation 억제, 내 관찰가능성 개념의 대안적 신호로 주목 |
+| 5 (기준논문 후속) | SLAug, RASS, MoreStyle, VesselMorph, clDice, DomainDrop 후속 탐색 | 대부분 직접 후속 없음. DCON 재검색 실패(색인 어려움), AG-TAL의 radius-aware Dice loss 재확인 |
+| 5 | MICCAI 2025 few-shot cross-domain vessel thickness | MBFCV (기존 등재) 재확인, 신규 없음 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 가능성 — 즉시 정독 필요)
+
+**TSIAA — Teacher–Student Instance-Level Adversarial Augmentation (IEEE TMI 2026, Vol 45 Issue 2, pp.764–776)**
+- 논문 핵심 주장: "image-level uniform adversarial augmentation은 최적이 아니다. Instance-level adversarial augmentation이 이미지 내 서로 다른 구조 간 증강 규칙의 균일성을 깨뜨린다(breaks the uniformity of augmentation rules across different structures within an image)."
+- Learnable constrained Bézier transformation 기반 Instance-level Augmentation Module(IAM) 다수를 사용, Teacher-Student adversarial loop로 학습
+- **내 핵심 novelty claim과 문장 수준에서 거의 동일한 동기를 공유** — "구조마다 다른 증강"이라는 아이디어를 이미 저널 논문으로 출판함
+- **핵심 차이(방어선)**: TSIAA의 instance별 강도는 adversarial하게 탐색/학습된 값(암묵적, per-instance 단위, 랜덤/최적화 기반)인 반면, 내 방법은 **annotation에서 직접 계산되는 연속적인 local vessel radius/observability**라는 명시적·해석 가능한 기하학적 신호에 의해 결정됨. 또한 TSIAA는 vessel/tubular structure에 특화되지 않았고 thin structure 보호라는 개념이 없음(코드: github.com/Wangzs0228/TSIAA로 검증 필요)
+- ⚠️ 이 논문은 Related Work에서 반드시 정면으로 다뤄야 하며, "구조별 비균일 증강"이라는 아이디어 자체의 독창성이 아니라 **"연속적 기하 신호 기반 조건화"**가 내 방법의 차별점임을 명확히 해야 함
+
+**Split-and-Combine (ICCV 2025)**
+- Patch 단위로 독립적인 style augmentation을 적용(전체 이미지 단일 증강이 아님) + entropy 기반 risk assessment로 반복적 증강 강도를 adaptively 결정 + energy 기반 OOD-discrepancy score로 augmentation이 얼마나 out-of-distribution으로 밀려나는지 제어
+- **내 방법과의 관계**: 공간적으로 국소적인(patch-wise) 증강 강도 조절 + 강도를 결정하는 risk/uncertainty 신호라는 아이디어가 구조적으로 유사. 단, 조건 신호가 entropy(모델 예측 기반, implicit)인 반면 나는 vessel radius(annotation 기반, explicit)
+- 방법론적으로 가장 가까운 top-tier vision 논문 — 내 stopping-rule/강도 스케줄링 설계에 참고 가치 높음
+
+**MSSSeg / StructAug (arXiv 2512.23997)**
+- Differentiable box-counting 기반 multi-scale structural complexity 추정 → 이 복잡도에 따라 augmentation 강도를 학습적으로 조절(StructAug) + Persistent Homology Loss로 topology 보호
+- **관찰가능성(observability)을 fractal/box-counting complexity로 정의한다는 점에서 내 radius 기반 정의의 대안 신호**로 주목할 가치. Self-supervised 세팅이라 직접 경쟁은 아니지만 "구조 복잡도 → 증강 강도" 매핑이라는 mechanism 자체는 유사
+
+**Keep the Core / SAGE-KEEP (arXiv 2512.15811)**
+- Brain MRI segmentation에서 adversarial sparsity 기반으로 "importance/fragility가 높은 토큰"을 찾아 그 영역에서는 augmentation을 적용하되 원본 픽셀 값을 강제로 복원(= augmentation 사실상 억제)
+- **내 "얇은 구조는 보수적으로 보호"라는 아이디어의 거울상**: fragility를 기하학적(radius)이 아니라 adversarial sensitivity로 정의. 대안적 observability 신호로서 논문에 언급할 가치
+
+#### 혈관/Tubular 구조 특화 신규 논문 (다수, architecture/loss 중심 — augmentation 겹침 없음)
+
+AC2RUNet(CoW topology, thin vessel breakage 문제), MorVess(vessel thickness map을 explicit supervision으로 사용), MARVEL(Murray's law radius-scaling prior), TopoVST(vessel radius를 skeleton tracking의 조건 신호로 사용) 등은 모두 **"vessel radius/thickness가 중요하다"는 내 동기를 architecture/loss 레벨에서 뒷받침하는 방향**으로만 인용 가능. Augmentation budget 조절 메커니즘은 어디에도 없음 — **핵심 novelty gap 유지**.
+
+### Novelty Gap 재확인 (Run #8)
+
+- **"radius/observability-conditioned continuous augmentation strength"**: 여전히 직접 명시 논문 없음.
+- **가장 근접한 경쟁**: TSIAA (구조별 비균일 augmentation, 그러나 조건 신호가 학습된 adversarial parameter) > Split-and-Combine (공간적 국소 강도 조절, 조건 신호가 entropy) > MSSSeg (구조 복잡도 기반 강도, self-supervised 세팅)
+- 세 논문 모두 **"어떤 조건 신호로 무엇을 조절하는가"**의 조합이 내 방법(annotation-derived continuous vessel radius → nonlinear appearance aug strength)과 다름. TSIAA와의 차별화 논거를 IDEA_COMPARISON_TABLE에 최우선으로 추가함.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 독해 필수 (github.com/Wangzs0228/TSIAA 코드 확인 포함): instance 정의 방식(semantic class 단위인지, connected component 단위인지), Bézier 파라미터가 정말 랜덤/adversarial인지 혹은 어떤 구조적 신호를 참조하는지 확인
+- [ ] Split-and-Combine 전문 독해: entropy 기반 risk assessment의 정확한 정의, patch 크기 선택 기준
+- [ ] MSSSeg의 box-counting complexity 정의와 vessel radius의 상관관계 분석 (thin vessel이 fractal complexity 관점에서 높게 나오는지 낮게 나오는지 확인 필요 — 방향에 따라 내 주장을 지지할 수도, 반박할 수도 있음)
+- [ ] DCON (Pattern Recognition 2025) 후속 재탐색 실패 — 다음 실행에서 재시도
+- [ ] BTECF의 caliber/radius 파라미터화 방식이 내 augmentation conditioning 설계에 참고 가능한지 확인
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

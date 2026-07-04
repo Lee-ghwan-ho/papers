@@ -22,6 +22,10 @@
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
+| ★★★★ | **TSIAA** | **Run #8 신규, 최우선.** Teacher–Student Instance-Level Adversarial Augmentation (IEEE TMI 2026). "Image-level uniform augmentation is suboptimal; instance-level augmentation breaks uniformity across structures within an image"라는 문장 수준으로 내 핵심 주장과 겹침. Learnable Bézier per-instance transform + adversarial teacher-student loop. 즉시 전문/코드(github.com/Wangzs0228/TSIAA) 확인 필수 — instance 정의 방식과 강도 결정 메커니즘이 진짜 "구조 무관 학습된 값"인지 재확인. |
+| ★★★ | **SPLITCOMBINE** | **Run #8 신규.** Split-and-Combine: Enhancing Style Augmentation for Single Domain Generalization (ICCV 2025). Patch-wise 독립 style aug + entropy 기반 반복적 강도 조절 + energy 기반 OOD-discrepancy 제어. 공간적으로 국소화된 augmentation 강도 조절이라는 점에서 방법론적으로 가장 가까운 top-tier vision 논문. Stopping-rule 설계에 참고. |
+| ★★★ | **MSSSEG** | **Run #8 신규.** MSSSeg: Learning Multi-Scale Structural Complexity for Self-Supervised Segmentation (arXiv 2512.23997). Differentiable box-counting 기반 구조 복잡도로 augmentation 강도(StructAug)를 조절 + Persistent Homology Loss. "구조 복잡도 → aug 강도" 매핑이 내 "radius → aug 강도"와 mechanism이 유사. Self-supervised 세팅이라 직접 경쟁은 아니지만 conditioning 신호 설계의 대안 사례로 필독. |
+| ★★★ | **KEEPSAGE** | **Run #8 신규.** Keep the Core: Adversarial Priors for Significance-Preserving Brain MRI Segmentation (arXiv 2512.15811). Adversarial sensitivity 기반 fragility map으로 augmentation을 국소적으로 억제(원본 픽셀 복원). 내 "얇은 혈관 보호" 주장의 거울상이나 조건 신호가 기하학적(radius) 대신 adversarial. 대안적 observability 정의로서 Discussion에 언급 가치. |
 
 ---
 
@@ -50,6 +54,12 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **CONSTSTYLE** | **Run #8 신규** ConstStyle: Robust DG with Unified Style Transformation (ICCV 2025). Train/test 샘플을 공통 "unified style" 공간으로 투영. 강도를 국소적으로 조절하는 개념은 없지만 canonical appearance 정합 아이디어는 참고 가치. |
+| ★★ | **ADAPTFOUND** | **Run #8 신규** Adapt Foundational Segmentation Models with Heterogeneous Searching Space (ICCV 2025). 22개 rule-based + 10개 learning-based 증강 연산의 heterogeneous search space를 정의하고 정책 탐색. 내 nonlinear aug family를 여러 연산의 policy-selection으로 확장할 때 참고. |
+| ★★ | **AC2RUNET** | **Run #8 신규** Anatomically Conditioned Recurrent Refinement for Topology-Aware CoW Segmentation (arXiv 2606.12319). Thin/fragile 혈관의 broken vessel 문제를 curriculum + recurrent refinement로 해결. TOF-MRA/CoW 도메인에서 내 thin vessel 동기를 직접 뒷받침하는 최신 근거. |
+| ★★ | **TOPOVST** | **Run #8 신규** TopoVST: Topology-fidelitous Vessel Skeleton Tracking (arXiv 2603.14909). Local vessel radius를 GNN 기반 skeleton tracking의 조건 신호(class-imbalance weighting)로 사용. 내 radius 계산 방식(sphere graph 기반) 설계에 참고 가능. |
+| ★★ | **MORVESS** | **Run #8 신규** MorVess: Morphology-Aware Pulmonary Vessel Segmentation (arXiv 2606.24214). Vessel thickness map을 explicit supervision target으로 예측(centerline/diameter transition 감독). 내 방법은 radius를 augmentation 강도 조절에 쓰고, MorVess는 예측 대상으로 씀 — 상호보완적 활용 가능성. |
+| ★★ | **MARVEL** | **Run #8 신규** MARVEL: Murray's Law-informed Vessel Tree Segmentation (arXiv 2605.25363). Murray's law(분기점 radius-flow 관계) biophysical prior를 topology 추정에 통합. Radius 기반 처리를 정당화하는 생리학적 근거로 인용 가치. |
 
 ---
 
@@ -78,6 +88,17 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **WAVESDG** | **Run #8 신규** WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus Segmentation (arXiv 2603.28463). Wavelet sub-band 기반 구조/스타일 분리. Fundus(혈관 포함) 도메인 SSDG 경쟁 방법 — baseline 비교 후보. |
+| ★ | **DATASCALE_TOPO** | **Run #8 신규** Revisiting Data Scaling in Medical Image Segmentation via Topology-Aware Augmentation (arXiv 2511.13883). Deformation 기반 topology-aware aug가 scaling law의 error scale을 낮춘다는 실증. 구조 인지 증강의 일반적 효용을 지지하는 근거로 인용 가능. |
+| ★ | **BTECF** | **Run #8 신규** Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis (arXiv 2605.13015). Vessel caliber/tortuosity를 Bézier tree로 파라미터화해 counterfactual perturbation — 목적은 질병 분류 설명이지만 radius 파라미터화 방식이 내 augmentation 설계에 참고 가치. |
+| ★ | **SADA** | **Run #8 신규** On-the-Fly Data Augmentation via Gradient-Guided and Sample-Aware Influence Estimation (arXiv 2510.00434). 학습 동역학(gradient projection variance) 기반 per-sample 증강 강도 조절 — radius 대신 training stability를 관찰가능성 신호로 쓰는 대안적 접근. |
+| ★ | **CSWINUNETR** | **Run #8 신규** CSWinUNETR: Segmentation of Thin Anatomical Structures (arXiv 2606.19824). Thin/tortuous 구조 특화 attention backbone. 아키텍처 참고용. |
+| ★ | **VESSELFM_CT** | **Run #8 신규** vesselFM-CT: Segmenting All Blood Vessels in CT Images (arXiv 2606.09400). TubeLoss로 극단적 vessel scale heterogeneity 처리. Thick/thin dichotomy를 loss 레벨에서 다룬 사례. |
+| ★ | **TOPOLORASAM** | **Run #8 신규** TopoLoRA-SAM: Topology-Aware PEFT for Thin-Structure Cross-Domain Segmentation (arXiv 2601.02273). SAM + LoRA + clDice supervision, cross-domain 혈관 평가. |
+| ★ | **CORSEGREC** | **Run #8 신규** CorSegRec: Topology-Preserving Coronary Artery Extraction (Medical Image Analysis 2025, arXiv 2504.01597). Thin distal vessel 연결성 복구를 post-hoc topology repair로 해결. |
+| ★ | **TPNET** | **Run #8 신규** Few-Shot Pulmonary Vessel Segmentation via Tubular-Aware Prompt-Tuning (IEEE TMI 2026). Tubular structure를 few-shot transfer prior로 활용. |
+| ★ | **WIDTHTOPO** | **Run #8 신규** Topology-Guaranteed Image Segmentation: Enforcing Connectivity, Genus, and Width Constraints (SIAM J. Imaging Sciences 2026, arXiv 2601.11409). Width(두께)를 topological prior의 1급 속성으로 명시적 정식화 — 내 "두께가 다르면 다르게 취급해야 한다"는 주장의 수학적 지지 근거로 인용 가능. |
+| ★ | **FEWSHOT3DVESSEL** | **Run #8 신규** Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models (arXiv 2602.23782). DINOv3 adapter 기반, few-shot OOD robustness 보고. |
 
 ---
 
@@ -115,3 +136,7 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| CUSTDOMADAPT | **Run #8 신규** Customizing Domain Adapters for Domain Generalization. ICCV 2025. Domain-specific lightweight adapter 조합. 자연영상, 간접 참고. |
+| SEMIR_GRAPHMINOR | **Run #8 신규** SEMIR: Topology-Preserving Graph Minors for Thin-Structure Segmentation. ECCV 2026. 전력선/균열 등 비의료 thin structure. Graph minor 표현 아이디어만 참고. |
+| SCNP | **Run #8 신규** Towards High-Quality Image Segmentation: Topology Accuracy by Penalizing Neighbor Pixels. CVPR 2026. 일반 topology 정확도 개선, DG/vessel 특화 아님. |
+| UNIVG | **Run #8 신규** UniVG: Generative Data-engine for Universal Few-shot 2D Vascular Segmentation. arXiv 2604.10737. 합성 데이터 기반 접근, 내 augmentation paradigm과 다름. |

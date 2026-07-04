@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-04  
+> 총 수록 논문: 120편
 
 ---
 
@@ -57,6 +57,9 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher–Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| DATASCALE_TOPO | Revisiting Data Scaling in Medical Image Segmentation via Topology-Aware Augmentation | arXiv | 2025 | Preprint Only | Medium |
 
 ---
 
@@ -76,6 +79,10 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| BTECF | A General Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis | arXiv | 2026 | Preprint Only | Medium |
+| SADA | On-the-Fly Data Augmentation via Gradient-Guided and Sample-Aware Influence Estimation | arXiv | 2025 | Preprint Only | Medium |
+| MSSSEG | MSSSeg: Learning Multi-Scale Structural Complexity for Self-Supervised Segmentation | arXiv | 2025 | Preprint Only | **High** |
+| KEEPSAGE | Keep the Core: Adversarial Priors for Significance-Preserving Brain MRI Segmentation | arXiv | 2025 | Preprint Only | **High** |
 
 ---
 
@@ -114,6 +121,18 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware Circle of Willis Segmentation | arXiv | 2026 | Preprint Only | High |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | Medium |
+| MARVEL | MARVEL: Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation | arXiv | 2026 | Preprint Only | Medium |
+| TOPOVST | TopoVST: Toward Topology-fidelitous Vessel Skeleton Tracking | arXiv | 2026 | Preprint Only | Medium |
+| CSWINUNETR | CSWinUNETR: Segmentation of Thin Anatomical Structures in Medical Images | arXiv | 2026 | Preprint Only | Medium |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images for System-Level Cardiovascular Analysis | arXiv | 2026 | Preprint Only | Medium |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| CORSEGREC | CorSegRec: A Topology-Preserving Three-Stage Framework for Fully-Connected Coronary Artery Extraction | Medical Image Analysis | 2025 | Published Journal Article | Medium |
+| TPNET | Few-Shot Pulmonary Vessel Segmentation based on Tubular-Aware Prompt-Tuning | IEEE TMI | 2026 | Published Journal Article | Medium |
+| WIDTHTOPO | Topology-Guaranteed Image Segmentation: Enforcing Connectivity, Genus, and Width Constraints | SIAM Journal on Imaging Sciences | 2026 | Published Journal Article | Medium |
+| FEWSHOT3DVESSEL | Breaking the Data Barrier: Robust Few-Shot 3D Vessel Segmentation using Foundation Models | arXiv | 2026 | Preprint Only | Medium |
+| UNIVG | UniVG: Generative Data-engine Foundation Model for Universal Few-shot 2D Vascular Image Segmentation | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -135,6 +154,12 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| SPLITCOMBINE | Split-and-Combine: Enhancing Style Augmentation for Single Domain Generalization | ICCV 2025 | 2025 | Accepted Conference Paper | **High** |
+| CONSTSTYLE | ConstStyle: Robust Domain Generalization with Unified Style Transformation | ICCV 2025 | 2025 | Accepted Conference Paper | Medium |
+| CUSTDOMADAPT | Customizing Domain Adapters for Domain Generalization | ICCV 2025 | 2025 | Accepted Conference Paper | Low |
+| ADAPTFOUND | Adapt Foundational Segmentation Models with Heterogeneous Searching Space | ICCV 2025 | 2025 | Accepted Conference Paper | Medium |
+| SEMIR_GRAPHMINOR | SEMIR: Topology-Preserving Graph Minors for Thin-Structure Segmentation | ECCV 2026 | 2026 | Accepted Conference Paper | Low |
+| SCNP | Towards High-Quality Image Segmentation: Improving Topology Accuracy by Penalizing Neighbor Pixels | CVPR 2026 | 2026 | Accepted Conference Paper | Low |
 
 ---
 
@@ -178,3 +203,18 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | WaveSDG: Decoupling Wavelet Sub-bands for SSDG in Fundus Segmentation | 2603.28463 | 2026 |
+| DATASCALE_TOPO | Revisiting Data Scaling via Topology-Aware Augmentation | 2511.13883 | 2025 |
+| BTECF | Bézier Tree Encoding Counterfactual Framework for Retinal Vessel Disease | 2605.13015 | 2026 |
+| SADA | On-the-Fly Data Augmentation via Gradient-Guided Influence Estimation | 2510.00434 | 2025 |
+| MSSSEG | MSSSeg: Multi-Scale Structural Complexity for Self-Supervised Segmentation | 2512.23997 | 2025 |
+| KEEPSAGE | Keep the Core: Adversarial Priors for Significance-Preserving Brain MRI Seg. | 2512.15811 | 2025 |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for CoW Segmentation | 2606.12319 | 2026 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation | 2606.24214 | 2026 |
+| MARVEL | MARVEL: Murray's Law-informed Vessel Tree Segmentation | 2605.25363 | 2026 |
+| TOPOVST | TopoVST: Topology-fidelitous Vessel Skeleton Tracking | 2603.14909 | 2026 |
+| CSWINUNETR | CSWinUNETR: Segmentation of Thin Anatomical Structures | 2606.19824 | 2026 |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images | 2606.09400 | 2026 |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware PEFT for Thin-Structure Cross-Domain Seg. | 2601.02273 | 2026 |
+| FEWSHOT3DVESSEL | Breaking the Data Barrier: Few-Shot 3D Vessel Seg. w/ Foundation Models | 2602.23782 | 2026 |
+| UNIVG | UniVG: Generative Data-engine for Universal Vascular Image Segmentation | 2604.10737 | 2026 |
