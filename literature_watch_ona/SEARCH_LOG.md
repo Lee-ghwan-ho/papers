@@ -2,6 +2,80 @@
 
 ---
 
+## 2026-07-05 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-05
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **8편** (Published Journal 2편 + Workshop 1편 + Preprint 5편)
+
+### 수행한 검색 쿼리
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation arXiv July 2026 | WaveSDG (2603.28463) 재확인 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular 2026 new method arXiv | 신규 TOF-MRA DG 방법 없음, 기존 목록 재확인 |
+| B | structure-conditioned augmentation vessel radius observability domain generalization | DGSSA, Hessian-VF 재확인 — gap 유지 |
+| B | nonlinear intensity augmentation medical segmentation domain generalization arXiv June 2026 | FedGIN (2508.05137) 발견하나 관련성 낮아 미수록 |
+| A | MICCAI 2026 domain generalization vessel segmentation submission arXiv | MICCAI 2026 accepted list 아직 미공개 |
+| B | radius-conditioned augmentation medical segmentation thickness-conditioned appearance vessel | MorVess (2606.24214) 발견 — augmentation 아닌 architecture, 미수록 |
+| C | MorVess 상세 확인 | thickness/distance-map을 SAM-adapter 보조 supervision으로 사용, DG 아님 → 미수록 |
+| C | WaveSDG 상세 확인 | wavelet sub-band decoupling 기반 SSDG fundus, structure-conditioned budget 없음 → **WAVESDG로 수록** |
+| D | CVPR 2026 domain generalization segmentation augmentation accepted | CVPR 2026 리스트 미공개 |
+| D | ICCV 2025 robust segmentation distribution shift structure-preserving augmentation | ADAL/DPMFormer 재확인, 신규 없음 |
+| D | NeurIPS 2025 counterfactual augmentation structure-preserving perturbation segmentation | CF-Seg 재확인만 |
+| C | tubular structure segmentation topology preservation domain generalization 2026 | **Topology-Guaranteed Image Segmentation (2601.11409, SIAM J. Imaging Sciences 2026)** 발견 → TOPOWIDTH로 수록 |
+| A | AdverIN Medical Image Analysis 2025 publication date confirmation | **AdverIN (MedIA 2025, arXiv 2304.02720)** 확인 — 7회 실행 동안 누락되었던 foundational monotonic intensity augmentation 논문. Published Journal 확정 → 수록 |
+| B | class-wise augmentation strength structure-aware perturbation medical segmentation 2026 | SPAD 등 기존 재확인, 신규 없음 |
+| D | AAAI 2026 domain generalization medical image segmentation augmentation accepted paper | 신규 없음 |
+| D | ICLR 2026 domain generalization segmentation augmentation openreview | LangDAug 재확인만 |
+| C | coronary artery airway segmentation domain generalization 2026 augmentation thin structure | **DomainFlow (STACOM 2024 Workshop)** 발견 — AngioDG(이미 수록)의 동일 저자 선행 workshop 논문 → 계보 기록용으로 수록 |
+| B | shortcut suppression domain generalization medical image segmentation 2026 | 신규 없음 |
+| Follow-up | DomainFlow venue 확인 (Springer STACOM 2024) | Workshop Paper 확정 |
+| Follow-up | vesselFM foundation model follow-up citation 2026 | 신규 후속 없음 |
+| Follow-up | Vector Field Transformer for vessel segmentation follow-up 2026 | 신규 후속 없음 |
+| Follow-up | COSTA cerebrovascular TOF-MRA follow-up 2026 | 신규 후속 없음 |
+| Follow-up | Circle of Willis segmentation 2026 new method domain generalization multi-center | COW_TOPO/AG-TAL 재확인만 |
+| D | uncertainty-guided augmentation hard example generation medical image DG 2026 | 기존 foundational (pre-2024) 재확인만 |
+| B | content style disentanglement counterfactual appearance generation medical segmentation 2026 | CDDSA 재확인만 |
+| B/D | causal representation learning invariance shape-biased medical segmentation DG 2026 | MCDRL 재확인만 |
+| Follow-up | learned augmentation policy vessel segmentation DG reinforcement 2026 | AADG 재확인, 신규 후속 없음 |
+| C | retinal vessel segmentation domain generalization new method June 2026 arXiv | **RLAD (2503.01190)** 발견 — layout-preserving diffusion generative augmentation → RLAD_RETINA로 수록 |
+| B | acquisition-inspired augmentation medical image DG MRI simulation 2026 | k-space/counterfactual-acquisition 논문 발견하나 vessel/구조 무관 → 미수록 |
+| C | vesselness Hessian scale-space local radius augmentation domain generalization 2026 | Hessian-VF 재확인만 |
+| C | CurvSegFlow / MTFlow 상세 확인 | **CurvSegFlow (2606.21608)**, **MTFlow (2601.14841)** 확인 — flow-matching 기반 curvilinear/tubular noise-robustness, DG 아님 → 참고용 수록 |
+| Follow-up | AdverIN mask-operation 상세, DomainDrop follow-up, ICML/NeurIPS 2026 invariance learning | DomainDrop 직접 2026 후속 없음 (mammogram classification 응용만 존재) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (baseline 공백 보완)
+
+**AdverIN (Medical Image Analysis 2025)** — arXiv 2304.02720
+- **Monotonic** adversarial intensity mapping (mask 연산 포함)으로 원본 intensity ordering을 국소적으로 보존하면서 강도를 적대적으로 학습
+- Continuous-ONA와 같은 "monotonic/label-preserving nonlinear intensity transform" 계열의 foundational 논문 — 7회 실행 동안 누락되어 있었음(중대한 문헌 공백)
+- **핵심 차이**: AdverIN은 이미지 전체에 균일하게 adversarial 강도로 매핑을 학습. Radius/observability 기반 구조별 조건화 없음. Thin vessel 보호 개념 없음.
+- **Novelty conflict: 없음.** 오히려 "monotonic intensity aug family가 이미 SSDG에서 강력한 baseline"이라는 근거로 활용 — Continuous-ONA는 반드시 AdverIN 대비 thin vessel 보존 효과를 입증해야 함. related work 인용 필수.
+
+**BTECF (arXiv 2026, 2605.13015)**
+- 망막 혈관을 cubic-Bézier segment tree로 인코딩, segment 단위 do-intervention(굴곡/직경)으로 질병 효과 counterfactual 시각화
+- **내 방법과의 접점**: "혈관을 segment 단위로 독립적으로 perturb 가능한 단위로 취급"한다는 기술적 아이디어가 유사. 단, 목적이 질병 상태 counterfactual 설명이지 SSDG augmentation이 아니며, radius/observability score 대신 disease semantics를 사용
+- Novelty conflict 낮음이나, "vessel segment를 atomic perturbation unit으로 인코딩 가능하다"는 기술적 근거로 인용 가치 있음
+
+### Novelty Gap 재확인
+
+- **"vessel radius/observability 기반 continuous augmentation budget"** 키워드: Run #8에서도 직접 명시 논문 없음 — gap 8회 연속 유지
+- AG-TAL(loss), L2CP(test-time 제거), DCON/ADA(per-sample), AdverIN(uniform monotonic), BTECF(counterfactual segment) 모두 다른 축에서 "구조 단위/강도 조건화"에 근접하지만 내 핵심 결합(continuous radius → augmentation strength, source-only, training-time, label-preserving)은 여전히 비어 있음
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] AdverIN 전문 독해 필수: mask 연산 정의, 적대적 최적화 절차, baseline 비교표에 포함 여부 결정
+- [ ] BTECF Bézier segment encoding 상세: observability score 계산에 참고 가능한 parameterization인지 확인
+- [ ] MICCAI 2026 / CVPR 2026 accepted list 공개 시 재탐색
+- [ ] FedGIN (2508.05137), MorVess (2606.24214): augmentation/architecture 세부 재검토 가치 낮음 확인됨
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

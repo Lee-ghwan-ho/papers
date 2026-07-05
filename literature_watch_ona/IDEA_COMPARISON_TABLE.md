@@ -53,6 +53,7 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **AdverIN** *(Run#8)* | Global (whole image) | **Uniform adversarial** (monotonic mapping, no structure conditioning) | ❌ | ❌ | ❌ | ❌ | Monotonic/label-preserving intensity mapping을 adversarial하게 학습하는 foundational 논문. 내 방법과 같은 "monotonic nonlinear transform" 계열이지만 구조 단위 조건화가 전혀 없음 — 균일 강도 적용. Baseline 비교 필수 대상. |
 
 ---
 
@@ -89,6 +90,15 @@
 | TopoTTA | TTA for tubular topology | Cross-domain topological shift 탐지 |
 
 ---
+
+---
+
+## Run #8 (2026-07-05) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **AdverIN** (Medical Image Analysis 2025) | Monotonic adversarial intensity mapping이 label-preserving nonlinear intensity transform의 foundational 선행 연구. 내 방법이 "AdverIN의 매핑을 구조별로 조건화한 확장"처럼 보일 위험. 7회 실행 동안 문헌 공백이었음. | 핵심 차이 강조: AdverIN = 이미지 전체 균일 강도의 adversarial 최적화, 나 = source annotation에서 유도한 local radius/observability에 따라 강도를 continuous하게 조절 (adversarial 최적화 아님, 고정된 관찰가능성 신호 기반). Related work에서 "monotonic transform family의 established baseline"으로 명시적으로 인용하고 실험적으로 비교 필요. |
+| **BTECF** (arXiv 2605.13015, 2026) | 혈관을 segment 단위 Bézier tree로 인코딩해 atomic perturbation을 가능케 함 — "구조를 독립 단위로 분해해 다르게 처리한다"는 내 방법의 상위 원리와 표면적으로 유사. | 핵심 차이: BTECF는 질병 상태 counterfactual 설명이 목적이며 perturbation 축이 기하학적 형태(굴곡/직경)이지 augmentation 강도가 아님. Radius/observability 기반 augmentation budget 개념 없음. SSDG training과 무관. |
 
 ---
 

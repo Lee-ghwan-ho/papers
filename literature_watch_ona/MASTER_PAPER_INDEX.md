@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-05  
+> 총 수록 논문: 104편
 
 ---
 
@@ -57,6 +57,10 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| ADVERIN | AdverIN: Monotonic Adversarial Intensity Attack for Domain Generalization in Medical Image Segmentation | Medical Image Analysis | 2025 | Published Journal Article | **High** |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| RLAD_RETINA | Enhancing Retinal Vessel Segmentation Generalization via Layout-Aware Generative Modelling | arXiv | 2025 | Preprint Only | Medium |
+| DOMAINFLOW_CORONARY | Single-Source Domain Generalization for Coronary Vessels Segmentation in X-Ray Angiography | STACOM 2024 (MICCAI Workshop) | 2024 | Workshop Paper | Low |
 
 ---
 
@@ -114,6 +118,10 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| BTECF | A General Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis | arXiv | 2026 | Preprint Only | Medium |
+| CURVSEGFLOW | CurvSegFlow: Time-Conditioned Flow Matching for Robust Segmentation of Curvilinear Structures in Noisy Biomedical Images | arXiv | 2026 | Preprint Only | Medium |
+| MTFLOW | MTFlow: Time-Conditioned Flow Matching for Microtubule Segmentation in Noisy Microscopy Images | arXiv | 2026 | Preprint Only | Low |
+| TOPOWIDTH | Topology-Guaranteed Image Segmentation: Enforcing Connectivity, Genus, and Width Constraints | SIAM Journal on Imaging Sciences | 2026 | Published Journal Article | Low |
 
 ---
 
@@ -178,3 +186,9 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| RLAD_RETINA | Enhancing Retinal Vessel Segmentation Generalization via Layout-Aware Generative Modelling | 2503.01190 | 2025 |
+| BTECF | A General Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis | 2605.13015 | 2026 |
+| CURVSEGFLOW | CurvSegFlow: Time-Conditioned Flow Matching for Curvilinear Structures | 2606.21608 | 2026 |
+| MTFLOW | MTFlow: Time-Conditioned Flow Matching for Microtubule Segmentation | 2601.14841 | 2026 |
+| TOPOWIDTH | Topology-Guaranteed Image Segmentation (Connectivity, Genus, Width) | 2601.11409 | 2026 |

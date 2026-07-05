@@ -50,6 +50,8 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★★ | **ADVERIN** | **Run #8 신규 — 7회 실행 동안 누락된 foundational 논문.** Monotonic adversarial intensity mapping (mask 연산 포함)으로 label-preserving intensity 변형을 학습 (Medical Image Analysis 2025, arXiv 2304.02720). Continuous-ONA와 같은 "monotonic nonlinear intensity transform" 계열. 핵심 차이: AdverIN은 이미지 전체에 균일한 강도로 적대적 최적화, radius 조건화 없음. Related work 인용 및 baseline 비교 후보로 즉시 정독 필요. |
+| ★★ | **BTECF** | **Run #8 신규** Bézier Tree Encoding Counterfactual Framework (arXiv 2605.13015, 2026). 망막 혈관을 segment 단위 Bézier tree로 인코딩해 atomic do-intervention 수행. 목적은 질병 counterfactual 설명이지만 "vessel segment를 독립적 perturbation 단위로 인코딩"하는 기술이 내 observability score parameterization에 참고 가능. |
 
 ---
 
@@ -78,6 +80,9 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Segmentation (arXiv 2603.28463, 2026). Wavelet sub-band 분해로 anatomical structure와 domain appearance 분리. 전역 wavelet-band 분리 방식으로 내 intra-class radius conditioning과 mechanism 다름 — SSDG fundus 최신 baseline 후보. |
+| ★ | **RLAD_RETINA** | **Run #8 신규** Layout-Aware Generative Modelling for retinal vessel DG (arXiv 2503.01190, 2025, venue 미확인). Diffusion generative aug이 실제 vessel layout을 보존하며 병변/시신경 등 나머지 요소만 다양화. Vessel 구조 전체를 보존한다는 점에서 내 "구조 보호" 동기와 프레이밍 유사하나 thin/thick 구분 없음. |
+| ★ | **CURVSEGFLOW** | **Run #8 신규** Time-Conditioned Flow Matching for curvilinear structures (arXiv 2606.21608, 2026). Vessel/nerve/artery 등 다양한 tubular 도메인에서 저 SNR 하 thin structure 단절 문제를 flow-matching 기반 반복 정제로 해결. Architecture/inference 방법으로 DG augmentation과 무관하나 "thin structure가 불균형적으로 취약하다"는 동기 보강 인용 가능. |
 
 ---
 
@@ -115,3 +120,6 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| MTFLOW | **Run #8 신규** MTFlow: Time-Conditioned Flow Matching for microtubule segmentation (arXiv 2601.14841). CurvSegFlow의 선행 논문. DG/augmentation 무관, architecture 참고용. |
+| TOPOWIDTH | **Run #8 신규** Topology-Guaranteed Image Segmentation: connectivity/genus/width constraints (SIAM J. Imaging Sciences 2026, arXiv 2601.11409). Vessel width를 topological energy에 명시적 변수로 포함하는 loss/PDE 방법. Mechanism 다르지만 "width를 first-class variable로 다룬다"는 트렌드 참고. |
+| DOMAINFLOW_CORONARY | **Run #8 신규** SSDG for coronary vessels in X-ray angiography (STACOM 2024 Workshop). 이미 수록된 AngioDG의 동일 저자 선행 workshop 논문 — 계보 기록용, AngioDG로 superseded. |
