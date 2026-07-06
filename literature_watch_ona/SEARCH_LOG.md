@@ -2,6 +2,84 @@
 
 ---
 
+## 2026-07-06 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-06
+- 모델: claude-sonnet-5 (4개 병렬 서브에이전트: Lane A+D, Lane B, Lane C, Lane 5 follow-up)
+- 연도 우선: 2026 (Run #7 이후, 2026-06-03 ~ 2026-07-06 구간 집중), 보조: 2025 foundational
+- 신규 발견: **10편** (Published Journal 2편 + Accepted Conference 1편 + Preprint Only 7편)
+
+### 수행한 검색 쿼리 (병렬 에이전트 4개, 총 ~189회 검색/도구 호출)
+
+| Lane | 담당 | 주요 발견 |
+|------|------|-----------|
+| A+D | SSDG 직접경쟁 + Top-tier Vision (CVPR/ICCV/ECCV/NeurIPS/ICLR/AAAI/ICML) | TSIAA (IEEE TMI), MARVEL, GPDG, Low-Freq Shortcuts, MorVess 재확인 |
+| B | 방법론 유사 (class/region/structure-conditioned aug, nonlinear intensity, Bezier, spline 등) | TSIAA (Bezier per-instance adversarial aug) 발견 — 이번 Run 최우선 논문 |
+| C | 혈관/tubular 구조 특화 (thin vessel, topology, centerline, vesselness, Hessian) | MorVess, vesselFM-CT, CSWinUNETR (MICCAI 2026) 발견 |
+| Follow-up (Lane 5) | SLAug/RASS/Causality_SDG/MoreStyle/VesselMorph/VectorFieldTransformer/clDice/DomainDrop 후속 탐색 | TopBrain Challenge (medRxiv), WaveSDG, TubeMLLM 발견. SLAug/RASS/Causality_SDG/DomainDrop 직접 후속 논문 없음 확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험) — ★★★ 즉시 정독 필요
+
+**TSIAA — Teacher-Student Instance-Level Adversarial Augmentation (IEEE TMI 2026)** — DOI: 10.1109/TMI.2025.3605162, Vol 45, pp 764-776
+- **Run #8 최우선 발견.** 기존 known-list에 없던 **Published Journal** 논문.
+- Learnable constrained Bézier 변환을 사용하는 Instance-level Augmentation Module(IAM)을 통해 **이미지 내 서로 다른 구조(instance)마다 다른 augmentation을 적용** — teacher-student adversarial loop으로 학습.
+- Single-source DG, target domain 정보 미사용 — 내 세팅과 정확히 동일.
+- **내 방법과의 핵심 차이**: TSIAA의 instance별 차등 augmentation은 **adversarially learned** (무엇을 얼마나 강하게 augment할지 학습을 통해 탐색), 나의 Continuous-ONA는 **명시적으로 측정된 local vessel radius/observability에 continuous하게 조건화**. TSIAA는 vessel radius/thickness 개념을 전혀 사용하지 않고, "instance" 단위도 혈관이 아닌 일반적인 해부학적 구조/영역 단위로 추정됨(원문 직접 확인 필요).
+- **Novelty 방어 논거**: "구조 단위로 augmentation을 다르게 적용해야 한다"는 motivation을 공유하는 가장 가까운 선행 연구. 그러나 (1) conditioning 신호가 명시적 형태학적 측정값(radius)이 아닌 학습된 adversarial policy라는 점, (2) 혈관 특유의 "관찰 가능성(observability)" 개념이 없다는 점에서 명확히 구분됨. Related Work에서 반드시 상세 비교 필요.
+- ⚠️ WebFetch로 원문 직접 확인 실패(네트워크 정책상 arxiv.org 차단 + IEEE Xplore 접근 제한) — 서지정보는 검색 스니펫 기반 재구성. **원문 PDF 직접 확인 최우선 과제.**
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463, ~2026-03)** — Preprint Only
+- Wavelet sub-band decomposition으로 anatomical structure vs. domain-specific appearance 분리, SSDG for fundus (vessel 포함) segmentation.
+- SLAug/RASS의 Bezier/frequency perturbation과는 다른 구조 분리 전략. Radius 조건화 없음.
+
+#### 혈관·tubular 특화 신규 논문
+
+**MorVess (arXiv 2606.24214, 2026-06-23)** — Preprint Only
+- Pulmonary vessel: Vessel Thickness Map(VTM, medial-axis 기반 continuous thickness)을 mask/distance map과 함께 **auxiliary supervision target**으로 예측 — augmentation이 아닌 loss/supervision 측면에서 "continuous vessel thickness" 개념을 사용한 최신 사례.
+- **내 연구 지지 근거로 활용 가능**: continuous vessel thickness가 "유용한 신호"라는 독립적 증거. 단, augmentation에는 전혀 적용되지 않음 — gap 유지.
+
+**TopBrain Segmentation Challenge (medRxiv, DOI 10.64898/2026.05.28.26354312, 2026-05-28)**
+- TopCoW를 whole-brain 48-class 혈관으로 확장한 새 challenge/benchmark. CTA+MRA 90 volumes, per-vessel caliber(반지름) ground truth 포함.
+- Menze lab 계열 (TopCoW 연장선). "smaller/complex vessels remain the true bottleneck" — 내 motivation을 독립적으로 재확인.
+- **내 TOF-MRA 연구와 직접 관련된 신규 평가 리소스** — 향후 벤치마크 활용 가능성 검토 필요.
+
+**vesselFM-CT (arXiv 2606.09400)** — CVPR 2025 vesselFM의 CT 확장판. TubeLoss로 대동맥~미세혈관까지 radius 이질성 처리. Loss 설계 관점, augmentation 아님.
+
+**CSWinUNETR (arXiv 2606.19824, MICCAI 2026 accepted 표기)** — Cross-shaped stripe attention 기반 thin structure 분할 아키텍처. Augmentation/DG 실험 없음.
+
+**TubeMLLM (arXiv 2603.09217)** — Vessel-like anatomy를 위한 topology-aware multimodal foundation model. Augmentation 무관.
+
+**MARVEL (arXiv 2605.25363)** — Murray's Law 기반 radius-aware topology loss, multi-source/multi-modality. Radius를 loss에 사용(AG-TAL과 유사 축), augmentation 아님.
+
+#### Top-tier Vision (참고용, 낮은 관련성)
+
+**GPDG (Frontiers of Computer Science, 2026-06-15)** — Domain을 latent environment의 샘플로 재정의하는 이론적 DG 프레임워크. 의료영상/증강과 무관하나 "단일 invariant mapping의 한계"라는 이론적 motivation으로 인용 가능.
+
+**Low-Frequency Shortcuts in Texture-Driven Visual Learning (arXiv 2606.03493)** — texture-driven domain에서 low-frequency shortcut 의존성 분석. 내 "thick vessel의 intensity shortcut 억제" motivation을 지지하는 방계 근거로 활용 가능.
+
+### Novelty Gap 재확인
+
+- **"continuous radius/observability-conditioned augmentation strength"** 키워드: Run #8에서도 명시적으로 이를 구현한 논문 없음 확인.
+- 가장 근접한 논문은 TSIAA (adversarial instance-level, radius 미사용)와 MorVess/MARVEL/vesselFM-CT (radius를 loss/supervision에 사용, augmentation 미사용) — **두 축 모두 내 방법과 정확히 겹치지 않음**.
+- **핵심 gap 유지**: augmentation strength를 vessel radius/observability의 continuous function으로 조건화하는 논문은 여전히 부재.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 원문 PDF 직접 확인 (IEEE Xplore 접근 방법 확보 필요) — instance 정의가 혈관 구조 단위인지, augmentation 강도 결정 메커니즘 상세
+- [ ] TSIAA와 ADA(MICCAI 2025)의 관계 확인 — 동일 연구 그룹 여부, ADA의 후속판 가능성
+- [ ] TopBrain 데이터셋 실제 접근 가능성 및 caliber ground truth 형식 확인
+- [ ] MorVess VTM 계산 방식(medial-axis propagation) 상세 — 내 observability score 계산과 비교
+- [ ] MARVEL Murray's Law exponent와 AG-TAL radius-aware Dice의 관계 비교
+- [ ] MICCAI 2026 정식 accepted list 공개 시 (통상 7~8월) 재탐색 필요
+- [ ] arXiv 직접 접근 네트워크 정책 확인 (이번 Run에서 일부 서브에이전트가 403 겪음) — 원문 확인 대체 경로 마련
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

@@ -9,6 +9,7 @@
 
 | 우선순위 | KEY | 이유 |
 |---------|-----|------|
+| ★★★★ | **TSIAA** | **Run #8 신규, 최우선.** Teacher-Student Instance-Level Adversarial Augmentation (IEEE TMI 2026). Bézier 기반 Instance-level Augmentation Module로 이미지 내 구조별로 다른 augmentation을 적용하는 SSDG 논문. Single-source, no target info — 내 세팅과 동일. 핵심 차이는 "adversarially learned instance policy" vs. 내 "radius/observability 기반 continuous 조건화"이지만, 원문 미확인 상태 (network 정책상 IEEE Xplore/arXiv 접근 실패). **원문 직접 확인 및 ADA와의 관계 파악이 이번 사이클 최우선 과제.** |
 | ★★★ | **ADA** | **Run #2 신규** Learnable Bezier Remap으로 per-sample adaptive aug. "aug 강도를 content에 따라 조절"이라는 아이디어 공유. 즉시 full text 확인 필수. MICCAI 2025 Paper 0315. |
 | ★★★ | **MBFCV** | **Run #2 신규** Multi-Branch Feature Extractor로 혈관 두께 명시적 구분. 내 intra-class thickness conditioning과 방향 유사. MICCAI 2025 Paper 0782. |
 | ★★★ | **SRCSM** | Semantic-aware RC는 label 단위로 다른 augmentation 적용. 내 방법이 "같은 class 내 다른 강도"임을 명확히 구분하기 위해 즉시 독해 필요. arXiv:2512.01510 |
@@ -29,6 +30,10 @@
 
 | 우선순위 | KEY | 이유 |
 |---------|-----|------|
+| ★★ | **MORVESS** | **Run #8 신규** MorVess: pulmonary vessel segmentation with Vessel Thickness Map(VTM) as auxiliary continuous supervision. 내 observability score 계산과 비교할 medial-axis 기반 thickness 정의 참고. arXiv 2606.24214. |
+| ★★ | **TOPBRAIN** | **Run #8 신규** TopBrain Segmentation Challenge — whole-brain 48-class vessel (CTA+MRA) benchmark, per-vessel caliber ground truth. TopCoW 계열 확장. 향후 평가 데이터셋으로 활용 가능성 검토. medRxiv 2026. |
+| ★★ | **MARVEL** | **Run #8 신규** Murray's Law 기반 radius-aware topology loss. AG-TAL과 같은 축(radius를 loss에 활용)의 최신 사례 — 내 augmentation 동기의 지지 근거로 활용. arXiv 2605.25363. |
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG (fundus). Structure/appearance 분리 전략 비교 대상. arXiv 2603.28463. |
 | ★★ | **ANGIODG** | Vessel segmentation SSDG 직접 경쟁. Channel-informed feature reweighting. arXiv:2511.17724 |
 | ★★ | **STYCONA** | Content+Style decomposition aug. 유사 구조 포함. arXiv:2502.20619 |
 | ★★ | **HESSIAN_VF** | Hessian-based vessel DG. 내 observability 계산 근거로 사용 가능. MedIA 2024. |
@@ -115,3 +120,8 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| VESSELFM_CT | **Run #8 신규** vesselFM의 CT 확장, TubeLoss로 radius 이질성 처리. Loss 설계 참고. arXiv 2606.09400. |
+| CSWINUNETR | **Run #8 신규** Cross-shaped stripe attention 기반 thin structure 분할 아키텍처. MICCAI 2026. Augmentation 무관, architecture 참고용. |
+| TUBEMLLM | **Run #8 신규** Vessel-like anatomy topology multimodal foundation model. arXiv 2603.09217. 간접 참고. |
+| GPDG | **Run #8 신규** Environment-as-nexus DG 이론 프레임워크. Frontiers of Computer Science 2026. 이론적 motivation 인용 후보. |
+| LOWFREQ_SHORTCUT | **Run #8 신규** Low-frequency shortcut 의존성 분석 (non-medical). arXiv 2606.03493. "thick vessel shortcut 억제" motivation 지지 근거. |

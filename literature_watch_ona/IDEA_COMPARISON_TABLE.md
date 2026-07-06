@@ -53,6 +53,7 @@
 | **AGTA** *(Run#3)* | Class-level (tumor/normal) | **Binary** (anatomy class 기반) | ⚠️ anatomy map 사용 | ⚠️ tumor texture 보존 | ❌ | ❌ | Anatomy-guided texture aug. class-level binary. 내 방법은 single vessel class 내 continuous radius conditioning. |
 | **LANGDAUG** *(Run#4)* | Global (source domain 간 intermediate) | None (Langevin dynamics) | ❌ | ❌ | ❌ (multi-source, no target) | ❌ | EBM + Langevin으로 source 간 interpolation 샘플 생성. Multi-source 설정. 내 방법의 conditioning 개념 없음. |
 | **L2CP** *(Run#4)* | Vessel-specific (copy-paste) | **Thin/thick implicit** (morphological closing) | ⚠️ morphological closing scale | ⚠️ thin vessel 제거로 target style 추출 | ✅ (target image 사용) | ❌ | **Test-time training** 방법. Thin vessel을 explicit하게 처리하지만 test-time adaptation 패러다임. 내 방법은 training-time SSDG. |
+| **TSIAA** *(Run#8)* ⚠️ | **Instance-level** (per-structure, image 내 구조별) | **Learned adversarial** (Bezier param, teacher-student) | ❌ radius/observability 미사용 (adversarial policy로 대체) | ❌ 명시적 thin 보호 없음 | ❌ (single-source) | ❌ | **가장 근접한 선행 연구.** "구조 단위로 다른 augmentation" motivation 공유. 핵심 차이: conditioning 신호가 measured radius가 아닌 학습된 adversarial policy. 혈관 특유 observability 개념 없음. 원문 미확인 — 최우선 정독 대상. |
 
 ---
 
@@ -72,6 +73,9 @@
 | TTDG_MGM *(Run#4)* | Universe embeddings + multi-graph matching + morphological prior. Test-time DG. CVPR 2025. | Test-time 방식. 내 training-time aug과 다름. 그러나 morphological prior 활용이 내 radius signal과 개념 유사. |
 | GRAPHSEG *(Run#4)* | Variational Bayesian + deformable retinal atlas graph prior. Structure-preserved/degraded decomposition. NeurIPS 2025. | 구조를 preserved/degraded로 분리하는 개념이 내 관찰 가능성 분류와 연결됨. 단, retinal atlas 의존 (특정 해부 구조). |
 | VESSELFM *(Run#4)* | Foundation model: 17 datasets + domain randomization + flow matching. CVPR 2025. | Large-scale foundation model. 내 lightweight SSDG와 데이터 요구사항 근본 다름. |
+| MORVESS *(Run#8)* | Vessel Thickness Map(continuous, medial-axis)을 auxiliary supervision target으로 예측. Pulmonary CT. | **Continuous vessel thickness**를 사용한 최신 사례이지만 augmentation이 아닌 loss/supervision 측면. "radius가 유용한 신호"라는 독립적 지지 근거. |
+| VESSELFM_CT *(Run#8)* | TubeLoss로 대동맥~미세혈관 radius 이질성을 loss에서 처리. CT, foundation model. | Radius heterogeneity를 loss 설계 축에서 다룸. Augmentation 아님. |
+| MARVEL *(Run#8)* | Murray's Law 기반 radius-specific topology loss. Multi-source/modality. | AG-TAL과 같은 축(radius→loss weighting). Augmentation 축과는 직교. |
 
 ---
 

@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-06  
+> 총 수록 논문: 106편
 
 ---
 
@@ -57,6 +57,8 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher–Student Instance-Level Adversarial Augmentation for Single-Source Domain Generalization | IEEE TMI | 2026 | Published Journal Article | **High** |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | High |
 
 ---
 
@@ -114,6 +116,12 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | Medium |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images for System-Level Cardiovascular Analysis | arXiv | 2026 | Preprint Only | Medium |
+| TOPBRAIN | TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy | medRxiv | 2026 | Preprint Only | High |
+| CSWINUNETR | CSWinUNETR: Segmentation of Thin Anatomical Structures in Medical Images | MICCAI 2026 | 2026 | Accepted Conference | Medium |
+| TUBEMLLM | TubeMLLM: A Foundation Model for Topology Knowledge Exploration in Vessel-like Anatomy | arXiv | 2026 | Preprint Only | Medium |
+| MARVEL | MARVEL: Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -135,6 +143,8 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| GPDG | Environment is a Nexus: Generalization Process for Domain Generalization | Frontiers of Computer Science | 2026 | Published Journal Article | Low |
+| LOWFREQ_SHORTCUT | Low-Frequency Shortcuts in Texture-Driven Visual Learning | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -178,3 +188,10 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | 2606.24214 | 2026 |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images | 2606.09400 | 2026 |
+| TOPBRAIN | TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy | medRxiv 10.64898/2026.05.28.26354312 | 2026 |
+| TUBEMLLM | TubeMLLM: Foundation Model for Topology Knowledge in Vessel-like Anatomy | 2603.09217 | 2026 |
+| MARVEL | MARVEL: Murray's Law-informed Vessel Tree Segmentation | 2605.25363 | 2026 |
+| LOWFREQ_SHORTCUT | Low-Frequency Shortcuts in Texture-Driven Visual Learning | 2606.03493 | 2026 |
