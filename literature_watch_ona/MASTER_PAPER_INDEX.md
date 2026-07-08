@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-08  
+> 총 수록 논문: 105편
 
 ---
 
@@ -57,6 +57,9 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | **High** |
+| LIVASNET | LIVAS-Net: A Parameter-Efficient 3D Architecture for Intracranial Artery Segmentation in TOF-MRA | Electronics (MDPI) | 2026 | Published Journal Article | Medium |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images for System-Level Cardiovascular Analysis | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -76,6 +79,7 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| BTECF | A General Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis | arXiv | 2026 | Preprint Only | Medium |
 
 ---
 
@@ -114,6 +118,11 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | **High** |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware Circle of Willis Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| MARVEL | Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation | arXiv | 2026 | Preprint Only | **High** |
+| TOPBRAIN | TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy | medRxiv | 2026 | Preprint Only | **High** |
+| SEMANTICVESSEL | Scaling up Fine-grained Intracranial Vessel Annotations in Computed Tomography Angiography | arXiv | 2026 | Preprint Only | Low |
 
 ---
 
@@ -178,3 +187,11 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| VESSELFM_CT | vesselFM-CT: Segmenting All Blood Vessels in CT Images | 2606.09400 | 2026 |
+| BTECF | Bézier Tree Encoding Counterfactual Framework for Retinal Vessel Disease Analysis | 2605.13015 | 2026 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | 2606.24214 | 2026 |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware CoW Segmentation | 2606.12319 | 2026 |
+| MARVEL | Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation | 2605.25363 | 2026 |
+| TOPBRAIN | TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy | medRxiv 2026 | 2026 |
+| SEMANTICVESSEL | Scaling up Fine-grained Intracranial Vessel Annotations in CTA | 2606.21756 | 2026 |

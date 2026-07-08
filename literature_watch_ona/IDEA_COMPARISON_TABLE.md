@@ -92,6 +92,16 @@
 
 ---
 
+## Run #8 (2026-07-08) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **MorVess** (arXiv 2606.24214) | Vessel thickness map(VTM)을 centerline propagate radius로 계산 후 auxiliary supervision으로 사용. "radius를 training에 명시적으로 반영"한다는 점에서 AG-TAL과 함께 내 동기와 가장 가까운 논문. | 핵심 차이: MorVess = loss/supervision target (thickness map을 예측 대상으로 학습), 나 = augmentation budget (thickness/observability로 augmentation 강도를 조절). Pulmonary CT, DG 세팅 아님. VTM 계산식은 내 observability score 구현에 참고 가능. |
+| **MARVEL** (arXiv 2605.25363) | Murray's Law(부모/자식 혈관 radius 관계)를 topology estimation에 직접 활용. Radius를 명시적 수학 관계로 사용한다는 점에서 내 방법과 개념적 인접성 높음. | 핵심 차이: MARVEL = topology consistency (구조 예측), 나 = appearance augmentation budget. Radius의 생물물리학적 근거(Murray's Law)를 내 observability score 설계의 이론적 뒷받침으로 인용 가능. |
+| **WaveSDG** (arXiv 2603.28463) | Wavelet sub-band 분리로 anatomical structure vs. domain appearance를 나누는 SSDG 방법. Fundus(망막혈관형) 데이터셋 — 내 문제와 동일한 "얇은 혈관형 구조 SSDG" 세팅. | 핵심 차이: WaveSDG = feature-space wavelet 기반 uniform 분리 (구조 크기와 무관), 나 = image-space에서 vessel radius에 따라 continuous하게 강도 조절. Thin/thick 구분 없음. |
+
+---
+
 ## Run #4 (2026-05-31) 신규 위험 논문 업데이트
 
 | 논문 | 위험 이유 | 대응 방향 |

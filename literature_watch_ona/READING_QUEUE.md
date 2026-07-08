@@ -22,6 +22,8 @@
 | ★★★ | **AADG** | **Run #6 신규** Automatic Augmentation for DG on Retinal Image Segmentation (IEEE TMI 2022). Adversarial training + RL로 augmentation policy를 자동 탐색, Sinkhorn distance 기반 domain diversity proxy. 내 방법과 "augmentation 강도를 자동 조절"이라는 방향 유사 — 차이는 AADG = 전체 이미지 단위 policy search, 나 = intra-image vessel structure 단위 연속 조절. novelty 구분 필수. |
 | ★★★ | **DCON** | **Run #7 신규** Hybrid Dual-Augmentation Constraint Framework for SSDG (Pattern Recognition 2025). Dual-view asymmetric augmentation: image-level(global-local stylized aug) + feature-level perturbation을 결합, bilevel contrastive learning으로 domain-invariant representation 학습. 내 방법과 "dual-level augmentation for SSDG"라는 방향이 일부 겹침. 핵심 차이: DCON = class-level feature/style diversity, 나 = intra-class vessel radius별 augmentation budget 연속 조절. 구분 논거 파악 필수. |
 | ★★★ | **AG-TAL** | **Run #7 신규** Anatomically-Guided Topology-Aware Loss for CoW segmentation (arXiv 2604.27357, April 2026). **radius-aware Dice loss**: GT vascular radius를 localized weighting으로 활용하여 소혈관 집중. breakage-aware clDice (group convolution으로 효율적 topology 보존). 핵심: 내 ONA의 "vessel radius/observability 기반 차별 처리"와 동일한 radius 개념을 loss 설계에 적용한 논문. 내 augmentation 정당화에 활용 가능. 단, 목적은 loss weighting (not augmentation). |
+| ★★★ | **MORVESS** | **Run #8 신규** MorVess: Morphology-Aware Pulmonary Vessel Segmentation (arXiv 2606.24214, 2026-06-23). Vessel mask+distance map+**thickness map(VTM)**을 joint 예측 — centerline propagate maximal inscribed sphere radius로 계산. AG-TAL과 유사한 radius 계산 방식을 loss/auxiliary supervision에 적용한 최신 사례. 3개 리서치 에이전트가 독립적으로 교차 발견 — 내 novelty gap(augmentation에는 radius 미적용) 재확인에 핵심적. Pulmonary CT, DG 세팅 아님. |
+| ★★★ | **MARVEL** | **Run #8 신규** Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation (arXiv 2605.25363, 2026-05). Parent/daughter vessel radius 관계(Murray's Law)를 topology estimation에 직접 활용. 내 ONA의 radius 기반 conditioning과 개념적으로 가장 가까운 논문 중 하나 — biophysical radius law를 observability score 설계 근거로 인용 가능. 목적은 topology consistency (augmentation 아님). |
 
 ---
 
@@ -50,6 +52,9 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **WAVESDG** | **Run #8 신규** Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation (arXiv 2603.28463). Wavelet sub-band를 anatomical structure vs. domain appearance로 분리(WISER module). Fundus(망막혈관형 구조) SSDG — 내 문제와 동일 세팅의 직접 경쟁 후보. 차이: feature-space wavelet 분리 vs. 내 image-space structure-conditioned aug. |
+| ★★ | **TOPBRAIN** | **Run #8 신규** TopBrain Segmentation Challenge for Whole Brain Vessel Anatomy (medRxiv 2026-05). TopCoW를 whole-brain(48 landmark vessel classes, CTA+MRA)으로 확장. Vessel caliber measurement along centerline을 whole-brain 규모에서 최초 보고 — 내 TOF-MRA 평가용 벤치마크/데이터셋 후보로 활용 가능성 확인 필요. |
+| ★★ | **AC2RUNET** | **Run #8 신규** Anatomically Conditioned Recurrent Refinement for Topology-Aware CoW Segmentation (arXiv 2606.12319). Static/Dynamic stream 분리로 broken vessel topology 재귀적 정제. 내 TOF-MRA/CoW와 동일 해부학적 영역이나 radius conditioning 없음 — 같은 데이터셋(TopCoW) 비교 대상으로 참고. |
 
 ---
 
@@ -78,6 +83,9 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **VESSELFM_CT** | **Run #8 신규** vesselFM-CT: Segmenting All Blood Vessels in CT Images (arXiv 2606.09400). vesselFM 후속작, TubeLoss로 vessel 크기 이질성(대혈관~미세혈관) 처리 — loss-level scale handling 사례로 내 augmentation-level 접근과 대조 참고. |
+| ★ | **LIVASNET** | **Run #8 신규** LIVAS-Net: Parameter-Efficient 3D Architecture for Intracranial Artery Segmentation in TOF-MRA (Electronics/MDPI 2026). 내 정확한 modality(TOF-MRA)/task 이지만 efficiency 중심, DG 다루지 않음. Baseline 아키텍처 참고용. |
+| ★ | **BTECF** | **Run #8 신규** Bézier Tree Encoding Counterfactual Framework for Retinal-Vessel-Mediated Disease Analysis (arXiv 2605.13015). 망막 혈관을 Bézier tree로 인코딩 + diffusion counterfactual (tortuosity/caliber do-intervention). Structure-preserving counterfactual generation 최신 사례, disease biomarker 분석 목적(DG 학습 aug 아님). |
 
 ---
 
@@ -115,3 +123,4 @@
 | DROPGEN | **Run #4 신규** Foundation model representation + source intensities for biomedical DG. arXiv 2604.02564. Architecture-agnostic, 3D biomedical seg. |
 | VESSHAPE | **Run #4 신규** VessShape: shape bias via synthetic vessel dataset. arXiv 2510.27646. Few/zero-shot vessel DG. Shape-bias vs texture-bias 관련 참고. |
 | SDAIRM | **Run #4 신규** Semantic Aug + Invariant Risk Minimization for medical DG. arXiv 2502.05593. Multi-source, classification 위주. 간접 참고. |
+| SEMANTICVESSEL | **Run #8 신규** Scaling up fine-grained intracranial vessel annotations in CTA (arXiv 2606.21756). 데이터셋/annotation-scaling 논문, 방법론 아님. |

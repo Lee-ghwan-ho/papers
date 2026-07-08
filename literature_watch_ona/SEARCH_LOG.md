@@ -2,6 +2,100 @@
 
 ---
 
+## 2026-07-08 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-08 (직전 실행 2026-06-03로부터 약 5주 경과)
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 실행 방식: 5개 병렬 리서치 에이전트 (Cat A / Cat B / Cat C / Cat D / 기준논문 후속탐색)
+- 신규 발견: **9편** (Preprint Only 8편 + Published Journal Article 1편)
+
+### 수행한 검색 쿼리 (에이전트별 대표 쿼리)
+
+| Lane | 대표 쿼리 | 주요 발견 |
+|------|-----------|-----------|
+| A | single source domain generalization medical image segmentation 2026 | 기존 목록 재확인 (DCON, TSIAA, WaveSDG 후보 부상) |
+| A | vessel segmentation domain generalization 2026 TOF-MRA cerebrovascular | MULTIDOMAIN_BRAIN 재확인 |
+| A | radius-aware / caliber-aware augmentation vessel segmentation | **MorVess (arXiv 2606.24214)** 발견 |
+| A | arxiv abs 2607 / 2606 vascular vessel angiography segmentation | **vesselFM-CT (arXiv 2606.09400)**, **AC2RUNet (arXiv 2606.12319)** 발견 |
+| A | MARVEL Murray's Law vessel tree segmentation | **MARVEL (arXiv 2605.25363)** 발견 — radius 관계 기반 topology |
+| A | TOF-MRA intracranial artery segmentation 2026 Electronics MDPI | **LIVAS-Net (Electronics 2026)** 발견 |
+| B | class-wise / structure-aware / morphology-aware augmentation 2026 | MorVess 교차확인, DGSSA/HESSIAN_VF 재확인 |
+| B | counterfactual appearance augmentation domain generalization 2026 | **BTECF (arXiv 2605.13015)** 발견 — Bézier tree encoding counterfactual for vessel |
+| B | shortcut suppression domain generalization segmentation 2026 | 관련 논문 없음 (탈의료영상 논문만 발견, 미수록) |
+| C | tubular structure segmentation domain generalization 2026 | MorVess, AC2RUNet 교차확인 |
+| C | Circle of Willis segmentation 2026 MICCAI arXiv | AC2RUNet 상세 확인, **TopBrain Challenge (medRxiv 2026)** 발견 |
+| C | scaling up fine-grained intracranial vessel annotation CTA 2026 | **SemanticVessel (arXiv 2606.21756)** 발견 |
+| D | CVPR/ICML/ICLR/AAAI 2026 domain generalization segmentation augmentation | 직접 신규 톱티어 논문 없음. WaveSDG(3월, 창밖) 재발견 |
+| D | uncertainty-guided / difficulty-aware adaptive augmentation 2026 | DASA (Research Square, non-peer-reviewed) 발견 — 미수록 (venue 미달) |
+| Follow-up | AG-TAL / DCON / AADG / ADA / MBFCV 후속 인용 탐색 | 직접 후속 논문 없음 (아직 인용 전파 시간 부족) |
+| Follow-up | Circle of Willis / TopCoW 계열 후속 | AC2RUNet, TopBrain Challenge 확인 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**MorVess (arXiv 2606.24214, 2026-06-23)** — ⚠️ High priority read, 3개 에이전트에서 교차 확인
+- Vessel mask + distance map + **thickness map(VTM)**을 joint 예측하는 morphology-aware pulmonary vessel segmentation
+- VTM: centerline 따라 maximal inscribed sphere radius를 propagate하여 계산 — **AG-TAL의 skeleton distance transform과 유사한 radius 계산 방식**
+- 핵심 차이: **loss/auxiliary supervision 목적** (thickness map을 보조 학습 타겟으로 사용), augmentation budget 조절이 아님. Pulmonary CT (TOF-MRA 아님), cross-domain 실험은 포함하나 SSDG 세팅은 아님.
+- 내 연구 활용: "radius 기반 표현이 supervision(AG-TAL, MorVess)에서는 이미 검증되었으나 augmentation에는 미적용"이라는 gap 근거 강화
+
+**MARVEL (arXiv 2605.25363, 2026-05, 창밖이나 강한 연관성으로 수록)** — ⚠️ High priority read
+- Murray's Law (parent/daughter vessel radius 관계)를 vessel tree topology estimation에 직접 활용
+- 내 ONA의 "vessel radius 기반 차별 처리"와 개념적으로 가장 가까운 논문 중 하나 — 단, 목적은 topology consistency (biophysical radius law 활용), augmentation strength 조절이 아님
+- 내 연구 활용: radius 계산의 생물물리학적 근거(Murray's Law)를 ONA의 observability score 설계 논거로 인용 가능
+
+**TopBrain Challenge (medRxiv, 2026-05-28/30)** — 창밖이나 강한 연관성으로 수록
+- TopCoW를 whole-brain vasculature로 확장 (48 landmark vessel classes, CTA+MRA)
+- **Vessel caliber measurement along centerline을 whole-brain 규모에서 최초 보고**
+- 내 TOF-MRA 평가에 사용 가능한 벤치마크/데이터셋 후보
+
+#### 방법론 신규 논문
+
+**WaveSDG (arXiv 2603.28463, 2026-03/04, 창밖이나 SSDG 혈관 직접경쟁이라 수록)**
+- Wavelet sub-band decomposition으로 anatomical structure vs. domain appearance 분리 (WISER module)
+- Fundus (retinal vessel-like) SSDG — 내 문제와 동일한 "얇은 혈관형 구조 SSDG" 세팅
+- 핵심 차이: feature-space wavelet 분리, 내 방법은 image-space structure-conditioned augmentation
+
+**vesselFM-CT (arXiv 2606.09400)** — vesselFM(기존 VESSELFM) 후속작
+- TubeLoss로 vessel 크기 이질성(대혈관~미세혈관) 처리 — loss-level scale handling
+- 내 방법(augmentation-level scale handling)과 대조되는 접근
+
+**BTECF (arXiv 2605.13015)**
+- 망막 혈관을 Bézier tree로 인코딩 + diffusion 기반 counterfactual (tortuosity/caliber 축 do-intervention)
+- Structure-preserving counterfactual generation의 최신 사례. Disease biomarker 분석 목적, DG 학습용 aug 아님
+
+#### 기타 (Low relevance, 참고용)
+
+- **AC2RUNET**: CoW topology 재귀적 정제, radius conditioning 없음
+- **LIVASNET**: TOF-MRA intracranial artery segmentation, 효율성 중심 (parameter-efficient), DG 다루지 않음
+- **SEMANTICVESSEL**: intracranial vessel annotation 데이터셋 (CTA), 방법 논문 아님
+
+### Novelty Gap 재확인
+
+- **"vessel observability conditioned augmentation strength"** 키워드: Run #8에서도 직접 명시 논문 없음
+- **"continuous radius-conditioned augmentation budget"**: MorVess/AG-TAL/MARVEL 모두 radius를 loss/topology에 활용하지만 augmentation에는 여전히 없음
+- **내 핵심 gap 유지**: intra-class vessel radius/observability → augmentation budget (continuous, image-space) mapping은 여전히 미개척
+
+### 검토했으나 미수록 (venue/관련성 미달)
+
+- DASA (Research Square, non-peer-reviewed) — difficulty-proportional augmentation, 내 방법과 정반대 논리(hard=more aug) → related work 대조군으로 향후 활용 가능하나 정식 출판 아님
+- FORGERY_SHORTCUT_SUPP (딥페이크 탐지, 의료영상 아님)
+- ADVAUG_GARLIC (농업공학 저널, CV venue 아님)
+- TOPOTTA_ANOM, TOPOAGENT — 이름 충돌/tangential, vessel 특화 아님
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] MorVess 전문 독해: VTM 계산 공식 상세 및 AG-TAL radius 계산과의 이동 가능성
+- [ ] MARVEL 전문 독해: Murray's Law 공식화 및 ONA observability score와의 연결점
+- [ ] WaveSDG 전문 독해: WISER module이 내 기존 인덱스 항목과 완전히 구분되는지 재확인
+- [ ] TopBrain Challenge 데이터 접근성 확인 (Zenodo 16878417)
+- [ ] AG-TAL/DCON/AADG/ADA/MBFCV 인용 전파는 아직 이름 — 다음 실행에서 재탐색
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경
