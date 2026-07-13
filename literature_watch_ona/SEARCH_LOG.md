@@ -2,6 +2,54 @@
 
 ---
 
+## 2026-07-13 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-13
+- 모델: claude-sonnet-5
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 이전 실행 이후 경과: ~6주 (2026-06-03 → 2026-07-13)
+- 실행 방식: Category A/B/C/D + Lane 5(기준논문 후속) 5개 병렬 서브에이전트 조사
+- 신규 발견: **28편** (Published Journal 5편 + Accepted Conference 11편 + Workshop 1편 + Preprint 11편)
+
+### 수행한 검색 쿼리 (에이전트별 요약, 총 70+개 개별 쿼리)
+
+| Lane | 대표 쿼리 | 주요 발견 |
+|------|-----------|-----------|
+| A | single source domain generalization medical image segmentation 2026 / vessel segmentation DG cerebrovascular TOF-MRA 2026 | TSIAA (IEEE TMI 2026), AMAP (npj Digital Medicine 2026), WaveSDG, ROBUST-WT, RobustSurg |
+| A | CVPR/MICCAI 2026 accepted papers domain generalization augmentation | MICCAI 2026 proceedings 미공개 확인 (기존과 동일) |
+| B | nonlinear intensity augmentation / class-wise / structure-aware / morphology-aware augmentation DG 2026 | LOCALGAMMA (NLDL 2024, local gamma restricted to lesion region), BEZDIFF, SHORTCUTKD |
+| B | Bezier / monotonic spline / counterfactual appearance / shortcut suppression DG segmentation | WaveSDG, SemDir·ConStyX·ARFU 등 기존 논문 재확인(중복 제외) |
+| C | tubular structure segmentation topology domain generalization 2026 / vesselness Hessian radius | MorVess(**thickness map** 예측), AC2RUNet, TopoSculpt, SEMIR(ECCV 2026), CSWinUNETR, ContextLoss, TopoLoRA-SAM, GraphMorph, DeformCL, CoW Centerline Graphs, 3-stage coronary topology |
+| D | CVPR/ICCV/ECCV/NeurIPS/ICLR/AAAI/ICML 2025-2026 domain generalization augmentation robust | **A3Point (ICLR 2026)** — region-adaptive latent learning, **Sample-Aware RandAugment (IJCV 2025)** — per-instance adaptive aug strength, Flat Minima Perspective (AAAI 2026), PDAF (ICCV 2025), PAPT-SDG (CVPR 2025), EBiL-HaDS (NeurIPS 2024) |
+| Lane5 | SLAug/RASS/VesselMorph/VFT/clDice/DomainDrop/ConStyX/TopoTTA/HarmonySeg 후속·인용·경쟁 탐색 | DomainFlow(STACOM 2024, coronary SSDG), VesselSDF(MICCAI 2025), PASC-Net, 다수 후속 확인했으나 대부분 이미 알려진 논문과 중복 |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 충돌 위험)
+
+**TSIAA (IEEE TMI 2026)** — Teacher–Student Instance-Level Adversarial Augmentation for SSDG Medical Image Segmentation
+- 학습 가능한 Instance-level Augmentation Module(Bezier 기반)로 **이미지 내 서로 다른 구조(instance)마다 다른 augmentation을 적용** — "uniform augmentation across an image is suboptimal"이라는 상위 프레이밍이 내 핵심 주장과 정면으로 겹침
+- 차이(잠정): instance-level(discrete object 단위) + adversarially learned parameter인 반면, 내 방법은 continuous radius/observability 기반의 명시적·해석 가능한 conditioning이며 vessel/tubular structure에 특화
+- 전문 확인 전까지는 **P0 최우선 정독 대상**. paper_notes/TSIAA.md 작성함.
+
+**A3Point (ICLR 2026)** — Adaptive Augmentation-Aware Latent Learning for Robust LiDAR Semantic Segmentation
+- Semantic confusion(허용 가능한 augmentation 부작용) vs. semantic shift(유해한 augmentation 부작용)를 지역별로 구분해 다른 처리를 적용
+- 의료영상/혈관과 무관하지만, "같은 이미지 내에서 augmentation의 안전/위험 여부가 위치마다 다르다"는 구조적 논리가 내 논문의 이론적 근거로 인용 가치 높음
+
+**LOCALGAMMA (NLDL 2024)** — Local Gamma Augmentation for Ischemic Stroke Lesion Segmentation
+- Binary lesion mask로 제한된 영역에만 gamma augmentation을 적용 — "이미지 전체에 균일하게 증강하면 안 된다"는 정성적 선례. Continuous(연속) 아님, radius 기반 아님 → 직접 충돌은 아니지만 관련 선행연구로 반드시 인용 검토 필요.
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] TSIAA 전문 확인 (IEEE Xplore doc 11146907) — IAM이 진짜 instance-level인지, region-continuous 요소가 있는지 확정
+- [ ] MorVess의 thickness map이 augmentation이 아닌 loss/supervision에만 쓰이는지 코드/전문으로 재확인
+- [ ] AC2RUNet의 curriculum이 training-time 전역 스케줄인지 spatial adaptive인지 확인
+- [ ] MICCAI 2026 proceedings 공개 시 재탐색
+- [ ] ICLR 2026 전체 accepted 목록에서 augmentation-strength-conditioning 관련 논문 추가 스캔
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

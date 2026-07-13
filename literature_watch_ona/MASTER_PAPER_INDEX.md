@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-13  
+> 총 수록 논문: 122편 (신규 28편, Run #8)
 
 ---
 
@@ -57,6 +57,12 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| TSIAA | Teacher–Student Instance-Level Adversarial Augmentation for Single Domain Generalized Medical Image Segmentation | IEEE TMI | 2026 | Published Journal Article | **High** |
+| AMAP | Anatomically-guided Masked Autoencoder with Domain-Adaptive Prompting for Multimodal Cerebral Aneurysm Detection and Segmentation | npj Digital Medicine | 2026 | Published Journal Article | High |
+| DOMAINFLOW | DomainFlow: Single-Source Domain Generalization for Coronary Vessels Segmentation in X-Ray Angiography | STACOM 2024 (MICCAI Workshop) | 2024 | Workshop Paper | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| ROBUSTWT | ROBUST-WT: Robust Uncertainty-aware Segmentation Transform via Whitening and Training Enhancements | arXiv | 2026 | Preprint Only | Low |
+| ROBUSTSURG | RobustSurg: Tackling Domain Generalisation for Out-of-Distribution Surgical Scene Segmentation | arXiv | 2025 | Preprint Only | Low |
 
 ---
 
@@ -76,6 +82,9 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| LOCALGAMMA | Local Gamma Augmentation for Ischemic Stroke Lesion Segmentation on MRI | NLDL 2024 | 2024 | Accepted Conference Paper | **High** |
+| SHORTCUTKD | Preventing Shortcut Learning in Medical Image Analysis through Intermediate Layer Knowledge Distillation from Specialist Teachers | arXiv | 2025 | Preprint Only | Medium |
+| BEZDIFF | Bézier Meets Diffusion: Robust Generation Across Domains for Medical Image Segmentation | arXiv | 2025 | Preprint Only | Medium |
 
 ---
 
@@ -114,6 +123,19 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | arXiv | 2026 | Preprint Only | **High** |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware Circle of Willis Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| TOPOSCULPT | TopoSculpt: Betti-Steered Topological Sculpting of 3D Fine-grained Tubular Shapes | arXiv | 2025 | Preprint Only | Medium |
+| SEMIR | Topology-Preserving Graph Minors for Thin-Structure Segmentation | ECCV 2026 | 2026 | Accepted Conference Paper | Medium |
+| CSWINUNETR | CSWinUNETR: Segmentation of Thin Anatomical Structures in Medical Images | arXiv | 2026 | Preprint Only | Medium |
+| CONTEXTLOSS | ContextLoss: Context Information for Topology-Preserving Segmentation | ICIP 2025 | 2025 | Accepted Conference Paper | Medium |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| GRAPHMORPH | GraphMorph: Tubular Structure Extraction by Morphing Predicted Graphs | NeurIPS 2024 | 2024 | Accepted Conference Paper | Medium |
+| DEFORMCL | DeformCL: Learning Deformable Centerline Representation for Vessel Extraction in 3D Medical Image | CVPR 2025 | 2025 | Accepted Conference Paper | Medium |
+| COWCENTERLINEGRAPH | Circle of Willis Centerline Graphs: A Dataset and Baseline Algorithm | arXiv | 2025 | Preprint Only | Medium |
+| COROTOPO3STAGE | A Topology-Preserving Three-Stage Framework for Fully-Connected Coronary Artery Extraction | Medical Image Analysis | 2025 | Published Journal Article | Medium |
+| VESSELSDF | VesselSDF: Distance Field Priors for Vascular Network Reconstruction | MICCAI 2025 | 2025 | Accepted Conference Paper | Medium |
+| PASCNET | PASC-Net: Plug-and-play Shape Self-learning Convolutions Network with Hierarchical Topology Constraints for Vessel Segmentation | Biomedical Signal Processing and Control | 2025 | Published Journal Article | Medium |
 
 ---
 
@@ -135,6 +157,12 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| A3POINT | Adaptive Augmentation-Aware Latent Learning for Robust LiDAR Semantic Segmentation | ICLR 2026 | 2026 | Accepted Conference Paper | **High** |
+| SRA | Sample-Aware RandAugment: Search-Free Automatic Data Augmentation for Effective Image Recognition | IJCV | 2025 | Published Journal Article | **High** |
+| FLATMIN_AUG | A Flat Minima Perspective on Understanding Augmentations and Model Robustness | AAAI 2026 | 2026 | Accepted Conference Paper | Medium |
+| PDAF | Exploring Probabilistic Modeling Beyond Domain Generalization for Semantic Segmentation | ICCV 2025 | 2025 | Accepted Conference Paper | Medium |
+| PAPT_SDG | Adversarial Domain Prompt Tuning and Generation for Single Domain Generalization | CVPR 2025 | 2025 | Accepted Conference Paper | Medium |
+| EBIL_HADS | Advancing Open-Set Domain Generalization Using Evidential Bi-Level Hardest Domain Scheduler | NeurIPS 2024 | 2024 | Accepted Conference Paper | Medium |
 
 ---
 
@@ -178,3 +206,17 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| AMAP | Anatomically-guided MAE with Domain-Adaptive Prompting for Cerebral Aneurysm | 2502.21244 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Image Segmentation | 2603.28463 | 2026 |
+| ROBUSTWT | ROBUST-WT: Whitening + Training Enhancements for Cross-Domain Fundus Seg | 2606.03069 | 2026 |
+| ROBUSTSURG | RobustSurg: DG for OOD Surgical Scene Segmentation | 2512.02188 | 2025 |
+| LOCALGAMMA | Local Gamma Augmentation for Ischemic Stroke Lesion Segmentation on MRI | 2401.06893 | 2024 |
+| SHORTCUTKD | Preventing Shortcut Learning via Intermediate Layer KD from Specialist Teachers | 2511.17421 | 2025 |
+| BEZDIFF | Bézier Meets Diffusion: Robust Generation Across Domains for Medical Segmentation | 2509.22476 | 2025 |
+| MORVESS | MorVess: Morphology-Aware Pulmonary Vessel Segmentation Network | 2606.24214 | 2026 |
+| AC2RUNET | Anatomically Conditioned Recurrent Refinement for Topology-Aware CoW Segmentation | 2606.12319 | 2026 |
+| TOPOSCULPT | TopoSculpt: Betti-Steered Topological Sculpting of 3D Tubular Shapes | 2509.03938 | 2025 |
+| CSWINUNETR | CSWinUNETR: Segmentation of Thin Anatomical Structures in Medical Images | 2606.19824 | 2026 |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware PEFT of Foundation Segmenters for Thin Structures | 2601.02273 | 2026 |
+| COWCENTERLINEGRAPH | Circle of Willis Centerline Graphs: A Dataset and Baseline Algorithm | 2510.13720 | 2025 |
+| COROTOPO3STAGE | Topology-Preserving Three-Stage Framework for Coronary Artery Extraction | 2504.01597 | 2025 |

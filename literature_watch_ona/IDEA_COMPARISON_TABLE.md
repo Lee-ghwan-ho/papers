@@ -92,6 +92,16 @@
 
 ---
 
+## Run #8 (2026-07-13) 신규 위험 논문 업데이트
+
+| 논문 | 위험 이유 | 대응 방향 |
+|------|-----------|-----------|
+| **TSIAA** (IEEE TMI 2026) | Instance-level Bezier augmentation으로 "이미지 내 구조마다 다른 augmentation을 적용해야 한다"는 상위 프레이밍이 내 핵심 주장과 정면으로 겹침. 전문 미확인 상태로 이번 조사 최우선 경계 논문. | 잠정 차이: TSIAA = discrete instance 단위 + adversarially learned parameter, 나 = continuous radius/observability 함수 + annotation-derived explicit signal. **전문 확인 후 재평가 필수.** |
+| **A3Point** (ICLR 2026) | LiDAR segmentation에서 semantic confusion(무해) vs. semantic shift(유해)를 지역별로 구분해 다른 augmentation 처리. "동일 샘플 내 augmentation 안전성이 위치마다 다르다"는 원칙이 구조적으로 유사. | 의료영상/혈관과 무관한 타 도메인(LiDAR)이므로 직접 충돌 아님. 오히려 이론적 근거로 인용 가치 높음 — "general vision에서도 독립적으로 확인된 원칙". |
+| **LOCALGAMMA** (NLDL 2024) | Binary lesion mask로 제한된 gamma augmentation. "이미지 전체 균일 증강은 문제"라는 정성적 선례를 2024년에 이미 제시. | 핵심 차이: LOCALGAMMA = binary mask 조건, 나 = continuous radius 조건. 조건 대상도 병리 영역 vs. tubular structure 관찰가능성으로 다름. Related work 인용 필수. |
+
+---
+
 ## Run #4 (2026-05-31) 신규 위험 논문 업데이트
 
 | 논문 | 위험 이유 | 대응 방향 |
@@ -126,6 +136,7 @@
 | **StyCona** | Local content augmentation 포함 | StyCona의 content augmentation은 전체 해부 구조 변형(이동/크기 변환), 내 방법은 intensity/appearance 변환의 강도 조절. |
 | **SRCSM** | Semantic-aware RC (label별 다른 증강) | SRCSM은 서로 다른 semantic class에 다른 RC를 적용. 나는 같은 class 내에서 구조 두께에 따라 연속적으로 강도 조절. |
 | **ConStyX** | Over-augmented feature 억제 | ConStyX는 over-augmented image의 feature를 줄이는 post-hoc 방식. 나는 처음부터 구조별로 aug budget을 다르게 배분하는 proactive 방식. |
+| **TSIAA** *(Run#8)* | Instance-level adversarial Bezier augmentation. "이미지 내 구조마다 다른 augmentation 적용"이라는 프레이밍이 정면으로 겹침. IEEE TMI 2026. | 잠정: discrete instance 단위 + adversarially learned vs. 나의 continuous radius 함수 + annotation-derived explicit signal. **전문 확인 전까지 최우선 경계.** |
 
 ---
 
