@@ -2,6 +2,84 @@
 
 ---
 
+## 2026-07-14 — 정기 탐색 (Run #8)
+
+### 실행 환경
+- 날짜: 2026-07-14
+- 모델: claude-sonnet-5 (2개 병렬 subagent: Lane A/B, Lane C/D+Follow-up)
+- 연도 우선: 2025–2026, 보조: 2024 (foundational 한정)
+- 신규 발견: **11편** (Published Journal 3편 + Accepted Conference 3편 + Workshop 2편 + Preprint 3편)
+- 직전 실행(Run #7, 2026-06-03)로부터 약 6주 공백 — MICCAI 2026 accepted list 미공개, CVPR/ICLR/ICML 2026 관련 워크숍/일부 accepted 정보만 존재
+
+### 수행한 검색 쿼리 (Lane A/B agent)
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| A | single source domain generalization medical image segmentation 2026 arXiv | 기존 목록 재확인 |
+| A | vessel segmentation domain generalization TOF-MRA cerebrovascular 2026 | Multi-Domain Brain Vessel(MELBA) 재확인(이미 인덱싱됨) |
+| A | Multi-Domain Brain Vessel Segmentation Feature Disentanglement Hessian vector field self-attention | 상세 재확인 — 신규 아님 |
+| A | "Decoupling Wavelet Sub-bands" fundus single source domain generalization | **WAVESDG (arXiv 2603.28463)** 발견 |
+| A | "Dual-contrastive channel disentanglement" Neurocomputing SSDG | **DCCD (Neurocomputing 2026)** 발견 |
+| A | WaveRNet Wavelet-Guided Frequency Learning Multi-Source DG Retinal Vessel | 기존 인덱싱 확인 (WAVERNETV, 신규 아님) |
+| B | Universal Frequency Domain Perturbation SSDG openreview | **UNIFREQSDG (ACM MM 2024)** 발견 |
+| B | structure-aware morphology-aware augmentation vessel thickness radius adaptive strength 2025 2026 | 신규 없음 — gap 재확인 |
+| B | Bezier / monotonic spline augmentation medical segmentation 2026 | 신규 없음 |
+| B | Colormap augmentation cross-modality domain generalization | Colormap aug (IJCARS 2025) 확인 — uniform aug 사례, 낮은 관련성으로 미수록 |
+| B | "Right Regions, Wrong Labels" semantic label flips correlation shift | ICLR 2026 CAO workshop, 진단 논문 — 미수록 (낮은 관련성) |
+| B | MIMM-X Disentangling Spurious Correlations Medical Image Analysis | FAIMI 2025 workshop, classification task — 미수록 |
+| B | TubeMLLM foundation model topology vessel-like anatomy | arXiv 2603.09217, 낮은 관련성 — 미수록 |
+| B | thin vessel thick vessel adaptive augmentation strength segmentation robustness 2025 2026 | 신규 없음 — 핵심 gap 재확인 |
+| Follow-up | RASS / MoreStyle / AADG / SRCSM / ConStyX / Causality-SDG 2026 후속 citation | 신규 후속 논문 미발견 (아직 이름) |
+
+### 수행한 검색 쿼리 (Lane C/D + Follow-up agent)
+
+| Lane | 쿼리 | 주요 발견 |
+|------|------|-----------|
+| C | tubular structure segmentation topology preservation CVPR/ICCV/ECCV 2026 | 신규 topology-constraint 논문 다수(낮은 관련성) |
+| C | thin vessel segmentation domain shift 2026 | DGSSA 재확인, SMILE-UHURA/COMMA 발견 |
+| C | vesselness Hessian local radius scale-space representation augmentation 2025 2026 | 신규 없음 (classic Frangi/Sato 문헌만) |
+| C | clDice skeleton connectivity supervision domain generalization 2026 | TopoLoRA-SAM, crack-segmentation 논문 발견 |
+| C | coronary artery segmentation domain generalization augmentation 2025 2026 | **DOMAINFLOW (connectivity mask prediction)** 발견 |
+| C | airway segmentation domain generalization thin structure 2025 2026 | 신규 없음 (HarmonySeg 재확인) |
+| C | TOF-MRA brain vessel segmentation deep learning generalization new dataset 2026 | 신규 대형 데이터셋 없음 |
+| D | CVPR 2026 domain generalization segmentation augmentation accepted papers | **MAPJ (CVPR 2026 DG-EBF workshop)** 발견 |
+| D | ICLR 2026 structure preserving augmentation segmentation openreview | 신규 없음 (관련성 낮은 hit만) |
+| D | NeurIPS 2025 counterfactual augmentation domain generalization segmentation | **PMDG (arXiv 2505.23173)** 발견 |
+| D | AAAI 2026 / ICML 2026 domain generalization segmentation augmentation | 신규 없음 |
+| D | uncertainty-guided augmentation hard example generation segmentation 2025 2026 CVPR ICCV | **GAUDA (WACV 2025)**, **GHEAPC (CVPR 2025, point cloud)** 발견 |
+| D | frequency domain robustness single domain generalization segmentation 2025 2026 | RandDG/RASS/ARFU 재확인 |
+| D | causal representation learning invariance DG segmentation 2025 2026 | CaRGI 등 발견 — 낮은 관련성 |
+| Follow-up | VesselMorph / Hessian-VF / AG-TAL / vesselFM 2025 2026 citation | 직접 후속 없음, 인접 아키텍처 논문만 (MorVess, COMMA) |
+
+### 핵심 신규 발견 요약
+
+#### 최우선 주의 논문 (Novelty 관련)
+
+**DOMAINFLOW — Single-Source DG for Coronary Vessels via Connectivity Mask Prediction (Springer LNCS, ~2025)**
+- 모델이 이진 마스크 대신 **connectivity mask**를 예측하도록 하여, appearance 변화에 덜 민감한 topology 표현을 학습
+- 내 방법과 같은 문제(vessel SSDG)를 다루지만 완전히 다른 레버(target representation vs. augmentation strength) 사용 — orthogonal, 직접 novelty 충돌 없음
+- Related work citation으로 유용: "non-augmentation 경로로 vessel topology robustness를 얻는 대안"
+
+**WaveSDG / DCCD** — 둘 다 일반 SSDG 방법(fundus/organ 무관), feature-level frequency/channel disentanglement. 혈관 특이적이지 않고 continuous per-structure augmentation budget 개념 없음. Novelty 충돌 없음.
+
+**GAUDA / MAPJ / PMDG** — "augmentation을 균일하지 않게 적용한다"는 원칙은 공유하지만, 조절 신호가 각각 uncertainty(학습됨), magnitude(주파수 공간), pseudo-domain 분해로 — 내 "source annotation 기반 vessel radius/observability" 신호와 다름. 방향성 지지 근거로 활용 가능.
+
+### Novelty Gap 재확인 (Run #8)
+
+- 두 subagent 모두 **"continuous, source-annotation-derived vessel radius/observability score가 단일 nonlinear appearance augmentation family의 강도를 연속적으로 조절"**하는 논문을 발견하지 못함
+- 가장 근접한 strawman은 SRCSM(discrete class-wise), FIESTA/GAUDA(uncertainty-guided, non-anatomical), RandDG(uniform GIN) — 모두 Run #7 이전부터 인덱싱된 상태 유지
+- **핵심 gap 유지**: 6주간 신규 논문 없음 → Continuous-ONA의 핵심 주장은 여전히 미점유 영역
+
+### 미탐색 / 추가 탐색 필요 구역
+
+- [ ] MICCAI 2026 accepted paper list 공개 시 재탐색 (예상 2026년 하반기)
+- [ ] DOMAINFLOW 정확한 venue/DOI 확인 필요 (Springer LNCS chapter, 정식 conference/workshop명 미확정)
+- [ ] Multi-Domain Brain Vessel Segmentation (MELBA) 논문 전문 확인 — WebFetch가 arXiv/PMC/ResearchGate에서 403 반환, 스니펫 기반 요약만 확보됨
+- [ ] CVPR/ICCV/ECCV 2026 정식 accepted list 공개 후 재탐색
+- [ ] ICLR 2026 OpenReview 직접 검색 재시도 (이번 실행에서 큰 성과 없음)
+
+---
+
 ## 2026-06-03 — 정기 탐색 (Run #7)
 
 ### 실행 환경

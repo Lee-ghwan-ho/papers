@@ -1,7 +1,7 @@
 # MASTER PAPER INDEX — Continuous-ONA Literature Watch
 
-> 마지막 업데이트: 2026-06-03  
-> 총 수록 논문: 96편
+> 마지막 업데이트: 2026-07-14  
+> 총 수록 논문: 107편
 
 ---
 
@@ -57,6 +57,8 @@
 | DAGMRI | Data-Agnostic Augmentations for Unknown Variations: Out-of-Distribution Generalisation in MRI Segmentation | MIDL 2025 | 2025 | Accepted Conference | Medium |
 | DCON | A Hybrid Dual-Augmentation Constraint Framework for Single-source Domain Generalization in Medical Image Segmentation | Pattern Recognition | 2025 | Published Journal Article | High |
 | ARFU | Anatomically-Robust and Feature-Unbiased Domain Generalization for Medical Segmentation | Expert Systems with Applications | 2025 | Published Journal Article | Medium |
+| WAVESDG | Decoupling Wavelet Sub-bands for Single Source Domain Generalization in Fundus Image Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| DCCD | Dual-contrastive channel disentanglement for single-source domain generalization in medical image segmentation | Neurocomputing | 2026 | Published Journal Article | Medium |
 
 ---
 
@@ -76,6 +78,7 @@
 | XDOMAINMIX | Cross-Domain Feature Augmentation for Domain Generalization | IJCAI 2024 | 2024 | Accepted Conference | Medium |
 | STRUCSTYLE | Structure-Aware Stylized Image Synthesis for Robust Medical Image Segmentation | arXiv | 2024 | Preprint Only | Medium |
 | AADG | AADG: Automatic Augmentation for Domain Generalization on Retinal Image Segmentation | IEEE TMI | 2022 | Published Journal | **High** |
+| UNIFREQSDG | Universal Frequency Domain Perturbation for Single-Source Domain Generalization | ACM Multimedia 2024 | 2024 | Official Proceedings Paper | Medium |
 
 ---
 
@@ -114,6 +117,10 @@
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | arXiv | 2026 | Preprint Only | Medium |
 | COW_TOPO | Topology-Aware Multiclass Segmentation of the Circle of Willis from MRA and CTA Images | Computers in Biology and Medicine | 2026 | Published Journal Article | Medium |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for Multiclass Segmentation of the Circle of Willis Using Large-Scale Multi-Center Datasets | arXiv | 2026 | Preprint Only | **High** |
+| DOMAINFLOW | Single-Source Domain Generalization for Coronary Vessels Segmentation in X-Ray Angiography via Connectivity Mask Prediction | Springer LNCS (venue TBD) | 2025 | Accepted Conference Paper | **High** |
+| SMILEUHURA | SMILE-UHURA Challenge — Small Vessel Segmentation at Mesoscopic Scale from Ultra-High Resolution 7T MRA | ISBI 2023 Workshop / arXiv | 2025 | Workshop Paper | Medium |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation | arXiv | 2026 | Preprint Only | Medium |
+| COMMA | COMMA: Coordinate-aware Modulated Mamba Network for 3D Dispersed Vessel Segmentation | IEEE TIP | 2026 | Published Journal Article | Medium |
 
 ---
 
@@ -135,6 +142,10 @@
 | GRAPHSEG | Towards Generalizable Retina Vessel Segmentation with Deformable Graph Priors | NeurIPS 2025 | 2025 | Accepted Conference | Medium |
 | VESSELFM | vesselFM: A Foundation Model for Universal 3D Blood Vessel Segmentation | CVPR 2025 | 2025 | Accepted Conference | Medium |
 | FLEX-SEG | Do We Need Perfect Data? Leveraging Noise for Domain Generalized Segmentation | AAAI 2026 | 2026 | Accepted Conference Paper | Low |
+| GAUDA | GAUDA: Generative Adaptive Uncertainty-Guided Diffusion-Based Augmentation for Surgical Segmentation | WACV 2025 | 2025 | Accepted Conference Paper | Medium |
+| MAPJ | Magnitude-Aware Phase Jittering for Domain-Generalized Semantic Segmentation | CVPR 2026 Workshop (DG-EBF) | 2026 | Workshop Paper | Medium |
+| PMDG | Pseudo Multi-Source Domain Generalization: Bridging the Gap Between Single and Multi-Source Domain Generalization | arXiv | 2025 | Preprint Only | Medium |
+| GHEAPC | Generative Hard Example Augmentation for Semantic Point Cloud Segmentation | CVPR 2025 | 2025 | Accepted Conference Paper | Low |
 
 ---
 
@@ -178,3 +189,6 @@
 | FREQADAPSAM | Frequency Adapter with SAM for Generalized Medical Image Segmentation | 2605.09925 | 2026 |
 | VESSELSIM | VesselSim: Learning 3D Blood Vessel Segmentation Without Expert Annotations | 2605.26277 | 2026 |
 | AG-TAL | AG-TAL: Anatomically-Guided Topology-Aware Loss for CoW Multiclass Segmentation | 2604.27357 | 2026 |
+| WAVESDG | Decoupling Wavelet Sub-bands for SSDG in Fundus Segmentation (WISER) | 2603.28463 | 2026 |
+| TOPOLORASAM | TopoLoRA-SAM: Topology-Aware PEFT for Thin-Structure Cross-Domain Segmentation | 2601.02273 | 2026 |
+| PMDG | Pseudo Multi-Source Domain Generalization | 2505.23173 | 2025 |

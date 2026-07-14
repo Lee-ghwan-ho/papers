@@ -50,6 +50,8 @@
 | ★★ | **MIXSTYLEFLOW** | **Run #6 신규** MixStyleFlow: Domain Generalization using Normalizing Flows (MICCAI 2025). Normalizing flows로 feature style distribution 명시적 모델링 후 MixStyle과 결합. Prostate MRI + fundus. 내 방법과 직접 경쟁. 차이: feature-level uniform style mix vs. 내 pixel-level structure-conditioned appearance aug. |
 | ★★ | **DAGMRI** | **Run #6 신규** Data-Agnostic Augmentations for Unknown Variations (MIDL 2025, arXiv 2505.10223). MixUp + Auxiliary Fourier Augmentation in nnU-Net for OOD MRI. 내 baseline 구성 참고 (MixUp aug 효과 평가). |
 | ★★ | **ARFU** | **Run #7 신규** Anatomically-Robust and Feature-Unbiased DG for Medical Segmentation (Expert Systems with Applications 2025). SRG(shape regularization-guided aug) + APG(anatomical prior-guided aug) 조합, low-frequency 구조를 appearance transform의 regularizer로 사용. CT-MRI abdominal + cardiac MRI 실험. 내 방법과 유사점: low-freq 구조 보존 + augmentation controllability. 차이: ARFU = organ-level shape bias 방지, 나 = intra-vessel radius별 augmentation budget. |
+| ★★ | **DOMAINFLOW** | **Run #8 신규** Coronary vessel SSDG via connectivity mask prediction (Springer LNCS, ~2025). Binary mask 대신 connectivity mask를 예측 target으로 사용해 appearance-invariant topology 표현 학습. 내 방법과 동일 문제(vessel SSDG)지만 완전히 다른 레버(target representation vs. augmentation strength) — orthogonal 비교 대상으로 related work에 활용 가능. |
+| ★★ | **SMILEUHURA** | **Run #8 신규** SMILE-UHURA Challenge: 7T ultra-high-res TOF-MRA small vessel segmentation benchmark (ISBI 2023 workshop, results arXiv 2411.09593). 내 정확한 이미징 modality(TOF-MRA)에서 소혈관 가시성 문제를 벤치마크로 다룬 논문 — motivation citation으로 강력. 방법론적 경쟁 아님 (challenge report). |
 
 ---
 
@@ -78,6 +80,14 @@
 | ★ | **OVS_NET** | **Run #5 신규** Dual-branch for small vessel enhancement + morphology-aware correction module (topology/connectivity). IEEE TIP 2025. "segmentation algorithms optimized for overlap scores overlook small/fragile structures"라는 정확히 내 동기와 맞닿는 진술 포함. arXiv 2411.15251. |
 | ★ | **DOMAIN_GAME** | **Run #5 신규** Geometric transformation sensitivity로 anatomical vs domain-specific feature 분리. MICCAI 2024 Workshop (CMMCA). 내 방법과 feature space 분리 방향이 다르지만 AGTA와 같은 workshop volume에 실린 경쟁 논문. arXiv 2406.02125. |
 | ★ | **VESSELSIM** | **Run #6 신규** VesselSim: 3D blood vessel segmentation without expert annotations (arXiv 2605.26277, May 2026). Stochastic geometry-driven vascular simulation + domain-randomized intensity synthesis. 16,500 synthetic 3D volumes. vesselFM와 경쟁. 합성 데이터 기반 DG의 최신 사례 — domain randomization scheme 상세 확인 필요. |
+| ★ | **WAVESDG** | **Run #8 신규** Wavelet sub-band decoupling (WISER module) for SSDG fundus segmentation. arXiv 2603.28463. Feature-level wavelet 분해로 구조/스타일 분리 — vessel-specific 아님, continuous per-structure modulation 없음. |
+| ★ | **DCCD** | **Run #8 신규** Dual-contrastive channel disentanglement for SSDG (Neurocomputing 2026). Style+구조 dual-shift contrastive loss. 일반 organ SSDG, 혈관/thin structure 특이적 아님. |
+| ★ | **UNIFREQSDG** | **Run #8 신규** Universal Frequency Domain Perturbation for SSDG (ACM MM 2024). Learnable global spectral perturbation policy. Fundus/prostate 실험. 내 방법과 달리 per-structure modulation 없음 — SSDG augmentation-policy baseline 후보로 참고. |
+| ★ | **TOPOLORASAM** | **Run #8 신규** TopoLoRA-SAM: LoRA-adapted SAM + differentiable clDice for thin-structure cross-domain segmentation. arXiv 2601.02273. Architecture/loss-side 해법 — 내 augmentation-only POC 범위 밖이지만 competing thin-structure DG 솔루션으로 related work 인용 가치. |
+| ★ | **GAUDA** | **Run #8 신규** Generative Adaptive Uncertainty-Guided Diffusion Augmentation for surgical segmentation. WACV 2025. Uncertainty가 augmentation 강도/위치를 조절 — "non-uniform augmentation budget" 원칙을 공유하지만 학습된 uncertainty 신호 사용(내 방법은 anatomy-derived radius). |
+| ★ | **MAPJ** | **Run #8 신규** Magnitude-Aware Phase Jittering for DG semantic segmentation. CVPR 2026 Workshop (DG-EBF). 자연영상 street-scene, frequency magnitude로 phase jitter 강도 조절 — "local signal이 augmentation 강도를 결정"한다는 구조적으로 유사한 원칙을 비의료 도메인에서 독립적으로 뒷받침. |
+| ★ | **PMDG** | **Run #8 신규** Pseudo Multi-Source Domain Generalization. arXiv 2505.23173. 단일 source를 pseudo-domain들로 분해 후 MSDG 기법 적용. "단일 source를 구조화된 하위 집단으로 분해"하는 프레이밍이 내 vessel radius stratification 논리와 유사하지만 메커니즘은 다름. |
+| ★ | **COMMA** | **Run #8 신규** Coordinate-aware Modulated Mamba Network for 3D Dispersed Vessel Segmentation + 570-case public dataset. IEEE TIP 2026, arXiv 2503.02332. Architecture/dataset 기여, DG 방법 아님 — 벤치마크/백본 참고용. |
 
 ---
 
@@ -97,6 +107,7 @@
 | HALLUDG | Hallucinated DG network. |
 | DYNSDG | Dynamic DG. |
 | BIRF_SDG | Band importance freq filter. |
+| GHEAPC | **Run #8 신규** Generative hard-example augmentation for point cloud segmentation (CVPR 2025). Non-medical, error-driven augmentation selection loop — 대안적 신호원 참고용. |
 | ISAC | Vascular mask completion cross-domain. |
 | CLCE | Centerline Cross-Entropy loss. |
 | VESSELMORPH | Shape-aware vessel DG. (이미 알고 있는 기준 논문) |
